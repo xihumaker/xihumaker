@@ -1,0 +1,53 @@
+{
+    "button": [{
+        "name": "了解创客",
+        "sub_button": [{
+            "type": "click",
+            "name": "什么是创客？",
+            "key": "WHAT_IS_MAKER"
+        }, {
+            "type": "view",
+            "name": "西湖创客汇简介",
+            "url": "http://www.xihumaker.com/?p=122&from=message&isappinstalled=0"
+        }, {
+            "type": "view",
+            "name": "入会登记",
+            "url": "http://www.xihumaker.com/"
+        }, {
+            "type": "click",
+            "name": "《西湖创客报》",
+            "key": "MAKER_NEWS"
+        }, {
+            "type": "view",
+            "name": "章程",
+            "url": "http://www.xihumaker.com/?page_id=13&from=message&isappinstalled=0"
+        }]
+    }, {
+        "name": "近期活动",
+        "sub_button": [{
+            "type": "view",
+            "name": "3-2 春游与环保",
+            "url": "http://www.xihumaker.com/"
+        }, {
+            "type": "view",
+            "name": "3-15 少年玩编程",
+            "url": "http://www.xihumaker.com/"
+        }, {
+            "type": "view",
+            "name": "4-6 深圳制汇节",
+            "url": "http://www.xihumaker.com/"
+        }, {
+            "type": "view",
+            "name": "4-12 深圳行汇报",
+            "url": "http://www.xihumaker.com/"
+        }, {
+            "type": "view",
+            "name": "往期活动一览",
+            "url": "http://www.xihumaker.com/"
+        }]
+    }, {
+        "type": "view",
+        "name": "北斗社区",
+        "url": "http://www.xihumaker.com/"
+    }]
+}
