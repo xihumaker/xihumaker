@@ -9,6 +9,6 @@
 module.exports = {
     MONGODB_IP: "127.0.0.1",
     MONGODB_DATABASE_NAME: "xihuamaker",
-    WEB_SERVER_IP: '122.235.189.247',
+    WEB_SERVER_IP: '183.128.222.211',
     WEB_SERVER_PORT: 80
 }

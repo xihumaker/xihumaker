@@ -16,7 +16,6 @@ module.exports = function(app) {
         }
     });
 
-    // Start
     app.post('/verify', function(req, res) {
         weixin.loop(req, res);
     });
@@ -27,17 +26,17 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/register', function(req, res) {
-        res.render('register');
+    // 微信端登录页面
+    app.get('/m/login', function(req, res) {
+        res.render('mobile/login');
     });
 
-    app.get('/login', function(req, res) {
-        res.render('login');
+    // 微信端注册页面
+    app.get('/m/register', function(req, res) {
+        res.render('mobile/register');
     });
 
-    app.get('/whatIsMaker', function(req, res) {
-        res.render('whatIsMaker');
-    });
+
 
 }
 
