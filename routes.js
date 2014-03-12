@@ -27,12 +27,12 @@ module.exports = function(app) {
     });
 
     // 微信端登录页面
-    app.get('/m/login', function(req, res) {
+    app.get('/weixin/login', function(req, res) {
         res.render('mobile/login');
     });
 
     // 微信端注册页面
-    app.get('/m/register', function(req, res) {
+    app.get('/weixin/register', function(req, res) {
         res.render('mobile/register');
     });
 
