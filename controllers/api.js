@@ -20,14 +20,38 @@ module.exports = {
         weixin.sendMsg(resMsg);
     },
 
-    // 什么是创客
-    whatIsMaker: function(msg) {
+    // 创客？ - 创客来了
+    chuangKeLaiLe: function(msg) {
         var articles = [];
         articles[0] = {
-            title: "一张图了解创客运动",
-            description: "什么是创客？创客圈子神秘吗？全球创客运动发展如何？",
+            title: "什么是创客？",
+            description: "",
             picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
-            url: WEB_SERVER_IP + '/whatIsMaker'
+            url: WEB_SERVER_IP + '/weixin/article/0'
+        };
+        articles[1] = {
+            title: "西湖创客汇简介&理事会及联系方式",
+            description: "",
+            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            url: WEB_SERVER_IP + '/weixin/article/1'
+        };
+        articles[2] = {
+            title: "《西湖创客报》",
+            description: "",
+            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            url: WEB_SERVER_IP + '/weixin/papers'
+        };
+        articles[3] = {
+            title: "捐助本会",
+            description: "",
+            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            url: WEB_SERVER_IP + '/weixin/donation'
+        };
+        articles[4] = {
+            title: "西湖创客汇章程",
+            description: "",
+            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            url: WEB_SERVER_IP + '/weixin/constitution'
         };
 
         // 返回图文消息

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>注册 - 西湖创客汇</title>
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="/icon/favicon.ico">
+        <!-- Le styles -->
+        <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
+        <link rel="stylesheet" href="/css/weixin/main.css">
+
+        <script type="text/javascript">
+            // 隐藏微信中网页右上角按钮
+            // document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            //     WeixinJSBridge.call('hideOptionMenu');
+            // });
+        </script>
+        <style type="text/css">
+            .page_container {
+                top: 0px;
+                margin-top: 0px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="main">
+            <section class="page1">
+                <div class="page_container">
+                    <img src="/img/logo_360*200.jpg" width="280" class="logo" height="130" alt="">
+                    <div class="ui form segment">
+                        <div class="field">
+                            <div class="ui left labeled icon input">
+                                <input type="text" placeholder="邮箱" class="email" id="email">
+                                <i class="mail icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left labeled icon input">
+                                <input type="text" placeholder="手机号" class="phone" id="phone">
+                                <i class="phone icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left labeled icon input">
+                                <input type="text" placeholder="真实姓名" class="username" id="username">
+                                <i class="user icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left labeled icon input">
+                                <input type="password" placeholder="密码" class="password" id="password">
+                                <i class="lock icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left labeled icon input">
+                                <input type="password" placeholder="确认密码" class="rePassword" id="rePassword">
+                                <i class="lock icon"></i>
+                            </div>
+                        </div>
+                        <div class="ui small warning message">
+                            <i class="icon attention"></i>
+                        </div>
+                        <div class="field">
+                            <a href="javascript:void(0);" class="ui fluid green submit button" id="register">注册</a>
+                        </div>
+                        <div class="ui horizontal icon divider">
+                            <i class=" green leaf icon"></i>
+                        </div>
+                        <div class="field">
+                            <a href="/weixin/login" class="ui right floated tiny header">已有账号？立即登录</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script type="text/javascript" src="/lib/zepto.min.js"></script>
+        <script type="text/javascript" src="/lib/validator.min.js"></script>
+        <script type="text/javascript" src="/lib/md5.js"></script>
+        <script type="text/javascript" src="/js/weixin/register.js"></script>
+        
+    </body>
+</html>

@@ -4,7 +4,7 @@ html, body {
 }
 body {
     margin: 0;
-    background: #0078D8 url(/img/light.png) center no-repeat;
+    background: #fff url(/img/light.png) center no-repeat;
 }
 .page_container {
     width: 320px;
@@ -12,7 +12,8 @@ body {
     position: absolute;
     left: 50%;
     margin-left: -160px;
-    top: 45px;
+    top: 50%;
+    margin-top: -250px;
     text-align: center;
 }
 

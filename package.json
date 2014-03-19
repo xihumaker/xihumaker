@@ -9,6 +9,7 @@
         "express": "3.4.2",
         "ejs": "*",
         "mongoose": "*",
-        "weixin-api": "*"
+        "weixin-api": "*",
+        "validator": "*"
     }
 }

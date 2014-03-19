@@ -1,6 +1,8 @@
 var weixin = require('weixin-api');
 var config = require('./config');
 var api = require('./controllers/api');
+var user = require('./controllers/user');
+var project = require('./controllers/project');
 
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
 
@@ -20,28 +22,111 @@ module.exports = function(app) {
         weixin.loop(req, res);
     });
 
-    app.get('/', function(req, res) {
-        res.render('index', {
-            title: "NodeJS项目模板"
-        });
-    });
-
     // 微信端登录页面
     app.get('/weixin/login', function(req, res) {
-        res.render('mobile/login');
+        res.render('weixin/login');
     });
+
+    // 用户登录操作
+    app.post('/weixin/login', user.login);
 
     // 微信端注册页面
     app.get('/weixin/register', function(req, res) {
-        res.render('mobile/register');
+        res.render('weixin/register');
+    });
+
+    // 绑定微信ID和西湖创客汇账号
+    app.get('/weixin/bind', function(req, res) {
+        res.render('weixin/bind');
+    });
+
+    // 项目列表页面
+    app.get('/weixin/projectList', function(req, res) {
+        res.render('weixin/projectList');
     });
 
 
+    // 根据_id获取用户信息
+    app.get('/api/user/:_id', user.findUserById);
+    // 注册新用户
+    app.post('/api/users', user.addUser);
+
+
+    app.get('/api/project/:_id', project.findProjectById);
+    app.post('/api/project/:_id', project.findProjectByIdAndUpdate);
+    app.post('/api/projects', user.userAuth, project.addProject);
+    app.get('/api/projects', project.findProjectsByPage);
+    app.get('/api/projects/search', project.searchProjects);
+
+
+
+    // 什么是创客？
+    // 西湖创客汇简介&理事会及联系方式
+    app.get('/weixin/article/:id', function(req, res) {
+        var id = req.param('id');
+        res.render('weixin/article/' + id);
+    });
+
+    // 《中国创客报》
+    app.get('/weixin/papers', function(req, res) {
+        res.render('weixin/papers');
+    });
+    app.get('/weixin/paper/:id', function(req, res) {
+        var id = req.param('id');
+        res.render('weixin/paper/' + id);
+    });
+
+    // 捐助本会
+    app.get('/weixin/donation', function(req, res) {
+        res.render('weixin/donation');
+    });
+
+    // 西湖创客汇章程
+    app.get('/weixin/constitution', function(req, res) {
+        res.render('weixin/constitution');
+    });
+
+    // 改变世界
+    app.get('/weixin/gaibianshijie', function(req, res) {
+        res.render('weixin/projectList');
+    });
+
+    // 项目详情页
+    app.get('/weixin/project/:_id', user.userAuth, project.getProjectById);
+
+    // 编辑项目
+    app.get('/weixin/project/:_id/edit', project.editProjectById);
+
+    // 新建项目
+    app.get('/weixin/newPro', user.userAuth, function(req, res) {
+        res.render('weixin/newPro');
+    });
+
+    // 推广创客文化
+    app.get('/weixin/tuiguang', function(req, res) {
+        res.render('weixin/tuiguang');
+    });
+
+    // 创客微课程
+    app.get('/weixin/weikecheng', function(req, res) {
+        res.render('weixin/weikecheng');
+    });
+
+    /**
+     * 404 Page
+     */
+    app.get('*', function(req, res, next) {
+        if (/.*\.(gif|jpg|jpeg|png|bmp|js|css|html|eot|svg|ttf|woff|otf|ico).*$/.test(req.originalUrl)) {
+            next();
+        } else {
+            res.render('404');
+        }
+    });
 
 }
 
 // config
-weixin.token = 'xihumaker';
+weixin.token = config.TOKEN;
 
 // 监听文本消息
 weixin.textMsg(function(msg) {
@@ -134,7 +219,6 @@ weixin.urlMsg(function(msg) {
 // 监听事件消息
 weixin.eventMsg(function(msg) {
     console.log("eventMsg received");
-    console.log(JSON.stringify(msg));
 
     // 用户关注公众号事件
     if (msg.event === 'subscribe') {
@@ -144,12 +228,15 @@ weixin.eventMsg(function(msg) {
     // 菜单事件
     if (msg.event === 'CLICK') {
         switch (msg.eventKey) {
-            case 'WHAT_IS_MAKER':
-                api.whatIsMaker(msg);
+            case 'CHUANG_KE_LAI_LE':
+                api.chuangKeLaiLe(msg);
                 break;
-
             default:
                 break;
         }
+    }
+
+    if (msg.event === 'LOCATION') {
+        console.log(msg);
     }
 });

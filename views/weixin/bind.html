@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>绑定账号 - 西湖创客汇</title>
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="/icon/favicon.ico">
+        <!-- Le styles -->
+        <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
+        <link rel="stylesheet" href="/css/weixin/main.css">
+
+        <script type="text/javascript">
+            // 隐藏微信中网页右上角按钮
+            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                WeixinJSBridge.call('hideOptionMenu');
+            });
+        </script>
+        
+        <style type="text/css">
+            .ui.header {
+                color: #fff;
+            }
+            .field1 {
+                display: none;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <div class="main">
+            <section class="page1">
+                <div class="page_container">
+                    <img src="/img/mobile-logo.png" width="250" class="logo" height="110" alt="">
+                    <div class="ui form segment">
+                        <div class="field field1">
+                            <div class="ui icon header">
+                                <i class="circular check icon"></i>绑定成功
+                                <h5 class="ui header">3秒后页面将自动跳转，如果没有跳转，请点击<a href="">这里</a></h5>
+                            </div>
+                        </div>
+                        <div class="field field2">
+                            <div class="ui center aligned header">
+                                绑定西湖创客汇账号
+                            </div>
+                        </div>
+                        <div class="field field2">
+                            <div class="ui left labeled icon input">
+                                <input type="text" placeholder="用户名 / 邮箱" class="username" autofocus id="username">
+                                <i class="user icon"></i>
+                            </div>
+                        </div>
+                        <div class="field field2">
+                            <div class="ui left labeled icon input">
+                                <input type="password" placeholder="密码" class="password" id="password">
+                                <i class="lock icon"></i>
+                            </div>
+                        </div>
+                        <div class="ui small warning message">
+                            <i class="icon attention"></i>
+                        </div>
+                        <div class="field field2">
+                            <a href="javascript:void(0);" class="ui fluid green submit button" id="bind">确定绑定</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script type="text/javascript" src="/lib/zepto.min.js"></script>
+        <script type="text/javascript" src="/lib/md5.js"></script>
+        <script type="text/javascript" src="/js/weixin/bind.js"></script>
+        
+    </body>
+</html>

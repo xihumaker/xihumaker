@@ -1,37 +1,49 @@
+/**
+ * 微信客户端登录页面
+ */
 $(function() {
 
-    var $username = $('#username'),
+    var $email = $('#email'),
         $password = $('#password'),
-        $warning = $('.warning'),
+        $message = $('.message'),
         $login = $('#login');
 
     $login.click(function() {
-
-        var username = $username.val().trim();
+        var email = $email.val().trim();
         var password = $password.val().trim();
 
-        if (!username) {
-            $warning.html('<i class="icon attention"></i>请输入用户名').show();
+        if (!email) {
+            $message.html('<i class="icon attention"></i>请输入邮箱').show();
             return;
         }
         if (!password) {
-            $warning.html('<i class="icon attention"></i>请输入密码').show();
+            $message.html('<i class="icon attention"></i>请输入密码').show();
             return;
         }
 
         $login.html('正在登录...');
 
         $.ajax({
-            url: '',
+            url: '/weixin/login',
             type: 'POST',
             data: {
-                username: username,
+                email: email,
                 password: hex_md5(password)
             },
             dataType: 'json',
             timeout: 15000,
             success: function(data, textStatus, jqXHR) {
-
+                if (data.r === 0) {
+                    if (/login/.test(window.location.href)) {
+                        window.location.href = '/weixin/projectList';
+                    } else {
+                        window.location.reload();
+                    }
+                } else {
+                    $login.html('登录');
+                    $message.html('<i class="icon attention"></i>' + data.msg).show();
+                    return;
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
 
@@ -41,10 +53,7 @@ $(function() {
     });
 
     $('input').focus(function() {
-        $warning.hide();
+        $message.hide();
     });
-
-
-
 
 });
