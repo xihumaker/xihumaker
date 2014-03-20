@@ -41,6 +41,14 @@
             background-color: #EAE8E8;
             height: 25px;
         }
+        .ui.form textarea {
+            border: none;
+            padding: 0;
+            overflow-y:visible;
+            min-height: inherit;
+            height: inherit;
+            max-height: inherit;
+        }
     </style>
     <script type="text/javascript">
         
@@ -78,10 +86,15 @@
                 </h5>
             </div>
             <div class="ui divider"></div>
-            <h4 class="ui inverted teal block header">项目描述</h4>
+            <h4 class="ui inverted teal block header">项目项目简介</h4>
             <p><%= project.description %></p>
-            <h4 class="ui inverted teal block header">针对问题或目的</h4>
-            <p><%= project.purpose %></p>
+
+            <div class="ui form">
+                <h4 class="ui inverted teal block header">针对问题或目的</h4>
+                <p><%= project.purpose %></p>
+            </div>
+
+            
             <h4 class="ui inverted teal block header">解决方案</h4>
             <p><%= project.solution %></p>
             <h4 class="ui inverted teal block header">创始人与团队介绍</h4>
