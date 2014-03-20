@@ -112,6 +112,15 @@ module.exports = function(app) {
         res.render('weixin/weikecheng');
     });
 
+    app.get('/weixin/weikecheng/:tag', function(req, res) {
+        var tag = req.param('tag');
+        if (tag === '开源硬件与传感器') {
+            res.render('weixin/weikecheng/openSourceHardwareAndSensors')
+        } else {
+            res.render('weixin/weikecheng/building');
+        }
+    })
+
     /**
      * 404 Page
      */

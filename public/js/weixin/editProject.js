@@ -13,9 +13,9 @@ $(function() {
 
     var _id = project._id;
 
-    $purpose.val(project.purpose);
-    $solution.val(project.solution);
-    $teamInfo.val(project.teamInfo);
+    $purpose.val($purpose.attr('data-value'));
+    $solution.val($solution.attr('data-value'));
+    $teamInfo.val($teamInfo.attr('data-value'));
 
     // 保存修改
     $save.click(function() {
