@@ -19,7 +19,7 @@ $(function() {
             description = $description.val().trim(),
             industry = $industry.val().trim(),
             group = $group.val().trim(),
-        purpose = $purpose.val().trim(),
+            purpose = $purpose.val().trim(),
             solution = $solution.val().trim(),
             teamInfo = $teamInfo.val().trim();
 

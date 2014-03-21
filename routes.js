@@ -8,6 +8,10 @@ var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
 
 module.exports = function(app) {
 
+    app.get('/', function(req, res) {
+        res.render('index');
+    });
+
     // 接入验证
     app.get('/verify', function(req, res) {
         // 签名成功
@@ -21,6 +25,10 @@ module.exports = function(app) {
     app.post('/verify', function(req, res) {
         weixin.loop(req, res);
     });
+
+    app.get('/weixin/map', function(req, res) {
+        res.render('weixin/baiduMap');
+    })
 
     // 微信端登录页面
     app.get('/weixin/login', function(req, res) {
@@ -57,6 +65,7 @@ module.exports = function(app) {
     app.post('/api/projects', user.userAuth, project.addProject);
     app.get('/api/projects', project.findProjectsByPage);
     app.get('/api/projects/search', project.searchProjects);
+    app.post('/api/project/:_id/join', project.joinProjectById);
 
 
 
@@ -95,7 +104,7 @@ module.exports = function(app) {
     app.get('/weixin/project/:_id', user.userAuth, project.getProjectById);
 
     // 编辑项目
-    app.get('/weixin/project/:_id/edit', project.editProjectById);
+    app.get('/weixin/project/:_id/edit', user.userAuth, project.editProjectById);
 
     // 新建项目
     app.get('/weixin/newPro', user.userAuth, function(req, res) {
@@ -119,13 +128,28 @@ module.exports = function(app) {
         } else {
             res.render('weixin/weikecheng/building');
         }
-    })
+    });
+
+    app.get('/weixin/weikecheng/:tag/:course', function(req, res) {
+        var tag = req.param('tag');
+        var course = req.param('course');
+
+        if (tag === '开源硬件与传感器') {
+            if (course === '轻松玩转pcDuino') {
+                res.render('weixin/weikecheng/openSourceHardwareAndSensors/pcDuino');
+            } else if (course === 'Arduino初级课程') {
+                res.render('weixin/weikecheng/openSourceHardwareAndSensors/Arduino');
+            }
+        }
+
+
+    });
 
     /**
      * 404 Page
      */
     app.get('*', function(req, res, next) {
-        if (/.*\.(gif|jpg|jpeg|png|bmp|js|css|html|eot|svg|ttf|woff|otf|ico).*$/.test(req.originalUrl)) {
+        if (/.*\.(gif|jpg|jpeg|png|bmp|js|css|html|eot|svg|ttf|woff|otf|ico|mp3).*$/.test(req.originalUrl)) {
             next();
         } else {
             res.render('404');

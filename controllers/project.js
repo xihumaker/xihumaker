@@ -138,12 +138,19 @@ var ProjectModule = {
             }
 
             if ( !! doc) {
+                console.log(doc);
                 doc.localCreateTime = Util.convertDate(doc.createTime);
 
                 if (doc.authorId == req.session.userId) {
                     doc.myProject = true;
                 } else {
                     doc.myProject = false;
+                    var members = doc.members;
+                    if (members.indexOf(req.session.userId) !== -1) { //说明该用户已经加入该项目中
+                        doc.hasJoin = true;
+                    } else { // 说明用户未加入该项目
+                        doc.hasJoin = false;
+                    }
                 }
                 doc.localIndustry = INDUSTRY_LIST[doc.industry];
                 doc.localGroup = GROUP_LIST[doc.group];
@@ -362,15 +369,6 @@ var ProjectModule = {
             return;
         }
 
-        console.log('_id = ' + _id);
-        console.log('title = ' + title);
-        console.log('description = ' + description);
-        console.log('industry = ' + industry);
-        console.log('group = ' + group);
-        console.log('purpose = ' + purpose);
-        console.log('solution = ' + solution);
-        console.log('teamInfo = ' + teamInfo);
-
         Project.findByIdAndUpdate(_id, {
             $set: {
                 title: title,
@@ -398,6 +396,72 @@ var ProjectModule = {
             });
             return;
         });
+    },
+
+    /**
+     * @method joinProjectById
+     * 申请加入某个项目
+     */
+    joinProjectById: function(req, res) {
+        var _id = req.param('_id');
+        var userId = req.session.userId;
+
+        Project.findOne({
+            _id: new ObjectId(_id)
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10028,
+                    "msg": "服务器错误，加入项目失败"
+                })
+                return;
+            }
+
+            if ( !! doc) {
+                var members = doc.members;
+                if (members.indexOf(userId) !== -1) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10030,
+                        "msg": "你已经在该项目中，不能重复加入"
+                    })
+                    return;
+                } else {
+                    members[members.length] = userId;
+
+                    Project.findByIdAndUpdate(_id, {
+                        $set: {
+                            members: members
+                        }
+                    }, function(err, doc) {
+                        if (err) {
+                            res.json({
+                                "r": 1,
+                                "errcode": 10028,
+                                "msg": "服务器错误，加入项目失败"
+                            })
+                            return;
+                        }
+
+                        res.json({
+                            "r": 0,
+                            "msg": "加入项目成功",
+                            "project": doc
+                        });
+                        return;
+                    });
+                }
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10029,
+                    "msg": "要加入的项目不存在"
+                })
+                return;
+            }
+        });
+
     }
 
 

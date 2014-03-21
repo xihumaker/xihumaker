@@ -9,16 +9,37 @@
         <!-- Le styles -->
         <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
         <link rel="shortcut icon" href="/icon/favicon.ico">
+        <style type="text/css">
+            .indent {
+                text-indent: 2em;
+            }
+            .ui.dimmer {
+                background-color: rgba(0, 0, 0, 0.65);
+                padding-top: 10px;
+            }
+        </style>
     </head>
     <body>
 
-        <p>阐述推广创客文化的意义，鼓励大家推荐朋友关注本服务号或者入会登记。后期考虑加入捐款入口。</p>
+        <p class="indent">创新已是国际竞争的主战场。即便看似没啥用处的创新，却有机会真正拓宽文明的道路。欢迎携手西湖创客汇，折腾青春，传播能量，推进社会创造力！创客信条：Live your life to the fullest!</p>
+        <p class="indent">推荐朋友关注本服务号奖励10枚金币，登记为会员则奖励50金币哦。</p>
+        <div class="ui fluid primary button" id="tuijiang">推荐朋友关注本站</div>
 
-        <div class="ui horizontal icon divider">
-            <i class="circular leaf icon"></i>
+        <div class="ui dimmer">
+            <img src="/img/tip.png" width="270" alt="">
         </div>
+    
+        <script type="text/javascript" src="/lib/zepto.min.js"></script>
 
-        <p>欢迎加入DIY的队伍，创新让生活更美好！</p>
+        <script type="text/javascript">
+            $('.ui.dimmer').click(function() {
+                $('.ui.dimmer').removeClass('active');
+            });
+
+            $('#tuijiang').click(function() {
+                $('.ui.dimmer').addClass('active');
+            });
+        </script>
 
     </body>
 </html>
