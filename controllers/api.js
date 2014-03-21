@@ -26,31 +26,31 @@ module.exports = {
         articles[0] = {
             title: "什么是创客？",
             description: "",
-            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            picUrl: WEB_SERVER_IP + '/img/logo_360_200.jpg',
             url: WEB_SERVER_IP + '/weixin/article/0'
         };
         articles[1] = {
             title: "西湖创客汇简介&理事会及联系方式",
             description: "",
-            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            picUrl: '',
             url: WEB_SERVER_IP + '/weixin/article/1'
         };
         articles[2] = {
             title: "《西湖创客报》",
             description: "",
-            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            picUrl: '',
             url: WEB_SERVER_IP + '/weixin/papers'
         };
         articles[3] = {
             title: "捐助本会",
             description: "",
-            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            picUrl: '',
             url: WEB_SERVER_IP + '/weixin/donation'
         };
         articles[4] = {
             title: "西湖创客汇章程",
             description: "",
-            picUrl: WEB_SERVER_IP + '/img/logo_360*200.jpg',
+            picUrl: '',
             url: WEB_SERVER_IP + '/weixin/constitution'
         };
 

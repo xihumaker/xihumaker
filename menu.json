@@ -9,14 +9,14 @@
             "type": "view",
             "name": "改变世界",
             "url": "http://xihumaker.jios.org/weixin/gaibianshijie"
+        }, {
+            "type": "view",
+            "name": "创客分布",
+            "url": "http://xihumaker.jios.org/weixin/map"
         }]
     }, {
         "name": "一起来！",
         "sub_button": [{
-            "type": "view",
-            "name": "江湖救急",
-            "url": "http://xihumaker.jios.org/weixin/jianghujiuji"
-        }, {
             "type": "view",
             "name": "创客微课程",
             "url": "http://xihumaker.jios.org/weixin/weikecheng"
