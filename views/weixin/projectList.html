@@ -8,7 +8,6 @@
     <meta name="description" content="">
     <link rel="shortcut icon" href="/icon/favicon.ico">
     <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
-    
     <style type="text/css">
         body {
             margin: 0;
@@ -78,6 +77,13 @@
             display: none;
         }
     </style>
+    
+    <script type="text/javascript">
+        // 显示微信中网页右上角按钮
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('showOptionMenu');
+        });
+    </script>
 </head>
 <body>
     <!-- 顶部导航菜单 -->
@@ -112,7 +118,7 @@
                     <div class="item" data-value="2004">洛阳分舵</div>
                 </div>
             </div>
-            <a href="/weixin/newPro" class="item right"><i class="add icon"></i>新建项目</a>
+            <a href="/weixin/createProject" class="item right"><i class="add icon"></i>新建项目</a>
         </div>
     </div>
     <!-- end 顶部导航菜单 -->
@@ -122,7 +128,6 @@
     </div>
 
     <div class="ui items" id="projectList">
-
         <div class="ui basic center aligned segment msgTip" id="msgTip">
             <h3 class="ui teal header" style="height: 300px;line-height: 300px;"></h3>
         </div>
@@ -141,7 +146,6 @@
     </div>
 
     <div class="ui fluid orange button loadMore" id="loadMore">加载更多</div>
-    <div class="ui fluid orange button loadMoreTwo" id="loadMoreTwo">加载更多</div>
 
     <script type="text/javascript" src="/lib/jquery.min.js"></script>
     <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>

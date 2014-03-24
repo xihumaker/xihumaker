@@ -34,7 +34,11 @@ $(function() {
             timeout: 15000,
             success: function(data, textStatus, jqXHR) {
                 if (data.r === 0) {
-                    if (/login/.test(window.location.href)) {
+                    var href = window.location.href;
+                    if (/returnUrl/.test(href)) { // 说明有指定返回Url
+                        var returnUrl = href.split('?')[1].split('=')[1];
+                        window.location.href = returnUrl;
+                    } else if (/login/.test(window.location.href)) {
                         window.location.href = '/weixin/projectList';
                     } else {
                         window.location.reload();

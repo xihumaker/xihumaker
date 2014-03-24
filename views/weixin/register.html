@@ -7,15 +7,14 @@
         <title>注册 - 西湖创客汇</title>
         <meta name="description" content="">
         <link rel="shortcut icon" href="/icon/favicon.ico">
-        <!-- Le styles -->
         <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
         <link rel="stylesheet" href="/css/weixin/main.css">
 
         <script type="text/javascript">
             // 隐藏微信中网页右上角按钮
-            // document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-            //     WeixinJSBridge.call('hideOptionMenu');
-            // });
+            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                WeixinJSBridge.call('hideOptionMenu');
+            });
         </script>
         <style type="text/css">
             .page_container {
@@ -29,7 +28,7 @@
         <div class="main">
             <section class="page1">
                 <div class="page_container">
-                    <img src="/img/logo.jpg" width="280" class="logo" height="130" alt="">
+                    <img src="/img/logo.jpg" width="280" height="125" class="logo" alt="">
                     <div class="ui form segment">
                         <div class="field">
                             <div class="ui left labeled icon input">

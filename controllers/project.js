@@ -56,6 +56,55 @@ var ProjectModule = {
     },
 
     /**
+     * @method findProjectByIdAndUpdate
+     * 根据项目ID修改项目信息
+     */
+    findProjectByIdAndUpdate: function(req, res) {
+        var _id = req.param('_id'),
+            title = req.param('title'),
+            description = req.param('description') || '',
+            industry = req.param('industry') || -1,
+            group = req.param('group') || -1,
+            updateTime = Date.now(),
+            members = req.param('members');
+
+        if (!title) {
+            res.json({
+                "r": 1,
+                "errcode": 10016,
+                "msg": "项目标题不能为空"
+            });
+            return;
+        }
+
+        Project.findByIdAndUpdate(_id, {
+            $set: {
+                title: title,
+                description: description,
+                industry: industry,
+                group: group,
+                updateTime: updateTime,
+                members: members
+            }
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10026,
+                    "msg": "服务器错误，更新项目失败"
+                });
+                return;
+            }
+            res.json({
+                "r": 0,
+                "msg": "修改成功",
+                "project": doc
+            });
+            return;
+        });
+    },
+
+    /**
      * @method addProject
      * 创建一个新项目
      */
@@ -64,10 +113,9 @@ var ProjectModule = {
             description = req.param('description') || '',
             industry = req.param('industry') || -1,
             group = req.param('group') || -1,
-            purpose = req.param('purpose') || '',
-            solution = req.param('solution') || '',
-            teamInfo = req.param('teamInfo') || '',
-            authorId = req.session.userId;
+            authorId = req.session.userId,
+            createTime = Date.now(),
+            updateTime = Date.now();
 
         if (!title) {
             res.json({
@@ -83,14 +131,10 @@ var ProjectModule = {
             description: description,
             industry: industry,
             group: group,
-            purpose: purpose,
-            solution: solution,
-            teamInfo: teamInfo,
-            createTime: Date.now(),
-            authorId: authorId
+            createTime: createTime,
+            authorId: authorId,
+            updateTime: updateTime
         });
-
-        console.log(project);
 
         project.save(function(err, doc) {
             if (err) {
@@ -138,26 +182,31 @@ var ProjectModule = {
             }
 
             if ( !! doc) {
-                console.log(doc);
-                doc.localCreateTime = Util.convertDate(doc.createTime);
-
-                if (doc.authorId == req.session.userId) {
-                    doc.myProject = true;
-                } else {
-                    doc.myProject = false;
-                    var members = doc.members;
-                    if (members.indexOf(req.session.userId) !== -1) { //说明该用户已经加入该项目中
-                        doc.hasJoin = true;
-                    } else { // 说明用户未加入该项目
-                        doc.hasJoin = false;
+                var hasLogin = false; // 保存用户是否已经登录
+                var isMyProject = false; // 保存是否是当前登录用户创建的项目
+                var hasJoin = false; // 保存用户是否已经加入该项目
+                if ( !! req.session.userId) { // 判断用户是否已经登录
+                    hasLogin = true;
+                    if (doc.authorId == req.session.userId) { // 用户已经登录，并且是该项目的创始人
+                        isMyProject = true;
+                    } else { // 用户已经登录，并且不是该项目的创始人
+                        var members = doc.members;
+                        if (members.indexOf(req.session.userId) !== -1) { // 说明该用户已经加入该项目中
+                            hasJoin = true;
+                        }
                     }
                 }
+                doc.localCreateTime = Util.convertDate(doc.createTime);
                 doc.localIndustry = INDUSTRY_LIST[doc.industry];
                 doc.localGroup = GROUP_LIST[doc.group];
+
                 res.render('weixin/projectInfo', {
                     "r": 0,
                     "msg": "请求成功",
-                    "project": doc
+                    "project": doc,
+                    "hasLogin": hasLogin,
+                    "isMyProject": isMyProject,
+                    "hasJoin": hasJoin
                 });
                 return;
             } else {
@@ -168,54 +217,6 @@ var ProjectModule = {
                 });
                 return;
             }
-        });
-    },
-
-    /**
-     * @method findProjectsByPage
-     * 分页查询项目
-     * 如果createTime为空，则说明用户是第一次查询，回前pageSize条数据
-     * 如果createTime不为空，则根据pageSize和createTime返回pageSize条数据
-     */
-    findProjectsByPage: function(req, res) {
-        var pageSize = req.param('pageSize'),
-            createTime = req.param('createTime'),
-            query;
-
-        if (!pageSize) {
-            res.json({
-                "r": 1,
-                "errcode": 10000,
-                "msg": "参数错误"
-            });
-        }
-        if (!createTime) {
-            // sort('-createTime')，最新的先返回
-            // sort('createTime'),最早的先返回
-            query = Project.find().sort('-createTime').limit(pageSize);
-        } else {
-            query = Project.find({
-                createTime: {
-                    $lt: createTime
-                }
-            }).sort('-createTime').limit(pageSize);
-        }
-
-        query.exec(function(err, docs) {
-            if (err) {
-                res.json({
-                    "r": 1,
-                    "errcode": 10025,
-                    "msg": "服务器错误，查找问题失败"
-                });
-                return;
-            }
-
-            res.json({
-                "r": 0,
-                "msg": "查找项目成功",
-                "projectList": docs
-            });
         });
     },
 
@@ -342,61 +343,7 @@ var ProjectModule = {
         });
     },
 
-    findProjectByIdAndUpdate: function(req, res) {
-        var _id = req.param('_id'),
-            title = req.param('title'),
-            description = req.param('description') || '',
-            industry = req.param('industry') || -1,
-            group = req.param('group') || -1,
-            purpose = req.param('purpose') || '',
-            solution = req.param('solution') || '',
-            teamInfo = req.param('teamInfo') || '';
 
-        if (!title) {
-            res.json({
-                "r": 1,
-                "errcode": 10016,
-                "msg": "项目标题不能为空"
-            });
-            return;
-        }
-        if (!description) {
-            res.json({
-                "r": 1,
-                "errcode": 10027,
-                "msg": "项目简介不能为空"
-            });
-            return;
-        }
-
-        Project.findByIdAndUpdate(_id, {
-            $set: {
-                title: title,
-                description: description,
-                industry: industry,
-                group: group,
-                purpose: purpose,
-                solution: solution,
-                teamInfo: teamInfo,
-                updateTime: Date.now()
-            }
-        }, function(err, doc) {
-            if (err) {
-                res.json({
-                    "r": 1,
-                    "errcode": 10026,
-                    "msg": "服务器错误，更新项目失败"
-                });
-                return;
-            }
-            res.json({
-                "r": 0,
-                "msg": "修改成功",
-                "project": doc
-            });
-            return;
-        });
-    },
 
     /**
      * @method joinProjectById

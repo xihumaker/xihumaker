@@ -31,6 +31,14 @@
             "type": "view",
             "name": "北斗社区",
             "url": "http://wsq.qq.com/reflow/183897913?from=message&isappinstalled=0"
+        }, {
+            "type": "view",
+            "name": "登录",
+            "url": "http://xihumaker.jios.org/weixin/login"
+        }, {
+            "type": "view",
+            "name": "加入我们",
+            "url": "http://xihumaker.jios.org/weixin/register"
         }]
     }]
 }
