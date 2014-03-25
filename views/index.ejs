@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创客分布 - 西湖创客汇</title>
+    <meta name="description" content="">
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=13b05f4f0215ddac6bd1075392956312&v=1.0"></script> 
+</head>
+<body>
+    <div class="ui small fixed transparent orange inverted main menu">
+        <div class="menu">
+            <div class="ui dropdown item" id="industryDropdown">
+                <input type="hidden" name="industry" value="-1" id="industry">
+                <div class="text ellipsis">全部行业</div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="-1">全部行业</div>
+                    <div class="item" data-value="1001">时尚科技</div>
+                    <div class="item" data-value="1002">创意设计</div>
+                    <div class="item" data-value="1003">自然环境</div>
+                    <div class="item" data-value="1004">智慧城市</div>
+                    <div class="item" data-value="1005">文艺生活</div>
+                    <div class="item" data-value="1006">医疗健康</div>
+                    <div class="item" data-value="1007">运动休闲</div>
+                    <div class="item" data-value="1008">敬老爱幼</div>
+                    <div class="item" data-value="1009">表达传播</div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+
+
+    <h1>hello</h1>
+    
+    
+    <div id="l-map"></div> 
+    <script type="text/javascript">  
+        var map = new BMap.Map("l-map");  
+        map.centerAndZoom(new BMap.Point(120.20000,30.26667), 11);  
+    </script>
+</body>
+</html>
+

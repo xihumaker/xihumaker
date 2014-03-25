@@ -8,6 +8,30 @@ var Project = require('../models/project');
 var INDUSTRY_LIST = config.INDUSTRY_LIST;
 var GROUP_LIST = config.GROUP_LIST;
 
+/**
+ * @method deleteByIndex
+ * 根据索引删除数组中的某个元素
+ * @param {Number} 索引
+ * @return {Array} 返回一个新数组
+ */
+Array.prototype.deleteByIndex = function(index) {
+    if (index < 0) {
+        return this;
+    } else {
+        return this.slice(0, index).concat(this.slice(index + 1, this.length));
+    }　　
+}
+
+/**
+ * @method deleteByValue
+ * 根据值删除数组中的某个元素
+ * @param {Number} 值
+ * @return {Array} 返回一个新数组
+ */
+Array.prototype.deleteByValue = function(val) {
+    return this.deleteByIndex(this.indexOf(val));
+}
+
 var ProjectModule = {
 
     /**
@@ -299,53 +323,6 @@ var ProjectModule = {
     },
 
     /**
-     * @method editProjectById
-     * 通过项目Id来修改某个项目
-     */
-    editProjectById: function(req, res) {
-        var _id = req.param('_id') || '';
-        if (_id.length !== 24) {
-            res.render('weixin/editProject', {
-                "r": 1,
-                "errcode": 10015,
-                "msg": "项目不存在"
-            });
-            return;
-        }
-
-        Project.findOne({
-            _id: new ObjectId(_id)
-        }, function(err, doc) {
-            if (err) {
-                res.render('weixin/editProject', {
-                    "r": 1,
-                    "errcode": 10022,
-                    "msg": "服务器错误，调用editProjectById方法出错"
-                });
-                return;
-            }
-
-            if ( !! doc) {
-                res.render('weixin/editProject', {
-                    "r": 0,
-                    "msg": "请求成功",
-                    "project": doc
-                });
-                return;
-            } else {
-                res.render('weixin/editProject', {
-                    "r": 1,
-                    "errcode": 10015,
-                    "msg": "项目不存在"
-                });
-                return;
-            }
-        });
-    },
-
-
-
-    /**
      * @method joinProjectById
      * 申请加入某个项目
      */
@@ -409,7 +386,122 @@ var ProjectModule = {
             }
         });
 
+    },
+
+    /**
+     * @method quitProjectById
+     * 退出项目
+     */
+    quitProjectById: function(req, res) {
+        var _id = req.param('_id');
+        var userId = req.session.userId;
+
+        Project.findOne({
+            _id: new ObjectId(_id)
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10031,
+                    "msg": "服务器错误，退出项目失败"
+                })
+                return;
+            }
+
+            if ( !! doc) {
+                var members = doc.members;
+                if (members.indexOf(userId) === -1) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10032,
+                        "msg": "你不在该项目中"
+                    });
+                    return;
+                } else {
+                    members = members.deleteByValue(userId);
+
+                    Project.findByIdAndUpdate(_id, {
+                        $set: {
+                            members: members
+                        }
+                    }, function(err, doc) {
+                        if (err) {
+                            res.json({
+                                "r": 1,
+                                "errcode": 10031,
+                                "msg": "服务器错误，退出项目失败"
+                            })
+                            return;
+                        }
+                        res.json({
+                            "r": 0,
+                            "msg": "退出项目成功",
+                            "project": doc
+                        });
+                        return;
+                    })
+                }
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10015,
+                    "msg": "项目不存在"
+                })
+                return;
+            }
+        });
+    },
+
+    // --------------------------------------------
+
+    /**
+     * @method editProjectById
+     * 通过项目Id来修改某个项目
+     */
+    editProjectById: function(req, res) {
+        var _id = req.param('_id') || '';
+        if (_id.length !== 24) {
+            res.render('weixin/editProject', {
+                "r": 1,
+                "errcode": 10015,
+                "msg": "项目不存在"
+            });
+            return;
+        }
+
+        Project.findOne({
+            _id: new ObjectId(_id)
+        }, function(err, doc) {
+            if (err) {
+                res.render('weixin/editProject', {
+                    "r": 1,
+                    "errcode": 10022,
+                    "msg": "服务器错误，调用editProjectById方法出错"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                res.render('weixin/editProject', {
+                    "r": 0,
+                    "msg": "请求成功",
+                    "project": doc
+                });
+                return;
+            } else {
+                res.render('weixin/editProject', {
+                    "r": 1,
+                    "errcode": 10015,
+                    "msg": "项目不存在"
+                });
+                return;
+            }
+        });
     }
+
+
+
+
 
 
 

@@ -1,38 +1,13 @@
 $(function() {
 
-    /**
-     * @method quitProject
-     * 退出项目
-     */
-    function quitProject() {
+    function findUserById(_id, succCall) {
         $.ajax({
-            url: '/api/project/' + _id + '/quit',
-            type: 'POST',
+            url: '/api/user/' + _id,
+            type: 'GET',
             dataType: 'json',
             timeout: 15000,
             success: function(data, textStatus, jqXHR) {
-                console.log(data);
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-
-            }
-        });
-    }
-
-    /**
-     * @method joinProject
-     * 加入项目
-     */
-    function joinProject() {
-        $.ajax({
-            url: '/api/project/' + _id + '/join',
-            type: 'POST',
-            dataType: 'json',
-            timeout: 15000,
-            success: function(data, textStatus, jqXHR) {
-                console.log(data);
-
+                succCall(data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
 
@@ -45,17 +20,75 @@ $(function() {
         var isMyProject = $('input').attr('data-isMyProject');
         var hasJoin = $('input').attr('data-hasJoin');
         var _id = $('input').attr('data-_id');
-        if (hasLogin === 'true') {
-            if (hasJoin === 'true') {
-                $('#quit').click(quitProject);
-            } else {
-                $('#join').click(joinProject);
+        var authorId = $('input').attr('data-authorId');
+        var members = $('input').attr('data-members');
+
+        findUserById(authorId, function(data) {
+            if (data.r === 0) {
+                $('#authorId').html('创始人：' + data.user.username);
+            }
+        })
+
+        if ( !! members) {
+            members = members.split(',');
+            $('#teaminfo').append($('<p id="members">项目成员：</p>'));
+            for (var i = 0; i < members.length; i++) {
+                var id = members[i];
+
+                findUserById(id, function(data) {
+                    if (data.r === 0) {
+                        $('#members').append($('<span> ' + data.user.username + ' </span>'));
+                    }
+                })
             }
         }
     }
 
+    // 退出项目
+    $('#quit').click(function() {
+        var _id = $('input').attr('data-_id');
+        $.ajax({
+            url: '/api/project/' + _id + '/quit',
+            type: 'POST',
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    alert('退出项目成功');
+                    window.location.reload();
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
 
+            }
+        });
+    });
 
+    // 加入项目
+    $('#join').click(function() {
+        var _id = $('input').attr('data-_id');
+        $.ajax({
+            url: '/api/project/' + _id + '/join',
+            type: 'POST',
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    alert('加入项目成功');
+                    window.location.reload();
+                } else {
+                    alert(dat.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
 
 
 });

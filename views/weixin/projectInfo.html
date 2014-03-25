@@ -11,58 +11,22 @@
     <meta name="description" content="">
     <link rel="shortcut icon" href="/icon/favicon.ico">
     <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/weixin/projectInfo.css">
     <style type="text/css">
-        body {
-            margin: 0;
-        }
-        .ui.menu.fixed {
-            top: 0;
-        }
-        .ui.segment {
-            margin: 50px 10px 10px 10px;
-            padding: 0px;
-        }
-        .ui.left.aligned.header {
-            margin-bottom: 5px !important;
-        }
-        h5.ui.header {
-            margin: 0 !important;
-            font-weight: normal;
-        }
-        .ui.divider {
-            margin: 0.5rem 0rem;
-        }
-        .ui.progress {
-            border: none;
-            padding: 0px;
-        }
-        .four.wide.column {
-            height: 25px;
-            line-height: 25px;
-        }
-        .ui.progress {
-            background-color: #EAE8E8;
-            height: 25px;
-        }
-        .ui.form textarea {
-            border: none;
-            padding: 0;
-            overflow-y:visible;
-            min-height: inherit;
-            height: inherit;
-            max-height: inherit;
+        .hide {
+            display: none !important;
         }
     </style>
+    
     <script type="text/javascript">
         // 显示微信中网页右上角按钮
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-            WeixinJSBridge.call('showOptionMenu');
+            WeixinJSBridge.call('hideOptionMenu');
         });
     </script>
     <script type="text/javascript">
         var r = '<%= r %>';
         var msg = '<%= msg %>';
-
     </script>
 </head>
 <body>
@@ -70,22 +34,22 @@
     <div class="ui small fixed transparent orange inverted main menu">
         <div class="menu">
             <a href="/weixin/projectList" class="item left"><i class="reply mail icon"></i>返回</a>
-            <!--
             <% if(r == '0') { %>
-                <input type="hidden" data-hasLogin=<%= hasLogin %> data-isMyProject="<%= isMyProject %>" data-hasJoin="<%= hasJoin %>" data-_id="<%= project._id %>">
+                <input type="hidden" data-hasLogin=<%= hasLogin %> data-isMyProject="<%= isMyProject %>" data-hasJoin="<%= hasJoin %>" data-_id="<%= project._id %>" data-members="<%= project.members %>" data-authorId="<%= project.authorId %>">
                 <% if(hasLogin) { %>
                     <% if(!isMyProject) { %>
                         <% if(hasJoin) { %>
+                            <a href="javascript:void(0);" class="item right hide" id="join">加入该项目</a>
                             <a href="javascript:void(0);" class="item right" id="quit">退出该项目</a>
                         <% } else { %>
                             <a href="javascript:void(0);" class="item right" id="join">加入该项目</a>
+                            <a href="javascript:void(0);" class="item right hide" id="quit">退出该项目</a>
                         <% } %>
                     <% } %>
                 <% } else { %>
                     <a href="/weixin/login?returnUrl=/weixin/project/<%= project._id %>" class="item right">加入该项目</a>
                 <% } %>
             <% } %>
-        -->
         </div>
     </div>
     
@@ -118,12 +82,15 @@
             <% } %>
 
             <h4 class="ui inverted teal block header">项目成员</h4>
-            <% if(project.members.length === 0) { %>
-                <p>项目成员为空</p>
-            <% } else { %>
-                <%= project.members %>
-            <% } %>
-            
+            <div id="teaminfo">
+                <p id="authorId"></p>
+                <% if(project.members.length === 0) { %>
+                    <p>项目成员：项目成员为空</p>
+                <% } else { %>
+                    
+                <% } %>
+            </div>
+
             <div class="ui horizontal icon divider">
                 <i class="circular leaf icon"></i>
             </div>

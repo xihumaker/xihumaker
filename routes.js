@@ -72,11 +72,6 @@ module.exports = function(app) {
     });
     // 微信端 - 改变世界
     app.get('/weixin/gaibianshijie', function(req, res) {
-        res.set({
-            'Pragma': 'no-cache',
-            'Cache-Control': 'no-cache',
-            'Expires': 0
-        })
         res.render('weixin/projectList');
     });
     // 微信端 - 项目列表页面
@@ -129,6 +124,8 @@ module.exports = function(app) {
     app.get('/weixin/project/:_id', project.getProjectById);
     // 加入项目
     app.post('/api/project/:_id/join', user.userAuth, project.joinProjectById);
+    // 退出项目
+    app.post('/api/project/:_id/quit', user.userAuth, project.quitProjectById);
 
     app.get('/api/projects/search', project.searchProjects);
 

@@ -139,7 +139,7 @@ var UserModule = {
             username = req.param('username'),
             password = req.param('password'),
             rePassword = req.param('rePassword');
-        
+
         if (!email) {
             res.json({
                 "r": 1,
@@ -266,10 +266,6 @@ var UserModule = {
                 }
             }
         });
-    },
-
-    delUserById: function(req, res) {
-
     }
 
 

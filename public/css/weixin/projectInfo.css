@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+}
+.ui.menu.fixed {
+    top: 0;
+}
+.ui.segment {
+    margin: 50px 10px 10px 10px;
+    padding: 0px;
+}
+.ui.left.aligned.header {
+    margin-bottom: 5px !important;
+}
+h5.ui.header {
+    margin: 0 !important;
+    font-weight: normal;
+}
+.ui.divider {
+    margin: 0.5rem 0rem;
+}
+.ui.progress {
+    border: none;
+    padding: 0px;
+}
+.four.wide.column {
+    height: 25px;
+    line-height: 25px;
+}
+.ui.progress {
+    background-color: #EAE8E8;
+    height: 25px;
+}
+.ui.form textarea {
+    border: none;
+    padding: 0;
+    overflow-y:visible;
+    min-height: inherit;
+    height: inherit;
+    max-height: inherit;
+}
