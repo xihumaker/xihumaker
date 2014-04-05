@@ -209,7 +209,7 @@ var ProjectModule = {
                 var hasLogin = false; // 保存用户是否已经登录
                 var isMyProject = false; // 保存是否是当前登录用户创建的项目
                 var hasJoin = false; // 保存用户是否已经加入该项目
-                var userId = req.signedCookies.xihumaker.userId;
+                var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
                 if ( !! userId) { // 判断用户是否已经登录
                     hasLogin = true;
                     if (doc.authorId == userId) { // 用户已经登录，并且是该项目的创始人

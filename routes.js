@@ -7,12 +7,20 @@ var admin = require('./controllers/admin');
 
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
 
-// 微信接入配置
+// dev - 微信接入配置
 weixin.configurate({
     token: 'xihumaker',
     appid: 'wxc2d82aa2e44a2faa',
     secret: '9ef7661014dd0dbd098b483fee803d58'
 });
+
+// pro - 部署
+// weixin.configurate({
+//     token: 'xihumaker',
+//     appid: 'wx1b77ae9461a7f199',
+//     secret: '4f87ca5ca463cff33541909fb88dc5cd'
+// });
+// weixin.reflashAccessToken();
 
 module.exports = function(app) {
 
