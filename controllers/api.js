@@ -1,27 +1,26 @@
-var weixin = require('weixin-api');
+var weixin = require('weixin-apis');
 var config = require('../config');
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
 
 module.exports = {
 
     // 用户关注公众号事件
-    subscribeHandler: function(msg) {
+    subscribeHandler: function(data) {
         var resMsg = {
-            fromUserName: msg.toUserName,
-            toUserName: msg.fromUserName,
-            msgType: "music",
+            toUserName: data.fromUserName,
+            fromUserName: data.toUserName,
+            msgType: 'music',
             title: "西湖创客汇",
-            description: "西湖创客汇",
+            description: "西湖创客汇是浙江地区的创客空间，我们的主旨是 青年 | 创新 | 科技",
             musicUrl: WEB_SERVER_IP + '/voice/welcome.mp3',
-            HQMusicUrl: "",
-            funcFlag: 0
+            thumbMediaId: '2JxNP_4jiAm-sNF4mpcMu79o00L4XeRxdccCAUayt7wRDAADdA2ONQvwE5ddY0bT'
         };
-
+        console.log(resMsg);
         weixin.sendMsg(resMsg);
     },
 
     // 创客？ - 创客来了
-    chuangKeLaiLe: function(msg) {
+    chuangKeLaiLe: function(data) {
         var articles = [];
         articles[0] = {
             title: "什么是创客？",
@@ -53,15 +52,12 @@ module.exports = {
             picUrl: '',
             url: WEB_SERVER_IP + '/weixin/constitution'
         };
-
-        // 返回图文消息
-        resMsg = {
-            fromUserName: msg.toUserName,
-            toUserName: msg.fromUserName,
-            msgType: "news",
-            articles: articles,
-            funcFlag: 0
-        }
+        var resMsg = {
+            toUserName: data.fromUserName,
+            fromUserName: data.toUserName,
+            msgType: 'news',
+            articles: articles
+        };
 
         weixin.sendMsg(resMsg);
     }

@@ -1,22 +1,30 @@
-var weixin = require('weixin-api');
+var weixin = require('weixin-apis');
 var config = require('./config');
 var api = require('./controllers/api');
 var user = require('./controllers/user');
 var project = require('./controllers/project');
+var admin = require('./controllers/admin');
 
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
+
+// 微信接入配置
+weixin.configurate({
+    token: 'xihumaker',
+    appid: 'wxc2d82aa2e44a2faa',
+    secret: '9ef7661014dd0dbd098b483fee803d58'
+});
 
 module.exports = function(app) {
 
     // 接入验证
     app.get('/verify', function(req, res) {
-        // 签名成功
         if (weixin.checkSignature(req)) {
             res.send(200, req.query.echostr);
         } else {
             res.send(200, 'fail');
         }
     });
+    // Start
     app.post('/verify', function(req, res) {
         weixin.loop(req, res);
     });
@@ -28,6 +36,19 @@ module.exports = function(app) {
     app.get('/', function(req, res) {
         res.render('index');
     });
+
+    app.get('/weixin/*', function(req, res, next) {
+        res.set({
+            'Content-Type': 'text/html',
+            'ETag': Date.now()
+        });
+        next();
+    });
+
+    app.get('/weixin/index', function(req, res) {
+        res.render('weixin/index');
+    });
+
     // 微信端 - 创建项目页面
     app.get('/weixin/createProject', user.userAuth, function(req, res) {
         res.render('weixin/createProject');
@@ -72,11 +93,11 @@ module.exports = function(app) {
     });
     // 微信端 - 改变世界
     app.get('/weixin/gaibianshijie', function(req, res) {
-        res.render('weixin/projectList');
+        res.render('weixin/projects');
     });
     // 微信端 - 项目列表页面
-    app.get('/weixin/projectList', function(req, res) {
-        res.render('weixin/projectList');
+    app.get('/weixin/projects', function(req, res) {
+        res.render('weixin/projects');
     });
     // 微信端 - 推广创客文化
     app.get('/weixin/tuiguang', function(req, res) {
@@ -106,6 +127,42 @@ module.exports = function(app) {
         }
     });
 
+    // 用户中心页面
+    app.get('/weixin/userCenter', user.userAuth, user.showUserCenter);
+    app.get('/weixin/user/:_id/edit', user.userAuth, user.showEditUser);
+
+    app.get('/weixin/events', function(req, res) {
+        res.render('weixin/events');
+    });
+
+    app.get('/oauthResponse', function(req, res) {
+        var _res = res;
+        var code = req.param('code');
+        var state = req.param('state');
+
+        weixin.getOauth2AccessToken(code, function(err, res, body) {
+            var ret = JSON.parse(body);
+            console.log(ret);
+            var access_token = ret.access_token;
+            var openid = ret.openid;
+            var refreshToken = ret.refresh_token;
+
+            weixin.getOauth2UserInfo({
+                access_token: access_token,
+                openid: openid,
+                lang: "zh_CN"
+            }, function(err, res, body) {
+                var ret = JSON.parse(body);
+                console.log(ret);
+                _res.json(ret);
+            });
+
+
+        });
+
+
+    });
+
 
     /**
      * ---------------------------------------------------------
@@ -116,6 +173,8 @@ module.exports = function(app) {
     app.post('/weixin/login', user.login);
     // 注册新用户
     app.post('/api/users', user.addUser);
+    // 用户注销操作
+    app.post('/weixin/logout', user.logout);
 
     app.get('/api/project/:_id', project.findProjectById);
     app.post('/api/project/:_id', project.findProjectByIdAndUpdate);
@@ -138,6 +197,47 @@ module.exports = function(app) {
         res.render('weixin/newPro');
     });
 
+    /**
+     * 后台管理相关路由
+     * ---------------------------------------------------------
+     */
+
+
+    // 后台管理首页
+    app.get('/admin', admin.auth, function(req, res) {
+        res.render('admin/index');
+    });
+    // 后台管理首页
+    app.get('/admin/index', admin.auth, function(req, res) {
+        res.render('admin/index');
+    });
+    // 后台管理登录页面
+    app.get('/admin/login', function(req, res) {
+        if (req.session.adminId) {
+            res.render('admin/index');
+        } else {
+            res.render('admin/login');
+        }
+    });
+    // 用户管理页面
+    app.get('/admin/userManagement', admin.auth, function(req, res) {
+        res.render('admin/userManagement');
+    });
+    // 项目管理页面
+    app.get('/admin/projectManagement', admin.auth, function(req, res) {
+        res.render('admin/projectManagement');
+    });
+    // 后台管理设置页面
+    app.get('/admin/settings', admin.auth, function(req, res) {
+        res.render('admin/settings');
+    });
+    // 后台管理退出操作
+    app.get('/admin/logout', admin.logout);
+
+    // 后台管理登录操作
+    app.post('/admin/login', admin.login);
+
+
 
     /**
      * 404 Page
@@ -152,118 +252,26 @@ module.exports = function(app) {
 
 }
 
-// config
-weixin.token = config.TOKEN;
-
-// 监听文本消息
-weixin.textMsg(function(msg) {
-    console.log("textMsg received");
-    console.log(JSON.stringify(msg));
-
-    var resMsg = {};
-
-    switch (msg.content) {
-        case "文本":
-            // 返回文本消息
-            resMsg = {
-                fromUserName: msg.toUserName,
-                toUserName: msg.fromUserName,
-                msgType: "text",
-                content: "这是文本回复",
-                funcFlag: 0
-            };
-            break;
-
-        case "音乐":
-            // 返回音乐消息
-            resMsg = {
-                fromUserName: msg.toUserName,
-                toUserName: msg.fromUserName,
-                msgType: "music",
-                title: "音乐标题",
-                description: "音乐描述",
-                musicUrl: "音乐url",
-                HQMusicUrl: "高质量音乐url",
-                funcFlag: 0
-            };
-            break;
-
-        case "图文":
-
-            var articles = [];
-            articles[0] = {
-                title: "PHP依赖管理工具Composer入门",
-                description: "PHP依赖管理工具Composer入门",
-                picUrl: "http://weizhifeng.net/images/tech/composer.png",
-                url: "http://weizhifeng.net/manage-php-dependency-with-composer.html"
-            };
-
-            articles[1] = {
-                title: "八月西湖",
-                description: "八月西湖",
-                picUrl: "http://weizhifeng.net/images/poem/bayuexihu.jpg",
-                url: "http://weizhifeng.net/bayuexihu.html"
-            };
-
-            articles[2] = {
-                title: "「翻译」Redis协议",
-                description: "「翻译」Redis协议",
-                picUrl: "http://weizhifeng.net/images/tech/redis.png",
-                url: "http://weizhifeng.net/redis-protocol.html"
-            };
-
-            // 返回图文消息
-            resMsg = {
-                fromUserName: msg.toUserName,
-                toUserName: msg.fromUserName,
-                msgType: "news",
-                articles: articles,
-                funcFlag: 0
-            }
-    }
-
-    weixin.sendMsg(resMsg);
+// 监听关注事件
+weixin.on('subscribeEventMsg', function(data) {
+    console.log('>>>>>>>>> subscribeEventMsg emit >>>>>>>>>');
+    console.log(data);
+    api.subscribeHandler(data);
 });
 
-// 监听图片消息
-weixin.imageMsg(function(msg) {
-    console.log("imageMsg received");
-    console.log(JSON.stringify(msg));
-});
-
-// 监听位置消息
-weixin.locationMsg(function(msg) {
-    console.log("locationMsg received");
-    console.log(JSON.stringify(msg));
-});
-
-// 监听链接消息
-weixin.urlMsg(function(msg) {
-    console.log("urlMsg received");
-    console.log(JSON.stringify(msg));
-});
-
-// 监听事件消息
-weixin.eventMsg(function(msg) {
-    console.log("eventMsg received");
-
-    // 用户关注公众号事件
-    if (msg.event === 'subscribe') {
-        api.subscribeHandler(msg);
-    }
+// 监听点击菜单拉取消息时的事件推送
+weixin.on('clickEventMsg', function(data) {
+    console.log('>>>>>>>>> clickEventMsg emit >>>>>>>>>');
+    console.log(data);
 
     // 菜单事件
-    if (msg.event === 'CLICK') {
-        switch (msg.eventKey) {
+    if (data.event === 'CLICK') {
+        switch (data.eventKey) {
             case 'CHUANG_KE_LAI_LE':
-                api.chuangKeLaiLe(msg);
+                api.chuangKeLaiLe(data);
                 break;
             default:
                 break;
         }
-    }
-
-    if (msg.event === 'LOCATION') {
-        console.log(msg);
     }
 });

@@ -6,14 +6,15 @@ var express = require('express'),
     path = require('path'),
     mongoose = require('mongoose'),
     config = require('./config'),
-    routes = require('./routes');
+    routes = require('./routes'),
+    logger = require('./common/logger');
 
 // 数据库连接
 mongoose.connect('mongodb://' + config.MONGODB_IP + '/' + config.MONGODB_DATABASE_NAME, function(err) {
     if (!err) {
-        console.log('【日志】连接到数据库：' + config.MONGODB_DATABASE_NAME);
+        logger.info('【日志】连接到数据库：' + config.MONGODB_DATABASE_NAME);
     } else {
-        throw err;
+        logger.error(err);
     }
 });
 
@@ -42,5 +43,5 @@ if ('development' == app.get('env')) {
 routes(app);
 
 http.createServer(app).listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + app.get('port'));
+    logger.info('Express server listening on port ' + app.get('port'));
 });

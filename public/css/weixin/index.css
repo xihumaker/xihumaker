@@ -1,0 +1,13 @@
+.logo {
+	margin-top: 10px;
+	position: relative;
+	left: 50%;
+	margin-left: -150px;
+}
+.indent {
+	text-indent: 2em;
+}
+.ui.basic.segment {
+	margin: 0px;
+	padding: 10px;
+}

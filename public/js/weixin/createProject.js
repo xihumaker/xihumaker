@@ -25,6 +25,15 @@ $(function() {
             alert('项目标题不能超过25个字');
             return;
         }
+        if (Number(industry) === -1) {
+            alert('行业选择不能为空');
+            return;
+        }
+        if (Number(group) === -1) {
+            alert('组别选择不能为空');
+            return;
+        }
+
 
         $create.html('正在创建...');
 

@@ -1,0 +1,14 @@
+body {
+    font-family: "微软雅黑","宋体", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    margin: 0px;
+    padding: 0px;
+    background-color: #F7F6F6;
+    padding-bottom: 70px;
+}
+#footernav .item {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+#footernav>.item>.icon {
+	margin: 0 auto .2em!important
+}

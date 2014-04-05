@@ -18,6 +18,10 @@
         "name": "一起来！",
         "sub_button": [{
             "type": "view",
+            "name": "活动",
+            "url": "http://xihumaker.jios.org/weixin/events"
+        }, {
+            "type": "view",
             "name": "创客微课程",
             "url": "http://xihumaker.jios.org/weixin/weikecheng"
         }, {
@@ -29,16 +33,16 @@
         "name": "朋友～",
         "sub_button": [{
             "type": "view",
+            "name": "会员秀",
+            "url": "http://xihumaker.jios.org/weixin/userCenter"
+        }, {
+            "type": "view",
             "name": "北斗社区",
             "url": "http://wsq.qq.com/reflow/183897913?from=message&isappinstalled=0"
         }, {
             "type": "view",
             "name": "登录",
             "url": "http://xihumaker.jios.org/weixin/login"
-        }, {
-            "type": "view",
-            "name": "加入我们",
-            "url": "http://xihumaker.jios.org/weixin/register"
         }]
     }]
 }

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no"/>
+    <title>个人信息</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/css/weixin/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/weixin/editUser.css">
+
+    <script type="text/javascript">
+            // 隐藏微信中网页右上角按钮
+            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                WeixinJSBridge.call('showOptionMenu');
+            });
+        </script>
+
+    <script type="text/javascript">
+        var r = "<%= r %>";
+        var msg = "<%= msg %>";
+        var workOrStudy = "<%= user.workOrStudy %>"
+
+        var user = {
+            email: "<%= user.email %>",
+            username: "<%= user.username %>",
+            _id: "<%= user._id %>",
+            coin: Number("<%= user.coin %>"),
+            headimgurl: "<%= user.headimgurl %>",
+            interest: "<%= user.interest %>" || [],
+            profession: "<%= user.profession %>",
+            school: "<%= user.school %>",
+            job: "<%= user.job %>",
+            company: "<%= user.company %>",
+            workOrStudy: "<%= user.workOrStudy %>",
+            inAddress: "<%= user.inAddress %>",
+            city: "<%= user.city %>",
+            province: "<%= user.province %>",
+            qq: "<%= user.qq %>",
+            birthday: Number("<%= user.birthday %>"),
+            sex: Number("<%= user.sex %>"),
+            createTime: Number("<%= user.createTime %>"),
+            phone: "<%= user.phone %>"
+        }
+    </script>
+</head>
+<body>
+
+
+    <div class="ui segment">
+        <div class="ui divided list">
+            <a class="item devitem" href="javascript:void(0);" style="line-height: 80px;">
+                <i class="right floated arrow icon" style="margin-top: 32px;"></i>
+                <img class="right floated" src="/upload/headimg/default.png" style="width: 75px;">
+                <div class="content">
+                    <div class="header">头像</div>
+                </div>
+            </a>
+            <div class="item">
+                <div class="content">
+                    <div class="header">邮箱地址</div>
+                </div>
+                <div class="ui header tiny right floated"><%= user.email %></div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">真实姓名</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated"><%= user.username %></div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">手机号码</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated"><%= user.phone %></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ui segment">
+        <div class="ui divided list">
+            <div class="item" id="sexItem">
+                <div class="content">
+                    <div class="header">性别</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+                    <% if(user.sex == '1') { %>
+                        男
+                    <% } else if(user.sex == '2') { %>
+                        女
+                    <% } else { %>
+                        未知
+                    <% } %>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">生日</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+                    <% if(user.birthday == '0') { %>
+                        未填写
+                    <% } else { %>
+                        <%= user.localBirthday %>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="content">
+                    <div class="header">QQ</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+                    <% if(user.qq == '') { %>
+                        未填写
+                    <% } else { %>
+                        <%= user.qq %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui segment">
+        <div class="ui divided list">
+            <div class="item">
+                <div class="content">
+                    <div class="header">我的收货地址</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+                    <% if(user.inAddress == '') { %>
+                        未填写
+                    <% } else { %>
+
+                    <% } %>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">地区</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+                    浙江 杭州
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">感兴趣的行业</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui basic segment">
+        <div class="ui form" style="padding-left: 10px;">
+            <div class="grouped inline fields">
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="workOrStudy" id="student">
+                        <label>在读学生</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="workOrStudy" id="haswork">
+                        <label>已工作</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui segment" id="hasworkField">
+        <div class="ui divided list">
+            <div class="item">
+                <div class="content">
+                    <div class="header">公司</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+                    
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">岗位</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui segment" id="studentField">
+        <div class="ui divided list">
+            <div class="item">
+                <div class="content">
+                    <div class="header">学校</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+                    
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">专业</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="ui basic segment">
+        <div class="ui fluid green button">保存修改</div>
+    </div>
+
+    <div class="ui large vertical inverted teal right overlay sidebar menu" id='sexField'>
+        <div class="item" data-value="1">男</div>
+        <div class="item" data-value="2">女</div>
+    </div>
+    
+    
+    
+    
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>
+    
+
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/weixin/editUser" ></script>
+
+</body>
+</html>

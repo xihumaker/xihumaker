@@ -72,7 +72,7 @@ $(function() {
             timeout: 15000,
             success: function(data, textStatus, jqXHR) {
                 if (data.r === 0) {
-                    window.location.href = '/weixin/projectList';
+                    window.location.href = '/weixin/projects';
                 } else {
                     $register.html('注册');
                     $message.html('<i class="icon attention"></i>' + data.msg).show();

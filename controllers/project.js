@@ -137,7 +137,7 @@ var ProjectModule = {
             description = req.param('description') || '',
             industry = req.param('industry') || -1,
             group = req.param('group') || -1,
-            authorId = req.session.userId,
+            authorId = req.signedCookies.xihumaker.userId,
             createTime = Date.now(),
             updateTime = Date.now();
 
@@ -209,13 +209,14 @@ var ProjectModule = {
                 var hasLogin = false; // 保存用户是否已经登录
                 var isMyProject = false; // 保存是否是当前登录用户创建的项目
                 var hasJoin = false; // 保存用户是否已经加入该项目
-                if ( !! req.session.userId) { // 判断用户是否已经登录
+                var userId = req.signedCookies.xihumaker.userId;
+                if ( !! userId) { // 判断用户是否已经登录
                     hasLogin = true;
-                    if (doc.authorId == req.session.userId) { // 用户已经登录，并且是该项目的创始人
+                    if (doc.authorId == userId) { // 用户已经登录，并且是该项目的创始人
                         isMyProject = true;
                     } else { // 用户已经登录，并且不是该项目的创始人
                         var members = doc.members;
-                        if (members.indexOf(req.session.userId) !== -1) { // 说明该用户已经加入该项目中
+                        if (members.indexOf(userId) !== -1) { // 说明该用户已经加入该项目中
                             hasJoin = true;
                         }
                     }
@@ -328,7 +329,7 @@ var ProjectModule = {
      */
     joinProjectById: function(req, res) {
         var _id = req.param('_id');
-        var userId = req.session.userId;
+        var userId = req.signedCookies.xihumaker.userId;
 
         Project.findOne({
             _id: new ObjectId(_id)
@@ -394,7 +395,7 @@ var ProjectModule = {
      */
     quitProjectById: function(req, res) {
         var _id = req.param('_id');
-        var userId = req.session.userId;
+        var userId = req.signedCookies.xihumaker.userId;
 
         Project.findOne({
             _id: new ObjectId(_id)

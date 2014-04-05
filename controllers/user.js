@@ -13,8 +13,10 @@ var UserModule = {
      * session对象中有userId属性，说明用户已经登录，验证通过，否则说明用户未登录
      */
     userAuth: function(req, res, next) {
-        if (req.session.userId) {
+        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+        if (userId) {
             console.log("[ >>> LOG >>> ]：用户已登录");
+            console.log('userId = ' + userId);
             next();
         } else {
             console.log("[ >>> LOG >>> ]：用户未登录");
@@ -65,8 +67,14 @@ var UserModule = {
             }
 
             if ( !! doc) {
-                // 用户登录成功后，将用户的userId属性添加到session对象
-                req.session.userId = doc._id;
+                //cookie 有效期30天
+                res.cookie('xihumaker', {
+                    userId: doc._id
+                }, {
+                    path: '/',
+                    maxAge: 1000 * 60 * 60 * 24 * 30,
+                    signed: true
+                });
                 res.json({
                     "r": 0,
                     "msg": "登录成功"
@@ -78,6 +86,20 @@ var UserModule = {
                     "msg": "邮箱或密码错误"
                 });
             }
+        });
+    },
+
+    /**
+     * @method logout
+     * 注销账号
+     */
+    logout: function(req, res) {
+        res.clearCookie('xihumaker', {
+            path: '/'
+        });
+        res.json({
+            'r': 0,
+            'msg': '注销成功'
         });
     },
 
@@ -254,8 +276,14 @@ var UserModule = {
                             });
                             return;
                         } else {
-                            // 用户注册成功后，将用户的userId属性添加到session对象
-                            req.session.userId = doc._id;
+                            //cookie 有效期30天
+                            res.cookie('xihumaker', {
+                                userId: doc._id
+                            }, {
+                                path: '/',
+                                maxAge: 1000 * 60 * 60 * 24 * 30,
+                                signed: true
+                            });
                             res.json({
                                 "r": 0,
                                 "msg": "注册成功"
@@ -264,6 +292,79 @@ var UserModule = {
                         }
                     });
                 }
+            }
+        });
+    },
+
+    showUserCenter: function(req, res) {
+        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+        // {password: 0}表示不返回password这个属性
+        User.findOne({
+            _id: new ObjectId(userId)
+        }, {
+            password: 0
+        }, function(err, doc) {
+            if (err) {
+                res.render('weixin/userCenter', {
+                    "r": 1,
+                    "errcode": 10001,
+                    "msg": "服务器错误，调用findUserById方法出错"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                res.render('weixin/userCenter', {
+                    "r": 0,
+                    "msg": "请求成功",
+                    "user": doc
+                });
+                return;
+            } else {
+                res.render('weixin/userCenter', {
+                    "r": 1,
+                    "errcode": 10002,
+                    "msg": "用户不存在"
+                });
+                return;
+            }
+        });
+    },
+
+
+    showEditUser: function(req, res) {
+        var _id = req.params._id;
+
+        // {password: 0}表示不返回password这个属性
+        User.findOne({
+            _id: new ObjectId(_id)
+        }, {
+            password: 0
+        }, function(err, doc) {
+            if (err) {
+                res.render('weixin/editUser', {
+                    "r": 1,
+                    "errcode": 10032,
+                    "msg": "服务器错误，调用showEditUser方法出错"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                doc.localBirthday = '1990年09月09日';
+                res.render('weixin/editUser', {
+                    "r": 0,
+                    "msg": "请求成功",
+                    "user": doc
+                });
+                return;
+            } else {
+                res.render('weixin/editUser', {
+                    "r": 1,
+                    "errcode": 10002,
+                    "msg": "用户不存在"
+                });
+                return;
             }
         });
     }

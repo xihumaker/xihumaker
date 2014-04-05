@@ -8,24 +8,29 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
     <link rel="shortcut icon" href="/icon/favicon.ico">
-    <style type="text/css">
-        .ui.vertical.menu .item>.label {
-            float: inherit;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/weixin/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/weixin/weikecheng.css">
+
 </head>
 <body>
-    <div class="ui large fluid vertical menu">
+
+    <div class="ui basic segment" style="padding: 10px;">
+        <div class="ui large fluid vertical menu">
         <a class="item" href="/weixin/weikecheng/开源硬件与传感器">
-            <i class="right arrow icon"></i>开源硬件与传感器
+            <i class="right black arrow icon"></i>开源硬件与传感器
             <div class="ui small red label">2</div>
         </a>
-        <a class="item" href="/weixin/weikecheng/创客文化"><i class="right arrow icon"></i>创客文化</a>
-        <a class="item" href="/weixin/weikecheng/PM与UX"><i class="right arrow icon"></i>PM与UX</a>
-        <a class="item" href="/weixin/weikecheng/开源软件"><i class="right arrow icon"></i>开源软件</a>
-        <a class="item" href="/weixin/weikecheng/光机电"><i class="right arrow icon"></i>光机电</a>
-        <a class="item" href="/weixin/weikecheng/文化艺术"><i class="right arrow icon"></i>文化艺术</a>
-        <a class="item" href="/weixin/weikecheng/杂学百科"><i class="right arrow icon"></i>杂学百科</a>
+        <a class="item" href="/weixin/weikecheng/创客文化"><i class="right black arrow icon"></i>创客文化</a>
+        <a class="item" href="/weixin/weikecheng/PM与UX"><i class="right black arrow icon"></i>PM与UX</a>
+        <a class="item" href="/weixin/weikecheng/开源软件"><i class="right black arrow icon"></i>开源软件</a>
+        <a class="item" href="/weixin/weikecheng/光机电"><i class="right black arrow icon"></i>光机电</a>
+        <a class="item" href="/weixin/weikecheng/文化艺术"><i class="right black arrow icon"></i>文化艺术</a>
+        <a class="item" href="/weixin/weikecheng/杂学百科"><i class="right black arrow icon"></i>杂学百科</a>
     </div>
+    </div>
+
+    <% include ./inc_footer_nav.html %>
+    
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/weixin/weikecheng" ></script>
 </body>
 </html>

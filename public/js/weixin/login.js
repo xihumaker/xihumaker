@@ -39,7 +39,7 @@ $(function() {
                         var returnUrl = href.split('?')[1].split('=')[1];
                         window.location.href = returnUrl;
                     } else if (/login/.test(window.location.href)) {
-                        window.location.href = '/weixin/projectList';
+                        window.location.href = '/weixin/projects';
                     } else {
                         window.location.reload();
                     }

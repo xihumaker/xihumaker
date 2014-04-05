@@ -3,8 +3,11 @@
  *
  * MONGODB_IP: 			MongoDB数据库服务器IP地址
  * MONGODB_DATABASE: 	MongoDB数据库名字
- * WEB_SERVER_PORT: 	Web服务器端口号，发布80，测试8080
- *
+ * WEB_SERVER_PORT: 	Web服务器端口号，发布80
+ * TOKEN                微信TOKEN
+ * ADMIN_ACCOUNT        西湖创客汇后台管理员账号
+ * INDUSTRY_LIST        行业分类
+ * GROUP_LIST           组别分类
  */
 module.exports = {
     MONGODB_IP: "127.0.0.1",
@@ -13,7 +16,11 @@ module.exports = {
     WEB_SERVER_PORT: 80,
     TOKEN: 'xihumaker',
 
-    // 行业分类
+    ADMIN_ACCOUNT: {
+        username: 'admin',
+        password: '123456'
+    },
+
     INDUSTRY_LIST: {
         '-1': '全部行业',
         '1001': '时尚科技',
@@ -27,7 +34,6 @@ module.exports = {
         '1009': '表达传播'
     },
 
-    // 组别分类
     GROUP_LIST: {
         '-1': '全部组别',
         '2001': '杭州电子科技大学',

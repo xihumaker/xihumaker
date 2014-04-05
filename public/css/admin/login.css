@@ -1,0 +1,99 @@
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+.wrapper {
+    height: 100% !important;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.main section {
+    overflow: hidden;
+}
+
+.main section .page_container {
+    width: 980px;
+    height: 500px;
+    position: relative;
+    top: 10%;
+    margin: 0 auto;
+}
+
+.main section.page1 {
+    background: url('/img/bg.jpg') no-repeat center center;
+    background-size: cover;
+}
+.ui.form {
+    width: 420px;
+    position: absolute;
+    top: 15%;
+    right: 4%;
+}
+
+/* page1 */
+.page1 .form a.ui.header {
+    margin-bottom: 0;
+}
+
+/* page2 */
+.page2 .message {
+    width: 290px;
+    margin-left: 90px;
+}
+
+.page2 .form .signup {
+    margin-left: 90px;
+    width: 290px;
+}
+
+i.icon.logo {
+    width: 400px;
+    height: 50px;
+    background: url('/img/login-logo.png');
+}
+
+.page2 .labeled.signup.button {
+    position: absolute;
+    right: 200px;
+    top: 120px;
+}
+
+.page2 .zaiyiqi {
+    position: absolute;
+    left: 140px;
+    top: 100px;
+}
+
+.page2 .form {
+    display: none;
+}
+
+.page2 .field label {
+    width: 20% !important;
+    text-align: right;
+}
+
+.page2 .field div.input {
+    width: 75% !important;
+}
+
+.page2 .codefield .ui.input{
+    width: 120px !important;
+}
+
+.page2 .codefield input {
+    width: 110px !important;
+}
+
+.page2 .codefield img {
+    vertical-align: middle;
+}
+
+.page2 .codefield a {
+    padding-left: 5px;
+}
+
+.page2 .ui.form {
+    padding-bottom: 30px;
+}

@@ -1,0 +1,28 @@
+.ui.segment {
+	margin: 10px !important;
+	padding: 5px !important;
+}
+.list .item{
+	color: gray;
+	text-decoration: none;
+}
+#userinfo i {
+	margin-top: 30px;
+}
+#userinfo img {
+	width: 70px;
+	height: 80px;
+}
+
+.ui.list .item {
+	padding: 8px !important;
+}
+.ui.basic.segment {
+	padding: 0 !important;
+}
+#hasworkField {
+	display: none;
+}
+#studentField {
+	display: none;
+}
