@@ -109,7 +109,6 @@ define(function(require, exports, module) {
     $('#inAddressSidebar .save').click(function() {
         var val = $('#inAddressSidebar input').val();
         user.inAddress = val;
-        $('#inAddressItem .tiny.header').html(user.inAddress);
         $('#inAddressSidebar').sidebar('toggle');
     });
 

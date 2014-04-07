@@ -65,7 +65,7 @@ define(function(require, exports, module) {
                             '<h4 class="ui black header">' + project.title + '</h4>' +
                             '<h5 class="ui black header">' + convertDate(project.createTime) + '</h5>' +
                             '<div class="image">' +
-                            '<img src="/img/垂丝海棠.jpg">' +
+                            '<img src="/img/logo.jpg">' +
                             '</div>' +
                             '<div class="content ellipsis">' +
                             '<p class="description">' + project.description + '</p>' +
