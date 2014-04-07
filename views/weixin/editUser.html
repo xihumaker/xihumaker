@@ -13,11 +13,11 @@
     <link rel="stylesheet" type="text/css" href="/css/weixin/editUser.css">
 
     <script type="text/javascript">
-            // 隐藏微信中网页右上角按钮
-            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-                WeixinJSBridge.call('showOptionMenu');
-            });
-        </script>
+        // 隐藏微信中网页右上角按钮
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('showOptionMenu');
+        });
+    </script>
 
     <script type="text/javascript">
         var r = "<%= r %>";
@@ -44,7 +44,8 @@
             sex: Number("<%= user.sex %>"),
             createTime: Number("<%= user.createTime %>"),
             phone: "<%= user.phone %>"
-        }
+        };
+        user.interest = user.interest.split(',');
     </script>
 </head>
 <body>
@@ -52,7 +53,7 @@
 
     <div class="ui segment">
         <div class="ui divided list">
-            <a class="item devitem" href="javascript:void(0);" style="line-height: 80px;">
+            <a class="item" href="javascript:void(0);" style="line-height: 80px;" id="headimgItem">
                 <i class="right floated arrow icon" style="margin-top: 32px;"></i>
                 <img class="right floated" src="/upload/headimg/default.png" style="width: 75px;">
                 <div class="content">
@@ -65,21 +66,20 @@
                 </div>
                 <div class="ui header tiny right floated"><%= user.email %></div>
             </div>
-            <div class="item">
+            <div class="item" id="usernameItem">
                 <div class="content">
                     <div class="header">真实姓名</div>
                 </div>
                 <i class="right floated arrow icon" style="margin-top: 2px;"></i>
                 <div class="ui header tiny right floated"><%= user.username %></div>
             </div>
-            <div class="item">
+            <div class="item" id="phoneItem">
                 <div class="content">
                     <div class="header">手机号码</div>
                 </div>
                 <i class="right floated arrow icon" style="margin-top: 2px;"></i>
                 <div class="ui header tiny right floated"><%= user.phone %></div>
             </div>
-
         </div>
     </div>
 
@@ -100,7 +100,7 @@
                     <% } %>
                 </div>
             </div>
-            <div class="item">
+            <div class="item" id="birthdayItem">
                 <div class="content">
                     <div class="header">生日</div>
                 </div>
@@ -108,13 +108,10 @@
                 <div class="ui header tiny right floated">
                     <% if(user.birthday == '0') { %>
                         未填写
-                    <% } else { %>
-                        <%= user.localBirthday %>
                     <% } %>
                 </div>
             </div>
-
-            <div class="item">
+            <div class="item" id="qqItem">
                 <div class="content">
                     <div class="header">QQ</div>
                 </div>
@@ -132,41 +129,37 @@
 
     <div class="ui segment">
         <div class="ui divided list">
-            <div class="item">
-                <div class="content">
-                    <div class="header">我的收货地址</div>
-                </div>
-                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
-                <div class="ui header tiny right floated">
-                    <% if(user.inAddress == '') { %>
-                        未填写
-                    <% } else { %>
-
-                    <% } %>
-                </div>
-            </div>
-            <div class="item">
+            <div class="item" id="areaItem">
                 <div class="content">
                     <div class="header">地区</div>
                 </div>
                 <i class="right floated arrow icon" style="margin-top: 2px;"></i>
                 <div class="ui header tiny right floated">
-                    浙江 杭州
+                    <% if(user.province != '0') { %>
+                        <%= user.province %> <%= user.city %>
+                    <% } %>
                 </div>
             </div>
-            <div class="item">
+            <div class="item" id="inAddressItem">
+                <div class="content">
+                    <div class="header">我的收货地址</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated"></div>
+            </div>
+            
+            <div class="item" id="interestItem">
                 <div class="content">
                     <div class="header">感兴趣的行业</div>
                 </div>
                 <i class="right floated arrow icon" style="margin-top: 2px;"></i>
                 <div class="ui header tiny right floated">
-
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="ui basic segment">
+    <div class="ui basic segment" id="workOrStudyField">
         <div class="ui form" style="padding-left: 10px;">
             <div class="grouped inline fields">
                 <div class="field">
@@ -185,64 +178,307 @@
         </div>
     </div>
 
-    <div class="ui segment" id="hasworkField">
-        <div class="ui divided list">
-            <div class="item">
-                <div class="content">
-                    <div class="header">公司</div>
-                </div>
-                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
-                <div class="ui header tiny right floated">
-                    
-                </div>
-            </div>
-            <div class="item">
-                <div class="content">
-                    <div class="header">岗位</div>
-                </div>
-                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
-                <div class="ui header tiny right floated">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="ui segment" id="studentField">
         <div class="ui divided list">
-            <div class="item">
+            <div class="item" id="schoolItem">
                 <div class="content">
                     <div class="header">学校</div>
                 </div>
                 <i class="right floated arrow icon" style="margin-top: 2px;"></i>
-                <div class="ui header tiny right floated">
-                    
-                </div>
+                <div class="ui header tiny right floated"><%= user.school %></div>
             </div>
-            <div class="item">
+            <div class="item" id="professionItem">
                 <div class="content">
                     <div class="header">专业</div>
                 </div>
                 <i class="right floated arrow icon" style="margin-top: 2px;"></i>
-                <div class="ui header tiny right floated">
+                <div class="ui header tiny right floated"><%= user.profession %></div>
+            </div>
+        </div>
+    </div>
 
+    <div class="ui segment" id="hasworkField">
+        <div class="ui divided list">
+            <div class="item" id="companyItem">
+                <div class="content">
+                    <div class="header">公司</div>
                 </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated"><%= user.company %></div>
+            </div>
+            <div class="item" id="jobItem">
+                <div class="content">
+                    <div class="header">岗位</div>
+                </div>
+                <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                <div class="ui header tiny right floated"><%= user.job %></div>
             </div>
         </div>
     </div>
 
 
-
     <div class="ui basic segment">
-        <div class="ui fluid green button">保存修改</div>
+        <div class="ui fluid green button" id="saveUpdate">保存修改</div>
+    </div>
+    
+    <!-- 真实姓名 -->
+    <div class="ui teal right overlay sidebar menu" id='usernameSidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="text" value="<%= user.username %>" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
     </div>
 
-    <div class="ui large vertical inverted teal right overlay sidebar menu" id='sexField'>
+    <!-- 手机号码 -->
+    <div class="ui teal right overlay sidebar menu" id='phoneSidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="text" value="<%= user.phone %>" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui warning message"></div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 性别 -->
+    <div class="ui large vertical inverted teal right overlay sidebar menu" id='sexSidebar'>
         <div class="item" data-value="1">男</div>
         <div class="item" data-value="2">女</div>
     </div>
+
+    <!-- 生日 -->
+    <div class="ui teal right overlay sidebar menu" id='birthdaySidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="date" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
+    </div>
     
-    
+    <!-- QQ -->
+    <div class="ui teal right overlay sidebar menu" id='qqSidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="text" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 我的收货地址 -->
+    <div class="ui teal right overlay sidebar menu" id='inAddressSidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="text" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 地区 -->
+    <div class="ui teal right overlay sidebar menu" id='areaSidebar'>
+        <div class="ui basic segment">
+            <select name="province" id="provinceSelect">
+                <option value="0">请选择</option>
+                <option value="北京">北京</option>
+                <option value="天津">天津</option>
+                <option value="上海">上海</option>
+                <option value="重庆">重庆</option>
+                <option value="河北省">河北省</option>
+                <option value="山西省">山西省</option>
+                <option value="辽宁省">辽宁省</option>
+                <option value="吉林省">吉林省</option>
+                <option value="黑龙江省">黑龙江省</option>
+                <option value="江苏省">江苏省</option>
+                <option value="浙江省">浙江省</option>
+                <option value="安徽省">安徽省</option>
+                <option value="福建省">福建省</option>
+                <option value="江西省">江西省</option>
+                <option value="山东省">山东省</option>
+                <option value="河南省">河南省</option>
+                <option value="湖北省">湖北省</option>
+                <option value="湖南省">湖南省</option>
+                <option value="广东省">广东省</option>
+                <option value="海南省">海南省</option>
+                <option value="四川省">四川省</option>
+                <option value="贵州省">贵州省</option>
+                <option value="云南省">云南省</option>
+                <option value="陕西省">陕西省</option>
+                <option value="甘肃省">甘肃省</option>
+                <option value="青海省">青海省</option>
+                <option value="台湾省">台湾省</option>
+                <option value="西藏自治区">西藏自治区</option>
+                <option value="广西壮族自治区">广西壮族自治区</option>
+                <option value="内蒙古自治区">内蒙古自治区</option>
+                <option value="宁夏回族自治区">宁夏回族自治区</option>
+                <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                <option value="香港特别行政区">香港特别行政区</option>
+                <option value="澳门特别行政区">澳门特别行政区</option>
+            </select>
+            <select name="city" id="citySelect">
+                <option value="0">请选择</option>
+            </select>
+            <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+        </div>
+    </div>
+
+    <!-- 感兴趣的行业 -->
+    <div class="ui right sidebar" id="interestSidebar" style="background:#fff;">
+        <div class="ui basic segment">
+            <div class="ui small header">感兴趣的行业</div>
+            <div class="ui form">
+                <main class="ui two column grid">
+                    <section class="column">
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="时尚科技">
+                                <label>时尚科技</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="智慧城市">
+                                <label>智慧城市</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="创意设计">
+                                <label>创意设计</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="文艺生活">
+                                <label>文艺生活</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="表达传播">
+                                <label>表达传播</label>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="column">
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="自然环境">
+                                <label>自然环境</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="社会公益">
+                                <label>社会公益</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="爱心辅助">
+                                <label>爱心辅助</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="医疗健康">
+                                <label>医疗健康</label>
+                            </div>
+                        </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="运动休闲">
+                                <label>运动休闲</label>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            
+            </div>
+            <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+        </div>
+    </div>
+
+    <!-- 学校 -->
+    <div class="ui teal right overlay sidebar menu" id='schoolSidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="text" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 专业 -->
+    <div class="ui teal right overlay sidebar menu" id='professionSidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="text" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 公司 -->
+    <div class="ui teal right overlay sidebar menu" id='companySidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="text" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 岗位 -->
+    <div class="ui teal right overlay sidebar menu" id='jobSidebar'>
+        <div class="ui basic segment">
+            <div class="ui form">
+                <div class="field">
+                    <div class="ui input">
+                        <input type="text" style="padding-left:10px;">
+                    </div>
+                </div>
+                <div class="ui green fluid button save" style="margin-top: 10px;">完成</div>
+            </div>
+        </div>
+    </div>
+
+
     
     
     <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
@@ -253,3 +489,4 @@
 
 </body>
 </html>
+

@@ -26,3 +26,6 @@
 #studentField {
 	display: none;
 }
+.ui.floated.header {
+	margin-right: 0px;
+}

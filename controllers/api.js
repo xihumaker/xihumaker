@@ -13,7 +13,7 @@ module.exports = {
             title: "西湖创客汇",
             description: "西湖创客汇是浙江地区的创客空间，我们的主旨是 青年 | 创新 | 科技",
             musicUrl: WEB_SERVER_IP + '/voice/welcome.mp3',
-            thumbMediaId: '2JxNP_4jiAm-sNF4mpcMu79o00L4XeRxdccCAUayt7wRDAADdA2ONQvwE5ddY0bT'
+            thumbMediaId: ''
         };
         console.log(resMsg);
         weixin.sendMsg(resMsg);

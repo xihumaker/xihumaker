@@ -351,7 +351,6 @@ var UserModule = {
             }
 
             if ( !! doc) {
-                doc.localBirthday = '1990年09月09日';
                 res.render('weixin/editUser', {
                     "r": 0,
                     "msg": "请求成功",
@@ -367,6 +366,63 @@ var UserModule = {
                 return;
             }
         });
+    },
+
+    // 修改用户信息
+    findUserByIdAndUpdate: function(req, res) {
+        var _id = req.params._id;
+        var user = req.body;
+
+        console.log(user.interest);
+
+        User.findByIdAndUpdate(_id, {
+            $set: {
+                username: user.username,
+                email: user.email,
+                phone: user.phone,
+                sex: user.sex,
+                birthday: user.birthday,
+                qq: user.qq,
+                province: user.province,
+                city: user.city,
+                inAddress: user.inAddress,
+                workOrStudy: user.workOrStudy,
+                company: user.company,
+                job: user.job,
+                school: user.school,
+                profession: user.profession,
+                interest: user.interest,
+                headimgurl: user.headimgurl,
+                coin: user.coin
+            }
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10033,
+                    "msg": "服务器错误，调用findUserByIdAndUpdateId方法出错"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                console.log(doc);
+                res.json({
+                    "r": 0,
+                    "msg": "修改成功",
+                    "user": doc
+                });
+                return;
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10002,
+                    "msg": "用户不存在"
+                });
+                return;
+            }
+        });
+
     }
 
 

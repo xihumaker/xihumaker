@@ -183,6 +183,8 @@ module.exports = function(app) {
     app.post('/api/users', user.addUser);
     // 用户注销操作
     app.post('/weixin/logout', user.logout);
+    // 修改用户
+    app.put('/api/user/:_id', user.findUserByIdAndUpdate);
 
     app.get('/api/project/:_id', project.findProjectById);
     app.post('/api/project/:_id', project.findProjectByIdAndUpdate);
