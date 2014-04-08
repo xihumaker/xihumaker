@@ -175,6 +175,8 @@ module.exports = function(app) {
     /**
      * ---------------------------------------------------------
      */
+    // 用户搜索
+    app.get('/api/users/search', user.searchUsers);
     // 根据_id获取用户信息
     app.get('/api/user/:_id', user.findUserById);
     // 用户登录操作

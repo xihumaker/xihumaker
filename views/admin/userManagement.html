@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>用户管理 - 西湖创客汇</title>
     <meta name="description" content="">
-    <link rel="stylesheet" href="/semantic/packaged/css/semantic.css">
-    <link rel="stylesheet" href="/css/admin/common.css">
+    <link rel="stylesheet" type="text/css" href="/semantic/packaged/css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/userManagement.css">
     <link rel="shortcut icon" href="/icon/favicon.ico">
 
     <script src="/lib/jquery.js"></script>
@@ -17,13 +18,57 @@
 
     <% include ./inc_topmenu.html %>
 
-    
-    
+    <div class="ui page grid main">
+        <div class="column">
+
+            <div class="ui large breadcrumb">
+                <a class="section">西湖创客汇</a>
+                <div class="divider"> / </div>
+                <a class="active section">用户管理</a>
+            </div>
+
+            <div class="ui basic segment searchSegment" style="padding-left: 0px;">
+                <div class="ui action left icon input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="请输入用户名进行搜索..." id="searchKey">
+                    <div class="ui teal button" id="searchBtn">搜索</div>
+                </div>
+            </div>
+
+            <table class="ui table segment">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>真实姓名</th>
+                        <th>邮箱</th>
+                        <th>手机号</th>
+                        <th>性别</th>
+                        <th>城市</th>
+                        <th>金币数</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="userList">
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="8" style="padding:0;">
+                            <div class="ui center aligned small teal header loadMore" id="loadMore">加载更多</div>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+
+            
+
+        </div>
+    </div>
 
     
-
+    <% include ./inc_gotop.html %>
     
-    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/index" ></script>
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/userManagement" ></script>
 
 </body>
 </html>

@@ -10,7 +10,6 @@ var UserModule = {
     /**
      * @method userAuth
      * 用户认证
-     * session对象中有userId属性，说明用户已经登录，验证通过，否则说明用户未登录
      */
     userAuth: function(req, res, next) {
         var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
@@ -296,6 +295,10 @@ var UserModule = {
         });
     },
 
+    /**
+     * @method showUserCenter
+     * 微信端 - 显示用户中心页面
+     */
     showUserCenter: function(req, res) {
         var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
         // {password: 0}表示不返回password这个属性
@@ -331,7 +334,10 @@ var UserModule = {
         });
     },
 
-
+    /**
+     * @method showEditUser
+     * 微信端 - 显示用户详情编辑页面
+     */
     showEditUser: function(req, res) {
         var _id = req.params._id;
 
@@ -421,6 +427,55 @@ var UserModule = {
                 });
                 return;
             }
+        });
+
+    },
+
+    /**
+     * @method searchUsers
+     * 用户高级搜索
+     */
+    searchUsers: function(req, res) {
+        var pageSize = req.query.pageSize;
+        var pageStart = req.query.pageStart;
+        var key = req.query.key;
+        var reg;
+        var query;
+
+        if (key) {
+            reg = new RegExp(key);
+            query = User.find({
+                username: reg
+            }, {
+                password: 0
+            }, {
+                skip: pageStart,
+                limit: pageSize
+            }).sort('-createTime');
+        } else {
+            query = User.find({}, {
+                password: 0
+            }, {
+                skip: pageStart,
+                limit: pageSize
+            }).sort('-createTime');
+        }
+
+        query.exec(function(err, docs) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10034,
+                    "msg": "服务器错误，查找用户失败"
+                });
+                return;
+            }
+
+            res.json({
+                "r": 0,
+                "msg": "查找项目成功",
+                "users": docs
+            });
         });
 
     }
