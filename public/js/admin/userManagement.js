@@ -3,9 +3,7 @@
  */
 define(function(require, exports, module) {
 
-    $('.ui.button').popup({
-        on: 'hover'
-    });
+
 
     function searchUsers(config, succCall, failCall) {
         failCall = failCall || function() {
@@ -32,12 +30,12 @@ define(function(require, exports, module) {
                             '<td>' + user.username + '</td>' +
                             '<td>' + user.email + '</td>' +
                             '<td>' + user.phone + '</td>' +
-                            '<td>' + user.sex + '</td>' +
+                            '<td>' + user.province + '</td>' +
                             '<td>' + user.city + '</td>' +
                             '<td>' + user.coin + '</td>' +
                             '<td>' +
                             '<div class="ui mini icon buttons">' +
-                            '<div class="ui red button" title="删除" data-content="删除" data-variation="inverted"><i class="trash icon"></i></div>' +
+                            '<div class="ui red button delete" data-id="' + user._id + '" title="删除" data-content="删除" data-variation="inverted"><i class="trash icon"></i></div>' +
                             '</div>' +
                             '</td>' +
                             '</tr>';
@@ -70,7 +68,7 @@ define(function(require, exports, module) {
         if (data.r === 0) {
             var len = data.users.length;
             if (len === 0) {
-                $userList.append($('<tr><td>用户列表为空</td></tr>'));
+                $userList.append($('<tr><td colspan="8"><div class="ui center aligned teal header" style="padding: 100px 0;">用户列表为空</div></td></tr>'));
             } else if (len === searchConfig.pageSize) {
                 $loadMore.show();
                 searchConfig.pageStart = $('#userList tr').length;
@@ -112,7 +110,7 @@ define(function(require, exports, module) {
             if (data.r === 0) {
                 var len = data.users.length;
                 if (len === 0) {
-                    $userList.append($('<tr><td>查找结果为空</td></tr>'));
+                    $userList.append($('<tr><td colspan="8"><div class="ui center aligned teal header" style="padding: 100px 0;">查询结果为空</div></td></tr>'));
                 } else if (len === searchConfig.pageSize) {
                     $loadMore.html('加载更多').show();
                     searchConfig.pageStart = $('#userList tr').length;
@@ -122,6 +120,40 @@ define(function(require, exports, module) {
             }
         });
     });
+
+    $('body').on('click', '.delete', function(e) {
+        var self = this;
+        var _id = this.getAttribute('data-id');
+
+        if (confirm('你确定要删除这个用户吗？')) {
+            $.ajax({
+                url: '/api/user',
+                type: 'DELETE',
+                data: {
+                    _id: _id
+                },
+                dataType: 'json',
+                timeout: 15000,
+                success: function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.r === 0) {
+                        $(self).parents('tr').remove();
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+        } else {
+
+        }
+
+
+    });
+
+
 
 
 

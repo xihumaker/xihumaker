@@ -4,8 +4,6 @@ define(function(require, exports, module) {
         'on': 'hover'
     });
 
-    $('.ui.button').popup({
-        on: 'hover'
-    });
+
 
 });

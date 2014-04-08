@@ -4,3 +4,11 @@
 .ui.breadcrumb {
 	margin-bottom: 0;
 }
+.searchSegment input {
+	width: 250px !important;
+}
+.loadMore {
+	cursor: pointer;
+	display: none;
+	padding: 8px 0px !important;
+}

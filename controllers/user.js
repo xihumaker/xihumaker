@@ -445,7 +445,13 @@ var UserModule = {
         if (key) {
             reg = new RegExp(key);
             query = User.find({
-                username: reg
+                '$or': [{
+                    'username': reg
+                }, {
+                    'email': reg
+                }, {
+                    'phone': reg
+                }]
             }, {
                 password: 0
             }, {
@@ -478,6 +484,41 @@ var UserModule = {
             });
         });
 
+    },
+
+    /**
+     * @method findUserByIdAndRemove
+     * 根据用户ID删除某个用户
+     */
+    findUserByIdAndRemove: function(req, res) {
+        var _id = req.body._id;
+
+        User.findByIdAndRemove(_id, {
+            password: 0
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10035,
+                    "msg": "服务器错误，删除用户失败"
+                });
+                return;
+            }
+
+            if (doc) {
+                res.json({
+                    "r": 0,
+                    "msg": "删除成功",
+                    "user": doc
+                });
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10002,
+                    "msg": "用户不存在"
+                });
+            }
+        });
     }
 
 

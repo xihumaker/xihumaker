@@ -27,6 +27,14 @@
                 <a class="active section">项目管理</a>
             </div>
 
+            <div class="ui basic segment searchSegment" style="padding-left: 0px;">
+                <div class="ui action left icon input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="项目标题" id="searchKey">
+                    <div class="ui teal button" id="searchBtn">搜索</div>
+                </div>
+            </div>
+
             <table class="ui celled table segment">
                 <thead>
                     <tr>
@@ -71,7 +79,13 @@
                     </tr>
 
                 </tbody>
-
+                <tfoot>
+                    <tr>
+                        <th colspan="8" style="padding:0;">
+                            <div class="ui center aligned small teal header loadMore" id="loadMore">加载更多</div>
+                        </th>
+                    </tr>
+                </tfoot>
             </table>
 
 

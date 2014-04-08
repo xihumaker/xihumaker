@@ -187,6 +187,8 @@ module.exports = function(app) {
     app.post('/weixin/logout', user.logout);
     // 修改用户
     app.put('/api/user/:_id', user.findUserByIdAndUpdate);
+    // 删除用户
+    app.delete('/api/user', user.findUserByIdAndRemove);
 
     app.get('/api/project/:_id', project.findProjectById);
     app.post('/api/project/:_id', project.findProjectByIdAndUpdate);
