@@ -1,8 +1,13 @@
-.main.ui.page.grid {
-	padding-top: 60px;
+div.main {
+    padding: 60px 15px 0;
 }
+
 .ui.breadcrumb {
 	margin-bottom: 0;
+}
+.searchSegment {
+	margin: 0 !important;
+	padding: 0 !important;
 }
 .searchSegment input {
 	width: 250px !important;

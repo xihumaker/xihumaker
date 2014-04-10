@@ -308,7 +308,7 @@ module.exports = function(app) {
     // 后台管理登录操作
     app.post('/admin/login', admin.login);
 
-
+    app.get('/admin/exportToExcel', admin.exportToExcel);
 
     /**
      * 404 Page

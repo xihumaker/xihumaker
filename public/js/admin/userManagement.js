@@ -3,7 +3,7 @@
  */
 define(function(require, exports, module) {
 
-
+    window.allUsers = [];
 
     function searchUsers(config, succCall, failCall) {
         failCall = failCall || function() {
@@ -18,21 +18,43 @@ define(function(require, exports, module) {
             timeout: 15000,
             success: function(data, textStatus, jqXHR) {
                 if (data.r === 0) {
+
                     var users = data.users;
                     var len = users.length;
                     var user;
                     var temp;
 
+                    allUsers = allUsers.concat(users);
+
                     for (var i = 0; i < len; i++) {
                         user = users[i];
+                        if (user.sex == 1) {
+                            user.localSex = "男";
+                        } else if (user.sex == 2) {
+                            user.localSex = "女";
+                        } else {
+                            user.localSex = "";
+                        }
+                        user.localCreateTime = (new Date(user.createTime)).toLocaleDateString();
+
+                        if (user.workOrStudy == 0) {
+                            user.localSorkOrStudy = "未知";
+                        } else if (user.workOrStudy == 1) {
+                            user.localSorkOrStudy = "已工作";
+                        } else {
+                            user.localSorkOrStudy = "在读学生";
+                        }
                         temp = '<tr>' +
-                            '<td>' + user._id + '</td>' +
                             '<td>' + user.username + '</td>' +
+                            '<td>' + user.localSex + '</td>' +
                             '<td>' + user.email + '</td>' +
                             '<td>' + user.phone + '</td>' +
+                            '<td>' + user.qq + '</td>' +
                             '<td>' + user.province + '</td>' +
                             '<td>' + user.city + '</td>' +
                             '<td>' + user.coin + '</td>' +
+                            '<td>' + user.localCreateTime + '</td>' +
+                            '<td>' + user.localSorkOrStudy + '</td>' +
                             '<td>' +
                             '<div class="ui mini icon buttons">' +
                             '<div class="ui red button delete" data-id="' + user._id + '" title="删除" data-content="删除" data-variation="inverted"><i class="trash icon"></i></div>' +
@@ -61,7 +83,6 @@ define(function(require, exports, module) {
         pageSize: 10,
         pageStart: 0
     };
-
 
     // 页面加载完成，默认去加载
     searchUsers(searchConfig, function(data) {
@@ -101,6 +122,8 @@ define(function(require, exports, module) {
 
     // 搜索
     $searchBtn.click(function() {
+        allUsers = []; // 清空数组
+
         searchConfig.pageStart = 0;
         searchConfig.key = $searchKey.val().trim();
         $('#userList tr').remove();
@@ -146,14 +169,26 @@ define(function(require, exports, module) {
 
                 }
             });
-        } else {
-
         }
-
-
     });
 
+    $('#exportToExcel').click(function() {
+        $.ajax({
+            url: '/admin/exportToExcel',
+            type: 'POST',
+            data: {
 
+            },
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
 
 
 

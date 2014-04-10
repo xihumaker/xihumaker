@@ -16,3 +16,440 @@
 [2014-04-10 13:19:07.880] [INFO] logger - 登录成功
 [2014-04-10 13:19:07.889] [INFO] logger - 管理员已经登录
 [2014-04-10 13:19:09.845] [INFO] logger - 管理员已经登录
+[2014-04-10 13:26:26.571] [INFO] logger - 管理员已经登录
+[2014-04-10 15:31:18.507] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:31:18.562] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:31:21.021] [INFO] logger - 管理员未登录
+[2014-04-10 15:31:27.058] [INFO] logger - 登录成功
+[2014-04-10 15:31:27.066] [INFO] logger - 管理员已经登录
+[2014-04-10 15:31:29.077] [INFO] logger - 管理员已经登录
+[2014-04-10 15:32:47.314] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:32:47.350] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:32:48.110] [INFO] logger - 管理员未登录
+[2014-04-10 15:32:54.049] [INFO] logger - 登录成功
+[2014-04-10 15:32:54.056] [INFO] logger - 管理员已经登录
+[2014-04-10 15:32:58.323] [INFO] logger - 管理员已经登录
+[2014-04-10 15:33:19.589] [INFO] logger - 管理员已经登录
+[2014-04-10 15:33:47.300] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:33:47.321] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:34:14.573] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:34:14.618] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:34:15.373] [INFO] logger - 管理员未登录
+[2014-04-10 15:35:23.837] [INFO] logger - 管理员未登录
+[2014-04-10 15:35:49.489] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:35:49.508] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:36:04.439] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:36:04.464] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:36:09.370] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:36:09.396] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:36:16.339] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:36:16.361] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:36:30.346] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:36:30.367] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:36:59.369] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:36:59.390] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:37:28.376] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:37:28.398] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:37:36.376] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:37:36.395] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:37:41.393] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:37:41.412] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:37:56.446] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:37:56.465] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:38:05.504] [INFO] logger - Express server listening on port 80
+[2014-04-10 15:38:05.539] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 15:38:06.919] [INFO] logger - 管理员未登录
+[2014-04-10 15:38:18.604] [INFO] logger - 登录成功
+[2014-04-10 15:38:18.615] [INFO] logger - 管理员已经登录
+[2014-04-10 15:38:29.566] [INFO] logger - 管理员已经登录
+[2014-04-10 15:38:35.305] [INFO] logger - 管理员已经登录
+[2014-04-10 15:38:38.428] [INFO] logger - 管理员已经登录
+[2014-04-10 15:38:45.163] [INFO] logger - 管理员未登录
+[2014-04-10 15:38:50.164] [INFO] logger - 登录成功
+[2014-04-10 15:38:50.173] [INFO] logger - 管理员已经登录
+[2014-04-10 15:38:51.844] [INFO] logger - 管理员已经登录
+[2014-04-10 15:40:31.271] [INFO] logger - 管理员已经登录
+[2014-04-10 15:40:36.926] [INFO] logger - 管理员已经登录
+[2014-04-10 15:41:21.591] [INFO] logger - 管理员已经登录
+[2014-04-10 15:42:34.989] [INFO] logger - 管理员已经登录
+[2014-04-10 15:42:54.107] [INFO] logger - 管理员已经登录
+[2014-04-10 15:43:30.107] [INFO] logger - 管理员已经登录
+[2014-04-10 15:44:24.979] [INFO] logger - 管理员已经登录
+[2014-04-10 15:44:53.301] [INFO] logger - 管理员已经登录
+[2014-04-10 15:46:11.529] [INFO] logger - 管理员已经登录
+[2014-04-10 15:46:20.145] [INFO] logger - 管理员已经登录
+[2014-04-10 15:46:32.488] [INFO] logger - 管理员已经登录
+[2014-04-10 15:46:46.039] [INFO] logger - 管理员已经登录
+[2014-04-10 15:47:11.856] [INFO] logger - 管理员已经登录
+[2014-04-10 15:47:20.370] [INFO] logger - 管理员已经登录
+[2014-04-10 15:47:28.099] [INFO] logger - 管理员已经登录
+[2014-04-10 15:47:47.463] [INFO] logger - 管理员已经登录
+[2014-04-10 15:48:03.204] [INFO] logger - 管理员已经登录
+[2014-04-10 15:48:09.571] [INFO] logger - 管理员已经登录
+[2014-04-10 15:48:25.722] [INFO] logger - 管理员已经登录
+[2014-04-10 15:48:35.261] [INFO] logger - 管理员已经登录
+[2014-04-10 15:48:44.346] [INFO] logger - 管理员已经登录
+[2014-04-10 16:27:42.885] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:27:42.912] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:28:12.840] [INFO] logger - 管理员已经登录
+[2014-04-10 16:29:09.009] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:29:09.028] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:29:25.110] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:29:25.134] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:29:28.479] [INFO] logger - 管理员已经登录
+[2014-04-10 16:30:26.070] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:30:26.089] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:30:32.116] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:30:32.134] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:30:35.183] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:30:35.212] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:30:39.407] [INFO] logger - 管理员已经登录
+[2014-04-10 16:31:05.103] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:31:05.122] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:31:12.061] [INFO] logger - 管理员已经登录
+[2014-04-10 16:31:57.174] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:31:57.194] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:32:04.142] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:32:04.165] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:32:14.207] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:32:14.252] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:32:14.946] [INFO] logger - 管理员已经登录
+[2014-04-10 16:32:55.026] [INFO] logger - 管理员已经登录
+[2014-04-10 16:33:33.247] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:33:33.270] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:33:36.374] [INFO] logger - 管理员已经登录
+[2014-04-10 16:33:42.315] [INFO] logger - 管理员已经登录
+[2014-04-10 16:33:58.126] [INFO] logger - 管理员已经登录
+[2014-04-10 16:34:51.265] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:34:51.285] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:34:54.456] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:34:54.484] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:34:55.278] [INFO] logger - 管理员已经登录
+[2014-04-10 16:36:48.367] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:36:48.386] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:36:51.428] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:36:51.449] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:36:52.753] [INFO] logger - 管理员已经登录
+[2014-04-10 16:37:23.416] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:37:23.440] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:37:35.458] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:37:35.484] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:37:36.119] [INFO] logger - 管理员已经登录
+[2014-04-10 16:38:18.516] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:38:18.536] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:38:31.536] [INFO] logger - 管理员已经登录
+[2014-04-10 16:38:44.767] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:38:44.818] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:38:46.171] [INFO] logger - 管理员已经登录
+[2014-04-10 16:38:55.505] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:38:55.527] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:39:03.534] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:39:03.554] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:39:04.386] [INFO] logger - 管理员已经登录
+[2014-04-10 16:39:29.752] [INFO] logger - 管理员已经登录
+[2014-04-10 16:40:38.720] [INFO] logger - 管理员已经登录
+[2014-04-10 16:42:21.060] [INFO] logger - 管理员已经登录
+[2014-04-10 16:42:35.220] [INFO] logger - 管理员已经登录
+[2014-04-10 16:43:13.079] [INFO] logger - 管理员已经登录
+[2014-04-10 16:43:37.008] [INFO] logger - 管理员已经登录
+[2014-04-10 16:43:49.358] [INFO] logger - 管理员已经登录
+[2014-04-10 16:43:55.132] [INFO] logger - 管理员已经登录
+[2014-04-10 16:44:17.136] [INFO] logger - 管理员已经登录
+[2014-04-10 16:45:31.685] [INFO] logger - 管理员已经登录
+[2014-04-10 16:45:44.681] [INFO] logger - 管理员已经登录
+[2014-04-10 16:45:51.101] [INFO] logger - 管理员已经登录
+[2014-04-10 16:45:56.398] [INFO] logger - 管理员已经登录
+[2014-04-10 16:46:14.923] [INFO] logger - 管理员已经登录
+[2014-04-10 16:46:18.302] [INFO] logger - 管理员已经登录
+[2014-04-10 16:47:09.275] [INFO] logger - 管理员已经登录
+[2014-04-10 16:48:08.344] [INFO] logger - 管理员已经登录
+[2014-04-10 16:48:20.793] [INFO] logger - 管理员已经登录
+[2014-04-10 16:48:46.093] [INFO] logger - 管理员已经登录
+[2014-04-10 16:50:10.753] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:50:10.773] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:50:44.753] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:50:44.773] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:50:46.928] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:50:46.958] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:51:06.773] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:51:06.798] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:51:17.771] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:51:17.792] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:51:30.804] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:51:30.824] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:51:34.781] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:51:34.803] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:53:45.881] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:53:45.901] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:53:54.014] [INFO] logger - 管理员已经登录
+[2014-04-10 16:54:07.953] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:54:07.977] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:54:56.929] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:54:56.946] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:56:29.096] [INFO] logger - 管理员已经登录
+[2014-04-10 16:57:04.824] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:57:04.841] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:57:56.873] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:57:56.890] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:58:04.866] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:58:04.883] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:58:09.872] [INFO] logger - Express server listening on port 80
+[2014-04-10 16:58:09.893] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 16:58:48.321] [INFO] logger - 管理员已经登录
+[2014-04-10 17:00:36.964] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:00:36.984] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:00:38.498] [INFO] logger - 管理员已经登录
+[2014-04-10 17:00:51.970] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:00:51.991] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:00:59.142] [INFO] logger - 管理员已经登录
+[2014-04-10 17:01:47.060] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:01:47.080] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:01:48.399] [INFO] logger - 管理员已经登录
+[2014-04-10 17:06:19.281] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:06:19.301] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:06:25.233] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:06:25.254] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:06:28.065] [INFO] logger - 管理员已经登录
+[2014-04-10 17:07:29.272] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:07:29.291] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:07:37.134] [INFO] logger - 管理员已经登录
+[2014-04-10 17:08:05.240] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:08:05.258] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:08:33.485] [INFO] logger - 管理员已经登录
+[2014-04-10 17:08:54.482] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:08:54.499] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:09:01.505] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:09:01.526] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:09:10.503] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:09:10.519] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:09:20.505] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:09:20.522] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:09:25.518] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:09:25.534] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:09:27.568] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:09:27.589] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:09:32.326] [INFO] logger - 管理员已经登录
+[2014-04-10 17:09:54.527] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:09:54.546] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:10:00.305] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:10:00.323] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:10:01.800] [INFO] logger - 管理员已经登录
+[2014-04-10 17:10:26.898] [INFO] logger - 管理员已经登录
+[2014-04-10 17:11:19.360] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:11:19.381] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:11:23.794] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:11:23.818] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:11:41.693] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:11:41.712] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:11:42.907] [INFO] logger - 管理员已经登录
+[2014-04-10 17:12:13.433] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:12:13.457] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:12:39.446] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:12:39.465] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:12:46.427] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:12:46.442] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:13:03.731] [INFO] logger - 管理员已经登录
+[2014-04-10 17:14:34.698] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:14:34.721] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:14:36.713] [INFO] logger - 管理员已经登录
+[2014-04-10 17:15:15.572] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:15:15.593] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:15:18.451] [INFO] logger - 管理员已经登录
+[2014-04-10 17:16:07.775] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:16:07.797] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:16:47.597] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:16:47.614] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:16:51.500] [INFO] logger - 管理员已经登录
+[2014-04-10 17:17:33.642] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:17:33.665] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:17:51.672] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:17:51.692] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:18:08.678] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:18:08.698] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:18:13.789] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:18:13.817] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:19:31.551] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:19:31.569] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:20:24.605] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:20:24.623] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:21:35.644] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:21:35.665] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:21:58.830] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:21:58.857] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:22:04.704] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:22:04.727] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:22:11.079] [INFO] logger - 管理员已经登录
+[2014-04-10 17:22:44.716] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:22:44.736] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:23:08.714] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:23:08.734] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:24:16.766] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:24:16.786] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:24:22.893] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:24:22.917] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:24:47.799] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:24:47.814] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:25:24.810] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:25:24.828] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:25:33.825] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:25:33.846] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:25:39.441] [INFO] logger - 管理员已经登录
+[2014-04-10 17:26:25.894] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:26:25.917] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:26:27.222] [INFO] logger - 管理员已经登录
+[2014-04-10 17:26:59.959] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:26:59.998] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:27:27.913] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:27:27.935] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:27:30.917] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:27:30.934] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:27:33.039] [INFO] logger - 管理员已经登录
+[2014-04-10 17:31:12.253] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:31:12.275] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:31:13.537] [INFO] logger - 管理员已经登录
+[2014-04-10 17:31:49.224] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:31:49.246] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:31:52.154] [INFO] logger - 管理员已经登录
+[2014-04-10 17:32:06.444] [INFO] logger - 管理员已经登录
+[2014-04-10 17:35:21.395] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:35:21.411] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:35:26.363] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:35:26.383] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:35:29.059] [INFO] logger - 管理员已经登录
+[2014-04-10 17:36:11.432] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:36:11.447] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:36:15.143] [INFO] logger - 管理员已经登录
+[2014-04-10 17:37:13.434] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:37:13.454] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:37:16.280] [INFO] logger - 管理员已经登录
+[2014-04-10 17:37:49.332] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:37:49.348] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:38:01.338] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:38:01.356] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:38:04.451] [INFO] logger - 管理员已经登录
+[2014-04-10 17:39:32.622] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:39:32.640] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:39:52.650] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:39:52.672] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:40:04.865] [INFO] logger - 管理员已经登录
+[2014-04-10 17:40:23.675] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:40:23.699] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:40:56.687] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:40:56.702] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:41:02.745] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:41:02.765] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:41:03.751] [INFO] logger - 管理员已经登录
+[2014-04-10 17:41:13.031] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:41:13.051] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:41:14.115] [INFO] logger - 管理员已经登录
+[2014-04-10 17:41:18.734] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:41:18.753] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:41:46.762] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:41:46.793] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:41:47.969] [INFO] logger - 管理员已经登录
+[2014-04-10 17:42:17.783] [INFO] logger - 管理员已经登录
+[2014-04-10 17:42:45.851] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:42:45.872] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:42:46.644] [INFO] logger - 管理员已经登录
+[2014-04-10 17:44:25.082] [INFO] logger - 管理员未登录
+[2014-04-10 17:44:29.103] [INFO] logger - 登录成功
+[2014-04-10 17:44:29.113] [INFO] logger - 管理员已经登录
+[2014-04-10 17:44:31.080] [INFO] logger - 管理员已经登录
+[2014-04-10 17:45:12.497] [INFO] logger - 管理员已经登录
+[2014-04-10 17:46:29.015] [INFO] logger - 管理员已经登录
+[2014-04-10 17:46:58.478] [INFO] logger - 管理员已经登录
+[2014-04-10 17:46:59.971] [INFO] logger - 管理员已经登录
+[2014-04-10 17:49:02.187] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:49:02.203] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:49:32.197] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:49:32.216] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:49:37.249] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:49:37.281] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:50:00.183] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:50:00.203] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:50:00.522] [INFO] logger - 管理员已经登录
+[2014-04-10 17:50:12.120] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:50:12.138] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:50:12.535] [INFO] logger - 管理员已经登录
+[2014-04-10 17:50:49.205] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:50:49.261] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:50:51.513] [INFO] logger - 管理员已经登录
+[2014-04-10 17:51:09.552] [INFO] logger - 管理员已经登录
+[2014-04-10 17:51:18.219] [INFO] logger - 管理员已经登录
+[2014-04-10 17:53:49.224] [INFO] logger - 管理员已经登录
+[2014-04-10 17:53:57.129] [INFO] logger - 管理员已经登录
+[2014-04-10 17:54:17.080] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:54:17.098] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:54:21.036] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:54:21.056] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:54:32.261] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:54:32.282] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:55:32.085] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:55:32.105] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:55:35.229] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:55:35.250] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:55:53.110] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:55:53.133] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:55:58.112] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:55:58.135] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:56:22.164] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:56:22.185] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:56:28.363] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:56:28.384] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:56:39.159] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:56:39.181] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:56:54.155] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:56:54.175] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:57:10.320] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:57:10.341] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:57:23.164] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:57:23.184] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:57:29.192] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:57:29.210] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:57:44.199] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:57:44.216] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:57:49.181] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:57:49.210] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:57:54.189] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:57:54.214] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:57:58.200] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:57:58.223] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:58:16.222] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:58:16.237] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:58:22.215] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:58:22.240] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:58:45.233] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:58:45.248] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:58:57.269] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:58:57.292] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 17:59:27.271] [INFO] logger - Express server listening on port 80
+[2014-04-10 17:59:27.289] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:00:08.371] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:00:08.395] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:00:19.540] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:00:19.559] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:00:34.411] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:00:34.429] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:01:38.532] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:01:38.552] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:01:58.359] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:01:58.377] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:02:22.444] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:02:22.463] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:02:28.386] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:02:28.409] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:02:53.407] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:02:53.423] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:03:05.519] [INFO] logger - 管理员已经登录
+[2014-04-10 18:04:19.591] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:04:19.609] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:05:10.519] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:05:10.539] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:05:16.139] [INFO] logger - 管理员已经登录
+[2014-04-10 18:05:18.740] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:05:18.764] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:05:33.601] [INFO] logger - Express server listening on port 80
+[2014-04-10 18:05:33.626] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-10 18:05:35.469] [INFO] logger - 管理员已经登录
+[2014-04-10 18:06:16.800] [INFO] logger - 管理员已经登录
+[2014-04-10 18:06:46.452] [INFO] logger - 管理员已经登录
