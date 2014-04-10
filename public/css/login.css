@@ -1,0 +1,9 @@
+.main.container {
+	margin-top: 51px;
+}
+.loginbox {
+	padding: 30px 0 100px 0;
+}
+.alert-warning {
+	display: none;
+}

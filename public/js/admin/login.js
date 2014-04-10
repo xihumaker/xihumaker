@@ -15,9 +15,6 @@ define(function(require, exports, module) {
         var username = $username.val().trim();
         var password = $password.val().trim();
 
-        username = 'admin';
-        password = '123456';
-
         if (!username) {
             $message.html('<i class="icon attention"></i>用户名不能为空').show();
             return;

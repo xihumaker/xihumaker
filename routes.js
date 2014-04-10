@@ -1,3 +1,4 @@
+var qiniu = require('qiniu');
 var weixin = require('weixin-apis');
 var config = require('./config');
 var api = require('./controllers/api');
@@ -22,6 +23,11 @@ weixin.configurate({
 // });
 // weixin.reflashAccessToken();
 
+qiniu.conf.ACCESS_KEY = config.QINIU_ACCESS_KEY;
+qiniu.conf.SECRET_KEY = config.QINIU_SECRET_KEY;
+
+var uptoken = new qiniu.rs.PutPolicy(config.QINIU_Bucket_Name);
+
 module.exports = function(app) {
 
     // 接入验证
@@ -37,12 +43,61 @@ module.exports = function(app) {
         weixin.loop(req, res);
     });
 
+    // 七牛token
+    app.get('/qiniuUptoken', function(req, res, next) {
+        var token = uptoken.token();
+        res.header("Cache-Control", "max-age=0, private, must-revalidate");
+        res.header("Pragma", "no-cache");
+        res.header("Expires", 0);
+        if (token) {
+            res.json({
+                uptoken: token
+            })
+        }
+    });
+    app.get('/qiniu', function(req, res) {
+        res.render('qiniu');
+    });
+
     /**
      * ---------------------------------------------------------
      */
     // Web端 - 网站首页
     app.get('/', function(req, res) {
-        res.render('index');
+        if (user.hasLogin(req)) { // 有userId说明用户已经登录
+            res.render('index', {
+                hasLogin: true
+            });
+        } else { // 没有userId说明用户没有登录
+            res.render('index', {
+                hasLogin: false
+            });
+        }
+    });
+    // 登录
+    app.get('/login', function(req, res) {
+        if (user.hasLogin(req)) {
+            res.render('login', {
+                hasLogin: true
+            });
+        } else {
+            res.render('login', {
+                hasLogin: false
+            });
+        }
+    });
+    // 注销
+    app.get('/logout', function(req, res) {
+        res.clearCookie('xihumaker', {
+            path: '/'
+        });
+        res.redirect('/');
+    });
+    // Web端 - 创建项目
+    app.get('/createProject', user.userWebAuth, function(req, res) {
+        res.render('createProject', {
+            hasLogin: true
+        });
     });
 
     app.get('/weixin/*', function(req, res, next) {
@@ -180,6 +235,7 @@ module.exports = function(app) {
     // 根据_id获取用户信息
     app.get('/api/user/:_id', user.findUserById);
     // 用户登录操作
+    app.post('/api/login', user.login);
     app.post('/weixin/login', user.login);
     // 注册新用户
     app.post('/api/users', user.addUser);
@@ -189,6 +245,7 @@ module.exports = function(app) {
     app.put('/api/user/:_id', user.findUserByIdAndUpdate);
     // 删除用户
     app.delete('/api/user', user.findUserByIdAndRemove);
+    app.get('/api/currentUserinfo', user.getCurrentUserinfo);
 
     app.get('/api/project/:_id', project.findProjectById);
     app.post('/api/project/:_id', project.findProjectByIdAndUpdate);

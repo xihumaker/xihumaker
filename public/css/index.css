@@ -1,0 +1,21 @@
+.carousel {
+	margin-top: 51px;
+}
+.thumbnail:hover {
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.7);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+.thumbnail .caption h3 {
+	margin: 5px 0;
+}
+.progress {
+	height: 10px;
+}
+.btn-link {
+	padding: 5px;
+	color: gray;
+}
+.btn-link:hover {
+	text-decoration: none;
+}

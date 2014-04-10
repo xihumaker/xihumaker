@@ -3,9 +3,20 @@ var mongoose = require('mongoose'),
 
 var validator = require('validator');
 var Util = require('../common/util');
+var logger = require('../common/logger');
 var User = require('../models/user');
 
 var UserModule = {
+
+    /**
+     * @method hasLogin
+     * 判断用户是否已经登录
+     * @return {Boolean} 如果已经登录返回true，未登录返回false
+     */
+    hasLogin: function(req, res) {
+        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+        return !!userId;
+    },
 
     /**
      * @method userAuth
@@ -21,6 +32,63 @@ var UserModule = {
             console.log("[ >>> LOG >>> ]：用户未登录");
             res.render('weixin/login');
         }
+    },
+
+    /**
+     * @method userWebAuth
+     * 用户认证
+     */
+    userWebAuth: function(req, res, next) {
+        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+        if (userId) {
+            console.log("[ >>> LOG >>> ]：用户已登录");
+            console.log('userId = ' + userId);
+            next();
+        } else {
+            console.log("[ >>> LOG >>> ]：用户未登录");
+            res.render('/login');
+        }
+    },
+
+    /**
+     * @method getCurrentUserinfo
+     * 获得当前登录用户的详细信息
+     */
+    getCurrentUserinfo: function(req, res) {
+        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+        var _id = userId;
+
+        // {password: 0}表示不返回password这个属性
+        User.findOne({
+            _id: new ObjectId(_id)
+        }, {
+            password: 0
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10036,
+                    "msg": "服务器错误，获得当前登录用户的详细信息失败"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                res.json({
+                    "r": 0,
+                    "msg": "请求成功",
+                    "user": doc
+                });
+                return;
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10002,
+                    "msg": "用户不存在"
+                });
+                return;
+            }
+        });
     },
 
     /**
@@ -185,7 +253,7 @@ var UserModule = {
             });
             return;
         }
-        if (!/^(((13[0-9]{1})|159|186|(15[0-9]{1}))+\d{8})$/.test(phone)) {
+        if (!Util.isPhone(phone)) {
             res.json({
                 "r": 1,
                 "errcode": 10021,
@@ -268,6 +336,7 @@ var UserModule = {
 
                     user.save(function(err, doc) {
                         if (err) {
+                            logger.error(err);
                             res.json({
                                 "r": 1,
                                 "errcode": 10013,
@@ -520,6 +589,8 @@ var UserModule = {
             }
         });
     }
+
+
 
 
 

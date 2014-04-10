@@ -31,7 +31,7 @@ $(function() {
             $message.html('<i class="icon attention"></i>手机号不能为空').show();
             return;
         }
-        if (!/^(((13[0-9]{1})|159|186|(15[0-9]{1}))+\d{8})$/.test(phone)) {
+        if (!/^(((13[0-9]{1})|159|180|181|186|(15[0-9]{1}))+\d{8})$/.test(phone)) {
             $message.html('<i class="icon attention"></i>请输入有效的手机号').show();
             return;
         }

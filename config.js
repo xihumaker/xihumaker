@@ -13,6 +13,9 @@ module.exports = {
     MONGODB_IP: "127.0.0.1",
     MONGODB_DATABASE_NAME: "xihumaker",
     WEB_SERVER_IP: 'xihumaker.jios.org',
+    QINIU_ACCESS_KEY: 'menzy45F91AK3Pj3gxqkuwOzraqUH6YRsU9w5QRM',
+    QINIU_SECRET_KEY: '0VDjejyiavSYr-vyNHkUnFsb8wdT7JCEcks3JkCq',
+    QINIU_Bucket_Name: 'xihumaker-test',
     WEB_SERVER_PORT: 80,
     TOKEN: 'xihumaker',
 

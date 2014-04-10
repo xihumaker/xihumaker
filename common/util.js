@@ -22,6 +22,18 @@ module.exports = {
         return ret;
     },
 
+    /**
+     * @method isPhone
+     * 判断是否是手机号码
+     */
+    isPhone: function(val) {
+        if (!/^(((13[0-9]{1})|159|180|181|186|(15[0-9]{1}))+\d{8})$/.test(val)) {
+            return false;
+        } else {
+            return true;
+        }
+    },
+
     isEmail: function(str) {
         if (!str.match(/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/)) {
             return false;
@@ -60,7 +72,9 @@ module.exports = {
             }
         }
         return (new Date(date)).toLocaleDateString();
-    }
+    },
+
+
 
 
 

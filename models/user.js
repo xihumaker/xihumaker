@@ -25,7 +25,7 @@ var mongoose = require('mongoose'),
 var UserSchema = new Schema({
     username: {
         type: String,
-        unique: true
+        default: ''
     },
     password: String,
     email: {
