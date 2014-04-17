@@ -27,6 +27,9 @@
     <script type="text/javascript">
         var r = '<%= r %>';
         var msg = '<%= msg %>';
+        var project = {
+            description: '<%= project.description %>'
+        }
     </script>
 </head>
 <body>
@@ -72,14 +75,13 @@
             </div>
             <div class="ui divider"></div>
 
-            <img src="/img/logo.jpg" width="100%;">
+            <img src="<%= project.coverUrl %>" width="100%;">
 
             <h4 class="ui inverted teal block header">项目描述</h4>
-            <% if(!project.description) { %>
-                <p>项目描述为空</p>
-            <% } else { %>
-                <%= project.description %>
-            <% } %>
+            <div id="description">
+                
+            </div>
+            
 
             <h4 class="ui inverted teal block header">项目成员</h4>
             <div id="teaminfo">
@@ -105,8 +107,9 @@
         
     </div>
     
-
+    
     <script type="text/javascript" src="/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/he.js"></script>
     <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>
     <script type="text/javascript" src="/js/weixin/projectInfo.js"></script>
         

@@ -75,7 +75,7 @@ define(function(require, exports, module) {
             },
             'Error': function(up, err, errTip) {
                 //上传出错时,处理相关的事情
-
+                console.log(errTip)
             },
             'UploadComplete': function() {
                 //队列文件处理完毕后,处理相关的事情

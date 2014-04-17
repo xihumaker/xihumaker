@@ -46,45 +46,20 @@
                         <th>创始人</th>
                         <th>组员</th>
                         <th>创建时间</th>
-                        <th>状态</th>
+                        <th>项目队名</th>
+                        <th>赞</th>
+                        <th>关注</th>
+                        <th>金币</th>
+                        <th>进度</th>
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>测试项目1测试项目1</td>
-                        <td>时尚科技</td>
-                        <td>杭州电子科技大学</td>
-                        <td>王干</td>
-                        <td>张三 李四</td>
-                        <td>2014年4月10号</td>
-                        <td>
-                            <div class="ui inline dropdown">
-                                <input type="hidden" name="status" value="3" id="status">
-                                <div class="text">进行中</div>
-                                <i class="dropdown icon"></i>
-                                <div class="menu">
-                                    <div class="item" data-value="1">审核中</div>
-                                    <div class="item" data-value="3">进行中</div>
-                                    <div class="item" data-value="4">已结束</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="ui mini icon buttons">
-                                <div class="ui red button" data-content="删除" data-variation="inverted"><i class="trash icon"></i></div>
-                                <div class="ui button" data-content="编辑" data-variation="inverted"><i class="edit icon"></i></div>
-                                <div class="ui button" data-content="查看" data-variation="inverted"><i class="camera icon"></i></div>
-                            </div>
-                            <div class="ui mini blue icon button" data-content="保存" data-variation="inverted"><i class="save icon"></i></div>
-                        </td>
-                    </tr>
-
+                <tbody id="projectList">
+                    
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="8" style="padding:0;">
+                        <th colspan="13" style="padding:0;">
                             <div class="ui center aligned small teal header loadMore" id="loadMore">加载更多</div>
                         </th>
                     </tr>

@@ -58,17 +58,22 @@ define(function(require, exports, module) {
                     var len = projectList.length;
                     var projectTemp = '';
                     var project;
+                    var coverUrl;
 
                     for (var i = 0; i < len; i++) {
                         project = projectList[i];
+                        coverUrl = project.coverUrl;
+                        if (!coverUrl) {
+                            coverUrl = '/img/default_project_cover.jpg'
+                        }
                         projectTemp = '<a class="item project" href="/weixin/project/' + project._id + '">' +
                             '<h4 class="ui black header">' + project.title + '</h4>' +
                             '<h5 class="ui black header">' + convertDate(project.createTime) + '</h5>' +
                             '<div class="image">' +
-                            '<img src="/img/logo.jpg">' +
+                            '<img src="' + coverUrl + '">' +
                             '</div>' +
                             '<div class="content ellipsis">' +
-                            '<p class="description">' + project.description + '</p>' +
+                            '<p class="description"></p>' +
                             '</div>' +
                             '<div class="ui divider"></div>' +
                             '<h5 class="ui black header">查看详情<i class="right arrow icon"></i></h5 class="ui black header">' +
@@ -86,7 +91,7 @@ define(function(require, exports, module) {
     }
 
     var searchConfig = {
-        pageSize: 3,
+        pageSize: 5,
         industry: -1,
         group: -1
     };

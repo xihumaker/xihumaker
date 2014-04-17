@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <title>项目详情 - 西湖创客汇</title>
+    <title><%= project.title %> - 西湖创客汇</title>
     <meta name="description" content="">
     
     <link rel="stylesheet" href="/bootflat/css/site.min.css">
@@ -64,10 +64,7 @@
                 </p>
                 <img src="<%= project.coverUrl %>" width="100%">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">项目描述</h3>
-
-                    </div>
+                    
                     <div class="panel-body" id="description"></div>
 
                     <!-- <div class="panel-heading">
@@ -203,6 +200,7 @@
     </div>
 
     <%include ./inc_footer.html %>
+    <%include ./inc_gotop.html %>
 
     <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/projectInfo" ></script>
 </body>

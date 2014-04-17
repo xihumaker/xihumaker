@@ -1,12 +1,49 @@
 <!-- 返回顶部 -->
 <style type="text/css">
-    .gotop.button { position: fixed; bottom: 75px; right: 50px; z-index: 999; }
+    .gotop {
+        cursor: pointer;
+        z-index: 999;
+        width: 60px;
+        height: 50px;
+        position: fixed;
+        background: url(/img/sideui.png) 0 0;
+        bottom: 70px;
+        right: 30px;
+        display: none;
+    }
+    .gotop:hover {
+        background-position: -71px 0;
+    }
+    .qrcode {
+        cursor: pointer;
+        z-index: 999;
+        width: 60px;
+        height: 40px;
+        position: fixed;
+        background: url(/img/sideui.png) -152px -286px;
+        bottom: 20px;
+        right: 30px;
+    }
+    .qrcode:hover {
+        background-position: -71px -286px;
+    }
+    #qrcode {
+        width: 0px;
+        height: 0px;
+        background: url(/img/qrcode.jpg);
+        z-index: 999;
+        position: fixed;
+        bottom: 20px;
+        right: 90px;
+        display: none;
+    }
 </style>
-<a class="ui massive teal icon button gotop">
-    <i class="up icon"></i>
-</a>
+<div class="gotop"></div>
+<div class="qrcode"></div>
+<div id="qrcode"></div>
 <script type="text/javascript">
 $(function() {
+    // 返回顶部
     var $gotop = $('.gotop');
     $(window).scroll(function() {
         $(this).scrollTop() != 0 ? $gotop.fadeIn() : $gotop.fadeOut();
@@ -16,5 +53,22 @@ $(function() {
             scrollTop: 0
         }, 400);
     });
+
+    // 微信公众号二维码
+    var $qrcode = $('.qrcode');
+    $qrcode.on('mouseover', function() {
+        $('#qrcode').fadeIn();
+        $('#qrcode').animate({
+            'width': '419px',
+            'height': '438px'
+        })
+    }).on('mouseout', function() {
+        $('#qrcode').hide();
+        $('#qrcode').animate({
+            'width': '0px',
+            'height': '0px'
+        })
+    });
 });
 </script>
+<!-- end 返回顶部 -->

@@ -601,6 +601,41 @@ var ProjectModule = {
                 return;
             }
         });
+    },
+
+    /**
+     * @method findProjectByIdAndRemove
+     * 根据ID查找项目并且删除找到的项目
+     */
+    findProjectByIdAndRemove: function(req, res) {
+        var _id = req.param('_id');
+
+        Project.findByIdAndRemove(_id, {
+
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10039,
+                    "msg": "服务器错误，删除项目失败"
+                });
+                return;
+            }
+
+            if (doc) {
+                res.json({
+                    "r": 0,
+                    "msg": "删除成功",
+                    "project": doc
+                });
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10015,
+                    "msg": "项目不存在"
+                });
+            }
+        });
     }
 
 

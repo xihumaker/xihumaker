@@ -260,7 +260,8 @@ module.exports = function(app) {
     app.post('/api/project/:_id/quit', user.userAuth, project.quitProjectById);
     // 项目搜索
     app.get('/api/projects/search', project.searchProjects);
-
+    // 删除项目
+    app.delete('/api/project/:_id', project.findProjectByIdAndRemove);
 
 
     /**

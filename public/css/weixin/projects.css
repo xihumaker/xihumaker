@@ -66,3 +66,12 @@ h5.ui.header .icon {
 .msgTip {
     display: none;
 }
+.project .ui.header {
+    height: 23px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+.ui.progress {
+    padding: 0;
+    height: 15px;
+}

@@ -1,5 +1,8 @@
 $(function() {
 
+    // 将项目详细描述添加进DOM树中
+    $('#description').append(he.decode(project.description));
+
     function findUserById(_id, succCall) {
         $.ajax({
             url: '/api/user/' + _id,
