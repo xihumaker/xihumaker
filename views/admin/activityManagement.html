@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <link rel="stylesheet" type="text/css" href="/semantic/packaged/css/semantic.css">
     <link rel="stylesheet" type="text/css" href="/css/admin/common.css">
-    <link rel="stylesheet" type="text/css" href="/css/admin/projectManagement.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/activityManagement.css">
     <link rel="shortcut icon" href="/icon/favicon.ico">
 
     <script src="/lib/jquery.js"></script>
@@ -24,14 +24,15 @@
                 <div class="ui large breadcrumb">
                     <a class="section">西湖创客汇</a>
                     <div class="divider"> / </div>
-                    <a class="active section">项目管理</a>
+                    <a class="active section">活动管理</a>
                 </div>
+                <a class="ui blue right floated button" href="/admin/createActivity" target="_blank">新建活动</a>
             </div>
 
             <div class="ui basic segment searchSegment" style="padding-left: 0px;">
                 <div class="ui action left icon input">
                     <i class="search icon"></i>
-                    <input type="text" placeholder="项目标题" id="searchKey">
+                    <input type="text" placeholder="" id="searchKey">
                     <div class="ui teal button" id="searchBtn">搜索</div>
                 </div>
             </div>
@@ -99,7 +100,7 @@
     
     <% include ./inc_gotop.html %>
     
-    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/projectManagement" ></script>
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/activityManagement" ></script>
 
 </body>
 </html>

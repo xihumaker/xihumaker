@@ -31,8 +31,13 @@ define(function(require, exports, module) {
             dataType: 'json',
             timeout: 15000,
             success: function(data, textStatus, jqXHR) {
+                var href = window.location.href;
                 if (data.r === 0) {
-                    window.location.href = '/';
+                    if (/login/.test(href)) {
+                        window.location.href = '/';
+                    } else {
+                        window.location.reload();
+                    }
                 } else {
                     $alert.html(data.msg).show();
                     return;

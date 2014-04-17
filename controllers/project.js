@@ -32,6 +32,28 @@ Array.prototype.deleteByValue = function(val) {
     return this.deleteByIndex(this.indexOf(val));
 }
 
+/**
+ * @method convertProgress
+ * 根据进度值返回响应的文本描述
+ */
+function convertProgress(val) {
+    if (val < 10) {
+        return 'idea';
+    } else if (val >= 10 && val < 20) {
+        return '招兵买马';
+    } else if (val >= 20 && val < 60) {
+        return '火热施工';
+    } else if (val >= 60 && val < 80) {
+        return '初露曙光';
+    } else if (val >= 80 && val <= 99) {
+        return '冲刺';
+    } else if (val === 100) {
+        return '胜利';
+    } else {
+        return '未知';
+    }
+}
+
 var ProjectModule = {
 
     /**
@@ -80,55 +102,6 @@ var ProjectModule = {
     },
 
     /**
-     * @method findProjectByIdAndUpdate
-     * 根据项目ID修改项目信息
-     */
-    findProjectByIdAndUpdate: function(req, res) {
-        var _id = req.param('_id'),
-            title = req.param('title'),
-            description = req.param('description') || '',
-            industry = req.param('industry') || -1,
-            group = req.param('group') || -1,
-            updateTime = Date.now(),
-            members = req.param('members');
-
-        if (!title) {
-            res.json({
-                "r": 1,
-                "errcode": 10016,
-                "msg": "项目标题不能为空"
-            });
-            return;
-        }
-
-        Project.findByIdAndUpdate(_id, {
-            $set: {
-                title: title,
-                description: description,
-                industry: industry,
-                group: group,
-                updateTime: updateTime,
-                members: members
-            }
-        }, function(err, doc) {
-            if (err) {
-                res.json({
-                    "r": 1,
-                    "errcode": 10026,
-                    "msg": "服务器错误，更新项目失败"
-                });
-                return;
-            }
-            res.json({
-                "r": 0,
-                "msg": "修改成功",
-                "project": doc
-            });
-            return;
-        });
-    },
-
-    /**
      * @method addProject
      * 创建一个新项目
      */
@@ -139,7 +112,11 @@ var ProjectModule = {
             group = req.param('group') || -1,
             authorId = req.signedCookies.xihumaker.userId,
             createTime = Date.now(),
-            updateTime = Date.now();
+            updateTime = Date.now(),
+            teamName = req.param('teamName'),
+            teamProfile = req.param('teamProfile'),
+            progress = req.param('progress'),
+            coverUrl = req.param('coverUrl');
 
         if (!title) {
             res.json({
@@ -157,7 +134,11 @@ var ProjectModule = {
             group: group,
             createTime: createTime,
             authorId: authorId,
-            updateTime: updateTime
+            updateTime: updateTime,
+            teamName: teamName,
+            teamProfile: teamProfile,
+            progress: progress,
+            coverUrl: coverUrl
         });
 
         project.save(function(err, doc) {
@@ -250,7 +231,7 @@ var ProjectModule = {
      * 项目高级搜索
      */
     searchProjects: function(req, res) {
-        var pageSize = req.param('pageSize') || 3;
+        var pageSize = req.param('pageSize') || 12;
         var industry = req.param('industry') || -1;
         var group = req.param('group') || -1;
         var createTime = req.param('createTime');
@@ -453,19 +434,17 @@ var ProjectModule = {
         });
     },
 
-    // --------------------------------------------
+    getProjectInfoById: function(req, res) {
+        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+        var hasLogin = !! userId;
 
-    /**
-     * @method editProjectById
-     * 通过项目Id来修改某个项目
-     */
-    editProjectById: function(req, res) {
         var _id = req.param('_id') || '';
         if (_id.length !== 24) {
-            res.render('weixin/editProject', {
+            res.render('projectInfo', {
                 "r": 1,
                 "errcode": 10015,
-                "msg": "项目不存在"
+                "msg": "项目不存在",
+                "hasLogin": hasLogin
             });
             return;
         }
@@ -474,23 +453,147 @@ var ProjectModule = {
             _id: new ObjectId(_id)
         }, function(err, doc) {
             if (err) {
-                res.render('weixin/editProject', {
+                res.render('projectInfo', {
                     "r": 1,
-                    "errcode": 10022,
-                    "msg": "服务器错误，调用editProjectById方法出错"
+                    "errcode": 10014,
+                    "msg": "服务器错误，调用findProjectById方法出错",
+                    "hasLogin": hasLogin
                 });
                 return;
             }
 
             if ( !! doc) {
-                res.render('weixin/editProject', {
+
+                var isMyProject = false; // 保存是否是当前登录用户创建的项目
+                var hasJoin = false; // 保存用户是否已经加入该项目
+
+                if (hasLogin) {
+                    if (doc.authorId == userId) { // 用户已经登录，并且是该项目的创始人
+                        isMyProject = true;
+                    } else { // 用户已经登录，并且不是该项目的创始人
+                        var members = doc.members;
+                        if (members.indexOf(userId) !== -1) { // 说明该用户已经加入该项目中
+                            hasJoin = true;
+                        }
+                    }
+                }
+
+                doc.localCreateTime = Util.convertDate(doc.createTime);
+                doc.localIndustry = INDUSTRY_LIST[doc.industry];
+                doc.localGroup = GROUP_LIST[doc.group];
+                doc.localProgress = convertProgress(doc.progress);
+
+                res.render('projectInfo', {
                     "r": 0,
                     "msg": "请求成功",
+                    "project": doc,
+                    "hasLogin": hasLogin,
+                    "isMyProject": isMyProject,
+                    "hasJoin": hasJoin
+                });
+                return;
+            } else {
+                res.render('projectInfo', {
+                    "r": 1,
+                    "errcode": 10015,
+                    "msg": "项目不存在",
+                    "hasLogin": hasLogin,
+                    "hasJoin": hasJoin
+                });
+                return;
+            }
+        });
+    },
+
+    showEditProject: function(req, res) {
+        var _id = req.param('_id');
+
+        Project.findOne({
+            _id: new ObjectId(_id)
+        }, function(err, doc) {
+            if (err) {
+                res.render('editProject', {
+                    "r": 1,
+                    "errcode": 10037,
+                    "msg": "服务器错误，调用showEditProject方法出错",
+                    "hasLogin": true
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                doc.localCreateTime = Util.convertDate(doc.createTime);
+                doc.localIndustry = INDUSTRY_LIST[doc.industry];
+                doc.localGroup = GROUP_LIST[doc.group];
+                doc.localProgress = convertProgress(doc.progress);
+
+                res.render('editProject', {
+                    "r": 0,
+                    "msg": "请求成功",
+                    "project": doc,
+                    "hasLogin": true
+                });
+                return;
+            } else {
+                res.render('editProject', {
+                    "r": 1,
+                    "errcode": 10015,
+                    "msg": "项目不存在",
+                    "hasJoin": true
+                });
+                return;
+            }
+        });
+    },
+
+    /**
+     * @method findProjectByIdAndUpdate
+     * 通过项目Id来修改某个项目
+     */
+    findProjectByIdAndUpdate: function(req, res) {
+        var _id = req.params._id;
+        var body = req.body;
+        var title = body.title;
+        var description = body.description;
+        var industry = Number(body.industry);
+        var group = Number(body.group);
+        var teamName = body.teamName;
+        var teamProfile = body.teamProfile;
+        var progress = Number(body.progress);
+        var coverUrl = body.coverUrl;
+        var updateTime = Date.now();
+
+        Project.findByIdAndUpdate(_id, {
+            $set: {
+                title: title,
+                description: description,
+                industry: industry,
+                group: group,
+                teamName: teamName,
+                teamProfile: teamProfile,
+                progress: progress,
+                coverUrl: coverUrl,
+                updateTime: updateTime
+            }
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10038,
+                    "msg": "服务器错误，调用findProjectByIdAndUpdate方法出错"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                res.json({
+                    "r": 0,
+                    "msg": "修改成功",
                     "project": doc
                 });
                 return;
             } else {
-                res.render('weixin/editProject', {
+                res.json({
                     "r": 1,
                     "errcode": 10015,
                     "msg": "项目不存在"

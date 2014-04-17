@@ -3,24 +3,29 @@ var mongoose = require('mongoose'),
     ObjectId = Schema.ObjectId;
 
 /**
- * title 项目标题
- * description 项目详细描述
- * industry 项目所属行业
- * group 项目所属组别
- * authorId 项目创始人ID
- * createTime 项目启动日期
- * updateTime 项目最近更新时间
- * members 项目组成员列表（用户ID）
- * progress 项目进度
- * status 项目状态 审核中1 已删除2 进行中3 已结束4
- * coverUrl 项目封面图片地址
+ * _id          项目唯一ID
+ * title        项目标题
+ * industry     项目所属行业
+ * group        项目所属组别
+ * authorId     项目创始人ID
+ * createTime   项目启动日期
+ * updateTime   项目最近更新时间
+ * members      项目组成员列表（用户ID）
+ * waitingList  等待项目创始人审核的成员列表
+ * coverUrl     项目封面图片地址
+ * teamName     项目队名
+ * teamProfile  团队一句话简介
+ * likeNum      项目被赞的个数
+ * concernNum   项目被关注的个数
+ * coinNum      项目共得到的金币个数
+ * progress     项目进度 0~100%，队长自行设定数值。
+ * description  项目详细描述
+ * level        项目级别，1-普通；2-创新；3-精华。（项目初建时均为1级，当管理员认为有一定创新意义时升为2级，
+ *              特别推荐的升为3级。在项目列表页，用户可以只看精华项目。2级仅用于后台标记，前台不体现区别）
+ * rankScore    项目热度，热度＝赞＋关注×5＋金币。仅用于默认排序，不在前台显示数值
  */
 var ProjectSchema = new Schema({
     title: {
-        type: String,
-        default: ''
-    },
-    description: {
         type: String,
         default: ''
     },
@@ -45,17 +50,49 @@ var ProjectSchema = new Schema({
         type: Array,
         default: []
     },
-    progress: {
-        type: Number,
-        default: 0
-    },
-    status: {
-        type: Number,
-        default: 3
+    waitingList: {
+        type: Array,
+        default: []
     },
     coverUrl: {
         type: String,
         default: ''
+    },
+    teamName: {
+        type: String,
+        default: ''
+    },
+    teamProfile: {
+        type: 'String',
+        default: ''
+    },
+    likeNum: {
+        type: Number,
+        default: 0
+    },
+    concernNum: {
+        type: Number,
+        default: 0
+    },
+    coinNum: {
+        type: Number,
+        default: 0
+    },
+    progress: {
+        type: Number,
+        default: 0
+    },
+    description: {
+        type: String,
+        default: ''
+    },
+    level: {
+        type: Number,
+        default: 1
+    },
+    rankScore: {
+        type: Number,
+        default: 0
     }
 });
 

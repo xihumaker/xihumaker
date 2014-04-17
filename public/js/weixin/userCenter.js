@@ -3,18 +3,15 @@ define(function(require, exports, module) {
     require('jquery');
     require('./common');
 
-
     $('.devitem').click(function() {
         alert('开发中，敬请期待');
     });
 
     $('#logout').click(function() {
-
         var ret = confirm('你确定要退出登录吗？');
-
         if (ret) {
             $.ajax({
-                url: '/weixin/logout',
+                url: '/api/logout',
                 type: 'POST',
                 timeout: 15000,
                 success: function(data, textStatus, jqXHR) {
@@ -34,8 +31,5 @@ define(function(require, exports, module) {
             return;
         }
     });
-
-
-
 
 });

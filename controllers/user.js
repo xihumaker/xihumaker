@@ -46,7 +46,9 @@ var UserModule = {
             next();
         } else {
             console.log("[ >>> LOG >>> ]：用户未登录");
-            res.render('/login');
+            res.render('login', {
+                hasLogin: false
+            });
         }
     },
 

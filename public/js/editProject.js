@@ -1,6 +1,29 @@
+/**
+ * Web - 项目编辑
+ * @author wanggan
+ * @email 244098979@qq.com
+ */
 define(function(require, exports, module) {
 
-    var Util = window.Util = require('../angel/util');
+    // 加载HTML decode库
+    require('../lib/he');
+
+    var um = UM.getEditor('myEditor');
+    /* 获取编辑器内容 */
+    // var html = um.getContent();
+    // var txt = um.getContentTxt();
+
+    /* 设置编辑器内容 */
+    // um.setContent('要设置的编辑器内容.');
+    um.setContent(he.decode(project.description));
+
+    $('#industry').val(project.industry);
+    $('#group').val(project.group);
+
+    if ( !! project.coverUrl) { // 封面图片不为空
+        $('#coverUrl').attr('src', project.coverUrl);
+        $('#coverUrl').attr('width', '85%');
+    }
 
     // 项目封面图片的上传
     var uploader = Qiniu.uploader({
@@ -69,6 +92,9 @@ define(function(require, exports, module) {
         }
     });
 
+    var $alert = $('.alert');
+    var $alertInfo = $('#alertInfo');
+
     var $title = $('#title');
     var $industry = $('#industry');
     var $group = $('#group');
@@ -76,10 +102,10 @@ define(function(require, exports, module) {
     var $teamProfile = $('#teamProfile');
     var $progress = $('#progress');
     var $coverUrl = $('#coverUrl');
-    var $createBtn = $('#createBtn');
+    var $saveBtn = $('#saveBtn');
 
-
-    $createBtn.click(function() {
+    $saveBtn.click(function() {
+        var _id = project._id;
         var title = $title.val().trim();
         var description = um.getContent();
         var industry = Number($industry.val());
@@ -109,11 +135,11 @@ define(function(require, exports, module) {
             alert('项目队名不能为空');
             return;
         }
-        $createBtn.html('正在创建...');
+        $saveBtn.html('正在保存...');
 
         $.ajax({
-            url: '/api/projects',
-            type: 'POST',
+            url: '/api/project/' + _id,
+            type: 'PUT',
             data: {
                 title: title,
                 description: description,
@@ -129,8 +155,12 @@ define(function(require, exports, module) {
             success: function(data, textStatus, jqXHR) {
                 console.log(data);
                 if (data.r === 0) {
-                    var _id = data.project._id;
-                    window.location.href = '/project/' + _id;
+                    $alertInfo.html('保存成功');
+                    $alert.show();
+                    $saveBtn.html('保存修改');
+                    setTimeout(function() {
+                        $alert.hide();
+                    }, 3000);
                 } else {
                     alert(data.msg);
                 }
@@ -143,8 +173,6 @@ define(function(require, exports, module) {
 
 
     });
-
-
 
 
 

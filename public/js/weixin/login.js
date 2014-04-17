@@ -24,7 +24,7 @@ $(function() {
         $login.html('正在登录...');
 
         $.ajax({
-            url: '/weixin/login',
+            url: '/api/login',
             type: 'POST',
             data: {
                 email: email,

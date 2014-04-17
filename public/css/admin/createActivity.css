@@ -16,3 +16,11 @@ div.main {
 	display: none;
 	padding: 8px 0px !important;
 }
+.ui.form .inline.field > input {
+	padding: 0.85em 1.2em !important;
+	width: 70%;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.edui-container,.edui-container .edui-toolbar {
+	box-shadow: none;
+}

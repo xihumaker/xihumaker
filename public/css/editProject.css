@@ -12,3 +12,6 @@
 #coverImg {
 	margin-left: 7.5%;
 }
+.alert {
+	display: none;
+}

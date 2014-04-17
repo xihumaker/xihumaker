@@ -52,11 +52,8 @@ module.exports = function(app) {
         if (token) {
             res.json({
                 uptoken: token
-            })
+            });
         }
-    });
-    app.get('/qiniu', function(req, res) {
-        res.render('qiniu');
     });
 
     /**
@@ -74,7 +71,7 @@ module.exports = function(app) {
             });
         }
     });
-    // 登录
+    // Web端 - 登录
     app.get('/login', function(req, res) {
         if (user.hasLogin(req)) {
             res.render('login', {
@@ -86,12 +83,24 @@ module.exports = function(app) {
             });
         }
     });
-    // 注销
+    // Web端 - 注销
     app.get('/logout', function(req, res) {
         res.clearCookie('xihumaker', {
             path: '/'
         });
         res.redirect('/');
+    });
+    // Web端 - 项目列表页
+    app.get('/projects', function(req, res) {
+        if (user.hasLogin(req)) {
+            res.render('projects', {
+                hasLogin: true
+            });
+        } else {
+            res.render('projects', {
+                hasLogin: false
+            });
+        }
     });
     // Web端 - 创建项目
     app.get('/createProject', user.userWebAuth, function(req, res) {
@@ -99,7 +108,12 @@ module.exports = function(app) {
             hasLogin: true
         });
     });
+    // Web端 - 项目详情页面
+    app.get('/project/:_id', project.getProjectInfoById);
+    // Web端 - 项目编辑页面
+    app.get('/project/:_id/edit', user.userWebAuth, project.showEditProject);
 
+    // 防止微信端页面刷新时，页面空白
     app.get('/weixin/*', function(req, res, next) {
         res.set({
             'Content-Type': 'text/html',
@@ -108,10 +122,10 @@ module.exports = function(app) {
         next();
     });
 
+    // 微信端 - 首页
     app.get('/weixin/index', function(req, res) {
         res.render('weixin/index');
     });
-
     // 微信端 - 创建项目页面
     app.get('/weixin/createProject', user.userAuth, function(req, res) {
         res.render('weixin/createProject');
@@ -166,7 +180,7 @@ module.exports = function(app) {
     app.get('/weixin/tuiguang', function(req, res) {
         res.render('weixin/tuiguang');
     });
-    // 创客微课程
+    // 微信端 - 创客微课程
     app.get('/weixin/weikecheng', function(req, res) {
         res.render('weixin/weikecheng');
     });
@@ -190,41 +204,22 @@ module.exports = function(app) {
         }
     });
 
-    // 用户中心页面
+    // 微信端 - 用户中心页面
     app.get('/weixin/userCenter', user.userAuth, user.showUserCenter);
+    // 微信端 - 用户信息编辑
     app.get('/weixin/user/:_id/edit', user.userAuth, user.showEditUser);
-
+    // 微信端 - 活动列表页
     app.get('/weixin/events', function(req, res) {
         res.render('weixin/events');
     });
-
-    app.get('/oauthResponse', function(req, res) {
-        var _res = res;
-        var code = req.param('code');
-        var state = req.param('state');
-
-        weixin.getOauth2AccessToken(code, function(err, res, body) {
-            var ret = JSON.parse(body);
-            console.log(ret);
-            var access_token = ret.access_token;
-            var openid = ret.openid;
-            var refreshToken = ret.refresh_token;
-
-            weixin.getOauth2UserInfo({
-                access_token: access_token,
-                openid: openid,
-                lang: "zh_CN"
-            }, function(err, res, body) {
-                var ret = JSON.parse(body);
-                console.log(ret);
-                _res.json(ret);
-            });
-
-
-        });
-
-
+    // 微信端 - 新建项目
+    app.get('/weixin/newPro', user.userAuth, function(req, res) {
+        res.render('weixin/newPro');
     });
+    // 微信端 - 项目详情页
+    app.get('/weixin/project/:_id', project.getProjectById);
+
+
 
 
     /**
@@ -236,44 +231,36 @@ module.exports = function(app) {
     app.get('/api/user/:_id', user.findUserById);
     // 用户登录操作
     app.post('/api/login', user.login);
-    app.post('/weixin/login', user.login);
     // 注册新用户
     app.post('/api/users', user.addUser);
     // 用户注销操作
-    app.post('/weixin/logout', user.logout);
+    app.post('/api/logout', user.logout);
     // 修改用户
     app.put('/api/user/:_id', user.findUserByIdAndUpdate);
     // 删除用户
     app.delete('/api/user', user.findUserByIdAndRemove);
+    // 获取当前请求用户的详细信息
     app.get('/api/currentUserinfo', user.getCurrentUserinfo);
 
+    // 根据项目ID查找项目信息
     app.get('/api/project/:_id', project.findProjectById);
-    app.post('/api/project/:_id', project.findProjectByIdAndUpdate);
+    // 创建项目
     app.post('/api/projects', user.userAuth, project.addProject);
-    // 项目详情页
-    app.get('/weixin/project/:_id', project.getProjectById);
+    // 更新项目
+    app.put('/api/project/:_id', user.userAuth, project.findProjectByIdAndUpdate);
     // 加入项目
     app.post('/api/project/:_id/join', user.userAuth, project.joinProjectById);
     // 退出项目
     app.post('/api/project/:_id/quit', user.userAuth, project.quitProjectById);
-
+    // 项目搜索
     app.get('/api/projects/search', project.searchProjects);
 
 
-    // 编辑项目
-    app.get('/weixin/project/:_id/edit', user.userAuth, project.editProjectById);
-
-    // 新建项目
-    app.get('/weixin/newPro', user.userAuth, function(req, res) {
-        res.render('weixin/newPro');
-    });
 
     /**
      * 后台管理相关路由
      * ---------------------------------------------------------
      */
-
-
     // 后台管理首页
     app.get('/admin', admin.auth, function(req, res) {
         res.render('admin/index');
@@ -298,17 +285,25 @@ module.exports = function(app) {
     app.get('/admin/projectManagement', admin.auth, function(req, res) {
         res.render('admin/projectManagement');
     });
+    // 活动管理页面
+    app.get('/admin/activityManagement', admin.auth, function(req, res) {
+        res.render('admin/activityManagement');
+    });
+    // 新建活动
+    app.get('/admin/createActivity', admin.auth, function(req, res) {
+        res.render('admin/createActivity');
+    });
     // 后台管理设置页面
     app.get('/admin/settings', admin.auth, function(req, res) {
         res.render('admin/settings');
     });
     // 后台管理退出操作
     app.get('/admin/logout', admin.logout);
-
     // 后台管理登录操作
     app.post('/admin/login', admin.login);
-
+    // 导出用户信息到Excel
     app.get('/admin/exportToExcel', admin.exportToExcel);
+
 
     /**
      * 404 Page

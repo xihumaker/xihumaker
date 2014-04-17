@@ -9,7 +9,7 @@ define(function(require, exports, module) {
      * 判断是否是手机号码
      */
     Util.isPhone = function(val) {
-        if (!/^(((13[0-9]{1})|159|180|181|186|(15[0-9]{1}))+\d{8})$/.test(val)) {
+        if (!/^(((13[0-9]{1})|159|180|181|186|189|(15[0-9]{1}))+\d{8})$/.test(val)) {
             return false;
         } else {
             return true;

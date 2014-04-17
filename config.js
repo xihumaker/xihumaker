@@ -13,9 +13,9 @@ module.exports = {
     MONGODB_IP: "127.0.0.1",
     MONGODB_DATABASE_NAME: "xihumaker",
     WEB_SERVER_IP: 'xihumaker.jios.org',
-    QINIU_ACCESS_KEY: 'menzy45F91AK3Pj3gxqkuwOzraqUH6YRsU9w5QRM',
-    QINIU_SECRET_KEY: '0VDjejyiavSYr-vyNHkUnFsb8wdT7JCEcks3JkCq',
-    QINIU_Bucket_Name: 'xihumaker-test',
+    QINIU_ACCESS_KEY: 'nrcu5P6P671pB3ujgNdEe34It3ajrILnEQD5EmKD',
+    QINIU_SECRET_KEY: 'y0as1N68ZRiTqLK_QRnwMxVAitj6Rlu1D57F1MO4',
+    QINIU_Bucket_Name: 'xihumakertest',
     WEB_SERVER_PORT: 80,
     TOKEN: 'xihumaker',
 
@@ -43,5 +43,14 @@ module.exports = {
         '2002': '中国计量学院',
         '2003': '杭州分舵',
         '2004': '洛阳分舵'
+    },
+
+    PROJECT_STATUS: {
+        '1': 'idea',
+        '2': '招兵买马',
+        '3': '火热施工',
+        '4': '初露曙光',
+        '5': '冲刺',
+        '6': '胜利'
     }
 }

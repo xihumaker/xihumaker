@@ -1,14 +1,12 @@
 <div class="ui teal fixed transparent inverted menu">
-    <div class="ui page grid">
-        <a href="/admin" class="icon item">
-            <i class="lemon icon"></i>&nbsp;西湖创客汇
-        </a>
-        <a href="/admin/index" class="icon item linkToIndex">首页</a>
-        <a href="/admin/userManagement" class="item linkToUserManagement">用户管理</a>
-        <a href="/admin/projectManagement" class="item linkToProjectManagement">项目管理</a>
-        <a href="/admin/logout" class="right item"><i class="off icon"></i>退出</a>
-        <a href="/admin/settings" class="right item linkToSettings">设置</a>
-    </div>
+    <a href="/admin" class="icon item">
+        <i class="lemon icon"></i>&nbsp;西湖创客汇
+    </a>
+    <a href="/admin/userManagement" class="item linkToUserManagement">用户管理</a>
+    <a href="/admin/projectManagement" class="item linkToProjectManagement">项目管理</a>
+    <a href="/admin/activityManagement" class="item linkToActivityManagement">活动管理</a>
+    <a href="/admin/logout" class="right item"><i class="off icon"></i>退出</a>
+    <a href="/admin/settings" class="right item linkToSettings">设置</a>
 </div>
 
 <script type="text/javascript">
@@ -27,6 +25,9 @@
         }
         if(/admin\/settings/.test(href)) {
             $('.linkToSettings').addClass('active');
+        }
+        if(/admin\/activityManagement/.test(href)) {
+            $('.linkToActivityManagement').addClass('active');
         }
     });
 </script>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新建活动 - 西湖创客汇</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="/semantic/packaged/css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="/umeditor/themes/default/css/umeditor.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/createActivity.css">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+
+    <script src="/lib/jquery.js"></script>
+    <script src="/semantic/packaged/javascript/semantic.js"></script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/umeditor/umeditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/umeditor/umeditor.min.js"></script>
+    <!-- 语言包文件 -->
+    <script type="text/javascript" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
+    <!-- 实例化编辑器代码 -->
+    <script type="text/javascript">
+        $(function(){
+            window.um = UM.getEditor('myEditor');
+            /* 获取编辑器内容 */
+            // var html = um.getContent();
+            // var txt = um.getContentTxt();
+
+            /* 设置编辑器内容 */
+            // um.setContent('要设置的编辑器内容.');
+        });
+    </script>
+</head>
+<body>
+
+    <% include ./inc_topmenu.html %>
+
+        <div class="main">
+
+            <div class="ui basic segment" style="margin: 0;padding: 0;height:42px;">
+                <div class="ui large breadcrumb">
+                    <a class="section">西湖创客汇</a>
+                    <div class="divider"> / </div>
+                    <a class="section">活动管理</a>
+                    <div class="divider"> / </div>
+                    <a class="active section">新建活动</a>
+
+                </div>
+            </div>
+
+            <div class="ui grid">
+                <div class="eleven wide column">
+                    <div class="ui basic segment">
+                        <div class="ui form">
+
+                            <div class="ui fluid input" style="margin-bottom: 15px;">
+                                <input type="text" placeholder="活动主题：不超过25个字">
+                            </div>
+                        
+                            <div class="inline field">
+                                <!--style给定宽度可以影响编辑器的最终宽度-->
+                                <script type="text/plain" id="myEditor" style="width:100%;height:240px;"></script>
+                            </div>
+                        
+                            <div class="inline field">
+                                <label style="margin-bottom: 10px;">注意事项：</label>
+                                <textarea></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="five wide column" style="padding-left: 0;">
+                    <div class="ui basic segment" style="padding-left: 0;">
+                        
+                        <div class="ui form">
+
+                            <div class="inline field">
+                                <label for="">活动日期：</label>
+                                <input type="date">
+                            </div>
+                            <div class="inline field">
+                                <label for="">集合时间：</label>
+                                <input type="time" style="width:224px;">
+                            </div>
+                            <div class="inline field">
+                                <label for="">发&nbsp;&nbsp;起&nbsp;&nbsp;人：</label>
+                                <input type="text">
+                            </div>
+                            <div class="inline field">
+                                <label for="">活动城市：</label>
+                                <input type="text">
+                            </div>
+                            <div class="inline field">
+                                <label for="">活动地点：</label>
+                                <input type="text">
+                            </div>
+                            <div class="inline field">
+                                <label for="">活动名额：</label>
+                                <input type="text">
+                            </div>
+                            <div class="fluid blue ui button">确定新建</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    
+    <% include ./inc_gotop.html %>
+    
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/activityManagement" ></script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+.rowLeft {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#title {
+	margin-top: 0px;
+	font-size: 20px;
+	font-weight: bold;
+}
+#group {
+	float:right;
+}
+#industry {
+	float:right;
+	padding-right:15px;
+}
+.col-md-3 {
+	padding: 0;
+}
+.support {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.progress {
+	margin-bottom: 0;
+}
+#joinTeam,#quitTeam {
+	margin-bottom:10px;
+}
+.rowMem {
+	margin-bottom: 5px;
+}

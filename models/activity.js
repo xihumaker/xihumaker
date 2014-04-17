@@ -3,90 +3,23 @@ var mongoose = require('mongoose'),
     ObjectId = Schema.ObjectId;
 
 /**
- * 活动
- * title        活动标题
- * createTime   活动创建日期
- * startTime    活动开始时间
- * endTime      活动结束时间
- * deadline     报名截止时间
- * organizers   主办方
- * unionOrganizers 联合主办方
- * limits       人数限制
- * city         城市
- * location     地点
- * links        相关链接
- * details      活动详情
- * thumbnail    活动封面图片
- * status
- * 活动状态：0准备中，1报名中，2报名截止，3进行中，4活动结束
- * 准备中（只有活动发布者能够看到）--> 活动发布者选择发布
- * participants 活动报名者
- * hasCheckin   活动已经签到者
+ * activityDate     活动日期
+ * meetingTime      集合时间
+ * topic            活动主题
+ * organizer        发起人
+ * city             城市
+ * location         地点
+ * limit            名额 —— 数字或者写不限制。若有限制，满额后就不能再接受报名了
+ * description      详情 —— 图片+纯文本
+ * note             注意事项 —— 纯文本
+ * likeNum          活动被赞的个数
+ * participants     报名者列表（用户ID）
+ * score            参与者评分
+ *                  评论—— 图片和纯文本
  */
 var ActivitySchema = new Schema({
-    title: {
-        type: String,
-        default: ''
-    },
-    createTime: {
-        type: Number,
-        default: 0
-    },
-    startTime: {
-        type: Number,
-        default: 0
-    },
-    endTime: {
-        type: Number,
-        default: 0
-    },
-    deadline: {
-        type: Number,
-        default: 0
-    },
-    organizers: {
-        type: Array,
-        default: []
-    },
-    unionOrganizers: {
-        type: Array,
-        default: []
-    },
-    limits: {
-        type: Number,
-        default: 0
-    },
-    city: {
-        type: String,
-        default: ''
-    },
-    location: {
-        type: String,
-        default: ''
-    },
-    links: {
-        type: Array,
-        default: []
-    },
-    details: {
-        type: String,
-        default: ''
-    },
-    thumbnail: {
-        type: String,
-        default: ''
-    },
-    participants: {
-        type: Array,
-        default: []
-    },
-    hasCheckin: {
-        type: Array,
-        default: []
-    },
-    status: {
-        type: Number,
-        default: 0
+    activityDate: {
+
     }
 });
 

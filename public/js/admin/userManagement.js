@@ -5,6 +5,8 @@ define(function(require, exports, module) {
 
     window.allUsers = [];
 
+    var counter = 0;
+
     function searchUsers(config, succCall, failCall) {
         failCall = failCall || function() {
             console.log('Default failCall callback invoked.')
@@ -27,6 +29,7 @@ define(function(require, exports, module) {
                     allUsers = allUsers.concat(users);
 
                     for (var i = 0; i < len; i++) {
+                        counter++;
                         user = users[i];
                         if (user.sex == 1) {
                             user.localSex = "男";
@@ -45,6 +48,7 @@ define(function(require, exports, module) {
                             user.localSorkOrStudy = "在读学生";
                         }
                         temp = '<tr>' +
+                            '<td>' + counter + '</td>' +
                             '<td>' + user.username + '</td>' +
                             '<td>' + user.localSex + '</td>' +
                             '<td>' + user.email + '</td>' +
@@ -122,7 +126,14 @@ define(function(require, exports, module) {
 
     // 搜索
     $searchBtn.click(function() {
+
+        if (!$('#searchKey').val().trim()) {
+            alert('请输入搜索条件');
+            return;
+        }
+
         allUsers = []; // 清空数组
+        counter = 0; // 计时器初始化0
 
         searchConfig.pageStart = 0;
         searchConfig.key = $searchKey.val().trim();
@@ -133,7 +144,7 @@ define(function(require, exports, module) {
             if (data.r === 0) {
                 var len = data.users.length;
                 if (len === 0) {
-                    $userList.append($('<tr><td colspan="8"><div class="ui center aligned teal header" style="padding: 100px 0;">查询结果为空</div></td></tr>'));
+                    $userList.append($('<tr><td colspan="12"><div class="ui center aligned teal header" style="padding: 100px 0;">查询结果为空</div></td></tr>'));
                 } else if (len === searchConfig.pageSize) {
                     $loadMore.html('加载更多').show();
                     searchConfig.pageStart = $('#userList tr').length;
