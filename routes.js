@@ -112,6 +112,12 @@ module.exports = function(app) {
     app.get('/project/:_id', project.getProjectInfoById);
     // Web端 - 项目编辑页面
     app.get('/project/:_id/edit', user.userWebAuth, project.showEditProject);
+    // Web端 - 我的创客汇
+    app.get('/myMaker', user.userWebAuth, function(req, res) {
+        res.render('myMaker', {
+            hasLogin: true
+        });
+    });
 
     // 防止微信端页面刷新时，页面空白
     app.get('/weixin/*', function(req, res, next) {

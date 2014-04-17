@@ -1,0 +1,45 @@
+.avatar {
+	padding: 10px 45px 0;
+}
+.avatarThumbnail {
+	padding: 10px;
+	margin-bottom: 5px;
+}
+.thumbnail .caption {
+	padding-bottom: 0;
+}
+a.list-group-item.active {
+	background-color: #434A54;
+	border-color: #434A54;
+}
+a.list-group-item.active:hover {
+	background-color: #656D78;
+	border-color: #656D78;
+}
+.page-header {
+	margin: 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #C0C0C0;
+}
+
+.thumbnail:hover {
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.7);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+.thumbnail .caption h3 {
+	margin: 5px 0;
+}
+.progress {
+	height: 10px;
+}
+.btn-link {
+	padding: 5px;
+	color: gray;
+}
+.btn-link:hover {
+	text-decoration: none;
+}
+.project .localProgress {
+	float: right;
+}
