@@ -680,3 +680,24 @@ Error: failed to connect to [127.0.0.1:27017]
 [2014-04-17 20:40:49.981] [INFO] logger - 【日志】连接到数据库：xihumaker
 [2014-04-17 20:59:04.266] [INFO] logger - 管理员已经登录
 [2014-04-17 20:59:08.985] [INFO] logger - 管理员已经登录
+[2014-04-18 08:05:50.323] [INFO] logger - Express server listening on port 80
+[2014-04-18 08:05:50.347] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-18 08:27:23.871] [INFO] logger - Express server listening on port 80
+[2014-04-18 08:27:23.892] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-18 08:28:06.868] [INFO] logger - Express server listening on port 80
+[2014-04-18 08:28:06.890] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-18 08:28:33.888] [INFO] logger - Express server listening on port 80
+[2014-04-18 08:28:33.910] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-18 08:33:54.082] [INFO] logger - Express server listening on port 80
+[2014-04-18 08:33:54.102] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-04-18 16:54:23.722] [INFO] logger - 管理员未登录
+[2014-04-18 16:54:29.237] [INFO] logger - 登录成功
+[2014-04-18 16:54:29.246] [INFO] logger - 管理员已经登录
+[2014-04-18 16:54:31.577] [INFO] logger - 管理员已经登录
+[2014-04-18 16:54:34.717] [INFO] logger - 管理员已经登录
+[2014-04-18 16:54:38.956] [INFO] logger - 管理员已经登录
+[2014-04-18 16:54:40.061] [INFO] logger - 管理员已经登录
+[2014-04-18 16:54:41.467] [INFO] logger - 管理员已经登录
+[2014-04-18 16:54:43.609] [INFO] logger - 管理员已经登录
+[2014-04-18 16:54:51.434] [INFO] logger - 管理员已经登录
+[2014-04-18 16:54:52.271] [INFO] logger - 管理员已经登录

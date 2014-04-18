@@ -140,10 +140,16 @@ define(function(require, exports, module) {
             }
         });
 
-
-
     });
 
+    Qiniu.watermark({
+        mode: 1,
+        image: 'http://xihumakertest.qiniudn.com/o_18lmhfnti17ursbuplh7tm16kn9.jpg',
+        dissolve: 50,
+        gravity: 'SouthWest',
+        dx: 100,
+        dy: 100
+    });
 
 
 
