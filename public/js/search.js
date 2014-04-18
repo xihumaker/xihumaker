@@ -2,19 +2,14 @@ define(function(require, exports, module) {
 
     var common = require('./common');
 
-    /**
-     * @method searchProjects
-     * 项目查询
-     */
-    function searchProjects(config, succCall, failCall) {
+    function searchProjectsByKey(config, succCall, failCall) {
         failCall = failCall || function() {
-            console.log('>>> LOG >>> searchProjects: Default failCall callback invoked.')
+            console.log('>>> LOG >>> searchProjectsByKey: Default failCall callback invoked.')
         }
         $.ajax({
-            url: '/api/projects/search',
+            url: '/api/projects/key',
             type: 'GET',
-            data: config,
-            dataType: 'json',
+            data: searchConfig,
             timeout: 15000,
             success: function(data, textStatus, jqXHR) {
                 console.log(data);
@@ -70,35 +65,40 @@ define(function(require, exports, module) {
                 failCall();
             }
         });
+
     }
 
-    // 项目查找配置参数
+    // 搜索关键字
+    var href = decodeURI(window.location.href);
+    var q = href.split('?')[1].split('=')[1];
+
+
     var searchConfig = {
+        q: q,
         pageSize: 12,
-        industry: -1,
-        group: -1
+        pageStart: 0
     };
 
     var $loadMore = $('#loadMore');
 
     // 页面加载完成后，默认去查找一次
-    searchProjects(searchConfig, function(data) {
+    searchProjectsByKey(searchConfig, function(data) {
         if (data.r == 0) {
             var projectList = data.projectList;
             var len = projectList.length;
             if (len === searchConfig.pageSize) {
                 $loadMore.show();
-                searchConfig.createTime = projectList[len - 1].createTime;
+                searchConfig.pageStart = searchConfig.pageStart + searchConfig.pageSize;
             }
-        } else {
 
+            $('#totalNum').html(data.total);
         }
     });
 
     // 点击“加载更多”
     $loadMore.click(function() {
         $loadMore.html('正在加载...');
-        searchProjects(searchConfig, function(data) {
+        searchProjectsByKey(searchConfig, function(data) {
             if (data.r == 0) {
                 var projectList = data.projectList;
                 var len = projectList.length;
@@ -107,15 +107,17 @@ define(function(require, exports, module) {
                     $loadMore.html('无更多项目');
                 } else if (len < searchConfig.pageSize) {
                     $loadMore.html('无更多项目');
-                    searchConfig.createTime = projectList[len - 1].createTime;
+                    searchConfig.pageStart = searchConfig.pageStart + searchConfig.pageSize;
                 } else if (len === searchConfig.pageSize) {
                     $loadMore.html('加载更多');
-                    searchConfig.createTime = projectList[len - 1].createTime;
+                    searchConfig.pageStart = searchConfig.pageStart + searchConfig.pageSize;
                 }
             } else {
                 alert(data.msg);
             }
         });
     });
+
+
 
 });

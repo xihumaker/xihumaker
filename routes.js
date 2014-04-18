@@ -118,6 +118,20 @@ module.exports = function(app) {
             hasLogin: true
         });
     });
+    // Web端 - 搜索项目页
+    app.get('/search', function(req, res) {
+        if (user.hasLogin(req)) {
+            res.render('search', {
+                hasLogin: true
+            });
+        } else {
+            res.render('search', {
+                hasLogin: false
+            });
+        }
+    });
+
+
 
     // 防止微信端页面刷新时，页面空白
     app.get('/weixin/*', function(req, res, next) {
@@ -247,6 +261,9 @@ module.exports = function(app) {
     app.delete('/api/user', user.findUserByIdAndRemove);
     // 获取当前请求用户的详细信息
     app.get('/api/currentUserinfo', user.getCurrentUserinfo);
+    // 获取某个用户发起的项目
+    app.get('/api/user/:_id/projects', project.findProjectsByUserId);
+
 
     // 根据项目ID查找项目信息
     app.get('/api/project/:_id', project.findProjectById);
@@ -262,6 +279,7 @@ module.exports = function(app) {
     app.get('/api/projects/search', project.searchProjects);
     // 删除项目
     app.delete('/api/project/:_id', project.findProjectByIdAndRemove);
+    app.get('/api/projects/key', project.searchProjectsByKey);
 
 
     /**

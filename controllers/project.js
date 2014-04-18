@@ -636,6 +636,92 @@ var ProjectModule = {
                 });
             }
         });
+    },
+
+    /**
+     * @method findProjectsByUserId
+     * 获取某个用户发起的项目
+     */
+    findProjectsByUserId: function(req, res) {
+        var _id = req.params._id;
+
+        var query = Project.find({
+            authorId: _id
+        }).sort('-createTime');
+
+        query.exec(function(err, docs) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10040,
+                    "msg": "服务器错误，获取当前请求用户创建的项目失败"
+                });
+                return;
+            }
+
+            res.json({
+                "r": 0,
+                "msg": "请求成功",
+                "projectList": docs
+            });
+        });
+    },
+
+    /**
+     * @method searchProjectsByKey
+     * 根据用户输入的关键字搜索项目
+     */
+    searchProjectsByKey: function(req, res) {
+        console.log(req.query);
+        // 获取关键字
+        var q = req.query.q;
+        var pageSize = Number(req.query.pageSize);
+        var pageStart = Number(req.query.pageStart);
+
+        var reg = new RegExp(q);
+
+        var query = Project.find({
+            '$or': [{
+                'title': reg
+            }, {
+                'description': reg
+            }]
+        }).sort('-createTime').limit(pageSize).skip(pageStart);
+
+        Project.count({
+            '$or': [{
+                'title': reg
+            }, {
+                'description': reg
+            }]
+        }, function(err, count) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10041,
+                    "msg": "服务器错误，搜索项目失败"
+                });
+                return;
+            }
+
+            query.exec(function(err, docs) {
+                if (err) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10041,
+                        "msg": "服务器错误，搜索项目失败"
+                    });
+                    return;
+                }
+
+                res.json({
+                    "r": 0,
+                    "msg": "请求成功",
+                    "projectList": docs,
+                    "total": count
+                });
+            });
+        });
     }
 
 
