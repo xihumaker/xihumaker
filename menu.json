@@ -3,7 +3,7 @@
         "name": "创客？",
         "sub_button": [{
             "type": "click",
-            "name": "创客来了",
+            "name": "关于我们",
             "key": "CHUANG_KE_LAI_LE"
         }, {
             "type": "view",
