@@ -208,6 +208,8 @@ module.exports = function(app) {
         var tag = req.param('tag');
         if (tag === '开源硬件与传感器') {
             res.render('weixin/weikecheng/openSourceHardwareAndSensors')
+        } else if (tag === '创客文化') {
+            res.render('weixin/weikecheng/makerCulture')
         } else {
             res.render('weixin/weikecheng/building');
         }
@@ -220,6 +222,12 @@ module.exports = function(app) {
                 res.render('weixin/weikecheng/openSourceHardwareAndSensors/pcDuino');
             } else if (course === 'Arduino初级课程') {
                 res.render('weixin/weikecheng/openSourceHardwareAndSensors/Arduino');
+            } else if (course === '毕业设计项目模块选型及采购') {
+                res.render('weixin/weikecheng/openSourceHardwareAndSensors/biYeSheJi')
+            }
+        } else if (tag === '创客文化') {
+            if (course === '会员秀') {
+                res.render('weixin/weikecheng/makerCulture/xihumaker');
             }
         }
     });
