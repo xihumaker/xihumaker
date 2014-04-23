@@ -164,12 +164,16 @@ var ProjectModule = {
      * 通过Id查找项目信息
      */
     getProjectById: function(req, res) {
+        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+        var hasLogin = !! userId;
+
         var _id = req.param('_id') || '';
         if (_id.length !== 24) {
             res.render('weixin/projectInfo', {
                 "r": 1,
                 "errcode": 10015,
-                "msg": "项目不存在"
+                "msg": "项目不存在",
+                "hasLogin": hasLogin
             });
             return;
         }
@@ -181,18 +185,18 @@ var ProjectModule = {
                 res.render('weixin/projectInfo', {
                     "r": 1,
                     "errcode": 10014,
-                    "msg": "服务器错误，调用findProjectById方法出错"
+                    "msg": "服务器错误，调用findProjectById方法出错",
+                    "hasLogin": hasLogin
                 });
                 return;
             }
 
             if ( !! doc) {
-                var hasLogin = false; // 保存用户是否已经登录
+
                 var isMyProject = false; // 保存是否是当前登录用户创建的项目
                 var hasJoin = false; // 保存用户是否已经加入该项目
-                var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
-                if ( !! userId) { // 判断用户是否已经登录
-                    hasLogin = true;
+
+                if (hasLogin) {
                     if (doc.authorId == userId) { // 用户已经登录，并且是该项目的创始人
                         isMyProject = true;
                     } else { // 用户已经登录，并且不是该项目的创始人
@@ -202,9 +206,11 @@ var ProjectModule = {
                         }
                     }
                 }
+
                 doc.localCreateTime = Util.convertDate(doc.createTime);
                 doc.localIndustry = INDUSTRY_LIST[doc.industry];
                 doc.localGroup = GROUP_LIST[doc.group];
+                doc.localProgress = convertProgress(doc.progress);
 
                 res.render('weixin/projectInfo', {
                     "r": 0,
@@ -219,11 +225,14 @@ var ProjectModule = {
                 res.render('weixin/projectInfo', {
                     "r": 1,
                     "errcode": 10015,
-                    "msg": "项目不存在"
+                    "msg": "项目不存在",
+                    "hasLogin": hasLogin,
+                    "hasJoin": hasJoin
                 });
                 return;
             }
         });
+
     },
 
     /**

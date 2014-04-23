@@ -3,116 +3,170 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>项目详情 - 西湖创客汇</title>
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title><%= project.title %> - 西湖创客汇</title>
     <meta name="description" content="">
-    <link rel="shortcut icon" href="/icon/favicon.ico">
-    <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
+    
+    <link rel="stylesheet" href="/bootflat/css/site.min.css">
     <link rel="stylesheet" type="text/css" href="/css/weixin/projectInfo.css">
-    <style type="text/css">
-        .hide {
-            display: none !important;
-        }
-    </style>
+    
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+        <script src="/bootflat/js/html5shiv.js"></script>
+        <script src="/bootflat/js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/bootflat/js/site.min.js"></script>
     
     <script type="text/javascript">
-        // 显示微信中网页右上角按钮
-        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-            WeixinJSBridge.call('hideOptionMenu');
-        });
-    </script>
-    <script type="text/javascript">
-        var r = '<%= r %>';
-        var msg = '<%= msg %>';
+        var r = "<%= r %>";
+        var msg = "<%= msg %>";
         var project = {
-            description: '<%= project.description %>'
-        }
+                authorId: "<%= project.authorId %>",
+                _id: "<%= project._id %>",
+                rankScore: <%= project.rankScore %>,
+                level: <%= project.level %>,
+                description: '<%= project.description %>',
+                progress: <%= project.progress %>,
+                coinNum: <%= project.coinNum %>,
+                concernNum: <%= project.concernNum %>,
+                likeNum: <%= project.likeNum %>,
+                teamProfile: "<%= project.teamProfile %>",
+                teamName: "<%= project.teamName %>",
+                coverUrl: "<%= project.coverUrl %>",
+                waitingList: "<%= project.waitingList %>" || [],
+                members: "<%= project.members %>",
+                updateTime: <%= project.updateTime %>,
+                createTime: <%= project.createTime %>,
+                group: <%= project.group %>,
+                industry: <%= project.industry %>,
+                title: "<%= project.title %>"
+            };
+        var hasLogin = <%= hasLogin %>;
+        var isMyProject = <%= isMyProject %>;
+        var hasJoin = <%= hasJoin %>;
     </script>
 </head>
 <body>
 
-    <div class="ui small fixed transparent teal inverted main menu">
-        <div class="menu">
-            <a href="/weixin/projects" class="item left"><i class="reply mail icon"></i>返回</a>
-            <% if(r == '0') { %>
-                <input type="hidden" data-hasLogin=<%= hasLogin %> data-isMyProject="<%= isMyProject %>" data-hasJoin="<%= hasJoin %>" data-_id="<%= project._id %>" data-members="<%= project.members %>" data-authorId="<%= project.authorId %>">
+    <div class="container">
+        <h3 id="title" class="text-center"><%= project.title %></h3>
+        <p>
+            <span>启动：<%= project.localCreateTime %></span>
+            <span id="group"><%= project.localGroup %></span>
+            <span id="industry"><%= project.localIndustry %></span>  
+        </p>
+        <% if(project.coverUrl) { %>
+            <img src="<%= project.coverUrl %>" width="100%">
+        <% } %>
+        <div class="panel panel-default">
+            
+            <div class="panel-body" id="description"></div>
+            <div class="panel-heading">
+                <h3 class="panel-title">进度</h3>
+            </div>
+            <div class="panel-body">
+                <span style="float: left;padding: 0 15px 0 0;"><%= project.localProgress %></span>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= project.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= project.progress %>%">
+                        <span class="sr-only">40% Complete (success)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">作者团队</h3>
+            </div>
+            <div class="panel-body">
+                <h4 class="text-center"><%= project.teamName %></h4>
+                <p class="text-center"><%= project.teamProfile %></p>
+
+                <!-- 用户已经登录 -->
                 <% if(hasLogin) { %>
+                    <!-- 非当前用户创建的项目 -->
                     <% if(!isMyProject) { %>
+                        <!-- 已加入该项目 -->
                         <% if(hasJoin) { %>
-                            <a href="javascript:void(0);" class="item right hide" id="join">加入该项目</a>
-                            <a href="javascript:void(0);" class="item right" id="quit">退出该项目</a>
+                            <button type="button" class="btn btn-primary btn-block" id="quitTeam" >退出项目</button>
+                        <!-- 未加入该项目 -->
                         <% } else { %>
-                            <a href="javascript:void(0);" class="item right" id="join">加入该项目</a>
-                            <a href="javascript:void(0);" class="item right hide" id="quit">退出该项目</a>
+                            <button type="button" class="btn btn-primary btn-block" id="joinTeam" >加入项目</button>
                         <% } %>
                     <% } %>
+                <!-- 用户未登录 -->
                 <% } else { %>
-                    <a href="/weixin/login?returnUrl=/weixin/project/<%= project._id %>" class="item right">加入该项目</a>
+                    <button type="button" class="btn btn-primary btn-block loginBtn" style="margin-bottom:10px;">加入团队</button>
                 <% } %>
+                
+                <div id="members"></div>
+            </div>
+
+            <% if(!isMyProject) { %>
+                <div class="panel-heading">
+                    <h3 class="panel-title">支持本项目</h3>
+                </div>
             <% } %>
+            
+            <!-- 用户已经登录 -->
+            <% if(hasLogin) { %>
+                <!-- 非当前用户创建的项目 -->
+                <% if(!isMyProject) { %>
+                    <div class="panel-body text-center support">
+                        <button type="button" class="btn btn-primary develop"><i class="glyphicon glyphicon-heart"></i> 赞<%= project.likeNum %></button>
+                        <button type="button" class="btn btn-primary develop"><i class="glyphicon glyphicon-star"></i> 关注<%= project.concernNum %></button>
+                        <button type="button" class="btn btn-danger develop"><i class="glyphicon glyphicon-usd"></i> 金币<%= project.coinNum %></button>
+                    </div>
+                <% } %>
+            <!-- 用户未登录 -->
+            <% } else { %>
+                <div class="panel-body text-center support">
+                    <button type="button" class="btn btn-primary loginBtn"><i class="glyphicon glyphicon-heart"></i> 赞<%= project.likeNum %></button>
+                    <button type="button" class="btn btn-primary loginBtn"><i class="glyphicon glyphicon-star"></i> 关注<%= project.concernNum %></button>
+                    <button type="button" class="btn btn-danger loginBtn"><i class="glyphicon glyphicon-usd"></i> 金币<%= project.coinNum %></button>
+                </div>
+            <% } %>
+            
+        </div>
+    </div>
+
+    <div class="modal" id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">登录</h4>
+                </div>
+            <div class="modal-body">
+                <p>您还未登录西湖创客汇，请先登录</p>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="username" placeholder="邮箱/手机号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="alert alert-warning hide" id="alertWarning"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" id="login">登录</button>
+            </div>
+            </div>
         </div>
     </div>
     
-    <div class="ui basic segment">
-        
-        <!-- 项目信息查找成功 -->
-        <% if(r == '0') { %>
-            <h3 class="ui center aligned header"><%= project.title %></h3>
-            <div style="height: 30px;line-height: 30px;">
-                <h5 class="ui left floated black tiny header">启动:<%= project.localCreateTime %></h5>
-                <h5 class="ui right floated black header">
-                    <% if(project.industry != '-1') { %>
-                        <%= project.localIndustry %>
-                    <% } %>
-                    <% if(project.group != '-1') { %>
-                        <%= project.localGroup %>
-                    <% } %>
-                     
-                </h5>
-            </div>
-            <div class="ui divider"></div>
 
-            <img src="<%= project.coverUrl %>" width="100%;">
-
-            <h4 class="ui inverted teal block header">项目描述</h4>
-            <div id="description">
-                
-            </div>
-            
-
-            <h4 class="ui inverted teal block header">项目成员</h4>
-            <div id="teaminfo">
-                <p id="authorId"></p>
-                <% if(project.members.length === 0) { %>
-                    <p>项目成员：项目成员为空</p>
-                <% } else { %>
-                    
-                <% } %>
-            </div>
-
-            <div class="ui horizontal icon divider">
-                <i class="circular leaf icon"></i>
-            </div>
-            <div class="ui tiny teal center aligned header">欢迎加入DIY的队伍,创新让生活更美好！</div>
-        <!-- 项目信息查找失败 -->
-        <% } else if(r == '1') { %>
-            <div class="ui center aligned icon header">
-                <i class="red attention icon"></i>
-                <h4 class="ui red header"><%= msg %></h4>
-            </div>
-        <% } %>
-        
-    </div>
     
     
-    <script type="text/javascript" src="/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="/lib/he.js"></script>
-    <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>
-    <script type="text/javascript" src="/js/weixin/projectInfo.js"></script>
-        
-        
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/weixin/projectInfo" ></script>
 </body>
 </html>

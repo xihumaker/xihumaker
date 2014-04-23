@@ -1,40 +1,29 @@
-body {
-    margin: 0;
+
+#title {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
 }
-.ui.menu.fixed {
-    top: 0;
+#group {
+    float:right;
 }
-.ui.segment {
-    margin: 50px 10px 10px 10px;
-    padding: 0px;
+#industry {
+    float:right;
+    padding-right:15px;
 }
-.ui.left.aligned.header {
-    margin-bottom: 5px !important;
+
+.support {
+    padding-left: 0px;
+    padding-right: 0px;
 }
-h5.ui.header {
-    margin: 0 !important;
-    font-weight: normal;
+.progress {
+    margin-bottom: 0;
+    width: 80%;
 }
-.ui.divider {
-    margin: 0.5rem 0rem;
+#joinTeam,#quitTeam {
+    margin-bottom:10px;
 }
-.ui.progress {
-    border: none;
-    padding: 0px;
+.rowMem {
+    margin-bottom: 5px;
 }
-.four.wide.column {
-    height: 25px;
-    line-height: 25px;
-}
-.ui.progress {
-    background-color: #EAE8E8;
-    height: 25px;
-}
-.ui.form textarea {
-    border: none;
-    padding: 0;
-    overflow-y:visible;
-    min-height: inherit;
-    height: inherit;
-    max-height: inherit;
-}
+
