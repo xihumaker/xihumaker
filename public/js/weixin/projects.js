@@ -1,5 +1,6 @@
 define(function(require, exports, module) {
 
+    var common = require('../common');
     require('./common');
 
     var $msgTip = $('#msgTip');
@@ -63,21 +64,32 @@ define(function(require, exports, module) {
                     for (var i = 0; i < len; i++) {
                         project = projectList[i];
                         coverUrl = project.coverUrl;
+                        localProgress = common.convertProgress(project.progress);
                         if (!coverUrl) {
                             coverUrl = '/img/default_project_cover.jpg'
                         }
+
                         projectTemp = '<a class="item project" href="/weixin/project/' + project._id + '">' +
-                            '<h4 class="ui black header">' + project.title + '</h4>' +
-                            '<h5 class="ui black header">' + convertDate(project.createTime) + '</h5>' +
                             '<div class="image">' +
                             '<img src="' + coverUrl + '">' +
                             '</div>' +
-                            '<div class="content ellipsis">' +
-                            '<p class="description"></p>' +
+                            '<h4 class="ui black header title">' + project.title + '</h4>' +
+                            '<div>' +
+                            '<div class="team">' +
+                            '<span class="teamName">' + project.teamName + '</span>' +
+                            '<span class="ui green small label localProgress" style="">' + localProgress + '</span>' +
                             '</div>' +
-                            '<div class="ui divider"></div>' +
-                            '<h5 class="ui black header">查看详情<i class="right arrow icon"></i></h5 class="ui black header">' +
+                            '<div class="progress">' +
+                            '<div class="progress-bar progress-bar-success" style="width: ' + project.progress + '%"></div>' +
+                            '</div>' +
+                            '<div style="text-align: center;">' +
+                            '<button type="button" class="btn btn-link"><i class="heart icon"></i> 赞' + project.likeNum + '</button>' +
+                            '<button type="button" class="btn btn-link"><i class="star icon"></i> 关注' + project.concernNum + '</button>' +
+                            '<button type="button" class="btn btn-link"><i class="dollar icon"></i> 金币' + project.coinNum + '</button>' +
+                            '</div>' +
+                            '</div>' +
                             '</a>';
+
                         $projectList.append($(projectTemp));
                     }
                 }

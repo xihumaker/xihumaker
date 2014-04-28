@@ -4,6 +4,9 @@ var config = require('./config');
 var api = require('./controllers/api');
 var user = require('./controllers/user');
 var project = require('./controllers/project');
+var like = require('./controllers/like');
+var concern = require('./controllers/concern');
+var comment = require('./controllers/comment');
 var admin = require('./controllers/admin');
 
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
@@ -289,6 +292,24 @@ module.exports = function(app) {
     app.delete('/api/project/:_id', project.findProjectByIdAndRemove);
     app.get('/api/projects/key', project.searchProjectsByKey);
 
+    // 赞
+    app.post('/api/project/:_id/like', like.create);
+    // 取消赞
+    app.delete('/api/project/:_id/like', like.deleteLike);
+    // 查找某个用户发起的赞
+    app.get('/api/user/:_id/likes', like.findLikesByUserId);
+
+    // 关注
+    app.post('/api/project/:_id/concern', concern.create);
+    // 取消关注
+    app.delete('/api/project/:_id/concern', concern.deleteConcern);
+    // 查找某个用户关注的项目
+    app.get('/api/user/:_id/concerns', concern.findConcernsByUserId);
+
+    // 围观群众 - 发言
+    app.post('/api/project/:_id/comment', comment.create);
+    // 围观群众 - 查找该项目所有的评论
+    app.get('/api/project/:_id/comments', comment.findCommentsByProjectId);
 
     /**
      * 后台管理相关路由

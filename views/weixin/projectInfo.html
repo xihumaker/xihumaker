@@ -110,8 +110,8 @@
                 <!-- 非当前用户创建的项目 -->
                 <% if(!isMyProject) { %>
                     <div class="panel-body text-center support">
-                        <button type="button" class="btn btn-primary develop"><i class="glyphicon glyphicon-heart"></i> 赞<%= project.likeNum %></button>
-                        <button type="button" class="btn btn-primary develop"><i class="glyphicon glyphicon-star"></i> 关注<%= project.concernNum %></button>
+                        <button type="button" title="赞" class="btn btn-primary likeBtn" id="like"><i class="glyphicon glyphicon-heart"></i> <span id="likeLabel">赞</span><span id="likeNum"><%= project.likeNum %></span></button>
+                        <button type="button" title="关注" class="btn btn-primary concernBtn" id="concern"><i class="glyphicon glyphicon-star"></i> <span id="concernLabel">关注</span><span id="concernNum"><%= project.concernNum %></span></button>
                         <button type="button" class="btn btn-danger develop"><i class="glyphicon glyphicon-usd"></i> 金币<%= project.coinNum %></button>
                     </div>
                 <% } %>
@@ -123,10 +123,28 @@
                     <button type="button" class="btn btn-danger loginBtn"><i class="glyphicon glyphicon-usd"></i> 金币<%= project.coinNum %></button>
                 </div>
             <% } %>
+
+            <div class="panel-heading">
+                <h3 class="panel-title">围观群众</h3>
+            </div>
+            <div class="panel-body">
+    
+                <div id="commentList"></div>
+                <% if(hasLogin) { %>
+                    <textarea class="form-control" rows="3" style="margin: 10px 0;" id="content" placeholder="发表一个评论"></textarea>
+                    <button type="button" class="btn btn-success btn-block" id="addComment">发言</button>
+                <% } else { %>
+                    <p>你必须先登录才能发表评论。
+                        <a href="javascript:void(0);" class="loginBtn">登录</a>
+                    </p>
+                <% } %>
+
+            </div>
             
         </div>
     </div>
-
+    
+    <!-- 登录框 -->
     <div class="modal" id="loginModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -163,6 +181,13 @@
             </div>
         </div>
     </div>
+    <!-- end 登录框  -->
+
+    
+
+
+
+
     
 
     

@@ -18,6 +18,10 @@ var UserModule = {
         return !!userId;
     },
 
+    getUserId: function(req, res) {
+        return req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+    },
+
     /**
      * @method userAuth
      * 用户认证

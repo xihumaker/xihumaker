@@ -12,3 +12,95 @@ body {
 #footernav>.item>.icon {
 	margin: 0 auto .2em!important
 }
+
+
+/*项目Item*/
+.project .title {
+    height: 34px;
+    overflow: hidden;
+    margin: 5px 0;
+    font-size: 16px !important;
+    line-height: 17px !important;
+}
+
+.project .team {
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+.project .teamName {
+    color: gray;
+}
+.project .localProgress {
+    float: right;
+    padding: 0 7px;
+    margin: 0;
+}
+
+.project .progress {
+    background-color: #E6E9ED;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    overflow: hidden;
+    height: 12px;
+    margin-bottom: 10px;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    clear: both;
+}
+
+.project .progress-bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #FFF;
+    text-align: center;
+    background-color: #428BCA;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    -webkit-transition: width .6s ease;
+    transition: width .6s ease;
+}
+.project .progress-bar-success {
+    background-color: #8CC152;
+}
+.project .btn-link, .btn-link:hover{
+    padding: 5px;
+    border-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    color: gray;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.project .btn-link {
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 0;
+}
+.project .btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid rgba(0, 0, 0, 0);
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* end 项目Item*/

@@ -1,10 +1,10 @@
 define(function(require, exports, module) {
 
     // 加载HTML decode库
-    require('../../lib/he');
-    require('../../lib/md5');
+    require('../lib/he');
+    require('../lib/md5');
 
-    var CONST = require('../const');
+    var CONST = require('./const');
     var INDUSTRY_LIST = CONST.INDUSTRY_LIST;
     var GROUP_LIST = CONST.GROUP_LIST;
 
@@ -42,10 +42,10 @@ define(function(require, exports, module) {
             }
             var username = user.username;
             var temp = '<div class="row rowMem">' +
-                '<div class="col-md-4 col-xs-4">' +
+                '<div class="col-md-4">' +
                 '<img class="media-object img-rounded" width="64" src="' + headimgurl + '">' +
                 '</div>' +
-                '<div class="col-md-8 col-xs-8">' +
+                '<div class="col-md-8">' +
                 '<h5 style="margin: 0 0 5px;">' + username + '<span>(创始人)</span></h5></div>' +
                 '</div>';
             $members.append($(temp));
@@ -53,6 +53,7 @@ define(function(require, exports, module) {
         }
     });
 
+    // 获取项目组成员信息
     var members = project.members;
     if ( !! members) {
         var member;
@@ -70,10 +71,10 @@ define(function(require, exports, module) {
                     }
                     var username = user.username;
                     var temp = '<div class="row rowMem">' +
-                        '<div class="col-md-4 col-xs-4">' +
+                        '<div class="col-md-4">' +
                         '<img class="media-object img-rounded" width="64" src="' + headimgurl + '">' +
                         '</div>' +
-                        '<div class="col-md-8 col-xs-8">' +
+                        '<div class="col-md-8">' +
                         '<h5 style="margin: 0 0 5px;">' + username + '</h5></div>' +
                         '</div>';
                     $members.append($(temp));
@@ -82,6 +83,55 @@ define(function(require, exports, module) {
         }
     }
 
+
+    // 用户未登录时，点击赞、关注、金币、加入团队这些按钮，弹出登录框
+    $('.loginBtn').click(function() {
+        $('#loginModal').modal('show');
+    });
+
+    var $alertWarning = $('#alertWarning');
+
+    // 用户点击登录Modal中的登录按钮
+    $('#login').click(function() {
+
+        var username = $('#username').val().trim();
+        var password = $('#password').val().trim();
+
+        if (!username) {
+            $alertWarning.html('用户名不能为空').removeClass('hide');
+            return;
+        }
+        if (!password) {
+            $alertWarning.html('密码不能为空').removeClass('hide');
+            return;
+        }
+
+        $.ajax({
+            url: '/api/login',
+            type: 'POST',
+            data: {
+                email: username,
+                password: hex_md5(password)
+            },
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                if (data.r === 0) {
+                    window.location.reload();
+                } else {
+                    $alertWarning.html(data.msg).removeClass('hide');
+                    return;
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+
+    $('#loginModal input').focus(function() {
+        $alertWarning.addClass('hide');
+    });
 
     // 加入项目
     $('#joinTeam').click(function() {
@@ -134,10 +184,154 @@ define(function(require, exports, module) {
         alert('加紧开发中，敬请期待');
     });
 
-    // 用户未登录时，点击赞、关注、金币、加入团队这些按钮，弹出登录框
-    $('.loginBtn').click(function() {
-        $('#loginModal').modal('show');
+    // 用户是否已经赞过该项目
+    var userId = $('#currentUsername').attr('data-id');
+    $.ajax({
+        url: '/api/user/' + userId + '/likes',
+        type: 'GET',
+        timeout: 15000,
+        success: function(data, textStatus, jqXHR) {
+            console.log(data);
+            if (data.r === 0) {
+                var likes = data.likes;
+                var len = likes.length;
+                for (var i = 0; i < len; i++) {
+                    if (project._id === likes[i].belongToProject) {
+                        $('#like').removeClass('likeBtn');
+                        $('#like').addClass('unlikeBtn');
+                        $('#likeLabel').html('取消');
+                    }
+                }
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+
+        }
     });
+
+    // 用户是否已经关注该项目
+    $.ajax({
+        url: '/api/user/' + userId + '/concerns',
+        type: 'GET',
+        timeout: 15000,
+        success: function(data, textStatus, jqXHR) {
+            console.log(data);
+            if (data.r === 0) {
+                var concerns = data.concerns;
+                var len = concerns.length;
+                for (var i = 0; i < len; i++) {
+                    if (project._id === concerns[i].belongToProject) {
+                        $('#concern').removeClass('concernBtn');
+                        $('#concern').addClass('unconcernBtn');
+                        $('#concernLabel').html('取消');
+                    }
+                }
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+
+        }
+    });
+
+    // 赞
+    $('body').on('click', '.likeBtn', function() {
+        var _id = project._id;
+        $.ajax({
+            url: '/api/project/' + _id + '/like',
+            type: 'POST',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    $('#likeNum').html(++project.likeNum);
+                    $('#likeLabel').html('取消');
+                    $('#like').removeClass('likeBtn');
+                    $('#like').addClass('unlikeBtn');
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+
+    // 取消赞
+    $('body').on('click', '.unlikeBtn', function() {
+        var _id = project._id;
+        $.ajax({
+            url: '/api/project/' + _id + '/like',
+            type: 'DELETE',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    $('#likeNum').html(--project.likeNum);
+                    $('#likeLabel').html('赞');
+                    $('#like').addClass('likeBtn');
+                    $('#like').removeClass('unlikeBtn');
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+
+    // 关注
+    $('body').on('click', '.concernBtn', function() {
+        var _id = project._id;
+        $.ajax({
+            url: '/api/project/' + _id + '/concern',
+            type: 'POST',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    $('#concernNum').html(++project.concernNum);
+                    $('#concernLabel').html('取消');
+                    $('#concern').removeClass('concernBtn');
+                    $('#concern').addClass('unconcernBtn');
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+
+    // 取消关注
+    $('body').on('click', '.unconcernBtn', function() {
+        var _id = project._id;
+        $.ajax({
+            url: '/api/project/' + _id + '/concern',
+            type: 'DELETE',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    $('#concernNum').html(--project.concernNum);
+                    $('#concernLabel').html('关注');
+                    $('#concern').addClass('concernBtn');
+                    $('#concern').removeClass('unconcernBtn');
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+
+
+
+
 
 
 });

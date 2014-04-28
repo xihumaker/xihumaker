@@ -97,9 +97,9 @@
                                 <a type="button" href="/project/<%= project._id %>/edit" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> 编辑</a>
                             <!-- 非当前用户创建的项目 -->
                             <% } else { %>
-                                <button type="button" class="btn btn-primary develop"><i class="glyphicon glyphicon-heart"></i> 赞<%= project.likeNum %></button>
-                                <button type="button" class="btn btn-primary develop"><i class="glyphicon glyphicon-star"></i> 关注<%= project.concernNum %></button>
-                                <button type="button" class="btn btn-danger develop"><i class="glyphicon glyphicon-usd"></i> 金币<%= project.coinNum %></button>
+                                <button type="button" title="赞" class="btn btn-primary likeBtn" id="like"><i class="glyphicon glyphicon-heart"></i> <span id="likeLabel">赞</span><span id="likeNum"><%= project.likeNum %></span></button>
+                                <button type="button" title="关注" class="btn btn-primary concernBtn" id="concern"><i class="glyphicon glyphicon-star"></i> <span id="concernLabel">关注</span><span id="concernNum"><%= project.concernNum %></span></button>
+                                <button type="button" title="赞助金币" class="btn btn-danger develop"><i class="glyphicon glyphicon-usd"></i> 金币<%= project.coinNum %></button>
                             <% } %>
                         <!-- 用户未登录 -->
                         <% } else { %>
