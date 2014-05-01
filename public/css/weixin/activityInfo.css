@@ -1,0 +1,14 @@
+#limit {
+	float: right;
+}
+.progress {
+	height: 12px;
+}
+#activityPeoples span {
+	margin-right: 5px;
+}
+.panel-body h5 {
+	font-size: 16px;
+	margin: 8px 0;
+	color: #FF4500;
+}

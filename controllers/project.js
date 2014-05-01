@@ -244,56 +244,29 @@ var ProjectModule = {
         var industry = req.param('industry') || -1;
         var group = req.param('group') || -1;
         var createTime = req.param('createTime');
-        var query;
+        var progress = req.param('progress');
 
-        if (!createTime) {
-            if (industry == -1 && group == -1) {
-                query = Project.find().sort('-createTime').limit(pageSize);
-            } else if (industry == -1 && group != -1) {
-                query = Project.find({
-                    group: group
-                }).sort('-createTime').limit(pageSize);
-            } else if (industry != -1 && group == -1) {
-                query = Project.find({
-                    industry: industry
-                }).sort('-createTime').limit(pageSize);
-            } else if (industry != -1 && group != -1) {
-                query = Project.find({
-                    industry: industry,
-                    group: group
-                }).sort('-createTime').limit(pageSize);
-            }
-        } else {
-            if (industry == -1 && group == -1) {
-                query = Project.find({
-                    createTime: {
-                        $lt: createTime
-                    }
-                }).sort('-createTime').limit(pageSize);
-            } else if (industry == -1 && group != -1) {
-                query = Project.find({
-                    group: group,
-                    createTime: {
-                        $lt: createTime
-                    }
-                }).sort('-createTime').limit(pageSize);
-            } else if (industry != -1 && group == -1) {
-                query = Project.find({
-                    industry: industry,
-                    createTime: {
-                        $lt: createTime
-                    }
-                }).sort('-createTime').limit(pageSize);
-            } else if (industry != -1 && group != -1) {
-                query = Project.find({
-                    industry: industry,
-                    group: group,
-                    createTime: {
-                        $lt: createTime
-                    }
-                }).sort('-createTime').limit(pageSize);
-            }
+        var query;
+        var queryParams = {};
+
+        if (group != -1) {
+            queryParams.group = group;
         }
+        if (industry != -1) {
+            queryParams.industry = industry;
+        }
+        if ( !! createTime) {
+            queryParams.createTime = {
+                $lt: createTime
+            };
+        }
+        if ( !! progress) {
+            queryParams.progress = progress;
+        }
+
+        query = Project.find(queryParams).sort('-createTime').limit(pageSize);
+
+
 
         query.exec(function(err, docs) {
             if (err) {

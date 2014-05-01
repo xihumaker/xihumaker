@@ -45,38 +45,57 @@
 
         <div class="ui segment">
             <div class="ui divided list">
+                <a class="item" href="/weixin/user/<%= user._id %>/projects/sponsor">
+                    <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                    <i class="list layout icon"></i>
+                    <div class="content">
+                        <div class="header">我发起的项目</div>
+                    </div>
+                </a>
+
                 <a class="item devitem" href="javascript:void(0);">
                     <i class="right floated arrow icon" style="margin-top: 2px;"></i>
                     <i class="list layout icon"></i>
                     <div class="content">
-                        <div class="header">我的项目</div>
+                        <div class="header">我参与的项目</div>
+                    </div>
+                </a>
+
+                <a class="item" href="/weixin/user/<%= user._id %>/projects/like">
+                    <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                    <i class="heart icon"></i>
+                    <div class="content">
+                        <div class="header">我点赞的项目</div>
+                    </div>
+                </a>
+
+                <a class="item devitem" href="javascript:void(0);">
+                    <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                    <i class="star icon"></i>
+                    <div class="content">
+                        <div class="header">我关注的项目</div>
                     </div>
                 </a>
                 
-                <a class="item devitem" href="javascript:void(0);">
-                    <i class="right floated arrow icon" style="margin-top: 4px;"></i>
-                    <i class="calendar icon"></i>
-                    <div class="content">
-                        <div class="header">参加的活动</div>
-                    </div>
-                </a>
-
-                <a class="item devitem" href="javascript:void(0);">
-                    <i class="right floated arrow icon" style="margin-top: 4px;"></i>
-                    <i class="star icon"></i>
-                    <div class="content">
-                        <div class="header">我的收藏</div>
-                    </div>
-                </a>
             </div>
+        </div>
 
+        <div class="ui segment">
+            <div class="ui divided list">
+                <a class="item devitem" href="javascript:void(0);">
+                    <i class="right floated arrow icon" style="margin-top: 2px;"></i>
+                    <i class="list layout icon"></i>
+                    <div class="content">
+                        <div class="header">我参加的活动</div>
+                    </div>
+                </a>
+
+            </div>
         </div>
 
         <div class="ui basic segment" style="padding:0px !important;">
             <div class="ui red fluid button" id="logout">退出登录</div>
         </div>
-        
-
 
 
     <!-- 查找用户信息失败 -->
@@ -87,11 +106,10 @@
     <% } %>
 
     
-    
 
-    
-
-    <% include ./inc_footer_nav.html %>
+    <!--
+    < include ./inc_footer_nav.html %>
+-->
 
     <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/weixin/userCenter" ></script>
 

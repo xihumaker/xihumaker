@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会员秀编辑 - 西湖创客汇</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="/semantic/packaged/css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="/umeditor/themes/default/css/umeditor.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/editVip.css">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+
+    <script src="/lib/jquery.js"></script>
+    <script src="/semantic/packaged/javascript/semantic.js"></script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/umeditor/umeditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/umeditor/umeditor.min.js"></script>
+    <!-- 语言包文件 -->
+    <script type="text/javascript" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
+    <!-- 实例化编辑器代码 -->
+
+    <script type="text/javascript">
+        var r = <%= r %>;
+        var msg = "<%= msg %>";
+        var vip = {
+            _id: "<%= vip._id %>",
+            name: "<%= vip.name %>",
+            headimgurl: "<%= vip.headimgurl %>",
+            title: "<%= vip.title %>",
+            content: "<%= vip.content %>",
+            likeNum: "<%= vip.likeNum %>",
+            createTime: <%= vip.createTime %>,
+            updateTime: <%= vip.updateTime %>
+        };
+    </script>
+</head>
+<body>
+
+    <% include ./inc_topmenu.html %>
+
+        <div class="main">
+
+            <div class="ui basic segment" style="margin: 0;padding: 0;height:42px;">
+                <div class="ui large breadcrumb">
+                    <a class="section">西湖创客汇</a>
+                    <div class="divider"> / </div>
+                    <a class="section">会员秀管理</a>
+                    <div class="divider"> / </div>
+                    <a class="active section">编辑会员秀</a>
+                </div>
+            </div>
+
+            <div class="ui grid">
+                <div class="eleven wide column">
+                    <div class="ui basic segment">
+                        <div class="ui form">
+                            <div class="ui fluid input" style="margin-bottom: 15px;">
+                                <input type="text" placeholder="标题：不超过14个字" id="title" value="<%= vip.title %>">
+                            </div>
+                            <div class="inline field">
+                            <!--style给定宽度可以影响编辑器的最终宽度-->
+                            <script type="text/plain" id="myEditor" style="width:100%;height:240px;"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="five wide column" style="padding-left: 0;">
+                    <div class="ui basic segment" style="padding-left: 0;">
+                        <div class="ui form">
+                            <div class="inline field">
+                                <label for="">姓名：</label>
+                                <input type="text" id="name" value="<%= vip.name %>">
+                            </div>
+                            <div class="inline field" id="pickfilesContainer">
+                                <label for="">头像：</label>
+                                <div class="ui button" id="pickfiles">上传图片</div>
+                                <p>（支持jpg、jpeg、png格式；建议尺寸大小: ）</p>
+                                <img src="<%= vip.headimgurl %>" alt="" id="headimgurl">
+                            </div>
+                            <div class="fluid blue ui button" id="create">保存修改</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    
+    <% include ./inc_gotop.html %>
+
+    <script type="text/javascript" src="/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/js/qiniu.js"></script>
+    
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/editVip" ></script>
+
+</body>
+</html>

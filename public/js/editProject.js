@@ -5,6 +5,9 @@
  */
 define(function(require, exports, module) {
 
+    var CONST = require('./const');
+    var QINIU_Bucket_Name = CONST.QINIU_Bucket_Name;
+
     // 加载HTML decode库
     require('../lib/he');
 
@@ -33,7 +36,7 @@ define(function(require, exports, module) {
         // uptoken : '<Your upload token>', //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
         unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
         // save_key: true,   // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
-        domain: 'http://xihumakertest.qiniudn.com/',
+        domain: 'http://' + QINIU_Bucket_Name + '.qiniudn.com/',
         container: 'pickfilesContainer',
         max_file_size: '4mb',
         flash_swf_url: '../plupload/Moxie.swf',

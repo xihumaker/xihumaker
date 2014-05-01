@@ -594,6 +594,84 @@ var UserModule = {
                 });
             }
         });
+    },
+
+    // 财富榜
+    richList: function(req, res) {
+        var num = req.params.num;
+        var query = User.find({
+
+        }, {
+            password: 0
+        }, {
+            limit: num
+        }).sort('-coin');
+
+        query.exec(function(err, docs) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10057,
+                    "msg": "服务器错误，查找财富榜失败"
+                });
+            }
+
+            res.json({
+                "r": 0,
+                "msg": "请求成功",
+                "users": docs
+            });
+        });
+    },
+
+    // 根据用户ID获取金币数排名
+    getCoinRankByUserId: function(req, res) {
+        var userId = req.params._id;
+
+        User.findOne({
+            _id: new ObjectId(userId)
+        }, {
+            password: 0
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10058,
+                    "msg": "服务器错误，获取用户金币数排名失败"
+                });
+                return;
+            }
+
+            var currentUser = doc;
+
+            var coin = currentUser.coin;
+            User.find({
+                coin: {
+                    $gt: coin
+                }
+            }, function(err, docs) {
+                if (err) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10058,
+                        "msg": "服务器错误，获取用户金币数排名失败"
+                    });
+                    return;
+                }
+
+                var len = docs.length;
+
+                res.json({
+                    "r": 0,
+                    "msg": "请求成功",
+                    "user": currentUser,
+                    "coinRank": len + 1
+                });
+                return;
+            });
+
+
+        })
     }
 
 

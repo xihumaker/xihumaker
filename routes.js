@@ -7,7 +7,11 @@ var project = require('./controllers/project');
 var like = require('./controllers/like');
 var concern = require('./controllers/concern');
 var comment = require('./controllers/comment');
+var vip = require('./controllers/vip');
+var vipLike = require('./controllers/vip_like');
 var admin = require('./controllers/admin');
+var activity = require('./controllers/activity');
+var activityPeople = require('./controllers/activity_people');
 
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
 
@@ -240,15 +244,44 @@ module.exports = function(app) {
     // 微信端 - 用户信息编辑
     app.get('/weixin/user/:_id/edit', user.userAuth, user.showEditUser);
     // 微信端 - 活动列表页
-    app.get('/weixin/events', function(req, res) {
-        res.render('weixin/events');
+    app.get('/weixin/activities', function(req, res) {
+        res.render('weixin/activities');
     });
-    // 微信端 - 新建项目
-    app.get('/weixin/newPro', user.userAuth, function(req, res) {
-        res.render('weixin/newPro');
-    });
+    // 微信端 - 活动详情页
+    app.get('/weixin/activity/:_id', activity.showActivity);
     // 微信端 - 项目详情页
     app.get('/weixin/project/:_id', project.getProjectById);
+    // 微信端 - 我发起的项目
+    app.get('/weixin/user/:_id/projects/sponsor', function(req, res) {
+        var _id = req.params._id;
+        res.render('weixin/sponsorProjects', {
+            userId: _id
+        });
+    });
+    // 微信端 - 我点赞的项目
+    app.get('/weixin/user/:_id/projects/like', function(req, res) {
+        var _id = req.params._id;
+        res.render('weixin/likeProjects', {
+            userId: _id
+        });
+    });
+    // 微信端 - 朋友 - 财富榜
+    app.get('/weixin/richList', function(req, res) {
+        var hasLogin = user.hasLogin(req);
+        res.render('weixin/richList', {
+            "hasLogin": hasLogin
+        });
+    });
+    // 微信端 - 朋友 - 会员秀
+    app.get('/weixin/vipShow', function(req, res) {
+        res.render('weixin/vipShow');
+    });
+    // 微信端 - 朋友 - 会员秀 - 会员详情页
+    app.get('/weixin/vip/:_id', vip.getVipInfoByid);
+    //  微信端 - 我报名的活动
+    app.get('/weixin/myActivities', user.userAuth, function(req, res) {
+        res.render('weixin/myActivities');
+    });
 
 
 
@@ -311,6 +344,38 @@ module.exports = function(app) {
     // 围观群众 - 查找该项目所有的评论
     app.get('/api/project/:_id/comments', comment.findCommentsByProjectId);
 
+
+    // 财富榜
+    app.get('/api/richList/:num', user.richList);
+    app.get('/api/user/:_id/coinRank', user.getCoinRankByUserId);
+
+    // 新建会员秀
+    app.post('/api/vip/create', admin.auth, vip.create);
+    // 编辑会员秀
+    app.put('/api/vip/:_id', admin.auth, vip.updateVipById);
+    // 删除会员秀
+    app.delete('/api/vip/:_id', admin.auth, vip.deleteVipById);
+    // 查找会员秀列表
+    app.get('/api/vips', vip.findVips);
+    // 会员秀 - 对某个会员秀发起赞
+    app.post('/api/vip/:_id/like', vipLike.create);
+
+
+    // 新建活动
+    app.post('/api/activity', admin.auth, activity.createActivity);
+    // 更新活动
+    app.put('/api/activity/:_id', admin.auth, activity.updateActivityById);
+    // 删除活动
+    app.delete('/api/activity/:_id', admin.auth, activity.deleteActivityById);
+    // 活动查询
+    app.get('/api/activity/search', activity.searchActivities);
+    // 活动报名
+    app.post('/api/activity/:_id/join', user.userAuth, activityPeople.joinActivity);
+    // 查找某个活动所有的报名用户
+    app.get('/api/activity/:_id/people', activityPeople.findAllPeoplesById);
+    // 查找某个用户报名的所有活动
+    app.get('/api/user/:_id/activities', activityPeople.findActivitiesByUserId);
+
     /**
      * 后台管理相关路由
      * ---------------------------------------------------------
@@ -343,10 +408,22 @@ module.exports = function(app) {
     app.get('/admin/activityManagement', admin.auth, function(req, res) {
         res.render('admin/activityManagement');
     });
+    // 会员秀管理页面
+    app.get('/admin/vipManagement', admin.auth, function(req, res) {
+        res.render('admin/vipManagement');
+    });
+    // 新建会员秀
+    app.get('/admin/createVip', admin.auth, function(req, res) {
+        res.render('admin/createVip');
+    });
+    // 编辑会员秀信息
+    app.get('/admin/vip/:_id/edit', admin.auth, vip.showEditVip);
     // 新建活动
     app.get('/admin/createActivity', admin.auth, function(req, res) {
         res.render('admin/createActivity');
     });
+    // 显示更新活动页面
+    app.get('/admin/activity/:_id/edit', admin.auth, activity.editActivity);
     // 后台管理设置页面
     app.get('/admin/settings', admin.auth, function(req, res) {
         res.render('admin/settings');
@@ -357,6 +434,8 @@ module.exports = function(app) {
     app.post('/admin/login', admin.login);
     // 导出用户信息到Excel
     app.get('/admin/exportToExcel', admin.exportToExcel);
+
+
 
 
     /**

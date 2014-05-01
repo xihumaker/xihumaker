@@ -15,7 +15,8 @@ define(function(require, exports, module) {
             'color': '#fff',
             'opacity': '0.75',
             'border-radius': '5px',
-            'font-size': '16px'
+            'font-size': '16px',
+            'z-index': '9999'
         });
         $('body').append($alert);
         $alert.css({

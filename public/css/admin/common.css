@@ -10,28 +10,12 @@ p {
     font-size: 14px;
     line-height: 22px;
 }
-.launch.button {
-    position: fixed;
-    top: 20%;
-    z-index: 500;
-    width: 70px;
-}
-.launch i {
-    margin-left: -15px;
-}
-.page.grid.mainpage {
-    padding-top: 65px;
-}
-.footer.list.link {
-    display: block;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-.bell.icon {
-    top: 50px;
-    position: fixed;
-    left: 10px;
-    cursor: pointer;
-    display: none;
+
+div.main {
+    padding: 60px 15px 0;
 }
 
+/*百度编辑器样式修改*/
+.edui-container,.edui-container .edui-toolbar {
+    box-shadow: none;
+}

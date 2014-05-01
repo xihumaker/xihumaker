@@ -20,7 +20,7 @@
 <body>
 
     <!-- 顶部导航菜单 -->
-    <div class="ui small fixed transparent teal inverted main menu" id="topmenu">
+    <div class="ui small fixed transparent green inverted main menu" id="topmenu">
         <div class="menu">
             <div class="ui dropdown item" id="industryDropdown">
                 <input type="hidden" name="industry" value="-1" id="industry">
@@ -46,13 +46,26 @@
                 <i class="dropdown icon"></i>
                 <div class="menu ui transition hidden">
                     <div class="item" data-value="-1">全部组别</div>
-                    <div class="item" data-value="2001">杭州电子科技大学</div>
-                    <div class="item" data-value="2002">中国计量学院</div>
+                    <div class="item" data-value="2001">杭电</div>
                     <div class="item" data-value="2003">杭州分舵</div>
                     <div class="item" data-value="2004">洛阳分舵</div>
+                    <div class="item" data-value="2005">浙江大学</div>
+                    <div class="item" data-value="2002">中国计量学院</div>
                 </div>
             </div>
-            <a href="/weixin/createProject" class="item right"><i class="add icon"></i>新建项目</a>
+
+            <div class="ui dropdown item right" id="moreDropdown">
+                <input type="hidden" name="more" value="" id="more">
+                <div class="text ellipsis">默认</div>
+                <i class="dropdown icon"></i>
+                <div class="menu ui transition hidden">
+                    <div class="item" data-value="3001">精华</div>
+                    <div class="item" data-value="3002">按热度排序</div>
+                    <div class="item" data-value="3003">按时间排序</div>
+                    <div class="item" data-value="3004">已完成项目</div>
+                </div>
+            </div>
+            
         </div>
     </div>
     <!-- end 顶部导航菜单 -->
@@ -65,15 +78,14 @@
         <div class="ui basic center aligned segment msgTip" id="msgTip">
             <h3 class="ui teal header" style="height: 300px;line-height: 300px;"></h3>
         </div>
-
-        
     </div>
 
-    <div class="ui fluid button loadMore" id="loadMore">加载更多</div>
+    <h5 class="ui center aligned teal header loadMore" id="loadMore">加载更多</h5>
 
     
-
-    <% include ./inc_footer_nav.html %>
+<!--
+    < include ./inc_footer_nav.html %>
+-->
 
     <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>

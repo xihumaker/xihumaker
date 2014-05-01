@@ -1,0 +1,38 @@
+<style type="text/css">
+    #loginModal {
+        top: 50px !important;
+    }
+</style>
+<script type="text/javascript" src="/lib/md5.js"></script>
+<!-- 登录框 -->
+<div class="modal fade" id="loginModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">登录</h4>
+            </div>
+        <div class="modal-body">
+            <p>您还未登录西湖创客汇，请先登录</p>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input type="email" class="form-control" id="username" placeholder="邮箱/手机号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="password" class="form-control" id="password" placeholder="密码">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-success" id="login">登录</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- end 登录框  -->
+

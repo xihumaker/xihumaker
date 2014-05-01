@@ -19,10 +19,14 @@
         "sub_button": [{
             "type": "view",
             "name": "活动",
-            "url": "http://xihumaker.jios.org/weixin/events"
+            "url": "http://xihumaker.jios.org/weixin/activities"
         }, {
             "type": "view",
-            "name": "创客微课程",
+            "name": "江湖救急",
+            "url": "http://xihumaker.jios.org/weixin/jianghujiuji"
+        }, {
+            "type": "view",
+            "name": "微课程",
             "url": "http://xihumaker.jios.org/weixin/weikecheng"
         }, {
             "type": "view",
@@ -34,15 +38,19 @@
         "sub_button": [{
             "type": "view",
             "name": "会员秀",
-            "url": "http://xihumaker.jios.org/weixin/userCenter"
+            "url": "http://xihumaker.jios.org/weixin/vipShow"
+        }, {
+            "type": "view",
+            "name": "财富榜",
+            "url": "http://xihumaker.jios.org/weixin/richList"
         }, {
             "type": "view",
             "name": "北斗社区",
             "url": "http://wsq.qq.com/reflow/183897913?from=message&isappinstalled=0"
         }, {
             "type": "view",
-            "name": "登录",
-            "url": "http://xihumaker.jios.org/weixin/login"
+            "name": "我",
+            "url": "http://xihumaker.jios.org/weixin/userCenter"
         }]
     }]
 }

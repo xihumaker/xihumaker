@@ -5,7 +5,7 @@ define(function(require, exports, module) {
     var href = window.location.href;
     if (/index/.test(href)) {
         $('#footernav #index').addClass('active');
-    } else if (/projects/.test(href)) {
+    } else if (/projects/.test(href) || /gaibianshijie/.test(href)) {
         $('#footernav #projects').addClass('active');
     } else if (/events/.test(href)) {
         $('#footernav #events').addClass('active');

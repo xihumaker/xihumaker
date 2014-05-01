@@ -56,17 +56,12 @@
                         <div class="ui form">
 
                             <div class="ui fluid input" style="margin-bottom: 15px;">
-                                <input type="text" placeholder="活动主题：不超过25个字">
+                                <input type="text" placeholder="活动主题：不超过25个字" id="topic">
                             </div>
                         
                             <div class="inline field">
                                 <!--style给定宽度可以影响编辑器的最终宽度-->
                                 <script type="text/plain" id="myEditor" style="width:100%;height:240px;"></script>
-                            </div>
-                        
-                            <div class="inline field">
-                                <label style="margin-bottom: 10px;">注意事项：</label>
-                                <textarea></textarea>
                             </div>
                         </div>
                     </div>
@@ -79,29 +74,48 @@
 
                             <div class="inline field">
                                 <label for="">活动日期：</label>
-                                <input type="date">
+                                <input type="date" id="activityDate">
                             </div>
                             <div class="inline field">
                                 <label for="">集合时间：</label>
-                                <input type="time" style="width:224px;">
+                                <input type="time" id="meetingTime" style="width:224px;">
                             </div>
                             <div class="inline field">
                                 <label for="">发&nbsp;&nbsp;起&nbsp;&nbsp;人：</label>
-                                <input type="text">
+                                <input type="text" id="organizer">
                             </div>
                             <div class="inline field">
                                 <label for="">活动城市：</label>
-                                <input type="text">
+                                <div class="ui selection dropdown item" id="cityDropdown">
+                                    <input type="hidden" name="city" value="" id="city">
+                                    <div class="text ellipsis">请选择</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu ui transition hidden">
+                                        <div class="item" data-value="4001">杭州</div>
+                                        <div class="item" data-value="4002">宁波</div>
+                                        <div class="item" data-value="4003">洛阳</div>
+                                        <div class="item" data-value="4004">南昌</div>
+                                        <div class="item" data-value="4005">深圳</div>
+                                        <div class="item" data-value="4006">温州</div>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="inline field">
                                 <label for="">活动地点：</label>
-                                <input type="text">
+                                <input type="text" id="location">
                             </div>
                             <div class="inline field">
                                 <label for="">活动名额：</label>
-                                <input type="text">
+                                <input type="text" id="limit">
                             </div>
-                            <div class="fluid blue ui button">确定新建</div>
+                            <div class="inline field" id="pickfilesContainer">
+                                <label for="">活动封面：</label>
+                                <div class="ui button" id="pickfiles">上传图片</div>
+                                <p>（支持jpg、jpeg、png格式；建议尺寸大小: ）</p>
+                                <img src="" alt="" id="coverUrl">
+                            </div>
+                            <div class="fluid blue ui button" id="createBtn">确定新建</div>
                         </div>
                     </div>
                 </div>
@@ -113,8 +127,11 @@
 
     
     <% include ./inc_gotop.html %>
+
+    <script type="text/javascript" src="/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/js/qiniu.js"></script>
     
-    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/activityManagement" ></script>
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/createActivity" ></script>
 
 </body>
 </html>

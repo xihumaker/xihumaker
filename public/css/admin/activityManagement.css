@@ -16,3 +16,6 @@ div.main {
 	display: none;
 	padding: 8px 0px !important;
 }
+table .ui.button {
+	margin-right: 5px;
+}

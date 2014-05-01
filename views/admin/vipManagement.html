@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会员秀管理 - 西湖创客汇</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="/semantic/packaged/css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/vipManagement.css">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+
+    <script src="/lib/jquery.js"></script>
+    <script src="/semantic/packaged/javascript/semantic.js"></script>
+</head>
+<body>
+
+    <% include ./inc_topmenu.html %>
+
+        <div class="main">
+
+            <div class="ui basic segment" style="margin: 0;padding: 0;height:42px;">
+                <div class="ui large breadcrumb">
+                    <a class="section">西湖创客汇</a>
+                    <div class="divider"> / </div>
+                    <a class="active section">会员秀管理</a>
+                </div>
+                <a class="ui blue right floated button" href="/admin/createVip" target="_blank">新建会员秀</a>
+            </div>
+
+            <table class="ui celled table segment">
+                <thead>
+                    <tr>
+                        <th>行号</th>
+                        <th>姓名</th>
+                        <th>头像</th>
+                        <th>标题</th>
+                        <th>赞</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="vipList"></tbody>
+                <!-- <tfoot>
+                    <tr>
+                        <th colspan="8" style="padding:0;">
+                            <div class="ui center aligned small teal header loadMore" id="loadMore">加载更多</div>
+                        </th>
+                    </tr>
+                </tfoot> -->
+            </table>
+
+        </div>
+
+    
+    <% include ./inc_gotop.html %>
+    
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/vipManagement" ></script>
+
+</body>
+</html>

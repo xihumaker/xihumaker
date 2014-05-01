@@ -8,36 +8,6 @@ define(function(require, exports, module) {
     var $loadMore = $('#loadMore');
     var $loading = $('#loading');
 
-    // 时间格式转换
-    function convertDate(date) {
-        var ONE_MINUTE_MILLISECONDS = 1 * 60 * 1000,
-            ONE_HOUR_MILLISECONDS = ONE_MINUTE_MILLISECONDS * 60,
-            ONE_DAY_MILLISECONDS = ONE_HOUR_MILLISECONDS * 24;
-
-        var currentMilliseconds = (new Date()).getTime(),
-            difference = currentMilliseconds - date;
-
-        if (difference < ONE_MINUTE_MILLISECONDS) {
-            return parseInt(difference / 1000) + "秒前";
-        }
-        for (var i = 1; i < 60; i++) {
-            if (difference < ONE_MINUTE_MILLISECONDS * i) {
-                return i + "分钟前";
-            }
-        }
-        for (var j = 1; j < 24; j++) {
-            if (difference < ONE_HOUR_MILLISECONDS * j) {
-                return j + "小时前";
-            }
-        }
-        for (var k = 1; k < 30; k++) {
-            if (difference < ONE_DAY_MILLISECONDS * k) {
-                return k + "天前";
-            }
-        }
-        return (new Date(date)).toLocaleDateString();
-    }
-
     /**
      * @method searchProjects
      * 项目查询
@@ -75,7 +45,7 @@ define(function(require, exports, module) {
                             '</div>' +
                             '<h4 class="ui black header title">' + project.title + '</h4>' +
                             '<div>' +
-                            '<div class="team">' +
+                            '<div class="misc">' +
                             '<span class="teamName">' + project.teamName + '</span>' +
                             '<span class="ui green small label localProgress" style="">' + localProgress + '</span>' +
                             '</div>' +
@@ -119,9 +89,10 @@ define(function(require, exports, module) {
             if (len === 0) {
                 $msgTip.find('.header').html('项目为空');
                 $msgTip.show();
+            } else if (len < searchConfig.pageSize) {
+                searchConfig.createTime = projectList[len - 1].createTime;
             } else if (len === searchConfig.pageSize) {
-                $loadMore.show();
-                $loadMore.html('加载更多');
+                $loadMore.html('加载更多').show();
                 searchConfig.createTime = projectList[len - 1].createTime;
             }
         } else {
@@ -138,6 +109,12 @@ define(function(require, exports, module) {
                 searchConfig.industry = value;
             } else if (this.id === 'groupDropdown') {
                 searchConfig.group = value;
+            } else if (this.id === "moreDropdown") {
+                if (value === 3004) { // 已完成项目
+                    searchConfig.progress = 100;
+                } else if (value === 3003) { // 按时间排序
+
+                }
             }
 
             $('.project').remove();
@@ -156,9 +133,10 @@ define(function(require, exports, module) {
                     if (len === 0) {
                         $msgTip.find('.header').html('查询结果为空');
                         $msgTip.show();
+                    } else if (len < searchConfig.pageSize) {
+                        searchConfig.createTime = projectList[len - 1].createTime;
                     } else if (len === searchConfig.pageSize) {
-                        $loadMore.show();
-                        $loadMore.html('加载更多');
+                        $loadMore.html('加载更多').show();
                         searchConfig.createTime = projectList[len - 1].createTime;
                     }
                 } else {
@@ -169,6 +147,7 @@ define(function(require, exports, module) {
         }
     });
 
+    // 点击加载更多
     $loadMore.click(function() {
         $loadMore.html('正在加载...');
         searchProjects(searchConfig, function(data) {
@@ -189,6 +168,34 @@ define(function(require, exports, module) {
                 alert(data.msg);
             }
         });
+    });
+
+    // 滚动到页面底部时自动加载
+    $(window).scroll(function() {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight == scrollHeight) {
+            $loadMore.html('正在加载...');
+            searchProjects(searchConfig, function(data) {
+                if (data.r == 0) {
+                    var projectList = data.projectList;
+                    var len = projectList.length;
+
+                    if (len === 0) {
+                        $loadMore.html('无更多项目');
+                    } else if (len < searchConfig.pageSize) {
+                        $loadMore.html('无更多项目');
+                        searchConfig.createTime = projectList[len - 1].createTime;
+                    } else if (len === searchConfig.pageSize) {
+                        $loadMore.html('加载更多');
+                        searchConfig.createTime = projectList[len - 1].createTime;
+                    }
+                } else {
+                    alert(data.msg);
+                }
+            });
+        }
     });
 
 
