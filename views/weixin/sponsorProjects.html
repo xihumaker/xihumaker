@@ -20,8 +20,24 @@
     <script type="text/javascript">
         var userId = "<%= userId %>"
     </script>
+    <style type="text/css">
+        body {
+            padding-bottom: 0;
+        }
+        #projectList {
+            padding-top: 40px;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- 顶部导航菜单 -->
+    <div class="ui small fixed transparent green inverted main menu" id="topmenu">
+        <div class="menu">
+            <div class="item center aligned">我发起的项目</div>
+        </div>
+    </div>
+    <!-- end 顶部导航菜单 -->
 
     <div class="ui active inverted dimmer" id="loading">
         <div class="ui medium text loader">Loading</div>

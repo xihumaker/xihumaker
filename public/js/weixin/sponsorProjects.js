@@ -40,7 +40,7 @@ define(function(require, exports, module) {
                             '</div>' +
                             '<h4 class="ui black header title">' + project.title + '</h4>' +
                             '<div>' +
-                            '<div class="team">' +
+                            '<div class="misc">' +
                             '<span class="teamName">' + project.teamName + '</span>' +
                             '<span class="ui green small label localProgress" style="">' + localProgress + '</span>' +
                             '</div>' +
