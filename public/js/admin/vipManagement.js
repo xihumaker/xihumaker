@@ -20,6 +20,9 @@ define(function(require, exports, module) {
                 var len = vips.length;
                 var vip;
                 var temp;
+                if (len === 0) {
+                    $vipList.append($('<tr><td colspan="9"><div class="ui center aligned teal header" style="padding: 100px 0;">列表为空</div></td></tr>'));
+                }
                 for (var i = 0; i < len; i++) {
                     vip = vips[i];
                     temp = '<tr>' +
