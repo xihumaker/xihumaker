@@ -43,8 +43,8 @@ define(function(require, exports, module) {
                             '<td>' + activity.totalNum + '/' + activity.limit + '</td>' +
                             '<td>' +
                             '<div class="ui tiny red button" data-content="删除" data-variation="inverted"><i class="trash icon"></i>删除</div>' +
-                            '<div class="ui tiny button" data-content="编辑" data-variation="inverted"><i class="edit icon"></i>编辑</div>' +
-                            '<div class="ui tiny button" data-content="查看" data-variation="inverted"><i class="camera icon"></i>查看</div>' +
+                            '<a href="/admin/activity/' + activity._id + '/edit" target="_blank" class="ui tiny button" data-content="编辑" data-variation="inverted"><i class="edit icon"></i>编辑</a>' +
+                            '<a href="/weixin/activity/' + activity._id + '" target="_blank" class="ui tiny button" data-content="查看" data-variation="inverted"><i class="camera icon"></i>查看</a>' +
                             '</td>' +
                             '</tr>';
 

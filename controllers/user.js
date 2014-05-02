@@ -672,6 +672,18 @@ var UserModule = {
 
 
         })
+    },
+
+    /**
+     * @method showMyActivities
+     * 显示我报名的活动页面
+     */
+    showMyActivities: function(req, res) {
+        var userId = UserModule.getUserId(req);
+
+        res.render('weixin/myActivities', {
+            userId: userId
+        });
     }
 
 

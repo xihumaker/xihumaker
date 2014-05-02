@@ -86,7 +86,7 @@ define(function(require, exports, module) {
         }
     });
 
-    // 报名
+    // 活动 - 报名
     $signupBtn.click(function(e) {
         $.ajax({
             url: '/api/activity/' + activity._id + '/join',
@@ -113,10 +113,28 @@ define(function(require, exports, module) {
         });
     });
 
-
-
+    // 活动 - 赞
     $likeBtn.click(function(e) {
-        iAlert('赞');
+        $.ajax({
+            url: '/api/activity/' + activity._id + '/like',
+            type: 'POST',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    iAlert('赞成功');
+                    $('#likeNum').html(++activity.likeNum);
+                } else {
+                    iAlert(data.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+
+
+
     });
 
 

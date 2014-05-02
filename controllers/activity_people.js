@@ -145,13 +145,30 @@ module.exports = {
             belongToUserId: userId
         }, function(err, docs) {
             if (err) {
-
+                logger.error(err);
+                res.json({
+                    "r": 1,
+                    "errcode": 10087,
+                    "msg": "服务器错误，根据用户ID查询报名的所有活动失败"
+                });
+                return;
             }
 
-            res.json({
-                'r': 0,
-                'msg': '请求成功',
-                'activities': docs
+            var activityIdList = []; // 保存所有报名的活动ID
+            for (var i = 0; i < docs.length; i++) {
+                activityIdList.push(docs[i].belongToActivityId);
+            }
+
+            Activity.find({
+                "_id": {
+                    $in: activityIdList
+                }
+            }, function(err, docs) {
+                res.json({
+                    'r': 0,
+                    'msg': '请求成功',
+                    'activities': docs
+                });
             });
         });
     }

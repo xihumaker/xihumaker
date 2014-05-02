@@ -60,15 +60,15 @@
             <div class="panel-body">
                 <h5>活动日期：<%= activity.activityDate %></h5>
                 <h5>集合时间：<%= activity.meetingTime %></h5>
-                <h5>城市：<span id="city"></span></h5>
-                <h5>地点：<%= activity.location %></h5>
-                <h5>发起人：<%= activity.organizer %></h5>
+                <h5>活动城市：<span id="city"></span></h5>
+                <h5>活动地点：<%= activity.location %></h5>
+                
                 <% if(activity.limit === 0) { %>
                     <h5>人数限制：不限</h5>
                 <% } else { %>
                     <h5>人数限制：<%= activity.limit %>人</h5>
                 <% } %>
-                
+                <h5>发起人：<%= activity.organizer %></h5>
             </div>
 
             <div class="panel-heading">
@@ -78,12 +78,12 @@
                 <!-- 用户已经登录 -->
                 <% if(hasLogin) { %>
                     <button type="button" class="btn btn-danger" style="margin-right: 25px;" id="likeBtn">
-                        <i class="glyphicon glyphicon-heart"></i> 赞 <span><%= activity.likeNum %></span>
+                        <i class="glyphicon glyphicon-heart"></i> 赞 <span id="likeNum"><%= activity.likeNum %></span>
                     </button>
                 <!-- 用户未登录 -->
                 <% } else { %>
                     <button type="button" class="btn btn-danger notLogin" style="margin-right: 25px;">
-                        <i class="glyphicon glyphicon-heart"></i> 赞 <span id=""><%= activity.likeNum %></span>
+                        <i class="glyphicon glyphicon-heart"></i> 赞 <span><%= activity.likeNum %></span>
                     </button>
                 <% } %>
                 
@@ -115,16 +115,14 @@
 
                 <% if(activity.limit === 0) { %>
                     <p>
-                        <span>已报名：<%= activity.totalNum %>人</span>
-                        <span id="limit">名额：不限</span>
+                        <span>已报名：<%= activity.totalNum %> / 不限</span>
                     </p>
                     <div class="progress">
                         <div class="progress-bar progress-bar-success" role="progressbar" style="width: 50%"></div>
                     </div>
                 <% } else { %>
                     <p>
-                        <span>已报名：<%= activity.totalNum %>人</span>
-                        <span id="limit">名额：<%= activity.limit %></span>
+                        <span>已报名：<%= activity.totalNum %> / <%= activity.limit %></span>
                     </p>
                     <div class="progress">
                         <div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= activity.totalNum * 100 / activity.limit %>%"></div>

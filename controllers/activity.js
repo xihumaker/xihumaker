@@ -360,7 +360,36 @@ var ActivityModule = {
      * 显示更新活动页面
      */
     editActivity: function(req, res) {
+        var activityId = req.params._id;
 
+        Activity.findOne({
+            _id: new ObjectId(activityId)
+        }, function(err, doc) {
+            if (err) {
+                logger.error(err);
+                res.render('weixin/editActivity', {
+                    "r": 1,
+                    "errcode": 10083,
+                    "msg": "服务器错误，查找活动详情失败"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                res.render('admin/editActivity', {
+                    "r": 0,
+                    "msg": "请求成功",
+                    "activity": doc
+                });
+                return;
+            } else {
+                res.render('admin/editActivity', {
+                    "r": 1,
+                    "errcode": 10090,
+                    "msg": "活动不存在"
+                });
+            }
+        });
     }
 
 

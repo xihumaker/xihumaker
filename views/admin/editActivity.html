@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= activity.topic %> - 西湖创客汇</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="/semantic/packaged/css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="/umeditor/themes/default/css/umeditor.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/createActivity.css">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+
+    <script src="/lib/jquery.js"></script>
+    <script src="/semantic/packaged/javascript/semantic.js"></script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/umeditor/umeditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/umeditor/umeditor.min.js"></script>
+    <!-- 语言包文件 -->
+    <script type="text/javascript" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
+    
+    <script type="text/javascript">
+        var r = <%= r %>;
+        var msg = "<%= msg %>";
+        var activity = {
+            _id: "<%= activity._id %>",
+            activityDate: "<%= activity.activityDate %>",
+            meetingTime: "<%= activity.meetingTime %>",
+            topic: "<%= activity.topic %>",
+            organizer: "<%= activity.organizer %>",
+            city: <%= activity.city %>,
+            location: "<%= activity.location %>",
+            limit: <%= activity.limit %>,
+            description: "<%= activity.description %>",
+            likeNum: <%= activity.likeNum %>,
+            totalNum: <%= activity.totalNum %>,
+            score: <%= activity.score %>,
+            coverUrl: "<%= activity.coverUrl %>",
+            createTime: <%= activity.createTime %>,
+            updateTime: <%= activity.updateTime %>
+        };
+    </script>
+</head>
+<body>
+
+    <% include ./inc_topmenu.html %>
+
+        <div class="main">
+
+            <div class="ui basic segment" style="margin: 0;padding: 0;height:42px;">
+                <div class="ui large breadcrumb">
+                    <a class="section">西湖创客汇</a>
+                    <div class="divider"> / </div>
+                    <a class="section">活动管理</a>
+                    <div class="divider"> / </div>
+                    <a class="active section">编辑活动</a>
+
+                </div>
+            </div>
+
+            <div class="ui grid">
+                <div class="eleven wide column">
+                    <div class="ui basic segment">
+                        <div class="ui form">
+
+                            <div class="ui fluid input" style="margin-bottom: 15px;">
+                                <input type="text" value="<%= activity.topic %>" placeholder="活动主题：不超过25个字" id="topic">
+                            </div>
+                        
+                            <div class="inline field">
+                                <!--style给定宽度可以影响编辑器的最终宽度-->
+                                <script type="text/plain" id="myEditor" style="width:100%;height:240px;"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="five wide column" style="padding-left: 0;">
+                    <div class="ui basic segment" style="padding-left: 0;">
+                        
+                        <div class="ui form">
+
+                            <div class="inline field">
+                                <label for="">活动日期：</label>
+                                <input type="date" id="activityDate">
+                            </div>
+                            <div class="inline field">
+                                <label for="">集合时间：</label>
+                                <input type="time" id="meetingTime" style="width:224px;">
+                            </div>
+                            <div class="inline field">
+                                <label for="">发&nbsp;&nbsp;起&nbsp;&nbsp;人：</label>
+                                <input type="text" id="organizer" value="<%= activity.organizer %>">
+                            </div>
+                            <div class="inline field">
+                                <label for="">活动城市：</label>
+                                <div class="ui selection dropdown item" id="cityDropdown">
+                                    <input type="hidden" name="city" value="<%= activity.city %>" id="city">
+                                    <div class="text ellipsis">请选择</div>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu ui transition hidden">
+                                        <div class="item" data-value="4001">杭州</div>
+                                        <div class="item" data-value="4002">宁波</div>
+                                        <div class="item" data-value="4003">洛阳</div>
+                                        <div class="item" data-value="4004">南昌</div>
+                                        <div class="item" data-value="4005">深圳</div>
+                                        <div class="item" data-value="4006">温州</div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="inline field">
+                                <label for="">活动地点：</label>
+                                <input type="text" id="location" value="<%= activity.location %>">
+                            </div>
+                            <div class="inline field">
+                                <label for="">活动名额：</label>
+                                <input type="text" id="limit" value="<%= activity.limit %>">
+                            </div>
+                            <div class="inline field" id="pickfilesContainer">
+                                <label for="">活动封面：</label>
+                                <div class="ui button" id="pickfiles">上传图片</div>
+                                <p>（支持jpg、jpeg、png格式；建议尺寸大小: ）</p>
+                                <img src="<%= activity.coverUrl %>" width="100%" alt="" id="coverUrl">
+                            </div>
+                            <div class="fluid blue ui button" id="createBtn">保存修改</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    
+    <% include ./inc_gotop.html %>
+
+    <script type="text/javascript" src="/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/js/qiniu.js"></script>
+    
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/editActivity" ></script>
+
+</body>
+</html>

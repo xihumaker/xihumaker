@@ -46,7 +46,7 @@ define(function(require, exports, module) {
                             '<h4 class="ui black header title">' + activity.topic + '</h4>' +
                             '<div>' +
                             '<div class="misc">' +
-                            '<span style="margin-right: 10px;">' + activity.activityDate + '</span>' +
+                            '<span style="margin-right: 15px;">' + activity.activityDate + '</span>' +
                             '<span>发起人：' + activity.organizer + '</span>' +
                             '<span class="ui green small label city" style="">' + CITY_LIST[activity.city] + '</span>' +
                             '</div>' +
@@ -92,7 +92,7 @@ define(function(require, exports, module) {
             len = activities.length;
         $loading.hide();
         if (len === 0) {
-            $msgTip.find('.header').html('活动为空');
+            $msgTip.find('.header').html('活动列表为空');
             $msgTip.show();
         } else if (len < searchConfig.pageSize) {
             searchConfig.pageStart = searchConfig.pageStart + len;

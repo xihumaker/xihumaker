@@ -12,6 +12,8 @@ var vipLike = require('./controllers/vip_like');
 var admin = require('./controllers/admin');
 var activity = require('./controllers/activity');
 var activityPeople = require('./controllers/activity_people');
+var activityLike = require('./controllers/activity_like');
+
 
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
 
@@ -279,9 +281,7 @@ module.exports = function(app) {
     // 微信端 - 朋友 - 会员秀 - 会员详情页
     app.get('/weixin/vip/:_id', vip.getVipInfoByid);
     //  微信端 - 我报名的活动
-    app.get('/weixin/myActivities', user.userAuth, function(req, res) {
-        res.render('weixin/myActivities');
-    });
+    app.get('/weixin/myActivities', user.userAuth, user.showMyActivities);
 
 
 
@@ -375,6 +375,11 @@ module.exports = function(app) {
     app.get('/api/activity/:_id/people', activityPeople.findAllPeoplesById);
     // 查找某个用户报名的所有活动
     app.get('/api/user/:_id/activities', activityPeople.findActivitiesByUserId);
+    // 活动 - 赞
+    app.post('/api/activity/:_id/like', activityLike.likeActivity);
+
+
+
 
     /**
      * 后台管理相关路由
