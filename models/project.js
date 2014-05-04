@@ -10,8 +10,6 @@ var mongoose = require('mongoose'),
  * authorId     项目创始人ID
  * createTime   项目启动日期
  * updateTime   项目最近更新时间
- * members      项目组成员列表（用户ID）
- * waitingList  等待项目创始人审核的成员列表
  * coverUrl     项目封面图片地址
  * teamName     项目队名
  * teamProfile  团队一句话简介

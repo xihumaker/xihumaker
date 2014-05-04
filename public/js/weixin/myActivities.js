@@ -28,6 +28,7 @@ define(function(require, exports, module) {
 
                     if (len === 0) {
                         $('#msgTip').show();
+                        $('#topmenu').hide();
                     }
 
                     for (var i = 0; i < len; i++) {

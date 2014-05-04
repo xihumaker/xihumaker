@@ -33,8 +33,6 @@
                 teamProfile: "<%= project.teamProfile %>",
                 teamName: "<%= project.teamName %>",
                 coverUrl: "<%= project.coverUrl %>",
-                waitingList: "<%= project.waitingList %>" || [],
-                members: "<%= project.members %>",
                 updateTime: <%= project.updateTime %>,
                 createTime: <%= project.createTime %>,
                 group: <%= project.group %>,
@@ -51,9 +49,9 @@
     <div class="container">
         <h3 id="title" class="text-center"><%= project.title %></h3>
         <p>
-            <span>启动：<%= project.localCreateTime %></span>
-            <span id="group"><%= project.localGroup %></span>
-            <span id="industry"><%= project.localIndustry %></span>  
+            启动：<span id="createTime"></span>
+            <span id="group"></span>
+            <span id="industry"></span>  
         </p>
         <% if(project.coverUrl) { %>
             <img src="<%= project.coverUrl %>" width="100%">
@@ -65,10 +63,9 @@
                 <h3 class="panel-title">进度</h3>
             </div>
             <div class="panel-body">
-                <span style="float: left;padding: 0 15px 0 0;"><%= project.localProgress %></span>
+                <span style="float: left;padding: 0 15px 0 0;" id="progress"></span>
                 <div class="progress">
                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= project.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= project.progress %>%">
-                        <span class="sr-only">40% Complete (success)</span>
                     </div>
                 </div>
             </div>
@@ -93,7 +90,7 @@
                     <% } %>
                 <!-- 用户未登录 -->
                 <% } else { %>
-                    <button type="button" class="btn btn-primary btn-block loginBtn" style="margin-bottom:10px;">加入团队</button>
+                    <button type="button" class="btn btn-primary btn-block loginBtn" style="margin-bottom:10px;">加入项目</button>
                 <% } %>
                 
                 <div id="members"></div>
@@ -113,6 +110,11 @@
                         <button type="button" title="赞" class="btn btn-primary likeBtn" id="like"><i class="glyphicon glyphicon-heart"></i> <span id="likeLabel">赞</span><span id="likeNum"><%= project.likeNum %></span></button>
                         <button type="button" title="关注" class="btn btn-primary concernBtn" id="concern"><i class="glyphicon glyphicon-star"></i> <span id="concernLabel">关注</span><span id="concernNum"><%= project.concernNum %></span></button>
                         <button type="button" class="btn btn-danger develop"><i class="glyphicon glyphicon-usd"></i> 金币<%= project.coinNum %></button>
+                    </div>
+                <!-- 当前用户创建的项目 -->
+                <% } else { %>
+                    <div class="panel-body text-center support">
+                        <button type="button" title="赞" class="btn btn-primary likeBtn" id="like"><i class="glyphicon glyphicon-heart"></i> <span id="likeLabel">赞</span><span id="likeNum"><%= project.likeNum %></span></button>
                     </div>
                 <% } %>
             <!-- 用户未登录 -->
@@ -144,44 +146,7 @@
         </div>
     </div>
     
-    <!-- 登录框 -->
-    <div class="modal" id="loginModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">登录</h4>
-                </div>
-            <div class="modal-body">
-                <p>您还未登录西湖创客汇，请先登录</p>
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">用户名</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="username" placeholder="邮箱/手机号">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="col-sm-2 control-label">密码</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" placeholder="密码">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="alert alert-warning hide" id="alertWarning"></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-success" id="login">登录</button>
-            </div>
-            </div>
-        </div>
-    </div>
-    <!-- end 登录框  -->
+    <% include ./inc_login_modal.html %>
 
     
 

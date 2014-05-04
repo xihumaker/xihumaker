@@ -4,9 +4,10 @@ var config = require('./config');
 var api = require('./controllers/api');
 var user = require('./controllers/user');
 var project = require('./controllers/project');
-var like = require('./controllers/like');
-var concern = require('./controllers/concern');
-var comment = require('./controllers/comment');
+var projectPeople = require('./controllers/project_people');
+var projectLike = require('./controllers/project_like');
+var projectConcern = require('./controllers/project_concern');
+var projectComment = require('./controllers/project_comment');
 var vip = require('./controllers/vip');
 var vipLike = require('./controllers/vip_like');
 var admin = require('./controllers/admin');
@@ -70,11 +71,11 @@ module.exports = function(app) {
      */
     // Web端 - 网站首页
     app.get('/', function(req, res) {
-        if (user.hasLogin(req)) { // 有userId说明用户已经登录
+        if (user.hasLogin(req)) {
             res.render('index', {
                 hasLogin: true
             });
-        } else { // 没有userId说明用户没有登录
+        } else {
             res.render('index', {
                 hasLogin: false
             });
@@ -252,7 +253,7 @@ module.exports = function(app) {
     // 微信端 - 活动详情页
     app.get('/weixin/activity/:_id', activity.showActivity);
     // 微信端 - 项目详情页
-    app.get('/weixin/project/:_id', project.getProjectById);
+    app.get('/weixin/project/:_id', project.showProject);
     // 微信端 - 我发起的项目
     app.get('/weixin/user/:_id/projects/sponsor', function(req, res) {
         var _id = req.params._id;
@@ -260,10 +261,17 @@ module.exports = function(app) {
             userId: _id
         });
     });
-    // 微信端 - 我点赞的项目
-    app.get('/weixin/user/:_id/projects/like', function(req, res) {
+    // 微信端 - 我参与的项目
+    app.get('/weixin/user/:_id/projects/take', function(req, res) {
         var _id = req.params._id;
-        res.render('weixin/likeProjects', {
+        res.render('weixin/takeProjects', {
+            userId: _id
+        });
+    });
+    // 微信端 - 我关注的项目
+    app.get('/weixin/user/:_id/projects/concern', function(req, res) {
+        var _id = req.params._id;
+        res.render('weixin/concernProjects', {
             userId: _id
         });
     });
@@ -316,33 +324,38 @@ module.exports = function(app) {
     // 更新项目
     app.put('/api/project/:_id', user.userAuth, project.findProjectByIdAndUpdate);
     // 加入项目
-    app.post('/api/project/:_id/join', user.userAuth, project.joinProjectById);
+    app.post('/api/project/:_id/join', user.userAuth2, projectPeople.joinProject);
     // 退出项目
-    app.post('/api/project/:_id/quit', user.userAuth, project.quitProjectById);
+    app.post('/api/project/:_id/quit', user.userAuth2, projectPeople.quitProject);
     // 项目搜索
     app.get('/api/projects/search', project.searchProjects);
     // 删除项目
     app.delete('/api/project/:_id', project.findProjectByIdAndRemove);
     app.get('/api/projects/key', project.searchProjectsByKey);
 
-    // 赞
-    app.post('/api/project/:_id/like', like.create);
-    // 取消赞
-    app.delete('/api/project/:_id/like', like.deleteLike);
-    // 查找某个用户发起的赞
-    app.get('/api/user/:_id/likes', like.findLikesByUserId);
+    // 项目 - 查找某个项目的所有成员
+    app.get('/api/project/:_id/peoples', projectPeople.findAllPeoplesByProjectId);
+    // 项目 - 查找某个用户参加的所有项目
+    app.get('/api/user/:_id/projects/take', projectPeople.findProjectsByUserId);
 
-    // 关注
-    app.post('/api/project/:_id/concern', concern.create);
-    // 取消关注
-    app.delete('/api/project/:_id/concern', concern.deleteConcern);
-    // 查找某个用户关注的项目
-    app.get('/api/user/:_id/concerns', concern.findConcernsByUserId);
+    // 项目 - 赞
+    app.post('/api/project/:_id/like', user.userAuth2, projectLike.likeProject);
+    // 项目 - 取消赞
+    app.post('/api/project/:_id/unlike', user.userAuth2, projectLike.unlikeProject);
+    // 项目 - 查询某个用户赞过的所有项目
+    app.get('/api/user/:_id/projects/like', projectLike.findProjectsByUserId);
 
-    // 围观群众 - 发言
-    app.post('/api/project/:_id/comment', comment.create);
-    // 围观群众 - 查找该项目所有的评论
-    app.get('/api/project/:_id/comments', comment.findCommentsByProjectId);
+    // 项目 - 关注
+    app.post('/api/project/:_id/concern', user.userAuth2, projectConcern.concernProject);
+    // 项目 - 取消关注
+    app.post('/api/project/:_id/unconcern', user.userAuth2, projectConcern.unconcernProject);
+    // 项目 - 查找某个用户关注的项目
+    app.get('/api/user/:_id/projects/concern', projectConcern.findProjectsByUserId);
+
+    // 项目 - 评论
+    app.post('/api/project/:_id/comment', user.userAuth2, projectComment.commentProject);
+    // 项目 - 查找该项目所有的评论
+    app.get('/api/project/:_id/comments', projectComment.findAllCommentsByProjectId);
 
 
     // 财富榜

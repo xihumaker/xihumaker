@@ -1,5 +1,5 @@
 /**
- * 我发起的项目
+ * 我关注的项目
  */
 define(function(require, exports, module) {
 
@@ -11,25 +11,27 @@ define(function(require, exports, module) {
     var $topmenu = $('#topmenu');
 
     $.ajax({
-        url: '/api/user/' + userId + '/projects',
+        url: '/api/user/' + userId + '/projects/concern',
         type: 'GET',
         timeout: 15000,
         success: function(data, textStatus, jqXHR) {
             console.log(data);
             if (data.r === 0) {
-                var projectList = data.projectList;
-                var len = projectList.length;
-                var project;
-                var temp;
-                var localProgress;
-                // 用户还未创建任何项目
+                var projects = data.projects,
+                    len = projects.length,
+                    project,
+                    temp,
+                    localProgress;
+
                 $loading.hide();
+
+                // 用户还未创建任何项目
                 if (len === 0) {
                     $msgTip.show();
                     $topmenu.hide();
                 } else {
                     for (var i = 0; i < len; i++) {
-                        project = projectList[i];
+                        project = projects[i];
                         localProgress = common.convertProgress(project.progress);
 
                         if (project.coverUrl == '') {
@@ -60,8 +62,6 @@ define(function(require, exports, module) {
                         $projectList.append($(temp));
                     }
                 }
-            } else {
-
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

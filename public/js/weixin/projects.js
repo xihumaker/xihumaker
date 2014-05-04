@@ -113,7 +113,9 @@ define(function(require, exports, module) {
                 if (value === 3004) { // 已完成项目
                     searchConfig.progress = 100;
                 } else if (value === 3003) { // 按时间排序
-
+                    window.location.reload();
+                } else {
+                    window.location.reload();
                 }
             }
 

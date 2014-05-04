@@ -39,6 +39,24 @@ var UserModule = {
     },
 
     /**
+     * @method userAuth2
+     * 用户认证，主要用户一些Ajax请求
+     */
+    userAuth2: function(req, res, next) {
+        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+        if (userId) {
+            next();
+        } else {
+            res.json({
+                "r": 1,
+                "errcode": 10093,
+                "msg": "用户未登录"
+            });
+            return;
+        }
+    },
+
+    /**
      * @method userWebAuth
      * 用户认证
      */
