@@ -1688,3 +1688,6 @@
 [2014-05-02 20:28:58.344] [INFO] logger - 管理员已经登录
 [2014-05-02 20:32:09.743] [INFO] logger - 管理员已经登录
 [2014-05-02 20:32:10.628] [INFO] logger - 管理员已经登录
+[2014-05-02 20:35:11.008] [INFO] logger - Express server listening on port 80
+[2014-05-02 20:35:11.028] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-05-02 20:38:56.411] [INFO] logger - 管理员已经登录
