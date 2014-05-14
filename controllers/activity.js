@@ -5,6 +5,7 @@ var logger = require('../common/logger');
 // 加载相关模型
 var Activity = require('../models/activity');
 var ActivityPeople = require('../models/activity_people');
+var ActivityScore = require('../models/activity_score');
 
 // 加载相关控制器
 var user = require('./user');
@@ -13,17 +14,19 @@ var ActivityModule = {
 
     /**
      * @method createActivity
-     * 新建活动
+     * 活动 - 新建活动
      */
     createActivity: function(req, res) {
         var body = req.body,
             activityDate = body.activityDate,
             meetingTime = body.meetingTime,
+            startTime = body.startTime,
+            endTime = body.endTime,
             topic = body.topic,
             organizer = body.organizer,
             city = body.city,
             location = body.location,
-            limit = body.limit,
+            limit = Number(body.limit) || 0, // 如果Number(body.limit)值为NoN，则名额使用默认值不限
             description = body.description,
             coverUrl = body.coverUrl;
 
@@ -48,6 +51,22 @@ var ActivityModule = {
                 "r": 1,
                 "errcode": 10074,
                 "msg": "集合时间不能为空"
+            });
+            return;
+        }
+        if (!startTime) {
+            res.json({
+                "r": 1,
+                "errcode": 10114,
+                "msg": "开始时间不能为空"
+            });
+            return;
+        }
+        if (!endTime) {
+            res.json({
+                "r": 1,
+                "errcode": 10115,
+                "msg": "结束时间不能为空"
             });
             return;
         }
@@ -79,6 +98,8 @@ var ActivityModule = {
         var activity = new Activity({
             activityDate: activityDate,
             meetingTime: meetingTime,
+            startTime: startTime,
+            endTime: endTime,
             topic: topic,
             organizer: organizer,
             city: city,
@@ -111,7 +132,7 @@ var ActivityModule = {
 
     /**
      * @method updateActivityById
-     * 更新活动
+     * 活动 - 更新活动
      */
     updateActivityById: function(req, res) {
         var _id = req.params._id;
@@ -119,15 +140,15 @@ var ActivityModule = {
         var body = req.body,
             activityDate = body.activityDate,
             meetingTime = body.meetingTime,
+            startTime = body.startTime,
+            endTime = body.endTime,
             topic = body.topic,
             organizer = body.organizer,
             city = body.city,
             location = body.location,
-            limit = body.limit,
+            limit = Number(body.limit) || 0, // 如果Number(body.limit)值为NoN，则名额使用默认值不限
             description = body.description,
             coverUrl = body.coverUrl;
-
-        console.log(body);
 
         if (!topic) {
             res.json({
@@ -150,6 +171,22 @@ var ActivityModule = {
                 "r": 1,
                 "errcode": 10074,
                 "msg": "集合时间不能为空"
+            });
+            return;
+        }
+        if (!startTime) {
+            res.json({
+                "r": 1,
+                "errcode": 10114,
+                "msg": "开始时间不能为空"
+            });
+            return;
+        }
+        if (!endTime) {
+            res.json({
+                "r": 1,
+                "errcode": 10115,
+                "msg": "结束时间不能为空"
             });
             return;
         }
@@ -180,15 +217,17 @@ var ActivityModule = {
 
         Activity.findByIdAndUpdate(_id, {
             $set: {
-                topic: body.topic,
-                activityDate: body.activityDate,
-                meetingTime: body.meetingTime,
-                organizer: body.organizer,
-                city: body.city,
-                location: body.location,
-                limit: body.limit,
-                description: body.description,
-                coverUrl: body.coverUrl,
+                topic: topic,
+                activityDate: activityDate,
+                meetingTime: meetingTime,
+                startTime: startTime,
+                endTime: endTime,
+                organizer: organizer,
+                city: city,
+                location: location,
+                limit: limit,
+                description: description,
+                coverUrl: coverUrl,
                 updateTime: Date.now()
             }
         }, function(err, doc) {
@@ -267,46 +306,55 @@ var ActivityModule = {
      */
     showActivity: function(req, res) {
         var _id = req.params._id,
-            hasLogin = false,
-            hasJoin = false,
-            userId = null,
-            activityStatus = 1; // 1 报名中,2 报名人数已满, 3 活动结束
+            hasLogin = false, // 是否登录
+            hasJoin = false, // 是否报名活动
+            hasCheckIn = false, // 是否已评分并签到
+            userId = null, // 用户Id
+            activityStatus = 1; // 1 报名中,2 报名人数已满, 3 活动结束, 4 签到中, 5 进行中
+
+        var errFun = function(err) {
+            if (err) {
+                logger.error(err);
+                res.render('weixin/activityInfo', {
+                    "r": 1,
+                    "errcode": 10083,
+                    "msg": "服务器错误，查找活动详情失败",
+                    "hasLogin": hasLogin,
+                    "hasJoin": hasJoin,
+                    "hasCheckIn": hasCheckIn,
+                    "userId": userId,
+                    "activityStatus": activityStatus
+                });
+                return;
+            }
+        };
 
         var localFun = function() {
             Activity.findOne({
                 _id: new ObjectId(_id)
             }, function(err, doc) {
-                if (err) {
-                    logger.error(err);
-                    res.render('weixin/activityInfo', {
-                        "r": 1,
-                        "errcode": 10083,
-                        "msg": "服务器错误，查找活动详情失败",
-                        "hasLogin": hasLogin,
-                        "hasJoin": hasJoin,
-                        "userId": userId,
-                        "activityStatus": activityStatus
-                    });
-                    return;
-                }
+                errFun(err);
 
-                var now = Date.now();
-                var time = (new Date(doc.activityDate + ' ' + doc.meetingTime)).getTime();
+                var nowPoint = Date.now();
+                var startTimePoint = (new Date(doc.activityDate + ' ' + doc.startTime)).getTime(); // 开始时间点
+                var endTimePoint = (new Date(doc.activityDate + ' ' + doc.endTime)).getTime(); // 结束时间点
+                var meetingTimePoint = (new Date(doc.activityDate + ' ' + doc.meetingTime)).getTime(); // 集合时间点
 
-                // 报名中：     当前时间 < 集合时间 && 已报名人数 < 限额
-                // 报名人数已满：当前时间 < 集合时间 && 已报名人数 >= 限额
-                // 活动结束：   当前时间 >= 集合时间
-                if (now >= time) {
-                    activityStatus = 3; // 活动报名结束
+                if (nowPoint > endTimePoint) {
+                    activityStatus = 3; // 活动结束
+                } else if (nowPoint > startTimePoint && nowPoint <= endTimePoint) {
+                    activityStatus = 5; // 进行中
+                } else if (nowPoint > meetingTimePoint && nowPoint <= startTimePoint) {
+                    activityStatus = 4; // 签到中
                 } else {
                     if (doc.limit !== 0) { // 人数有限制
                         if (doc.totalNum < doc.limit) {
-                            activityStatus = 1;
+                            activityStatus = 1; // 报名中
                         } else {
-                            activityStatus = 2;
+                            activityStatus = 2; // 报名人数已满
                         }
                     } else { // 人数不限
-                        activityStatus = 1;
+                        activityStatus = 1; // 报名中
                     }
                 }
 
@@ -316,6 +364,7 @@ var ActivityModule = {
                     "activity": doc,
                     "hasLogin": hasLogin,
                     "hasJoin": hasJoin,
+                    "hasCheckIn": hasCheckIn,
                     "userId": userId,
                     "activityStatus": activityStatus
                 });
@@ -331,23 +380,25 @@ var ActivityModule = {
                 belongToActivityId: _id,
                 belongToUserId: userId
             }, function(err, doc) {
-                if (err) {
-                    logger.error(err);
-                    res.render('weixin/activityInfo', {
-                        "r": 1,
-                        "errcode": 10083,
-                        "msg": "服务器错误，查找活动详情失败",
-                        "hasLogin": hasLogin,
-                        "hasJoin": hasJoin,
-                        "userId": userId,
-                        "activityStatus": activityStatus
-                    });
-                    return;
-                }
-                // 用户已报名
+                errFun(err);
+
+                // doc不为空，说明用户已报名该活动
                 if ( !! doc) {
                     hasJoin = true;
+                    // 判断用户是否已评分并签到
+                    ActivityScore.findOne({
+                        belongToUserId: userId,
+                        belongToActivityId: _id
+                    }, function(err, doc) {
+                        errFun(err);
+
+                        // doc不为空，说明用户已评分并签到
+                        if ( !! doc) {
+                            hasCheckIn = true;
+                        }
+                    });
                 }
+
                 localFun();
             });
         } else { // 用户未登录
@@ -367,7 +418,7 @@ var ActivityModule = {
         }, function(err, doc) {
             if (err) {
                 logger.error(err);
-                res.render('weixin/editActivity', {
+                res.render('admin/editActivity', {
                     "r": 1,
                     "errcode": 10083,
                     "msg": "服务器错误，查找活动详情失败"

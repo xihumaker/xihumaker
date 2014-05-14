@@ -55,6 +55,8 @@
         <div class="panel panel-default">
             <% if(activity.coverUrl) { %>
                 <img src="<%= activity.coverUrl %>" id="coverUrl" width="100%">
+            <% } else { %>
+                <img src="/img/default_activity_cover.jpg" width="100%">
             <% } %>
             
             <div class="panel-body">
@@ -86,11 +88,17 @@
                         <i class="glyphicon glyphicon-heart"></i> 赞 <span><%= activity.likeNum %></span>
                     </button>
                 <% } %>
-                
-                <!-- 2 报名人数已满 -->
+
+                <!-- 3 活动结束 -->
                 <% if(activityStatus === 3) { %>
                     <button type="button" class="btn">活动结束</button>
-                <!-- 3 活动结束 -->
+                <!-- 5 进行中 -->
+                <% } else if(activityStatus === 5) { %>
+                    <button type="button" class="btn btn-success">进行中</button>
+                <!-- 4 签到中 -->
+                <% } else if(activityStatus === 4) { %>
+                    <button type="button" class="btn btn-success">签到中</button>
+                <!-- 2 报名人数已满 -->
                 <% } else if(activityStatus === 2) { %>
                     <button type="button" class="btn">报名人数已满</button>
                 <!-- 1 报名中 -->
@@ -109,6 +117,7 @@
                         <button type="button" class="btn btn-success notLogin">马上报名</button>
                     <% } %>
                 <% } %>
+                
             </div>
 
             <div class="panel-body">
@@ -137,6 +146,80 @@
                 <h3 class="panel-title">活动详情</h3>
             </div>
             <div class="panel-body" id="description"></div>
+
+            <div class="panel-heading">
+                <h3 class="panel-title">参与者评价本次活动（缺席者请勿签到）</h3>
+            </div>
+            <div class="panel-body">
+                <div class="star">
+                    <ul>
+                        <li><a href="javascript:;">1</a></li>
+                        <li><a href="javascript:;">2</a></li>
+                        <li><a href="javascript:;">3</a></li>
+                        <li><a href="javascript:;">4</a></li>
+                        <li><a href="javascript:;">5</a></li>
+                    </ul>
+                </div>
+
+                <!-- 用户已经登录 -->
+                <% if(hasLogin) { %>
+                    <!-- 3 活动结束 -->
+                    <% if(activityStatus === 3) { %>
+                        <button type="button" class="btn btn-success hasEnd" style="float:right;">评价并签到</button>
+                    <!-- 4 签到中 5 进行中 -->
+                    <% } else if(activityStatus === 4 || activityStatus === 5) { %>
+                        <!-- 用户已加入该活动 -->
+                        <% if(hasJoin) { %>
+                            <!-- 用户已签到 -->
+                            <% if(hasCheckIn) { %>
+                                <button type="button" class="btn btn-success" style="float:right;">已签到</button>
+                            <!-- 用户未签到 -->
+                            <% } else { %>
+                                <button type="button" class="btn btn-success" style="float:right;" id="commentAndCheckIn">评价并签到</button>
+                            <% } %>
+                        <!-- 用户未加入该活动 -->
+                        <% } else { %>
+                            <button type="button" class="btn btn-success notJoin" style="float:right;">评价并签到</button>
+                        <% } %>
+                    <% } else { %>
+                        <button type="button" class="btn btn-success notStart" style="float:right;">评价并签到</button>
+                    <% } %>
+                <!-- 用户未登录 -->
+                <% } else { %>
+                    <button type="button" class="btn btn-success notLogin" style="float:right;">评价并签到</button>
+                <% } %>
+                
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>报名：<%= activity.totalNum %></td>
+                            <td>实到：<%= activity.checkInNum %></td>
+                            <% if(activity.checkInNum === 0) { %>
+                                <td>平均分：0 </td>
+                            <% } else { %>
+                                <td>平均分：<%= String(activity.score / activity.checkInNum).slice(0, 3) || 0  %></td>
+                            <% } %>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="panel-heading">
+                <h3 class="panel-title">评论</h3>
+            </div>
+            <div class="panel-body">
+                <div id="commentList"></div>
+                <% if(hasLogin) { %>
+                    <textarea class="form-control" rows="3" style="margin: 10px 0;" id="content" placeholder="发表一个评论"></textarea>
+                    <button type="button" class="btn btn-success btn-block" id="addComment">发言</button>
+                <% } else { %>
+                    <p>你必须先登录才能发表评论。
+                        <a href="javascript:void(0);" class="notLogin">登录</a>
+                    </p>
+                <% } %>
+            </div>
+
 
         </div>
     </div>

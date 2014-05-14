@@ -14,6 +14,8 @@ var admin = require('./controllers/admin');
 var activity = require('./controllers/activity');
 var activityPeople = require('./controllers/activity_people');
 var activityLike = require('./controllers/activity_like');
+var activityComment = require('./controllers/activity_comment');
+var activityScore = require('./controllers/activity_score');
 
 
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
@@ -172,6 +174,10 @@ module.exports = function(app) {
     app.get('/weixin/register', function(req, res) {
         res.render('weixin/register');
     });
+    // 微信端 - 绑定微信页面
+    app.get('/weixin/bindWeixin', function(req, res) {
+        res.render('weixin/bindWeixin');
+    });
     // 微信端
     // article/0 - 什么是创客？
     // article/1 - 西湖创客汇简介&理事会及联系方式
@@ -327,8 +333,10 @@ module.exports = function(app) {
     app.post('/api/project/:_id/join', user.userAuth2, projectPeople.joinProject);
     // 退出项目
     app.post('/api/project/:_id/quit', user.userAuth2, projectPeople.quitProject);
-    // 项目搜索
+    // 项目搜索 旧
     app.get('/api/projects/search', project.searchProjects);
+    // 项目搜索 新
+    app.get('/api/projects/find', project.findProjects);
     // 删除项目
     app.delete('/api/project/:_id', project.findProjectByIdAndRemove);
     app.get('/api/projects/key', project.searchProjectsByKey);
@@ -357,6 +365,9 @@ module.exports = function(app) {
     // 项目 - 查找该项目所有的评论
     app.get('/api/project/:_id/comments', projectComment.findAllCommentsByProjectId);
 
+    // 项目 - 设置项目级别，1-普通；2-创新；3-精华
+    app.post('/api/project/:_id/level', project.updateProjectLevel);
+
 
     // 财富榜
     app.get('/api/richList/:num', user.richList);
@@ -374,24 +385,28 @@ module.exports = function(app) {
     app.post('/api/vip/:_id/like', vipLike.create);
 
 
-    // 新建活动
-    app.post('/api/activity', admin.auth, activity.createActivity);
-    // 更新活动
-    app.put('/api/activity/:_id', admin.auth, activity.updateActivityById);
+    // 活动 - 新建活动
+    app.post('/api/activity', admin.auth2, activity.createActivity);
+    // 活动 - 更新活动
+    app.put('/api/activity/:_id', admin.auth2, activity.updateActivityById);
     // 删除活动
     app.delete('/api/activity/:_id', admin.auth, activity.deleteActivityById);
     // 活动查询
     app.get('/api/activity/search', activity.searchActivities);
-    // 活动报名
-    app.post('/api/activity/:_id/join', user.userAuth, activityPeople.joinActivity);
+    // 活动 - 活动报名
+    app.post('/api/activity/:_id/join', user.userAuth2, activityPeople.joinActivity);
     // 查找某个活动所有的报名用户
     app.get('/api/activity/:_id/people', activityPeople.findAllPeoplesById);
     // 查找某个用户报名的所有活动
     app.get('/api/user/:_id/activities', activityPeople.findActivitiesByUserId);
     // 活动 - 赞
     app.post('/api/activity/:_id/like', activityLike.likeActivity);
-
-
+    // 活动 - 评论
+    app.post('/api/activity/:_id/comment', user.userAuth2, activityComment.commentActivity);
+    // 活动 - 查找该活动所有的评论
+    app.get('/api/activity/:_id/comments', activityComment.findAllCommentsByActivityId);
+    // 活动 - 签到并评分
+    app.post('/api/activity/:_id/score', user.userAuth2, activityScore.scoreActivity);
 
 
     /**
@@ -452,8 +467,6 @@ module.exports = function(app) {
     app.post('/admin/login', admin.login);
     // 导出用户信息到Excel
     app.get('/admin/exportToExcel', admin.exportToExcel);
-
-
 
 
     /**

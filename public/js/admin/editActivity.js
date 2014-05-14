@@ -85,6 +85,8 @@ define(function(require, exports, module) {
     var $topic = $('#topic'); // 活动主题输入框
     var $activityDate = $('#activityDate'); // 活动日期
     var $meetingTime = $('#meetingTime'); // 集合时间
+    var $startTime = $('#startTime'); // 开始时间
+    var $endTime = $('#endTime'); // 结束时间
     var $organizer = $('#organizer'); // 发起人
     var $city = $('#city'); // 城市
     var $location = $('#location'); // 地点
@@ -95,11 +97,15 @@ define(function(require, exports, module) {
     // 设置活动日期与集合时间默认值
     $activityDate.val(activity.activityDate);
     $meetingTime.val(activity.meetingTime);
+    $startTime.val(activity.startTime);
+    $endTime.val(activity.endTime);
 
     $createBtn.click(function(e) {
         var topic = $topic.val().trim(),
             activityDate = $activityDate.val(),
             meetingTime = $meetingTime.val(),
+            startTime = $startTime.val(),
+            endTime = $endTime.val(),
             organizer = $organizer.val().trim(),
             city = $city.val().trim(),
             location = $location.val().trim(),
@@ -117,6 +123,14 @@ define(function(require, exports, module) {
         }
         if (!meetingTime) {
             iAlert('集合时间不能为空');
+            return;
+        }
+        if (!startTime) {
+            iAlert('开始时间不能为空');
+            return;
+        }
+        if (!endTime) {
+            iAlert('结束时间不能为空');
             return;
         }
         if (!organizer) {
@@ -138,6 +152,8 @@ define(function(require, exports, module) {
             data: {
                 activityDate: activityDate,
                 meetingTime: meetingTime,
+                startTime: startTime,
+                endTime: endTime,
                 topic: topic,
                 organizer: organizer,
                 city: city,
@@ -165,10 +181,7 @@ define(function(require, exports, module) {
 
     // 搜索条件改变时
     $('.ui.dropdown').dropdown({
-        on: 'click',
-        onChange: function(value, text) {
-
-        }
+        on: 'click'
     });
 
 

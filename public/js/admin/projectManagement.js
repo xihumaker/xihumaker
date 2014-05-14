@@ -1,8 +1,41 @@
 define(function(require, exports, module) {
 
+    var iAlert = require('../../angel/alert');
+
     var CONST = require("../const");
     var INDUSTRY_LIST = CONST.INDUSTRY_LIST;
     var GROUP_LIST = CONST.GROUP_LIST;
+
+    function updateProjectLevel(projectId, level) {
+        $.ajax({
+            url: '/api/project/' + projectId + '/level',
+            type: 'POST',
+            data: {
+                level: level
+            },
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    iAlert('修改成功');
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    function addDropdownEvent() {
+        $('.ui.dropdown').dropdown({
+            on: 'click',
+            onChange: function(value, text) {
+                var projectId = $(this).parents('tr').attr('data-id');
+                updateProjectLevel(projectId, value);
+            }
+        })
+    }
 
     /**
      * @method searchProjects
@@ -34,8 +67,8 @@ define(function(require, exports, module) {
                             '<td>' + project.title + '</td>' +
                             '<td>' + INDUSTRY_LIST[project.industry] + '</td>' +
                             '<td>' + GROUP_LIST[project.group] + '</td>' +
-                            '<td>' + project.authorId + '</td>' +
-                            '<td>' + project.members + '</td>' +
+                            '<td data-authorId="' + project.authorId + '"></td>' +
+                            '<td class="members"></td>' +
                             '<td>' + (new Date(project.createTime)).toLocaleString() + '</td>' +
                             '<td>' + project.teamName + '</td>' +
                             '<td>' + project.likeNum + '</td>' +
@@ -43,14 +76,26 @@ define(function(require, exports, module) {
                             '<td>' + project.coinNum + '</td>' +
                             '<td>' + project.progress + '</td>' +
                             '<td>' +
-                            '<div class="ui mini icon buttons">' +
-                            '<div class="ui red button delete" data-content="删除" data-variation="inverted"><i class="trash icon"></i></div>' +
-                            '<a class="ui button" data-content="查看" target="_blank" href="/project/' + project._id + '" data-variation="inverted"><i class="camera icon"></i></a>' +
+                            '<div class="ui blue top left pointing dropdown">' +
+                            '<input type="hidden" name="level" value="' + project.level + '" class="level">' +
+                            '<span class="text"></span>' +
+                            '<i class="dropdown icon"></i>' +
+                            '<div class="menu">' +
+                            '<div class="item" data-value="1">普通</div>' +
+                            '<div class="item" data-value="2">创新</div>' +
+                            '<div class="item" data-value="3">精华</div>' +
                             '</div>' +
+                            '</div>' +
+                            '</td>' +
+                            '<td>' +
+                            '<div class="ui mini red button delete" style="margin-right:5px;"><i class="trash icon"></i>删除</div>' +
+                            '<a class="ui mini button" target="_blank" href="/project/' + project._id + '"><i class="camera icon"></i>查看</a>' +
                             '</td>' +
                             '</tr>';
                         $('#projectList').append($(temp));
                     }
+
+                    addDropdownEvent();
                 }
                 // 查找成功不一致的逻辑写在回调函数里面
                 succCall(data);
@@ -81,8 +126,6 @@ define(function(require, exports, module) {
                 $loadMore.show();
                 searchConfig.createTime = projectList[len - 1].createTime;
             }
-        } else {
-
         }
     });
 
@@ -109,8 +152,7 @@ define(function(require, exports, module) {
         });
     });
 
-
-
+    // 删除
     $('#projectList').on('click', '.delete', function() {
         var self = this;
         var _id = $(this).parents('.project').attr('data-id');
@@ -138,6 +180,9 @@ define(function(require, exports, module) {
             return;
         }
     });
+
+
+
 
 
 });

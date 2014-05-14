@@ -46,7 +46,8 @@ module.exports = {
                     _id: new ObjectId(projectId)
                 }, {
                     $inc: {
-                        likeNum: 1
+                        likeNum: 1,
+                        rankScore: 1
                     }
                 }, function(err, doc) {
                     if (err) {
@@ -113,7 +114,8 @@ module.exports = {
                     _id: new ObjectId(projectId)
                 }, {
                     $inc: {
-                        likeNum: -1
+                        likeNum: -1,
+                        rankScore: -1
                     }
                 }, function(err, doc) {
                     if (err) {

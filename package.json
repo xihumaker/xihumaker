@@ -11,6 +11,6 @@
         "log4js": "*",
         "mongoose": "*",
         "validator": "*",
-        "weixin-apis": "0.0.4"
+        "weixin-apis": "0.0.5"
     }
 }

@@ -19,4 +19,4 @@ var ActivityLikeSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('ActivityLike', ActivityLikeSchema, 'ck_activitity_likes');
+module.exports = mongoose.model('ActivityLike', ActivityLikeSchema, 'ck_activity_likes');

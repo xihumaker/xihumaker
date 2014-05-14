@@ -9,7 +9,7 @@ module.exports = {
 
     /**
      * @method auth
-     * 验证管理员是否已经登录
+     * 验证管理员是否已经登录，主要用于页面请求
      */
     auth: function(req, res, next) {
         var adminId = req.signedCookies.admin && req.signedCookies.admin.adminId;
@@ -19,6 +19,25 @@ module.exports = {
         } else {
             logger.info("管理员未登录");
             res.render('admin/login');
+        }
+    },
+
+    /**
+     * @method auth2
+     * 验证管理员是否已经登录，主要用于Ajax请求
+     */
+    auth2: function(req, res, next) {
+        var adminId = req.signedCookies.admin && req.signedCookies.admin.adminId;
+        if (adminId) {
+            logger.info("管理员已经登录");
+            next();
+        } else {
+            logger.info("管理员未登录");
+            res.json({
+                "r": 1,
+                "errcode": "20001",
+                "msg": "管理员未登录"
+            });
         }
     },
 

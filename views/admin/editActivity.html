@@ -28,6 +28,8 @@
             _id: "<%= activity._id %>",
             activityDate: "<%= activity.activityDate %>",
             meetingTime: "<%= activity.meetingTime %>",
+            startTime: "<%= activity.startTime %>",
+            endTime: "<%= activity.endTime %>",
             topic: "<%= activity.topic %>",
             organizer: "<%= activity.organizer %>",
             city: <%= activity.city %>,
@@ -89,6 +91,14 @@
                             <div class="inline field">
                                 <label for="">集合时间：</label>
                                 <input type="time" id="meetingTime" style="width:224px;">
+                            </div>
+                            <div class="inline field">
+                                <label for="">开始时间：</label>
+                                <input type="time" id="startTime" style="width:224px;">
+                            </div>
+                            <div class="inline field">
+                                <label for="">结束时间：</label>
+                                <input type="time" id="endTime" style="width:224px;">
                             </div>
                             <div class="inline field">
                                 <label for="">发&nbsp;&nbsp;起&nbsp;&nbsp;人：</label>

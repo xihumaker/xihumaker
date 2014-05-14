@@ -9,13 +9,9 @@ module.exports = {
         var resMsg = {
             toUserName: data.fromUserName,
             fromUserName: data.toUserName,
-            msgType: 'music',
-            title: "西湖创客汇",
-            description: "西湖创客汇是浙江地区的创客空间，我们的主旨是 青年 | 创新 | 科技",
-            musicUrl: WEB_SERVER_IP + '/voice/welcome.mp3',
-            thumbMediaId: ''
+            msgType: 'text',
+            content: '谢谢你关注西湖创客汇，进步源于创造，欢迎参加创客活动，DIY美好生活。'
         };
-        console.log(resMsg);
         weixin.sendMsg(resMsg);
     },
 

@@ -33,7 +33,7 @@ module.exports = {
                 return;
             }
 
-            // 用户已报名了该活动
+            // doc不为空，说明用户已报名了该活动
             if ( !! doc) {
                 res.json({
                     "r": 1,
@@ -41,7 +41,7 @@ module.exports = {
                     "msg": "你已经报名该活动，不能重复报名"
                 });
                 return;
-            } else { // 用户未报名该活动
+            } else { // doc为空，说明用户还未报名该活动
                 // 活动表报名人数totalNum加1
                 Activity.findByIdAndUpdate({
                     _id: new ObjectId(activityId)

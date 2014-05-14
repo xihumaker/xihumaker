@@ -35,6 +35,7 @@ h5.ui.header .icon {
 }
 #topmenu, #footernav {
     z-index: 9999;
+    top: 0;
 }
 .ui.dropdown>.text {
     width: 55px;

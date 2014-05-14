@@ -8,6 +8,8 @@ var mongoose = require('mongoose'),
 /**
  * activityDate     活动日期
  * meetingTime      集合时间
+ * startTime        开始时间
+ * endTime          结束时间
  * topic            活动主题
  * organizer        发起人
  * city             城市
@@ -16,7 +18,8 @@ var mongoose = require('mongoose'),
  * description      详情 —— 图片+纯文本
  * likeNum          活动被赞的个数
  * totalNum         报名者人数
- * score            参与者评分（平均分）
+ * checkInNum       签到者人数
+ * score            参与者评分（总分）
  * coverUrl         活动封面图片地址
  * createTime       活动创建时间
  * updateTime       活动最后更新时间
@@ -24,6 +27,8 @@ var mongoose = require('mongoose'),
 var ActivitySchema = new Schema({
     activityDate: String,
     meetingTime: String,
+    startTime: String,
+    endTime: String,
     topic: String,
     organizer: String,
     city: String,
@@ -41,6 +46,10 @@ var ActivitySchema = new Schema({
         type: Number,
         default: 0
     },
+    checkInNum: {
+        type: Number,
+        default: 0
+    },
     score: {
         type: Number,
         default: 0
@@ -55,19 +64,5 @@ var ActivitySchema = new Schema({
         default: 0
     }
 });
-
-// db.ck_activities.find({
-//     "_id": {
-//         $in: [ObjectId("5360a4b7ab06dfa352000003"), ObjectId("5360a1cf76673f3a52000001")]
-//     }
-// });
-
-
-
-
-
-
-
-
 
 module.exports = mongoose.model('Activity', ActivitySchema, 'ck_activities');

@@ -10,3 +10,46 @@
 	margin: 8px 0;
 	color: #FF4500;
 }
+
+
+/*五星评分*/
+.star ul,li{
+	list-style:none;
+}
+.star {
+	height:40px;
+}
+.star ul{
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+.star li{
+	float:left;
+	width:30px;
+	height:30px;
+	text-indent:-9999px;
+	background:url('/img/star.png') no-repeat;
+	cursor:pointer;
+	margin-right: 2px;
+}
+.star li.on{
+	background-position:0 -37px;
+}
+.hidden{
+	display:none;
+}
+.parentCls {
+	width: 160px;
+	float: left;
+
+}
+/*end 五星评分*/
+
+table {
+	margin-bottom: 0 !important;
+	clear: both;
+}
+.table>tbody>tr>td {
+	border: none;
+}

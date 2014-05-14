@@ -6,11 +6,11 @@ body {
     padding-bottom: 20px;
 }
 #footernav .item {
-	padding-top: 8px;
-	padding-bottom: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 #footernav>.item>.icon {
-	margin: 0 auto .2em!important
+    margin: 0 auto .2em!important
 }
 
 
@@ -43,12 +43,19 @@ body {
     overflow: hidden;
     margin: 5px 0;
     font-size: 16px !important;
-    line-height: 17px !important;
+    line-height: 34px !important;
+}
+img.jinghua {
+    height: 30px !important;
+    width: 28px !important;
+    float: left !important;
+    padding-right: 5px !important;
 }
 .ui.items .item .misc {
     line-height: 20px;
     margin-bottom: 10px;
     color: gray;
+    height: 20px;
 }
 
 .ui.items .item .label {
@@ -123,6 +130,9 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+#topmenu {
+    top: 0;
 }
 
 

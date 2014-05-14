@@ -266,6 +266,58 @@ var ProjectModule = {
         }
     },
 
+
+    findProjects: function(req, res) {
+        var pageSize = req.query.pageSize || 12,
+            pageStart = req.query.pageStart || 0,
+            industry = req.query.industry || -1,
+            group = req.query.group || -1,
+            progress = req.query.progress,
+            level = req.query.level,
+            sortBy = req.query.sortBy || 1;
+
+        var query,
+            queryParams = {};
+
+        if (industry != -1) {
+            queryParams.industry = industry;
+        }
+        if (group != -1) {
+            queryParams.group = group;
+        }
+        if ( !! progress) {
+            queryParams.progress = progress;
+        }
+        if ( !! level) {
+            queryParams.level = level;
+        }
+
+        if (sortBy == 1) { // 按热度排序
+            console.log('按热度排序');
+            query = Project.find(queryParams).sort('-rankScore').limit(pageSize).skip(pageStart);
+        } else if (sortBy == 2) { // 按时间倒序排序
+            console.log('按时间倒序排序');
+            query = Project.find(queryParams).sort('-createTime').limit(pageSize).skip(pageStart);
+        }
+
+        query.exec(function(err, docs) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10025,
+                    "msg": "服务器错误，查找问题失败"
+                });
+                return;
+            }
+
+            res.json({
+                "r": 0,
+                "msg": "查找项目成功",
+                "projectList": docs
+            });
+        });
+    },
+
     /**
      * @method searchProjects
      * 项目高级搜索
@@ -276,6 +328,7 @@ var ProjectModule = {
         var group = req.param('group') || -1;
         var createTime = req.param('createTime');
         var progress = req.param('progress');
+        var level = req.param('level');
 
         var query;
         var queryParams = {};
@@ -294,10 +347,11 @@ var ProjectModule = {
         if ( !! progress) {
             queryParams.progress = progress;
         }
+        if ( !! level) {
+            queryParams.level = level;
+        }
 
         query = Project.find(queryParams).sort('-createTime').limit(pageSize);
-
-
 
         query.exec(function(err, docs) {
             if (err) {
@@ -632,8 +686,36 @@ var ProjectModule = {
                 });
             });
         });
-    }
+    },
 
+    /**
+     * @method updateProjectLevel
+     * 项目 - 设置项目级别，1-普通；2-创新；3-精华
+     */
+    updateProjectLevel: function(req, res) {
+        var projectId = req.params._id,
+            level = req.body.level;
+
+        Project.findByIdAndUpdate(projectId, {
+            $set: {
+                level: level
+            }
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10108,
+                    "msg": "服务器错误，更新项目级别失败"
+                });
+                return;
+            }
+
+            res.json({
+                "r": 0,
+                "msg": "更新成功"
+            });
+        });
+    }
 
 
 
