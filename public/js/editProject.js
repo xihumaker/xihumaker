@@ -5,6 +5,8 @@
  */
 define(function(require, exports, module) {
 
+    var iAlert = require('../angel/alert');
+
     var CONST = require('./const');
     var QINIU_Bucket_Name = CONST.QINIU_Bucket_Name;
 
@@ -95,9 +97,6 @@ define(function(require, exports, module) {
         }
     });
 
-    var $alert = $('.alert');
-    var $alertInfo = $('#alertInfo');
-
     var $title = $('#title');
     var $industry = $('#industry');
     var $group = $('#group');
@@ -119,23 +118,23 @@ define(function(require, exports, module) {
         var coverUrl = $coverUrl.attr('src');
 
         if (!title) {
-            alert('项目标题不能为空');
+            iAlert('项目标题不能为空');
             return;
         }
         if (title.length > 25) {
-            alert('项目标题不能超过25个字');
+            iAlert('项目标题不能超过25个字');
             return;
         }
         if (Number(industry) === -1) {
-            alert('行业选择不能为空');
+            iAlert('行业选择不能为空');
             return;
         }
         if (Number(group) === -1) {
-            alert('组别选择不能为空');
+            iAlert('组别选择不能为空');
             return;
         }
         if (!teamName) {
-            alert('项目队名不能为空');
+            iAlert('项目队名不能为空');
             return;
         }
         $saveBtn.html('正在保存...');
@@ -158,24 +157,103 @@ define(function(require, exports, module) {
             success: function(data, textStatus, jqXHR) {
                 console.log(data);
                 if (data.r === 0) {
-                    $alertInfo.html('保存成功');
-                    $alert.show();
+                    iAlert('保存成功');
                     $saveBtn.html('保存修改');
-                    setTimeout(function() {
-                        $alert.hide();
-                    }, 3000);
                 } else {
-                    alert(data.msg);
+                    iAlert(data.msg);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
 
             }
         });
-
-
-
     });
+
+
+    // 江湖告急相关代码
+    var $addOneTopic = $('#addOneTopic'),
+        $projectTopic = $('#projectTopic');
+
+    var $projectTopicList = $('#projectTopicList');
+
+    // 添加一个江湖告急
+    $addOneTopic.click(function(e) {
+        var content = $projectTopic.val().trim();
+
+        if (!content) {
+            iAlert('不能为空');
+            return;
+        }
+
+        $.ajax({
+            url: '/api/project/' + project._id + '/topic',
+            type: 'POST',
+            data: {
+                content: content
+            },
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    var topic = data.topic;
+                    iAlert('添加成功');
+                    $projectTopic.val('');
+                    var index = $projectTopicList.find('p').length;
+                    var temp = '<p data-id=' + topic._id + '>【' + (index + 1) + '】' + topic.content + '<a href="javascript:void(0);" class="deleteTopic">删除</a></p>';
+                    $projectTopicList.append($(temp));
+                } else {
+                    iAlert(data.msg);
+                }
+            }
+        });
+    });
+
+    // 查找项目的所有江湖告急
+    $.ajax({
+        url: '/api/project/' + project._id + '/topics',
+        type: 'get',
+        dataType: 'json',
+        timeout: 15000,
+        success: function(data, textStatus, jqXHR) {
+            console.log(data);
+            if (data.r === 0) {
+                var topics = data.topics,
+                    len = topics.length,
+                    topic,
+                    temp;
+                for (var i = 0; i < len; i++) {
+                    topic = topics[i];
+                    temp = '<p data-id=' + topic._id + '>【' + (i + 1) + '】' + topic.content + '<a href="javascript:void(0);" class="deleteTopic">删除</a></p>';
+                    $projectTopicList.append($(temp));
+                }
+            }
+        }
+    });
+
+    // 删除某条江湖告急
+    $projectTopicList.on('click', '.deleteTopic', function() {
+        var _this = this;
+        var projectTopicId = $(this).parent().attr('data-id');
+        var projectId = project._id;
+
+        $.ajax({
+            url: '/api/project/' + projectId + '/topic/' + projectTopicId,
+            type: 'delete',
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    iAlert('删除成功');
+                    $(_this).parent().remove();
+                }
+            }
+        });
+    });
+
+
+
 
 
 

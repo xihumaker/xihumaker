@@ -77,7 +77,7 @@ define(function(require, exports, module) {
     }
 
     var searchConfig = {
-        pageSize: 2,
+        pageSize: 5,
         pageStart: 0,
         industry: -1,
         group: -1,
@@ -108,7 +108,7 @@ define(function(require, exports, module) {
 
     // 搜索条件改变时
     $('.ui.dropdown').dropdown({
-        on: 'click',
+        on: 'hover',
         onChange: function(value, text) {
             searchConfig.pageStart = 0;
             searchConfig.sortBy = 1;

@@ -57,3 +57,7 @@ body {
 .project .misc {
 	margin-bottom: 0px;
 }
+/* end 项目列表通用样式*/
+.footer {
+	padding-bottom: 15px;
+}

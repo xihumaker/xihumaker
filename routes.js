@@ -8,6 +8,7 @@ var projectPeople = require('./controllers/project_people');
 var projectLike = require('./controllers/project_like');
 var projectConcern = require('./controllers/project_concern');
 var projectComment = require('./controllers/project_comment');
+var projectTopic = require('./controllers/project_topic');
 var vip = require('./controllers/vip');
 var vipLike = require('./controllers/vip_like');
 var admin = require('./controllers/admin');
@@ -296,6 +297,10 @@ module.exports = function(app) {
     app.get('/weixin/vip/:_id', vip.getVipInfoByid);
     //  微信端 - 我报名的活动
     app.get('/weixin/myActivities', user.userAuth, user.showMyActivities);
+    // 江湖告急
+    app.get('/weixin/jianghu', function(req, res) {
+        res.render('weixin/jianghu');
+    });
 
 
 
@@ -367,6 +372,18 @@ module.exports = function(app) {
 
     // 项目 - 设置项目级别，1-普通；2-创新；3-精华
     app.post('/api/project/:_id/level', project.updateProjectLevel);
+    // 项目 - 添加一条江湖告急
+    app.post('/api/project/:_id/topic', projectTopic.addOneTopic);
+    // 项目 - 删除一条江湖告急
+    app.delete('/api/project/:_id/topic/:tid', projectTopic.removeTopicById);
+    // 查找某个项目的所有江湖告急
+    app.get('/api/project/:_id/topics', projectTopic.findProjectTopics);
+    // 江湖告急 - 回复
+    app.post('/api/project/:_id/topic/:topicId', user.userAuth2, projectTopic.addOneTopicComment);
+    // 江湖救急 - 分页查询
+    app.get('/api/topics/find', projectTopic.findTopicsByPage);
+
+
 
 
     // 财富榜
@@ -391,7 +408,7 @@ module.exports = function(app) {
     app.put('/api/activity/:_id', admin.auth2, activity.updateActivityById);
     // 删除活动
     app.delete('/api/activity/:_id', admin.auth, activity.deleteActivityById);
-    // 活动查询
+    // 活动 - 活动查询
     app.get('/api/activity/search', activity.searchActivities);
     // 活动 - 活动报名
     app.post('/api/activity/:_id/join', user.userAuth2, activityPeople.joinActivity);

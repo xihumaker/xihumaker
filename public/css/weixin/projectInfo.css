@@ -34,8 +34,27 @@ img.jinghua {
 .col-md-2 {
     padding-right: 0px;
 }
-#commentList p {
+.commentList p {
     padding: 10px 0;
     margin: 0;
     border-bottom: 1px dashed #AAB2BD;
+}
+
+/*江湖告急*/
+#projectTopicList .topic {
+    padding: 5px 0px;
+    margin: 0;
+}
+#projectTopicList .topic p {
+    margin: 0;
+}
+#projectTopicList .topic textarea {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+#projectTopicList .topic .misc {
+    display: none;
+}
+.replay {
+    padding-left: 10px;
 }

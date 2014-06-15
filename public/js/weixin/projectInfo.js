@@ -95,7 +95,7 @@ define(function(require, exports, module) {
     });
 
     // 用户未登录时，点击赞、关注、金币、加入团队这些按钮，弹出登录框
-    $('.loginBtn').click(function() {
+    $('body').on('click', '.loginBtn', function() {
         $('#loginModal').modal('show');
     });
 
@@ -435,6 +435,108 @@ define(function(require, exports, module) {
             }
         });
     });
+
+
+    // 江湖告急相关代码
+    var $projectTopicList = $('#projectTopicList');
+
+    $.ajax({
+        url: '/api/project/' + project._id + '/topics',
+        type: 'get',
+        timeout: 15000,
+        success: function(data, textStatus, jqXHR) {
+            console.log(data);
+            if (data.r === 0) {
+                var topics = data.topics,
+                    len = topics.length,
+                    topic,
+                    temp,
+                    comments;
+                for (var i = 0; i < len; i++) {
+                    topic = topics[i];
+                    comments = topic.comments;
+
+                    if (hasLogin) {
+                        temp = '<div class="topic">' +
+                            '<p data-id="' + topic._id + '">【' + (i + 1) + '】' + topic.content + '<a href="javascript:void(0);" class="replay">回复</a></p>' +
+                            '<div class="commentList">';
+                    } else {
+                        temp = '<div class="topic">' +
+                            '<p data-id="' + topic._id + '">【' + (i + 1) + '】' + topic.content + '<a href="javascript:void(0);" class="loginBtn">回复</a></p>' +
+                            '<div class="commentList">';
+                    }
+
+
+
+                    for (var j = 0; j < comments.length; j++) {
+                        temp += '<p>' +
+                            '<img class="media-object img-rounded" width="20" style="float:left;margin-right:5px;" src="/img/default_avatar.png">' +
+                            '<span style="float: left;">' + comments[j].belongToUsername + '</span>：<span>' + comments[j].content + '</span></p>';
+                    }
+
+                    temp += '';
+
+                    temp += '</div><div class="misc">' +
+                        '<textarea class="form-control" rows="2"></textarea>' +
+                        '<button type="button" class="btn btn-default cancel" style="margin-right: 15px;">取消</button>' +
+                        '<button type="button" class="btn btn-success ok">回复</button>' +
+                        '</div>' +
+                        '</div>';
+
+
+                    $projectTopicList.append($(temp));
+                }
+            }
+        }
+    });
+
+    // 点击“回复”显示回复框
+    $('body').on('click', '.replay', function() {
+        $(this).parents('.topic').find('.misc').show()
+    });
+    // 点击“取消”隐藏回复框
+    $('body').on('click', '.cancel', function() {
+        $(this).parents('.topic').find('.misc').hide()
+    });
+    // 点击“回复”按钮
+    $('body').on('click', '.ok', function() {
+        var _this = this;
+        var topicId = $(this).parents('.topic').find('p[data-id]').attr('data-id');
+        var content = $(this).siblings('textarea').val();
+
+        if (!content) {
+            iAlert('回复不能为空');
+            return;
+        }
+
+        $.ajax({
+            url: '/api/project/' + project._id + '/topic/' + topicId,
+            type: 'post',
+            data: {
+                content: content
+            },
+            timeout: 15000,
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                if (data.r === 0) {
+                    iAlert('回复成功');
+                    $(_this).siblings('textarea').val('');
+                    var comment = data.comment;
+                    var temp = '<p>' +
+                        '<img class="media-object img-rounded" width="20" style="float:left;margin-right:5px;" src="/img/default_avatar.png">' +
+                        '<span style="float: left;">' + comment.belongToUsername + '</span>：<span>' + comment.content + '</span></p>';
+
+                    $(_this).parents('.topic').find('.commentList').append($(temp));
+                }
+            }
+        });
+
+
+    });
+
+
+
+
 
 
 

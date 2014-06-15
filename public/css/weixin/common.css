@@ -133,8 +133,7 @@ img.jinghua {
 }
 #topmenu {
     top: 0;
+    z-index: 9999;
 }
-
-
 
 

@@ -48,7 +48,10 @@
 
     <div class="container">
         <h3 id="title" class="text-center">
-            <img class="jinghua" src="/img/xunzhang.png" /><%= project.title %>
+            <% if(project.level === 3) { %>
+                <img class="jinghua" src="/img/xunzhang.png" />
+            <% } %>
+            <%= project.title %>
         </h3>
         <p>
             启动：<span id="createTime"></span>
@@ -128,12 +131,23 @@
                 </div>
             <% } %>
 
+
+            <div class="panel-heading">
+                <h3 class="panel-title">江湖告急</h3>
+            </div>
+            <div class="panel-body" id="projectTopicList">
+                
+
+
+            </div>
+
+
             <div class="panel-heading">
                 <h3 class="panel-title">围观群众</h3>
             </div>
             <div class="panel-body">
     
-                <div id="commentList"></div>
+                <div id="commentList" class="commentList"></div>
                 <% if(hasLogin) { %>
                     <textarea class="form-control" rows="3" style="margin: 10px 0;" id="content" placeholder="发表一个评论"></textarea>
                     <button type="button" class="btn btn-success btn-block" id="addComment">发言</button>

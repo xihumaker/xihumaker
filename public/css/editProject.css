@@ -15,3 +15,6 @@
 .alert {
 	display: none;
 }
+.deleteTopic {
+	padding-left: 10px;
+}
