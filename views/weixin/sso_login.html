@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="">
+    <meta name="viewport" content="width=device-width, user-scalable=0">
+    <title>登录 - 西湖创客汇</title>
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+    <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
+
+    <script type="text/javascript">
+        // 隐藏微信中网页右上角按钮
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        });
+    </script>
+
+</head>
+<body>
+
+    <div class="ui fluid form segment">
+      <h3 class="ui header">Log-in</h3>
+      <div class="field">
+        <label>Username</label>
+        <input placeholder="Username" type="text">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password">
+      </div>
+      <div class="ui blue submit button">Login</div>
+    </div>
+
+    <script type="text/javascript" src="/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="/lib/md5.js"></script>
+    <script type="text/javascript" src="/js/weixin/login.js"></script>
+    
+    
+</body>
+</html>

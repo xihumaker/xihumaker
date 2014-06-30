@@ -31,7 +31,7 @@ $(function() {
             $message.html('<i class="icon attention"></i>手机号不能为空').show();
             return;
         }
-        if (!/^(((13[0-9]{1})|159|180|181|186|189|(15[0-9]{1}))+\d{8})$/.test(phone)) {
+        if (!/^(1+\d{10})$/.test(phone)) {
             $message.html('<i class="icon attention"></i>请输入有效的手机号').show();
             return;
         }
@@ -59,20 +59,20 @@ $(function() {
         $register.html('正在注册...');
 
         $.ajax({
-            url: '/api/users',
+            url: '/api/register',
             type: 'POST',
             data: {
                 email: email,
                 phone: phone,
                 username: username,
-                password: hex_md5(password),
-                rePassword: hex_md5(rePassword)
+                password: hex_md5(password)
             },
             dataType: 'json',
             timeout: 15000,
             success: function(data, textStatus, jqXHR) {
+                console.log(data);
                 if (data.r === 0) {
-                    window.location.href = '/weixin/projects';
+                    window.location.href = '/weixin/registerSucc?userId=' + data.user._id;
                 } else {
                     $register.html('注册');
                     $message.html('<i class="icon attention"></i>' + data.msg).show();

@@ -24,14 +24,14 @@
             padding-bottom: 0;
         }
         #projectList {
-            padding-top: 40px;
+            padding-top: 0px;
         }
     </style>
 </head>
 <body>
 
     <!-- 顶部导航菜单 -->
-    <div class="ui small fixed transparent green inverted main menu" id="topmenu">
+    <div class="ui small transparent green inverted main menu" id="topmenu">
         <div class="menu">
             <div class="item center aligned">我发起的项目</div>
         </div>
@@ -45,13 +45,16 @@
     <div class="ui items" id="projectList">
         <div class="ui basic center aligned segment msgTip" id="msgTip">
             <h3 class="ui teal header" style="padding-top: 100px;">您还没有发起任何项目</h3>
-            <a class="ui fluid green button" href="/weixin/userCenter"><i class="reply mail icon"></i>返回</a>
+            <div class="ui buttons">
+                <a class="ui button" href="/weixin/userCenter"><i class="reply mail icon"></i>返回</a>
+                <div class="or"></div>
+                <a href="/weixin/projects" class="ui positive button">查看所有项目</a>
+            </div>
         </div>
     </div>
 
     <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>
-
     <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/weixin/sponsorProjects" ></script>
 
 </body>

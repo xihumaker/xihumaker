@@ -15,6 +15,8 @@ div.main {
 	cursor: pointer;
 	display: none;
 	padding: 8px 0px !important;
+	font-weight: normal;
+	font-style: normal;
 }
 table .ui.button {
 	margin-right: 5px;

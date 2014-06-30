@@ -1,25 +1,22 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
 var logger = require('../common/logger');
-// Modal
-var Project = require('../models/project');
 var ProjectComment = require('../models/project_comment');
 var User = require('../models/user');
-
-// Controller
-var user = require('./user');
+var auth = require('../policies/auth');
 
 module.exports = {
 
     /**
-     * @method commentProject
+     * @method addProjectComment
      * 项目 - 发表一个评论
      */
-    commentProject: function(req, res) {
-        var projectId = req.params._id,
-            userId = user.getUserId(req),
-            content = req.body.content;
+    addProjectComment: function(req, res) {
+        var projectId = req.params._id;
+        var userId = auth.getUserId(req, res);
+        var content = req.body.content;
 
         User.findOne({
             _id: new ObjectId(userId)

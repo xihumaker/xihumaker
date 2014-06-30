@@ -1,14 +1,11 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
 var logger = require('../common/logger');
-// Modal
 var Project = require('../models/project');
 var ProjectLike = require('../models/project_like');
-var User = require('../models/user');
-
-// Controller
-var user = require('./user');
+var auth = require('../policies/auth');
 
 module.exports = {
 
@@ -17,8 +14,8 @@ module.exports = {
      * 项目 - 赞
      */
     likeProject: function(req, res) {
-        var projectId = req.params._id,
-            userId = user.getUserId(req);
+        var userId = auth.getUserId(req, res);
+        var projectId = req.params._id;
 
         ProjectLike.findOne({
             belongToProjectId: projectId,
@@ -92,8 +89,8 @@ module.exports = {
      * 项目 - 取消赞
      */
     unlikeProject: function(req, res) {
-        var projectId = req.params._id,
-            userId = user.getUserId(req);
+        var userId = auth.getUserId(req, res);
+        var projectId = req.params._id;
 
         ProjectLike.findOneAndRemove({
             belongToProjectId: projectId,

@@ -1,21 +1,26 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
+var EventProxy = require('eventproxy');
 var logger = require('../common/logger');
 var VipLike = require('../models/vip_like');
 var Vip = require('../models/vip');
+var auth = require('../policies/auth');
 
+module.exports = {
 
-var VipLikeModule = {
-
-    // 会员秀 - 对某个会员秀发起赞
-    create: function(req, res) {
+    /**
+     * @method createVipLike
+     * 会员秀 - 赞
+     */
+    createVipLike: function(req, res) {
         var vipId = req.params._id;
-        var userId = req.body.userId;
+        var userId = auth.getUserId(req, res);
 
         VipLike.findOne({
-            belongToVipId: vipId,
-            belongToUserId: userId
+            belongToVipId: new ObjectId(vipId),
+            belongToUserId: new ObjectId(userId)
         }, function(err, doc) {
             if (err) {
                 logger.error(err);
@@ -35,52 +40,48 @@ var VipLikeModule = {
                 });
                 return;
             } else {
+
+                var ep = EventProxy.create("update", "new", function(updateVip, newVipLike) {
+                    if (updateVip && newVipLike) {
+                        res.json({
+                            "r": 0,
+                            "msg": "会员秀赞成功"
+                        });
+                    } else {
+                        res.json({
+                            "r": 1,
+                            "errcode": 10065,
+                            "msg": "服务器错误，会员秀赞失败"
+                        });
+                    }
+                });
+
                 Vip.findByIdAndUpdate(vipId, {
                     $inc: {
                         likeNum: 1
                     }
                 }, function(err, doc) {
                     if (err) {
-                        logger.error(err);
-                        res.json({
-                            "r": 1,
-                            "errcode": 10065,
-                            "msg": "服务器错误，会员秀赞失败"
-                        });
-                        return;
+                        ep.emit('update', false);
                     }
-
-                    var vipLike = new VipLike({
-                        belongToVipId: vipId,
-                        belongToUserId: userId,
-                        createTime: Date.now()
-                    });
-
-                    vipLike.save(function(err, doc) {
-                        if (err) {
-                            logger.error(err);
-                            res.json({
-                                "r": 1,
-                                "errcode": 10065,
-                                "msg": "服务器错误，会员秀赞失败"
-                            });
-                            return;
-                        } else {
-                            res.json({
-                                "r": 0,
-                                "msg": "会员秀赞成功"
-                            });
-                            return;
-                        }
-                    });
+                    ep.emit('update', true);
                 });
+
+                var vipLike = new VipLike({
+                    belongToVipId: vipId,
+                    belongToUserId: userId,
+                    createTime: Date.now()
+                });
+
+                vipLike.save(function(err, doc) {
+                    if (err) {
+                        ep.emit('new', false);
+                    }
+                    ep.emit('new', true);
+                });
+
             }
         });
-
     }
 
-
-
 };
-
-module.exports = VipLikeModule;

@@ -62,7 +62,6 @@ define(function(require, exports, module) {
                 console.log(sourceLink);
 
                 vip.headimgurl = sourceLink;
-                $('#headimgurl').attr('width', '50%');
                 $('#headimgurl').attr('src', sourceLink);
                 $('#pickfiles').html('修改图片');
             },

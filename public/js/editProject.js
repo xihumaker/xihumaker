@@ -3,8 +3,8 @@
  * @author wanggan
  * @email 244098979@qq.com
  */
-define(function(require, exports, module) {
-
+define(function(require) {
+    "use strict";
     var iAlert = require('../angel/alert');
 
     var CONST = require('./const');
@@ -24,11 +24,6 @@ define(function(require, exports, module) {
 
     $('#industry').val(project.industry);
     $('#group').val(project.group);
-
-    if ( !! project.coverUrl) { // 封面图片不为空
-        $('#coverUrl').attr('src', project.coverUrl);
-        $('#coverUrl').attr('width', '85%');
-    }
 
     // 项目封面图片的上传
     var uploader = Qiniu.uploader({
@@ -80,7 +75,7 @@ define(function(require, exports, module) {
             },
             'Error': function(up, err, errTip) {
                 //上传出错时,处理相关的事情
-                console.log(errTip)
+                console.log(errTip);
             },
             'UploadComplete': function() {
                 //队列文件处理完毕后,处理相关的事情

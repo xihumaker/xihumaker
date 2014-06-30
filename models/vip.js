@@ -31,5 +31,4 @@ var VipSchema = new Schema({
     }
 });
 
-//compile schema to model
 module.exports = mongoose.model('Vip', VipSchema, 'ck_vips');

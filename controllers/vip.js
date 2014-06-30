@@ -1,52 +1,57 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
 var logger = require('../common/logger');
 var Vip = require('../models/vip');
 var VipLike = require('../models/vip_like');
-var user = require('./user');
 
+function checkVip(req, res, vip) {
+    if (!vip.name) {
+        res.json({
+            "r": 1,
+            "errcode": 10060,
+            "msg": "会员姓名不能为空"
+        });
+        return false;
+    }
+    if (!vip.title) {
+        res.json({
+            "r": 1,
+            "errcode": 10061,
+            "msg": "会员秀标题不能为空"
+        });
+        return false;
+    }
+    if (!vip.headimgurl) {
+        res.json({
+            "r": 1,
+            "errcode": 10062,
+            "msg": "会员秀头像不能为空"
+        });
+        return false;
+    }
+    return true;
+}
 
-var VipModule = {
+module.exports = {
 
-    // 新建会员秀
-    create: function(req, res) {
+    /**
+     * @method createVip
+     * 新建会员秀
+     */
+    createVip: function(req, res) {
         var body = req.body;
-        var name = body.name;
-        var headimgurl = body.headimgurl;
-        var title = body.title;
-        var content = body.content;
 
-        if (!name) {
-            res.json({
-                "r": 1,
-                "errcode": 10060,
-                "msg": "会员姓名不能为空"
-            });
-            return;
-        }
-        if (!title) {
-            res.json({
-                "r": 1,
-                "errcode": 10061,
-                "msg": "会员秀标题不能为空"
-            });
-            return;
-        }
-        if (!headimgurl) {
-            res.json({
-                "r": 1,
-                "errcode": 10062,
-                "msg": "会员秀头像不能为空"
-            });
+        if (!checkVip(req, res, body)) {
             return;
         }
 
         var vip = new Vip({
-            name: name,
-            headimgurl: headimgurl,
-            title: title,
-            content: content,
+            name: body.name,
+            headimgurl: body.headimgurl,
+            title: body.title,
+            content: body.content,
             createTime: Date.now(),
             updateTime: Date.now()
         });
@@ -70,11 +75,12 @@ var VipModule = {
         });
     },
 
-    // 查找会员秀列表
-    findVips: function(req, res) {
-        var query = Vip.find({
-
-        }).sort('-likeNum'); // 按会员秀赞数量倒序排序
+    /**
+     * @method findAllVips
+     * 查找所有会员秀列表，按赞数量倒序排序
+     */
+    findAllVips: function(req, res) {
+        var query = Vip.find({}).sort('-likeNum'); // 按会员秀赞数量倒序排序
 
         query.exec(function(err, docs) {
             if (err) {
@@ -96,26 +102,22 @@ var VipModule = {
         });
     },
 
-    // 微信端 - 朋友 - 会员秀 - 会员详情页
-    getVipInfoByid: function(req, res) {
-        var _id = req.params._id;
-        var hasLogin = user.hasLogin(req);
-        var userId;
-
-        if (hasLogin) {
-            userId = user.getUserId(req);
-        }
+    /**
+     * @method showVipInfo
+     * 微信端 - 朋友 - 会员秀 - 会员秀详情页
+     */
+    showVipInfo: function(req, res) {
+        var vipId = req.params._id;
 
         Vip.findOne({
-            _id: new ObjectId(_id)
+            _id: new ObjectId(vipId)
         }, function(err, doc) {
             if (err) {
                 logger.error(err);
                 res.render('weixin/vipInfo', {
                     "r": 1,
                     "errcode": 10064,
-                    "msg": "服务器错误，查找会员秀详情失败",
-                    "hasLogin": hasLogin
+                    "msg": "服务器错误，查找会员秀详情失败"
                 });
                 return;
             }
@@ -123,15 +125,16 @@ var VipModule = {
             res.render('weixin/vipInfo', {
                 "r": 0,
                 "msg": "查找会员秀成功",
-                "vip": doc,
-                "hasLogin": hasLogin,
-                "userId": userId
+                "vip": doc
             });
             return;
         });
     },
 
-    // 根据会员秀ID删除某个会员秀
+    /**
+     * @method deleteVipById
+     * 根据会员秀ID删除某个会员秀
+     */
     deleteVipById: function(req, res) {
         var vipId = req.params._id;
 
@@ -178,7 +181,6 @@ var VipModule = {
                     });
                     return;
                 });
-
             } else {
                 res.json({
                     "r": 1,
@@ -224,10 +226,14 @@ var VipModule = {
         });
     },
 
-    // 编辑会员秀
+    // 更新会员秀
     updateVipById: function(req, res) {
         var _id = req.params._id;
         var vip = req.body;
+
+        if (!checkVip(req, res, vip)) {
+            return;
+        }
 
         Vip.findByIdAndUpdate(_id, {
             $set: {
@@ -263,13 +269,10 @@ var VipModule = {
                 return;
             }
         });
+    },
 
+    showVipShow: function(req, res) {
+        res.render('weixin/vipShow');
     }
 
-
-
-
-
 };
-
-module.exports = VipModule;

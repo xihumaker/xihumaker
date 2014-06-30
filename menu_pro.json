@@ -1,0 +1,60 @@
+{
+    "button": [{
+        "name": "创客？",
+        "sub_button": [{
+            "type": "click",
+            "name": "关于我们",
+            "key": "CHUANG_KE_LAI_LE"
+        }, {
+            "type": "view",
+            "name": "改变世界",
+            "url": "http://115.29.18.213in/gaibianshijie"
+        }, {
+            "type": "view",
+            "name": "创客分布",
+            "url": "http://115.29.18.213/weixin/map"
+        }]
+    }, {
+        "name": "一起来！",
+        "sub_button": [{
+            "type": "view",
+            "name": "活动",
+            "url": "http://115.29.18.213in/activities"
+        }, {
+            "type": "view",
+            "name": "江湖告急",
+            "url": "http://115.29.18.213in/jianghu"
+        }, {
+            "type": "view",
+            "name": "微课程",
+            "url": "http://115.29.18.213in/weikecheng"
+        }, {
+            "type": "view",
+            "name": "推广创客文化",
+            "url": "http://115.29.18.213in/tuiguang"
+        }]
+    }, {
+        "name": "朋友～",
+        "sub_button": [{
+            "type": "view",
+            "name": "会员秀",
+            "url": "http://115.29.18.213in/vipShow"
+        }, {
+            "type": "view",
+            "name": "财富榜",
+            "url": "http://115.29.18.213in/richList"
+        }, {
+            "type": "view",
+            "name": "北斗社区",
+            "url": "http://wsq.qq.com/reflow/183897913?from=message&isappinstalled=0"
+        }, {
+            "type": "view",
+            "name": "我",
+            "url": "http://115.29.18.213in/userCenter"
+        }, {
+            "type": "click",
+            "name": "绑定帐号",
+            "key": "BANGING_ACCOUNT"
+        }]
+    }]
+}

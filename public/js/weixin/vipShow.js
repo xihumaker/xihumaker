@@ -3,15 +3,16 @@
  */
 $(function() {
 
+    "use strict";
     var $msgTip = $('#msgTip');
     var $vipList = $('#vipList');
 
     $.ajax({
-        url: '/api/vips',
+        url: '/api/vips/all',
         type: 'GET',
         dataType: 'json',
         timeout: 15000,
-        success: function(data, textStatus, jqXHR) {
+        success: function(data) {
             console.log(data);
             if (data.r === 0) {
                 var vips = data.vips;
@@ -34,12 +35,7 @@ $(function() {
                     $vipList.append($(temp));
                 }
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-
         }
     });
-
-
 
 });

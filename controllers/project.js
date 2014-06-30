@@ -1,3 +1,4 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
@@ -5,11 +6,9 @@ var Util = require('../common/util');
 var config = require('../config');
 var Project = require('../models/project');
 var ProjectPeople = require('../models/project_people');
-
+var auth = require('../policies/auth');
 var INDUSTRY_LIST = config.INDUSTRY_LIST;
 var GROUP_LIST = config.GROUP_LIST;
-
-// Controller
 var user = require('./user');
 
 
@@ -25,7 +24,7 @@ Array.prototype.deleteByIndex = function(index) {
     } else {
         return this.slice(0, index).concat(this.slice(index + 1, this.length));
     }　　
-}
+};
 
 /**
  * @method deleteByValue
@@ -35,7 +34,7 @@ Array.prototype.deleteByIndex = function(index) {
  */
 Array.prototype.deleteByValue = function(val) {
     return this.deleteByIndex(this.indexOf(val));
-}
+};
 
 /**
  * @method convertProgress
@@ -59,7 +58,7 @@ function convertProgress(val) {
     }
 }
 
-var ProjectModule = {
+module.exports = {
 
     /**
      * @method findProjectById
@@ -91,7 +90,7 @@ var ProjectModule = {
             if ( !! doc) {
                 res.json({
                     "r": 0,
-                    "msg": "请求成功",
+                    "msg": "查找项目信息成功",
                     "project": doc
                 });
                 return;
@@ -111,17 +110,18 @@ var ProjectModule = {
      * 创建一个新项目
      */
     addProject: function(req, res) {
-        var title = req.param('title'),
-            description = req.param('description') || '',
-            industry = req.param('industry') || -1,
-            group = req.param('group') || -1,
-            authorId = req.signedCookies.xihumaker.userId,
-            createTime = Date.now(),
-            updateTime = Date.now(),
-            teamName = req.param('teamName'),
-            teamProfile = req.param('teamProfile'),
-            progress = req.param('progress'),
-            coverUrl = req.param('coverUrl');
+        var authorId = auth.getUserId(req, res);
+        var body = req.body;
+        var title = body.title;
+        var description = body.description || '';
+        var industry = body.industry || -1;
+        var group = body.group || -1;
+        var createTime = Date.now();
+        var updateTime = Date.now();
+        var teamName = body.teamName;
+        var teamProfile = body.teamProfile;
+        var progress = body.progress;
+        var coverUrl = body.coverUrl;
 
         if (!title) {
             res.json({
@@ -169,32 +169,65 @@ var ProjectModule = {
      * 微信端 - 项目详情页
      */
     showProject: function(req, res) {
-        var hasLogin = false,
-            isMyProject = false,
+        var hasLogin = auth.userAuth(req, res);
+        var isMyProject = false,
             hasJoin = false,
             userId = null;
+        var projectId = req.params._id;
+        if (hasLogin) {
+            userId = auth.getUserId(req, res);
+        }
 
-        var tempFun = function() {
-            Project.findOne({
-                _id: new ObjectId(projectId)
-            }, function(err, doc) {
-                if (err) {
+        Project.findOne({
+            _id: new ObjectId(projectId)
+        }, function(err, doc) {
+            if (err) {
+                res.render('weixin/projectInfo', {
+                    "r": 1,
+                    "errcode": 10096,
+                    "msg": "服务器错误，查找项目详情失败",
+                    "hasLogin": hasLogin,
+                    "isMyProject": isMyProject,
+                    "hasJoin": hasJoin
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                var _doc = doc;
+
+                if (String(doc.authorId) === userId) { // 是项目创始人
+                    isMyProject = true;
                     res.render('weixin/projectInfo', {
-                        "r": 1,
-                        "errcode": 10096,
-                        "msg": "服务器错误，查找项目详情失败",
+                        "r": 0,
+                        "msg": "请求成功",
+                        "project": _doc,
                         "hasLogin": hasLogin,
                         "isMyProject": isMyProject,
                         "hasJoin": hasJoin
                     });
                     return;
-                }
+                } else { // 非项目创始人
+                    ProjectPeople.findOne({
+                        belongToProjectId: projectId,
+                        belongToUserId: userId
+                    }, function(err, doc) {
+                        if (err) {
+                            res.render('weixin/projectInfo', {
+                                "r": 1,
+                                "errcode": 10096,
+                                "msg": "服务器错误，查找项目详情失败",
+                                "hasLogin": hasLogin,
+                                "isMyProject": isMyProject,
+                                "hasJoin": hasJoin
+                            });
+                            return;
+                        }
 
-                if ( !! doc) {
-                    var _doc = doc;
+                        if ( !! doc) {
+                            hasJoin = true;
+                        }
 
-                    if (String(doc.authorId) === userId) { // 是项目创始人
-                        isMyProject = true;
                         res.render('weixin/projectInfo', {
                             "r": 0,
                             "msg": "请求成功",
@@ -204,66 +237,23 @@ var ProjectModule = {
                             "hasJoin": hasJoin
                         });
                         return;
-                    } else { // 非项目创始人
-                        ProjectPeople.findOne({
-                            belongToProjectId: projectId,
-                            belongToUserId: userId
-                        }, function(err, doc) {
-                            if (err) {
-                                res.render('weixin/projectInfo', {
-                                    "r": 1,
-                                    "errcode": 10096,
-                                    "msg": "服务器错误，查找项目详情失败",
-                                    "hasLogin": hasLogin,
-                                    "isMyProject": isMyProject,
-                                    "hasJoin": hasJoin
-                                });
-                                return;
-                            }
-
-                            if ( !! doc) {
-                                hasJoin = true;
-                            }
-
-                            res.render('weixin/projectInfo', {
-                                "r": 0,
-                                "msg": "请求成功",
-                                "project": _doc,
-                                "hasLogin": hasLogin,
-                                "isMyProject": isMyProject,
-                                "hasJoin": hasJoin
-                            });
-                            return;
-                        });
-                    }
-                } else {
-                    res.render('weixin/projectInfo', {
-                        "r": 1,
-                        "errcode": 10097,
-                        "msg": "项目不存在或已删除",
-                        "hasLogin": hasLogin,
-                        "isMyProject": isMyProject,
-                        "hasJoin": hasJoin
                     });
-                    return;
                 }
-            });
-        }
+            } else {
+                res.render('weixin/projectInfo', {
+                    "r": 1,
+                    "errcode": 10097,
+                    "msg": "项目不存在或已删除",
+                    "hasLogin": hasLogin,
+                    "isMyProject": isMyProject,
+                    "hasJoin": hasJoin
+                });
+                return;
+            }
+        });
 
-        var projectId = req.params._id;
 
-        if (user.hasLogin(req)) {
-            // 已登录
-            // 如果是该项目作者，isMyProject = true
-            // 如果不是该项目作者，还需判断是否已经加入该项目
-            hasLogin = true;
-            userId = user.getUserId(req);
-            tempFun();
-        } else {
-            // 未登录
-            hasLogin = false;
-            tempFun();
-        }
+
     },
 
 
@@ -274,7 +264,8 @@ var ProjectModule = {
             group = req.query.group || -1,
             progress = req.query.progress,
             level = req.query.level,
-            sortBy = req.query.sortBy || 1;
+            sortBy = req.query.sortBy || 1,
+            q = req.query.q;
 
         var query,
             queryParams = {};
@@ -292,6 +283,18 @@ var ProjectModule = {
             queryParams.level = level;
         }
 
+        if ( !! q) {
+            var reg = new RegExp(q);
+            queryParams.$or = [{
+                'title': reg
+            }, {
+                'description': reg
+            }, {
+                'teamName': reg
+            }];
+        }
+        console.log(queryParams);
+
         if (sortBy == 1) { // 按热度排序
             console.log('按热度排序');
             query = Project.find(queryParams).sort('-rankScore').limit(pageSize).skip(pageStart);
@@ -299,6 +302,8 @@ var ProjectModule = {
             console.log('按时间倒序排序');
             query = Project.find(queryParams).sort('-createTime').limit(pageSize).skip(pageStart);
         }
+
+
 
         query.exec(function(err, docs) {
             if (err) {
@@ -371,106 +376,105 @@ var ProjectModule = {
         });
     },
 
-    getProjectInfoById: function(req, res) {
-        var hasLogin = false,
-            isMyProject = false,
-            hasJoin = false,
-            userId = null;
+    /**
+     * @method showProjectInfo
+     * Web端 - 项目详情页面
+     */
+    showProjectInfo: function(req, res) {
+        var hasLogin = auth.userAuth(req, res);
+        var isMyProject = false;
+        var hasJoin = false;
+        var userId = null;
+        var projectId = req.params._id;
 
-        var tempFun = function() {
-            Project.findOne({
-                _id: new ObjectId(projectId)
-            }, function(err, doc) {
-                if (err) {
+        if (hasLogin) {
+            userId = auth.getUserId(req, res);
+        }
+
+        var errFun = function(err) {
+            if (err) {
+                res.render('projectInfo', {
+                    "r": 1,
+                    "errcode": 10096,
+                    "msg": "服务器错误，查找项目详情失败",
+                    "isMyProject": isMyProject,
+                    "hasJoin": hasJoin
+                });
+                return true;
+            }
+        };
+
+        Project.findOne({
+            _id: new ObjectId(projectId)
+        }, function(err, doc) {
+            if (errFun(err)) {
+                return;
+            }
+
+            if ( !! doc) {
+                var _doc = doc;
+
+                if (String(doc.authorId) === userId) { // 是项目创始人
+                    isMyProject = true;
                     res.render('projectInfo', {
-                        "r": 1,
-                        "errcode": 10096,
-                        "msg": "服务器错误，查找项目详情失败",
-                        "hasLogin": hasLogin,
+                        "r": 0,
+                        "msg": "请求成功",
+                        "project": _doc,
                         "isMyProject": isMyProject,
                         "hasJoin": hasJoin
                     });
                     return;
-                }
+                } else { // 非项目创始人
+                    ProjectPeople.findOne({
+                        belongToProjectId: projectId,
+                        belongToUserId: userId
+                    }, function(err, doc) {
+                        if (errFun(err)) {
+                            return;
+                        }
 
-                if ( !! doc) {
-                    var _doc = doc;
+                        if ( !! doc) {
+                            hasJoin = true;
+                        }
 
-                    if (String(doc.authorId) === userId) { // 是项目创始人
-                        isMyProject = true;
                         res.render('projectInfo', {
                             "r": 0,
                             "msg": "请求成功",
                             "project": _doc,
-                            "hasLogin": hasLogin,
                             "isMyProject": isMyProject,
                             "hasJoin": hasJoin
                         });
                         return;
-                    } else { // 非项目创始人
-                        ProjectPeople.findOne({
-                            belongToProjectId: projectId,
-                            belongToUserId: userId
-                        }, function(err, doc) {
-                            if (err) {
-                                res.render('projectInfo', {
-                                    "r": 1,
-                                    "errcode": 10096,
-                                    "msg": "服务器错误，查找项目详情失败",
-                                    "hasLogin": hasLogin,
-                                    "isMyProject": isMyProject,
-                                    "hasJoin": hasJoin
-                                });
-                                return;
-                            }
-
-                            if ( !! doc) {
-                                hasJoin = true;
-                            }
-
-                            res.render('projectInfo', {
-                                "r": 0,
-                                "msg": "请求成功",
-                                "project": _doc,
-                                "hasLogin": hasLogin,
-                                "isMyProject": isMyProject,
-                                "hasJoin": hasJoin
-                            });
-                            return;
-                        });
-                    }
-                } else {
-                    res.render('projectInfo', {
-                        "r": 1,
-                        "errcode": 10097,
-                        "msg": "项目不存在或已删除",
-                        "hasLogin": hasLogin,
-                        "isMyProject": isMyProject,
-                        "hasJoin": hasJoin
                     });
-                    return;
                 }
-            });
-        }
-
-        var projectId = req.params._id;
-
-        if (user.hasLogin(req)) {
-            // 已登录
-            // 如果是该项目作者，isMyProject = true
-            // 如果不是该项目作者，还需判断是否已经加入该项目
-            hasLogin = true;
-            userId = user.getUserId(req);
-            tempFun();
-        } else {
-            // 未登录
-            hasLogin = false;
-            tempFun();
-        }
+            } else {
+                res.render('projectInfo', {
+                    "r": 1,
+                    "errcode": 10097,
+                    "msg": "项目不存在或已删除",
+                    "isMyProject": isMyProject,
+                    "hasJoin": hasJoin
+                });
+                return;
+            }
+        });
     },
 
+    /**
+     * @method showEditProject
+     * 显示项目编辑页面
+     */
     showEditProject: function(req, res) {
         var _id = req.param('_id');
+
+        if (_id.length !== 24) {
+            res.render('editProject', {
+                "r": 1,
+                "errcode": 10000,
+                "msg": "参数错误"
+            });
+            return;
+        }
 
         Project.findOne({
             _id: new ObjectId(_id)
@@ -479,31 +483,23 @@ var ProjectModule = {
                 res.render('editProject', {
                     "r": 1,
                     "errcode": 10037,
-                    "msg": "服务器错误，调用showEditProject方法出错",
-                    "hasLogin": true
+                    "msg": "服务器错误，调用showEditProject方法出错"
                 });
                 return;
             }
 
             if ( !! doc) {
-                doc.localCreateTime = Util.convertDate(doc.createTime);
-                doc.localIndustry = INDUSTRY_LIST[doc.industry];
-                doc.localGroup = GROUP_LIST[doc.group];
-                doc.localProgress = convertProgress(doc.progress);
-
                 res.render('editProject', {
                     "r": 0,
                     "msg": "请求成功",
-                    "project": doc,
-                    "hasLogin": true
+                    "project": doc
                 });
                 return;
             } else {
                 res.render('editProject', {
                     "r": 1,
                     "errcode": 10015,
-                    "msg": "项目不存在",
-                    "hasJoin": true
+                    "msg": "项目不存在"
                 });
                 return;
             }
@@ -607,10 +603,10 @@ var ProjectModule = {
      * 获取某个用户发起的项目
      */
     findProjectsByUserId: function(req, res) {
-        var _id = req.params._id;
+        var userId = req.params._id;
 
         var query = Project.find({
-            authorId: _id
+            authorId: userId
         }).sort('-createTime');
 
         query.exec(function(err, docs) {
@@ -625,7 +621,7 @@ var ProjectModule = {
 
             res.json({
                 "r": 0,
-                "msg": "请求成功",
+                "msg": "获取用户发起的项目成功",
                 "projectList": docs
             });
         });
@@ -636,11 +632,18 @@ var ProjectModule = {
      * 根据用户输入的关键字搜索项目
      */
     searchProjectsByKey: function(req, res) {
-        console.log(req.query);
-        // 获取关键字
         var q = req.query.q;
-        var pageSize = Number(req.query.pageSize);
-        var pageStart = Number(req.query.pageStart);
+        var pageSize = Number(req.query.pageSize) || 12;
+        var pageStart = Number(req.query.pageStart) || 0;
+
+        if (!q) {
+            res.json({
+                "r": 1,
+                "errcode": 10041,
+                "msg": "搜索关键字为空"
+            });
+            return;
+        }
 
         var reg = new RegExp(q);
 
@@ -712,7 +715,8 @@ var ProjectModule = {
 
             res.json({
                 "r": 0,
-                "msg": "更新成功"
+                "msg": "更新成功",
+                "project": doc
             });
         });
     }
@@ -723,5 +727,3 @@ var ProjectModule = {
 
 
 };
-
-module.exports = ProjectModule;

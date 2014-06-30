@@ -1,5 +1,6 @@
-define(function(require, exports, module) {
+define(function(require) {
 
+    "use strict";
     var CONST = require('./const');
     var QINIU_Bucket_Name = CONST.QINIU_Bucket_Name;
 
@@ -81,7 +82,6 @@ define(function(require, exports, module) {
     var $coverUrl = $('#coverUrl');
     var $createBtn = $('#createBtn');
 
-
     $createBtn.click(function() {
         var title = $title.val().trim();
         var description = um.getContent();
@@ -144,8 +144,6 @@ define(function(require, exports, module) {
         });
 
     });
-
-
 
 
 });

@@ -21,17 +21,7 @@
     <!-- 语言包文件 -->
     <script type="text/javascript" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
     <!-- 实例化编辑器代码 -->
-    <script type="text/javascript">
-        $(function(){
-            window.um = UM.getEditor('myEditor');
-            /* 获取编辑器内容 */
-            // var html = um.getContent();
-            // var txt = um.getContentTxt();
-
-            /* 设置编辑器内容 */
-            // um.setContent('要设置的编辑器内容.');
-        });
-    </script>
+    
 </head>
 <body>
 
@@ -121,7 +111,7 @@
                                 <label for="">活动封面：</label>
                                 <div class="ui button" id="pickfiles">上传图片</div>
                                 <p>（支持jpg、jpeg、png格式；建议尺寸大小: ）</p>
-                                <img src="" alt="" id="coverUrl">
+                                <img src="" alt="" id="coverUrl" width="100%" style="margin-top:10px;" />
                             </div>
                             <div class="fluid blue ui button" id="createBtn">确定新建</div>
                         </div>
@@ -129,12 +119,7 @@
                 </div>
             </div>
 
-
-
         </div>
-
-    
-    <% include ./inc_gotop.html %>
 
     <script type="text/javascript" src="/plupload/plupload.full.min.js"></script>
     <script type="text/javascript" src="/js/qiniu.js"></script>

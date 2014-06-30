@@ -1,14 +1,11 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
 var logger = require('../common/logger');
-// Modal
-var Activity = require('../models/activity');
 var ActivityComment = require('../models/activity_comment');
 var User = require('../models/user');
-
-// Controller
-var user = require('./user');
+var auth = require('../policies/auth');
 
 module.exports = {
 
@@ -18,7 +15,7 @@ module.exports = {
      */
     commentActivity: function(req, res) {
         var activityId = req.params._id,
-            userId = user.getUserId(req),
+            userId = auth.getUserId(req, res),
             content = req.body.content;
 
         User.findOne({

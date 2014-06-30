@@ -18,58 +18,112 @@
 
     <% include ./inc_topmenu.html %>
 
-        <div class="main">
+    <div class="main">
 
-            <div class="ui basic segment" style="margin: 0;padding: 0;">
-                <div class="ui large breadcrumb">
-                    <a class="section">西湖创客汇</a>
-                    <div class="divider"> / </div>
-                    <a class="active section">用户管理</a>
-                </div>
-                <a class="ui blue right floated button" href="/admin/exportToExcel">导出全部用户信息</a>
+        <div class="ui basic segment" style="margin: 0;padding: 0;">
+            <div class="ui large breadcrumb">
+                <a class="section">西湖创客汇</a>
+                <div class="divider"> / </div>
+                <a class="active section">用户管理</a>
+            </div>
+            <a class="ui blue right floated button" href="/admin/exportToExcel">导出全部用户信息</a>
+        </div>
+
+        <div class="ui basic segment searchSegment">
+            <div class="ui action left icon input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="真实姓名/邮箱/手机号" id="searchKey">
+                <div class="ui teal button" id="searchBtn">搜索</div>
             </div>
 
-            <div class="ui basic segment searchSegment">
-                <div class="ui action left icon input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="真实姓名/邮箱/手机号" id="searchKey">
-                    <div class="ui teal button" id="searchBtn">搜索</div>
-                </div>
+        </div>
 
-            </div>
+        <table class="ui table segment">
+            <thead>
+                <tr>
+                    <th>行号</th>
+                    <th>真实姓名</th>
+                    <th>用户ID</th>
+                    <th>邮箱</th>
+                    <th>手机号</th>
+                    <th>加入时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="userList"></tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="12" style="padding:0;">
+                        <div class="ui center aligned small teal header loadMore" id="loadMore">加载更多</div>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
 
+    </div>
+
+    <div class="ui horizontal icon divider">
+        <i class="circular leaf icon"></i>
+    </div>
+
+    <style>
+        .ui.dimmer {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .ui.modal {
+            -webkit-user-select: initial;
+        }
+        .ui.modal > .close {
+            top: 10px;
+            right: 0px;
+            color: gray;
+        }
+        .ui.modal > .header {
+            padding: 1em;
+            font-size: 16px;
+            background: #eee;
+        }
+        .ui.modal > .content {
+            background: #fff;
+            font-size: 16px;
+            padding: 15px;
+        }
+        .ui.modal > .content td {
+            padding: 0.7em 0.7em;
+        }
+    </style>
+    <div class="ui large modal transition hidden" style="margin-top: -112px;" id="userInfo">
+        <i class="close icon"></i>
+        <div class="header">用户详细信息</div>
+        <div class="content">
             <table class="ui table segment">
-                <thead>
-                    <tr>
-                        <th>行号</th>
-                        <th>真实姓名</th>
-                        <th>性别</th>
-                        <th>邮箱</th>
-                        <th>手机号</th>
-                        <th>QQ</th>
-                        <th>省份</th>
-                        <th>城市</th>
-                        <th>金币数</th>
-                        <th>加入时间</th>
-                        <th>已工作/在读学生</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody id="userList"></tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="12" style="padding:0;">
-                            <div class="ui center aligned small teal header loadMore" id="loadMore">加载更多</div>
-                        </th>
-                    </tr>
-                </tfoot>
+                <tbody>
+                    <tr><td>ID：</td><td id="userId"></td></tr>
+                    <tr><td>头像：</td><td><img src="" id="headimgurl" width="50" height="50" alt=""></td></tr>
+                    <tr><td>姓名：</td><td id="username"></td></tr>
+                    <tr><td>性别：</td><td id="sex"></td></tr>
+                    <tr><td>邮箱：</td><td id="email"></td></tr>
+                    <tr><td>手机号：</td><td id="phone"></td></tr>
+                    <tr><td>微信openId：</td><td id="openId"></td></tr>
+                    <tr><td>生日：</td><td id="birthday"></td></tr>
+                    <tr><td>金币：</td><td id="coin"></td></tr>
+                    <tr><td>兴趣：</td><td id="interest"></td></tr>
+                    <tr><td>收货地址：</td><td id="inAddress"></td></tr>
+                    <tr><td>城市：</td><td id="city"></td></tr>
+                    <tr><td>省份：</td><td id="province"></td></tr>
+                    <tr><td>工作/学生：</td><td id="workOrStudy"></td></tr>
+                    <tr><td>学校：</td><td id="school"></td></tr>
+                    <tr><td>专业：</td><td id="profession"></td></tr>
+                    <tr><td>公司：</td><td id="company"></td></tr>
+                    <tr><td>工作：</td><td id="job"></td></tr>
+                    <tr><td>加入日期：</td><td id="createTime"></td></tr>
+                </tbody>
             </table>
 
         </div>
+        
+    </div>
 
-        <div class="ui horizontal icon divider">
-            <i class="circular leaf icon"></i>
-        </div>
     
     <% include ./inc_gotop.html %>
     

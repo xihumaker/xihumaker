@@ -1,14 +1,12 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
 var logger = require('../common/logger');
-// Modal
 var Project = require('../models/project');
 var ProjectPeople = require('../models/project_people');
 var User = require('../models/user');
-
-// Controller
-var user = require('./user');
+var auth = require('../policies/auth');
 
 module.exports = {
 
@@ -18,7 +16,7 @@ module.exports = {
      */
     joinProject: function(req, res) {
         var projectId = req.params._id;
-        var userId = user.getUserId(req);
+        var userId = auth.getUserId(req, res);
 
         // 首先需要判断用户是否已经在该项目中
         ProjectPeople.findOne({
@@ -95,7 +93,7 @@ module.exports = {
      */
     quitProject: function(req, res) {
         var projectId = req.params._id;
-        var userId = user.getUserId(req);
+        var userId = auth.getUserId(req, res);
 
         ProjectPeople.findOneAndRemove({
             belongToProjectId: projectId,

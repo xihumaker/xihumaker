@@ -40,10 +40,12 @@ body {
 }
 .ui.items .item .title {
     height: 34px;
-    overflow: hidden;
     margin: 5px 0;
     font-size: 16px !important;
     line-height: 34px !important;
+    white-space: nowrap;/*禁止换行*/
+    overflow: hidden;/*禁止文本溢出显示*/
+    text-overflow: ellipsis;
 }
 img.jinghua {
     height: 30px !important;

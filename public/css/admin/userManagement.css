@@ -16,4 +16,9 @@ div.main {
 	cursor: pointer;
 	display: none;
 	padding: 8px 0px !important;
+	font-style: normal;
+	font-weight: normal !important;
+}
+.ui.button {
+	margin-right: 5px;
 }

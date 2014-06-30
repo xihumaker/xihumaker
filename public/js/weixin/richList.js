@@ -1,5 +1,9 @@
-$(function() {
-
+/**
+ * 财富榜
+ */
+define(function(require, exports, module){
+	
+	var iAlert = require('../../angel/alert');
     var $richList = $('#richList');
 
     function getCoinRankByUserId(userId, succCall) {
@@ -17,7 +21,7 @@ $(function() {
         });
     }
 
-    // 获取当前登录用户的金币排名
+    // 如果已登录，则需获取当前登录用户的金币排名
     if (hasLogin) {
         $.ajax({
             url: '/api/currentUserinfo',
@@ -35,8 +39,8 @@ $(function() {
                     getCoinRankByUserId(userId, function(data) {
                         if (data.r === 0) {
                             var temp = '<tr>' +
-                                '<td><img class="rounded mini ui image" src="' + user.headimgurl + '"></td>' +
-                                '<td>' + data.coinRank + '</td>' +
+                            '<td><img class="rounded mini ui image" src="' + user.headimgurl + '"></td>' +
+                                '<td>' + data.  + '</td>' +
                                 '<td>我</td>' +
                                 '<td>' + user.coin + '</td>' +
                                 '</tr>';
@@ -45,9 +49,6 @@ $(function() {
                         }
                     });
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-
             }
         });
     }
@@ -78,19 +79,13 @@ $(function() {
                         '</tr>';
 
                     $richList.append($(temp));
-
                 }
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-
         }
     });
 
-
-
     $('.dev').click(function() {
-        alert('开发中，敬请期待！')
+        iAlert('开发中，敬请期待！')
     });
 
 });

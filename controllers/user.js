@@ -1,90 +1,154 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
-var validator = require('validator');
 var Util = require('../common/util');
 var logger = require('../common/logger');
 var User = require('../models/user');
+var ccap = require('../services/ccap');
+var mail = require('../services/mail');
+var uuid = require('node-uuid');
+var auth = require('../policies/auth');
 
-var UserModule = {
+function newCookie(req, res, user) {
+    //cookie 有效期30天
+    res.cookie('xihumaker', {
+        userId: user._id,
+        username: user.username,
+        email: user.email
+    }, {
+        path: '/',
+        maxAge: 1000 * 60 * 60 * 24 * 30,
+        signed: true
+    });
+}
 
-    /**
-     * @method hasLogin
-     * 判断用户是否已经登录
-     * @return {Boolean} 如果已经登录返回true，未登录返回false
-     */
-    hasLogin: function(req, res) {
-        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
-        return !!userId;
-    },
+/**
+ * 验证邮箱
+ */
+function checkEmail(req, res, email) {
+    if (!email) {
+        res.json({
+            "r": 1,
+            "errcode": 10009,
+            "msg": "邮箱不能为空"
+        });
+        return false;
+    }
+    if (!Util.isEmail(email)) {
+        res.json({
+            "r": 1,
+            "errcode": 10010,
+            "msg": "邮箱地址不合法"
+        });
+        return false;
+    }
+    return true;
+}
 
-    getUserId: function(req, res) {
-        return req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
-    },
+function checkEmailEmpty(req, res, email) {
+    if (!email) {
+        res.json({
+            "r": 1,
+            "errcode": 10009,
+            "msg": "邮箱不能为空"
+        });
+        return false;
+    }
+    return true;
+}
 
-    /**
-     * @method userAuth
-     * 用户认证
-     */
-    userAuth: function(req, res, next) {
-        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
-        if (userId) {
-            console.log("[ >>> LOG >>> ]：用户已登录");
-            console.log('userId = ' + userId);
-            next();
-        } else {
-            console.log("[ >>> LOG >>> ]：用户未登录");
-            res.render('weixin/login');
-        }
-    },
+/**
+ * 验证手机号
+ */
+function checkPhone(req, res, phone) {
+    if (!phone) {
+        res.json({
+            "r": 1,
+            "errcode": 10020,
+            "msg": "手机号不能为空"
+        });
+        return false;
+    }
+    if (!Util.isPhone(phone)) {
+        res.json({
+            "r": 1,
+            "errcode": 10021,
+            "msg": "手机号不合法"
+        });
+        return false;
+    }
+    return true;
+}
 
-    /**
-     * @method userAuth2
-     * 用户认证，主要用户一些Ajax请求
-     */
-    userAuth2: function(req, res, next) {
-        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
-        if (userId) {
-            next();
-        } else {
-            res.json({
-                "r": 1,
-                "errcode": 10093,
-                "msg": "用户未登录"
-            });
-            return;
-        }
-    },
+/**
+ * 验证真实姓名
+ */
+function checkUsername(req, res, username) {
+    if (!username) {
+        res.json({
+            "r": 1,
+            "errcode": 10003,
+            "msg": "真实姓名不能为空"
+        });
+        return false;
+    }
+    return true;
+}
 
-    /**
-     * @method userWebAuth
-     * 用户认证
-     */
-    userWebAuth: function(req, res, next) {
-        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
-        if (userId) {
-            console.log("[ >>> LOG >>> ]：用户已登录");
-            console.log('userId = ' + userId);
-            next();
-        } else {
-            console.log("[ >>> LOG >>> ]：用户未登录");
-            res.render('login', {
-                hasLogin: false
-            });
-        }
-    },
+/**
+ * 验证密码
+ */
+function checkPassword(req, res, password) {
+    if (!password) {
+        res.json({
+            "r": 1,
+            "errcode": 10005,
+            "msg": "密码不能为空"
+        });
+        return false;
+    }
+    return true;
+}
+
+/**
+ * 验证验证码
+ */
+function checkCaptcha(req, res, captcha) {
+    if (!captcha) {
+        res.json({
+            "r": 1,
+            "errcode": 10117,
+            "msg": "验证码不能为空"
+        });
+        return false;
+    }
+
+    var _captcha = ccap.getCaptcha(req, res);
+    if (_captcha.toLowerCase() !== captcha.toLowerCase()) {
+        res.json({
+            "r": 1,
+            "errcode": 10118,
+            "msg": "验证码不正确"
+        });
+        return false;
+    }
+    return true;
+}
+
+
+module.exports = {
 
     /**
      * @method getCurrentUserinfo
      * 获得当前登录用户的详细信息
      */
     getCurrentUserinfo: function(req, res) {
-        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
-        var _id = userId;
+        var userId = auth.getUserId(req, res);
 
         // {password: 0}表示不返回password这个属性
         User.findOne({
-            _id: new ObjectId(_id)
+            _id: new ObjectId(userId)
         }, {
             password: 0
         }, function(err, doc) {
@@ -100,7 +164,7 @@ var UserModule = {
             if ( !! doc) {
                 res.json({
                     "r": 0,
-                    "msg": "请求成功",
+                    "msg": "获得当前登录用户信息成功",
                     "user": doc
                 });
                 return;
@@ -122,24 +186,9 @@ var UserModule = {
     login: function(req, res) {
         var email = req.param('email'),
             password = req.param('password');
-
-        if (!email) {
-            res.json({
-                "r": 1,
-                "errcode": 10009,
-                "msg": "邮箱不能为空"
-            });
+        if (!checkEmailEmpty(req, res, email) || !checkPassword(req, res, password)) {
             return;
         }
-        if (!password) {
-            res.json({
-                "r": 1,
-                "errcode": 10005,
-                "msg": "密码不能为空"
-            });
-            return;
-        }
-
         User.findOne({
             '$or': [{
                 'email': email
@@ -158,14 +207,7 @@ var UserModule = {
             }
 
             if ( !! doc) {
-                //cookie 有效期30天
-                res.cookie('xihumaker', {
-                    userId: doc._id
-                }, {
-                    path: '/',
-                    maxAge: 1000 * 60 * 60 * 24 * 30,
-                    signed: true
-                });
+                newCookie(req, res, doc);
                 res.json({
                     "r": 0,
                     "msg": "登录成功"
@@ -227,7 +269,7 @@ var UserModule = {
             if ( !! doc) {
                 res.json({
                     "r": 0,
-                    "msg": "请求成功",
+                    "msg": "查找用户信息成功",
                     "user": doc
                 });
                 return;
@@ -247,74 +289,13 @@ var UserModule = {
      * 新用户注册
      */
     addUser: function(req, res) {
-        var email = req.param('email'),
-            phone = req.param('phone'),
-            username = req.param('username'),
-            password = req.param('password'),
-            rePassword = req.param('rePassword');
+        var body = req.body;
+        var email = body.email;
+        var phone = body.phone;
+        var username = body.username;
+        var password = body.password;
 
-        if (!email) {
-            res.json({
-                "r": 1,
-                "errcode": 10009,
-                "msg": "邮箱不能为空"
-            });
-            return;
-        }
-        if (!validator.isEmail(email)) {
-            res.json({
-                "r": 1,
-                "errcode": 10010,
-                "msg": "邮箱地址不合法"
-            });
-            return;
-        }
-        if (!phone) {
-            res.json({
-                "r": 1,
-                "errcode": 10020,
-                "msg": "手机号不能为空"
-            });
-            return;
-        }
-        if (!Util.isPhone(phone)) {
-            res.json({
-                "r": 1,
-                "errcode": 10021,
-                "msg": "手机号不合法"
-            });
-            return;
-        }
-        if (!username) {
-            res.json({
-                "r": 1,
-                "errcode": 10003,
-                "msg": "真实姓名不能为空"
-            });
-            return;
-        }
-        if (!password) {
-            res.json({
-                "r": 1,
-                "errcode": 10005,
-                "msg": "密码不能为空"
-            });
-            return;
-        }
-        if (!rePassword) {
-            res.json({
-                "r": 1,
-                "errcode": 10007,
-                "msg": "确认密码不能为空"
-            });
-            return;
-        }
-        if (password !== rePassword) {
-            res.json({
-                "r": 1,
-                "errcode": 10008,
-                "msg": "两次输入的密码不一致"
-            });
+        if (!checkEmail(req, res, email) || !checkPhone(req, res, phone) || !checkUsername(req, res, username) || !checkPassword(req, res, password)) {
             return;
         }
 
@@ -332,58 +313,52 @@ var UserModule = {
                     "msg": "服务器错误，注册失败"
                 });
                 return;
+            }
+
+            if ( !! doc) {
+                if (doc.email === email) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10023,
+                        "msg": "该邮箱已经被注册"
+                    });
+                    return;
+                } else if (doc.phone === phone) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10024,
+                        "msg": "该手机号已经被注册"
+                    });
+                    return;
+                }
             } else {
-                if ( !! doc) {
-                    if (doc.email === email) {
+                var user = new User({
+                    email: email,
+                    phone: phone,
+                    username: username,
+                    password: Util.md5(password),
+                    createTime: Date.now()
+                });
+
+                user.save(function(err, doc) {
+                    if (err) {
+                        logger.error(err);
                         res.json({
                             "r": 1,
-                            "errcode": 10023,
-                            "msg": "该邮箱已经被注册"
+                            "errcode": 10013,
+                            "msg": "服务器错误，注册信息保存失败"
                         });
                         return;
-                    } else if (doc.phone === phone) {
+                    } else {
+                        newCookie(req, res, doc);
                         res.json({
-                            "r": 1,
-                            "errcode": 10024,
-                            "msg": "该手机号已经被注册"
+                            "r": 0,
+                            "msg": "注册成功",
+                            "user": doc
                         });
                         return;
                     }
-                } else {
-                    var user = new User({
-                        email: email,
-                        phone: phone,
-                        username: username,
-                        password: Util.md5(password),
-                        createTime: Date.now()
-                    });
-
-                    user.save(function(err, doc) {
-                        if (err) {
-                            logger.error(err);
-                            res.json({
-                                "r": 1,
-                                "errcode": 10013,
-                                "msg": "服务器错误，注册信息保存失败"
-                            });
-                            return;
-                        } else {
-                            //cookie 有效期30天
-                            res.cookie('xihumaker', {
-                                userId: doc._id
-                            }, {
-                                path: '/',
-                                maxAge: 1000 * 60 * 60 * 24 * 30,
-                                signed: true
-                            });
-                            res.json({
-                                "r": 0,
-                                "msg": "注册成功"
-                            });
-                            return;
-                        }
-                    });
-                }
+                });
             }
         });
     },
@@ -392,8 +367,8 @@ var UserModule = {
      * @method showUserCenter
      * 微信端 - 显示用户中心页面
      */
-    showUserCenter: function(req, res) {
-        var userId = req.signedCookies.xihumaker && req.signedCookies.xihumaker.userId;
+    showWeixinUserCenter: function(req, res) {
+        var userId = auth.getUserId(req, res);
         // {password: 0}表示不返回password这个属性
         User.findOne({
             _id: new ObjectId(userId)
@@ -404,7 +379,7 @@ var UserModule = {
                 res.render('weixin/userCenter', {
                     "r": 1,
                     "errcode": 10001,
-                    "msg": "服务器错误，调用findUserById方法出错"
+                    "msg": "服务器错误，显示用户中心页面失败"
                 });
                 return;
             }
@@ -412,7 +387,7 @@ var UserModule = {
             if ( !! doc) {
                 res.render('weixin/userCenter', {
                     "r": 0,
-                    "msg": "请求成功",
+                    "msg": "显示用户中心页面成功",
                     "user": doc
                 });
                 return;
@@ -428,10 +403,10 @@ var UserModule = {
     },
 
     /**
-     * @method showEditUser
+     * @method showWeixinEditUser
      * 微信端 - 显示用户详情编辑页面
      */
-    showEditUser: function(req, res) {
+    showWeixinEditUser: function(req, res) {
         var _id = req.params._id;
 
         // {password: 0}表示不返回password这个属性
@@ -444,7 +419,7 @@ var UserModule = {
                 res.render('weixin/editUser', {
                     "r": 1,
                     "errcode": 10032,
-                    "msg": "服务器错误，调用showEditUser方法出错"
+                    "msg": "服务器错误，调用showWeixinEditUser方法出错"
                 });
                 return;
             }
@@ -452,7 +427,7 @@ var UserModule = {
             if ( !! doc) {
                 res.render('weixin/editUser', {
                     "r": 0,
-                    "msg": "请求成功",
+                    "msg": "显示用户详情编辑页面成功",
                     "user": doc
                 });
                 return;
@@ -467,17 +442,16 @@ var UserModule = {
         });
     },
 
-    // 修改用户信息
+    /**
+     * @method findUserByIdAndUpdate
+     * 更新用户信息
+     */
     findUserByIdAndUpdate: function(req, res) {
-        var _id = req.params._id;
+        var _id = auth.getUserId(req, res);
         var user = req.body;
-
-        console.log(user.interest);
 
         User.findByIdAndUpdate(_id, {
             $set: {
-                username: user.username,
-                email: user.email,
                 phone: user.phone,
                 sex: user.sex,
                 birthday: user.birthday,
@@ -490,9 +464,8 @@ var UserModule = {
                 job: user.job,
                 school: user.school,
                 profession: user.profession,
-                interest: user.interest,
-                headimgurl: user.headimgurl,
-                coin: user.coin
+                interest: user.interest || [],
+                headimgurl: user.headimgurl
             }
         }, function(err, doc) {
             if (err) {
@@ -505,7 +478,6 @@ var UserModule = {
             }
 
             if ( !! doc) {
-                console.log(doc);
                 res.json({
                     "r": 0,
                     "msg": "修改成功",
@@ -521,7 +493,6 @@ var UserModule = {
                 return;
             }
         });
-
     },
 
     /**
@@ -572,11 +543,10 @@ var UserModule = {
 
             res.json({
                 "r": 0,
-                "msg": "查找项目成功",
+                "msg": "查找用户成功",
                 "users": docs
             });
         });
-
     },
 
     /**
@@ -614,7 +584,10 @@ var UserModule = {
         });
     },
 
-    // 财富榜
+    /**
+     * @method richList
+     * 根据金币个数，获取前N个用户
+     */
     richList: function(req, res) {
         var num = req.params.num;
         var query = User.find({
@@ -633,16 +606,18 @@ var UserModule = {
                     "msg": "服务器错误，查找财富榜失败"
                 });
             }
-
             res.json({
                 "r": 0,
-                "msg": "请求成功",
+                "msg": "根据金币个数，获取前N个用户成功",
                 "users": docs
             });
         });
     },
 
-    // 根据用户ID获取金币数排名
+    /**
+     * @method getCoinRankByUserId
+     * 根据用户ID获取金币数排名
+     */
     getCoinRankByUserId: function(req, res) {
         var userId = req.params._id;
 
@@ -661,7 +636,6 @@ var UserModule = {
             }
 
             var currentUser = doc;
-
             var coin = currentUser.coin;
             User.find({
                 coin: {
@@ -678,7 +652,6 @@ var UserModule = {
                 }
 
                 var len = docs.length;
-
                 res.json({
                     "r": 0,
                     "msg": "请求成功",
@@ -687,9 +660,7 @@ var UserModule = {
                 });
                 return;
             });
-
-
-        })
+        });
     },
 
     /**
@@ -697,17 +668,223 @@ var UserModule = {
      * 显示我报名的活动页面
      */
     showMyActivities: function(req, res) {
-        var userId = UserModule.getUserId(req);
+        res.render('weixin/myActivities');
+    },
 
-        res.render('weixin/myActivities', {
-            userId: userId
+    /**
+     * @method resetPassword
+     * 重设密码，成功，发送一份密码重置邮件
+     */
+    resetPassword: function(req, res) {
+        var email = req.body.email;
+        var captcha = req.body.captcha;
+
+        if (!checkEmail(req, res, email)) {
+            return;
+        }
+        if (!checkCaptcha(req, res, captcha)) {
+            return;
+        }
+
+        var resetTicket = Date.now();
+        var resetToken = uuid.v1();
+
+        User.findOneAndUpdate({
+            email: email
+        }, {
+            resetTicket: resetTicket,
+            resetToken: resetToken
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10119,
+                    "msg": "服务器错误，重设密码失败"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                mail.sendResetPassMail(email, resetToken, function(response) {
+                    console.log('发送了一份重设密码邮件');
+                    console.log(response);
+                    res.json({
+                        "r": 0,
+                        "msg": "发送成功"
+                    });
+                    return;
+                });
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10120,
+                    "msg": "该邮箱尚未注册，发送失败"
+                });
+                return;
+            }
+        });
+    },
+
+    /**
+     * @method showNewPassword
+     * 显示设置新密码页面
+     */
+    showNewPassword: function(req, res) {
+        var token = req.query.token || '';
+        var now = (new Date()).getTime();
+        var ONE_DAY_MILLISECONDS = 24 * 60 * 60 * 1000;
+        var diff = now - ONE_DAY_MILLISECONDS;
+
+        User.findOne({
+            resetToken: token,
+            resetTicket: {
+                $gt: diff
+            }
+        }, {
+            password: 0
+        }, function(err, doc) {
+            if (err) {
+                res.render('newPassword', {
+                    "r": 1,
+                    "errcode": 2007,
+                    "msg": "服务器错误，重置密码失败"
+                });
+                return;
+            }
+
+            // 没有找到
+            if (!doc) {
+                res.render('newPassword', {
+                    "r": 1,
+                    "errcode": 2008,
+                    "msg": "无效的链接地址"
+                });
+                return;
+            } else {
+                res.render('newPassword', {
+                    "r": 0,
+                    "user": doc
+                });
+            }
+        });
+    },
+
+    /**
+     * @method newPassword
+     * 设置新密码
+     */
+    newPassword: function(req, res) {
+        var password = req.param('password');
+        var token = req.param('token');
+
+        User.findOneAndUpdate({
+            resetToken: token
+        }, {
+            resetTicket: 0,
+            resetToken: '',
+            password: Util.md5(password)
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10121,
+                    "msg": "服务器错误，设置新密码失败"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                res.json({
+                    "r": 0,
+                    "msg": "设置新密码成功"
+                });
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10122,
+                    "msg": "TOKEN已经失效"
+                });
+            }
+        });
+    },
+
+    /**
+     * @method bindWeixin
+     * 绑定微信openid
+     */
+    bindWeixin: function(req, res) {
+        var body = req.body;
+        var email = body.email;
+        var password = body.password;
+        var openId = body.openId;
+
+        User.findOne({
+            email: email
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10126,
+                    "msg": "服务器错误，绑定失败"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                if (doc.password !== Util.md5(password)) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10123,
+                        "msg": "密码不正确"
+                    });
+                    return;
+                }
+
+                if ( !! doc.openId) {
+                    if (doc.openId === openId) {
+                        res.json({
+                            "r": 1,
+                            "errcode": 10124,
+                            "msg": "不能重复绑定"
+                        });
+                        return;
+                    } else {
+                        res.json({
+                            "r": 1,
+                            "errcode": 10125,
+                            "msg": "您的帐号已经绑定了一个微信号，一个帐号只能绑定一个微信号"
+                        });
+                        return;
+                    }
+                } else {
+                    doc.openId = openId;
+
+                    doc.save(function(err, doc) {
+                        if (err) {
+                            res.json({
+                                "r": 1,
+                                "errcode": 10126,
+                                "msg": "服务器错误，绑定失败"
+                            });
+                            return;
+                        }
+
+                        res.json({
+                            "r": 0,
+                            "msg": "绑定成功"
+                        });
+                        return;
+                    });
+                }
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10002,
+                    "msg": "用户不存在"
+                });
+                return;
+            }
         });
     }
 
-
-
-
-
 };
-
-module.exports = UserModule;

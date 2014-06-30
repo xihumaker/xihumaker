@@ -1,13 +1,16 @@
 /**
  * 创建活动
  */
-define(function(require, exports, module) {
+define(function(require) {
 
+    "use strict";
     var Util = require('../../angel/util');
     var iAlert = require('../../angel/alert');
 
     var CONST = require('../const');
     var QINIU_Bucket_Name = CONST.QINIU_Bucket_Name;
+
+    window.um = UM.getEditor('myEditor');
 
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
@@ -53,7 +56,6 @@ define(function(require, exports, module) {
                 var sourceLink = domain + res.key;
                 console.log(sourceLink);
 
-                $('#coverUrl').attr('width', '100%');
                 $('#coverUrl').attr('src', sourceLink);
                 $('#pickfiles').html('修改图片');
             },

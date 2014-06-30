@@ -9,8 +9,7 @@
     
     <link rel="stylesheet" href="/bootflat/css/site.min.css">
     <link rel="stylesheet" type="text/css" href="/css/createProject.css">
-    
-    
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
         <script src="/bootflat/js/html5shiv.js"></script>
@@ -41,12 +40,11 @@
 <body>
     
     <%include ./inc_top_navbar.html %>
-
-
     
     <div class="container main">
 
         <div class="row">
+
             <div class="col-md-9">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
@@ -54,23 +52,17 @@
                             <input type="email" class="form-control" id="title" placeholder="项目标题：不超过25个字">
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-sm-12">
                             <!--style给定宽度可以影响编辑器的最终宽度-->
                             <script type="text/plain" id="myEditor" style="width:100%;height:240px;"></script>
                         </div>
                     </div>
-
-                    
-
-                    
-                    
                 </form>
             </div>
+
             <div class="col-md-3">
                 <form class="form-horizontal" role="form">
-
                     <div class="form-group">
                         <label for="" class="col-sm-4 control-label">行业选择：</label>
                         <div class="col-sm-8">
@@ -103,6 +95,7 @@
                             </select>
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="" class="col-sm-4 control-label">项目队名：</label>
                         <div class="col-sm-8">
@@ -134,7 +127,6 @@
                         <img src="" width="0" alt="" id="coverUrl" style="margin-left:7.5%;">
                     </div>
 
-
                     <div class="form-group">
                         <div class="col-sm-12">
                             <button type="button" class="btn btn-primary btn-block" id="createBtn">完成创建</button>
@@ -145,14 +137,12 @@
             </div>
         </div>
 
-
     </div>
 
     <%include ./inc_footer.html %>
     
     <script type="text/javascript" src="/plupload/plupload.full.min.js"></script>
     <script type="text/javascript" src="/js/qiniu.js"></script>
-    
     <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/createProject" ></script>
 </body>
 </html>

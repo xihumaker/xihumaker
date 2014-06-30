@@ -1,14 +1,11 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
-var logger = require('../common/logger');
-// Modal
 var Activity = require('../models/activity');
 var ActivityLike = require('../models/activity_like');
-var User = require('../models/user');
+var auth = require('../policies/auth');
 
-// Controller
-var user = require('./user');
 
 module.exports = {
 
@@ -18,7 +15,7 @@ module.exports = {
      */
     likeActivity: function(req, res) {
         var activityId = req.params._id;
-        var userId = user.getUserId(req);
+        var userId = auth.getUserId(req, res);
 
         // 判断用户是否已经赞过
         ActivityLike.findOne({
@@ -26,7 +23,6 @@ module.exports = {
             belongToUserId: userId
         }, function(err, doc) {
             if (err) {
-                logger.error(err);
                 res.json({
                     "r": 1,
                     "errcode": 10088,
@@ -53,7 +49,6 @@ module.exports = {
                     }
                 }, function(err, doc) {
                     if (err) {
-                        logger.error(err);
                         res.json({
                             "r": 1,
                             "errcode": 10088,
@@ -71,7 +66,6 @@ module.exports = {
 
                     activityLike.save(function(err, doc) {
                         if (err) {
-                            logger.error(err);
                             res.json({
                                 "r": 1,
                                 "errcode": 10088,

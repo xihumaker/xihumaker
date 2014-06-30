@@ -44,13 +44,13 @@
     <%include ./inc_top_navbar.html %>
 
     <div class="container main">
-
+        <% if(r === 0) { %>
         <div class="row">
             <div class="col-md-9">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <input type="email" class="form-control" id="title" placeholder="项目标题：不超过25个字" value="<%= project.title %>">
+                            <input type="email" class="form-control" id="title" value="<%= project.title %>" placeholder="项目标题：不超过25个字">
                         </div>
                     </div>
 
@@ -141,7 +141,7 @@
                             <button type="button" class="btn btn-info" id="pickfiles">选择图片</button>
                         </div>
                         <p class="col-sm-12">（支持jpg、jpeg、png格式；建议尺寸大小: 600X450px）</p>
-                        <img src="" width="0" alt="" id="coverUrl" style="margin-left:7.5%;">
+                        <img src="<%= project.coverUrl %>" width="87%" id="coverUrl" style="margin-left:7.5%;">
                     </div>
 
                     <div class="form-group">
@@ -162,7 +162,7 @@
                 </form>
             </div>
         </div>
-
+        <% } %>
     </div>
 
     <%include ./inc_footer.html %>

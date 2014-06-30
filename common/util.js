@@ -1,3 +1,4 @@
+"use strict";
 var crypto = require('crypto');
 
 module.exports = {
@@ -27,13 +28,17 @@ module.exports = {
      * 判断是否是手机号码
      */
     isPhone: function(val) {
-        if (!/^(((13[0-9]{1})|159|180|181|186|189|(15[0-9]{1}))+\d{8})$/.test(val)) {
+        if (!/^(1+\d{10})$/.test(val)) {
             return false;
         } else {
             return true;
         }
     },
 
+    /**
+     * @method isEmail
+     * 判断是否是邮箱地址
+     */
     isEmail: function(str) {
         if (!str.match(/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/)) {
             return false;
@@ -41,10 +46,18 @@ module.exports = {
         return true;
     },
 
+    /**
+     * @method md5
+     * md5加密
+     */
     md5: function(text) {
         return crypto.createHash('md5').update(text).digest('hex');
     },
 
+    /**
+     * @method convertDate
+     * 将时间毫秒数转换成人类可读的字符串
+     */
     convertDate: function(date) {
         var ONE_MINUTE_MILLISECONDS = 1 * 60 * 1000,
             ONE_HOUR_MILLISECONDS = ONE_MINUTE_MILLISECONDS * 60,
@@ -72,12 +85,6 @@ module.exports = {
             }
         }
         return (new Date(date)).toLocaleDateString();
-    },
+    }
 
-
-
-
-
-
-
-}
+};

@@ -1,12 +1,11 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
-var logger = require('../common/logger');
+// var logger = require('../common/logger');
 var Activity = require('../models/activity');
 var ActivityPeople = require('../models/activity_people');
-var User = require('../models/user');
-
-var user = require('./user');
+var auth = require('../policies/auth');
 
 module.exports = {
 
@@ -16,7 +15,9 @@ module.exports = {
      */
     joinActivity: function(req, res) {
         var activityId = req.params._id;
-        var userId = user.getUserId(req);
+        var xihumaker = auth.getSignedCookies(req, res, 'xihumaker');
+        var userId = xihumaker.userId;
+        var username = xihumaker.username;
 
         // 判断用户是否已报名该活动
         ActivityPeople.findOne({
@@ -24,7 +25,6 @@ module.exports = {
             belongToUserId: userId
         }, function(err, doc) {
             if (err) {
-                logger.error(err);
                 res.json({
                     "r": 1,
                     "errcode": 10084,
@@ -51,7 +51,6 @@ module.exports = {
                     }
                 }, function(err, doc) {
                     if (err) {
-                        logger.error(err);
                         res.json({
                             "r": 1,
                             "errcode": 10084,
@@ -60,13 +59,15 @@ module.exports = {
                         return;
                     }
 
-                    User.findOne({
-                        _id: new ObjectId(userId)
-                    }, {
-                        password: 0
-                    }, function(err, doc) {
+                    var activityPeople = new ActivityPeople({
+                        belongToActivityId: activityId,
+                        belongToUserId: userId,
+                        belongToUsername: username,
+                        createTime: Date.now()
+                    });
+
+                    activityPeople.save(function(err, doc) {
                         if (err) {
-                            logger.error(err);
                             res.json({
                                 "r": 1,
                                 "errcode": 10084,
@@ -75,32 +76,69 @@ module.exports = {
                             return;
                         }
 
-                        var activityPeople = new ActivityPeople({
-                            belongToActivityId: activityId,
-                            belongToUserId: userId,
-                            belongToUsername: doc.username,
-                            createTime: Date.now()
+                        res.json({
+                            "r": 0,
+                            "msg": "活动报名成功"
                         });
-
-                        activityPeople.save(function(err, doc) {
-                            if (err) {
-                                logger.error(err);
-                                res.json({
-                                    "r": 1,
-                                    "errcode": 10084,
-                                    "msg": "服务器错误，活动报名失败"
-                                });
-                                return;
-                            }
-
-                            res.json({
-                                "r": 0,
-                                "msg": "活动报名成功"
-                            });
-                            return;
-                        });
+                        return;
                     });
                 });
+            }
+        });
+    },
+
+    /**
+     * @method unJoinActivity
+     * 取消报名
+     */
+    unJoinActivity: function(req, res) {
+        var activityId = req.params._id;
+        var xihumaker = auth.getSignedCookies(req, res, 'xihumaker');
+        var userId = xihumaker.userId;
+
+        ActivityPeople.findOneAndRemove({
+            belongToActivityId: activityId,
+            belongToUserId: userId
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    "r": 1,
+                    "errcode": 10129,
+                    "msg": "服务器错误，取消报名失败"
+                });
+                return;
+            }
+
+            if ( !! doc) {
+                Activity.findByIdAndUpdate({
+                    _id: new ObjectId(activityId)
+                }, {
+                    $inc: {
+                        totalNum: -1
+                    }
+                }, function(err, doc) {
+                    if (err) {
+                        res.json({
+                            "r": 1,
+                            "errcode": 10129,
+                            "msg": "服务器错误，取消报名失败"
+                        });
+                        return;
+                    }
+
+                    res.json({
+                        "r": 0,
+                        "msg": "取消报名成功"
+                    });
+                    return;
+                });
+            } else {
+                res.json({
+                    "r": 1,
+                    "errcode": 10130,
+                    "msg": "记录未找到，取消报名失败"
+                });
+                return;
             }
         });
     },
@@ -116,7 +154,6 @@ module.exports = {
             belongToActivityId: new ObjectId(activityId)
         }, function(err, docs) {
             if (err) {
-                logger.error(err);
                 res.json({
                     "r": 1,
                     "errcode": 10086,
@@ -145,7 +182,6 @@ module.exports = {
             belongToUserId: userId
         }, function(err, docs) {
             if (err) {
-                logger.error(err);
                 res.json({
                     "r": 1,
                     "errcode": 10087,
@@ -164,6 +200,14 @@ module.exports = {
                     $in: activityIdList
                 }
             }, function(err, docs) {
+                if (err) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10087,
+                        "msg": "服务器错误，根据用户ID查询报名的所有活动失败"
+                    });
+                    return;
+                }
                 res.json({
                     'r': 0,
                     'msg': '请求成功',
@@ -172,12 +216,5 @@ module.exports = {
             });
         });
     }
-
-
-
-
-
-
-
 
 };

@@ -1,5 +1,6 @@
-define(function(require, exports, module) {
+define(function(require) {
 
+    "use strict";
     require('../lib/md5');
 
     var $alert = $('.alert');
@@ -8,7 +9,6 @@ define(function(require, exports, module) {
     var $loginBtn = $('#loginBtn');
 
     $loginBtn.click(function() {
-
         var email = $email.val().trim();
         var password = $password.val().trim();
 
@@ -30,7 +30,7 @@ define(function(require, exports, module) {
             },
             dataType: 'json',
             timeout: 15000,
-            success: function(data, textStatus, jqXHR) {
+            success: function(data) {
                 var href = window.location.href;
                 if (data.r === 0) {
                     if (/login/.test(href)) {
@@ -42,12 +42,8 @@ define(function(require, exports, module) {
                     $alert.html(data.msg).show();
                     return;
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-
             }
         });
-
 
     });
 

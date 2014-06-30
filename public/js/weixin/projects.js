@@ -1,5 +1,5 @@
-define(function(require, exports, module) {
-
+define(function(require) {
+    "use strict";
     var common = require('../common');
     require('./common');
 
@@ -7,74 +7,6 @@ define(function(require, exports, module) {
     var $projectList = $('#projectList');
     var $loadMore = $('#loadMore');
     var $loading = $('#loading');
-
-    /**
-     * @method searchProjects
-     * 项目查询
-     */
-    function searchProjects(config, succCall, failCall) {
-        failCall = failCall || function() {
-            console.log('>>> LOG >>> searchProjects: Default failCall callback invoked.')
-        }
-        $.ajax({
-            url: '/api/projects/find',
-            type: 'GET',
-            data: config,
-            dataType: 'json',
-            timeout: 15000,
-            success: function(data, textStatus, jqXHR) {
-                // 查找成功一致的逻辑
-                if (data.r == 0) {
-                    var projectList = data.projectList;
-                    var len = projectList.length;
-                    var projectTemp = '';
-                    var project;
-                    var coverUrl;
-
-                    for (var i = 0; i < len; i++) {
-                        project = projectList[i];
-                        coverUrl = project.coverUrl;
-                        localProgress = common.convertProgress(project.progress);
-                        if (!coverUrl) {
-                            coverUrl = '/img/default_project_cover.jpg'
-                        }
-
-                        projectTemp = '<a class="item project" href="/weixin/project/' + project._id + '">' +
-                            '<div class="image">' +
-                            '<img src="' + coverUrl + '">' +
-                            '</div>';
-                        if (project.level === 3) {
-                            projectTemp += '<h4 class="ui black header title"><img class="jinghua" src="/img/xunzhang.png" />' + project.title + '</h4>';
-                        } else {
-                            projectTemp += '<h4 class="ui black header title">' + project.title + '</h4>';
-                        }
-                        projectTemp += '<div>' +
-                            '<div class="misc">' +
-                            '<span class="teamName">' + project.teamName + '</span>' +
-                            '<span class="ui green small label localProgress" style="">' + localProgress + '</span>' +
-                            '</div>' +
-                            '<div class="progress">' +
-                            '<div class="progress-bar progress-bar-success" style="width: ' + project.progress + '%"></div>' +
-                            '</div>' +
-                            '<div style="text-align: center;">' +
-                            '<button type="button" class="btn btn-link"><i class="heart icon"></i> 赞' + project.likeNum + '</button>' +
-                            '<button type="button" class="btn btn-link"><i class="star icon"></i> 关注' + project.concernNum + '</button>' +
-                            '<button type="button" class="btn btn-link"><i class="dollar icon"></i> 金币' + project.coinNum + '</button>' +
-                            '</div>' +
-                            '</div>' +
-                            '</a>';
-
-                        $projectList.append($(projectTemp));
-                    }
-                }
-                // 查找成功不一致的逻辑写在回调函数里面
-                succCall(data);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                failCall();
-            }
-        });
-    }
 
     var searchConfig = {
         pageSize: 5,
@@ -84,14 +16,76 @@ define(function(require, exports, module) {
         sortBy: 1
     };
 
+    function findProjects(config, succCall, failCall) {
+        failCall = failCall || function() {
+            console.log('>>> LOG >>> findProjects: Default failCall callback invoked.');
+        };
+
+        $.ajax({
+            url: '/api/projects/find',
+            type: 'GET',
+            data: config,
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data) {
+                succCall(data);
+            },
+            error: function() {
+                failCall();
+            }
+        });
+    }
+
+    function renderOne(project) {
+        var coverUrl = project.coverUrl;
+        var localProgress = common.convertProgress(project.progress);
+        if (!coverUrl) {
+            coverUrl = '/img/default_project_cover.jpg';
+        }
+
+        var projectTemp = '<a class="item project" href="/weixin/project/' + project._id + '">' +
+            '<div class="image">' +
+            '<img src="' + coverUrl + '">' +
+            '</div>';
+        if (project.level === 3) {
+            projectTemp += '<h4 class="ui black header title"><img class="jinghua" src="/img/xunzhang.png" />' + project.title + '</h4>';
+        } else {
+            projectTemp += '<h4 class="ui black header title">' + project.title + '</h4>';
+        }
+        projectTemp += '<div>' +
+            '<div class="misc">' +
+            '<span class="teamName">' + project.teamName + '</span>' +
+            '<span class="ui green small label localProgress" style="">' + localProgress + '</span>' +
+            '</div>' +
+            '<div class="progress">' +
+            '<div class="progress-bar progress-bar-success" style="width: ' + project.progress + '%"></div>' +
+            '</div>' +
+            '<div style="text-align: center;">' +
+            '<button type="button" class="btn btn-link"><i class="heart icon"></i> 赞' + project.likeNum + '</button>' +
+            '<button type="button" class="btn btn-link"><i class="star icon"></i> 关注' + project.concernNum + '</button>' +
+            '<button type="button" class="btn btn-link"><i class="dollar icon"></i> 金币' + project.coinNum + '</button>' +
+            '</div>' +
+            '</div>' +
+            '</a>';
+
+        $projectList.append($(projectTemp));
+    }
+
+    function render(projectList) {
+        for (var i = 0; i < projectList.length; i++) {
+            renderOne(projectList[i]);
+        }
+    }
+
     // 页面加载完成后，默认去查找一次
-    searchProjects(searchConfig, function(data) {
+    findProjects(searchConfig, function(data) {
         $loading.removeClass('active');
 
-        if (data.r == 0) {
+        if (data.r === 0) {
             var projectList = data.projectList;
             var len = projectList.length;
 
+            render(projectList);
             searchConfig.pageStart = searchConfig.pageStart + len;
 
             if (len === 0) {
@@ -136,13 +130,14 @@ define(function(require, exports, module) {
             $loadMore.hide();
             $msgTip.hide();
 
-            searchProjects(searchConfig, function(data) {
+            findProjects(searchConfig, function(data) {
                 $loading.removeClass('active');
 
-                if (data.r == 0) {
+                if (data.r === 0) {
                     var projectList = data.projectList;
                     var len = projectList.length;
 
+                    render(projectList);
                     searchConfig.pageStart = searchConfig.pageStart + len;
 
                     if (len === 0) {
@@ -162,11 +157,14 @@ define(function(require, exports, module) {
     // 点击加载更多
     $loadMore.click(function() {
         $loadMore.html('正在加载...');
-        searchProjects(searchConfig, function(data) {
-            if (data.r == 0) {
+        findProjects(searchConfig, function(data) {
+            if (data.r === 0) {
                 var projectList = data.projectList;
                 var len = projectList.length;
+
+                render(projectList);
                 searchConfig.pageStart = searchConfig.pageStart + len;
+
                 if (len === 0) {
                     $loadMore.html('无更多项目');
                 } else if (len < searchConfig.pageSize) {
@@ -187,11 +185,12 @@ define(function(require, exports, module) {
         var windowHeight = $(this).height();
         if (scrollTop + windowHeight == scrollHeight) {
             $loadMore.html('正在加载...');
-            searchProjects(searchConfig, function(data) {
-                if (data.r == 0) {
+            findProjects(searchConfig, function(data) {
+                if (data.r === 0) {
                     var projectList = data.projectList;
                     var len = projectList.length;
 
+                    render(projectList);
                     searchConfig.pageStart = searchConfig.pageStart + len;
 
                     if (len === 0) {

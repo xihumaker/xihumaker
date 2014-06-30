@@ -1,10 +1,9 @@
 /** 
  * log4js 日志输出配置文件
- * @type {exports}
  */
+"use strict";
 var log4js = require('log4js');
 
-// logger configure  
 log4js.configure({
     appenders: [{
         type: 'console'

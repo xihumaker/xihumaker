@@ -1,23 +1,20 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
 var logger = require('../common/logger');
-// Modal
 var Activity = require('../models/activity');
 var ActivityScore = require('../models/activity_score');
 var ActivityPeople = require('../models/activity_people');
-var User = require('../models/user');
-
-// Controller
-var user = require('./user');
+var auth = require('../policies/auth');
 
 module.exports = {
 
     // 活动 - 评价并签到
     scoreActivity: function(req, res) {
-        var activityId = req.params._id,
-            userId = user.getUserId(req),
-            starNum = Number(req.body.starNum) || 5;
+        var activityId = req.params._id;
+        var userId = auth.getUserId(req, res);
+        var starNum = Number(req.body.starNum) || 5;
 
         // err处理函数
         var errFun = function(err) {

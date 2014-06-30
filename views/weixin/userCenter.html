@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>西湖创客汇</title>
     <meta name="description" content="">
-    <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
     <link rel="shortcut icon" href="/icon/favicon.ico">
+    <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/css/weixin/common.css">
     <link rel="stylesheet" type="text/css" href="/css/weixin/userCenter.css">
 
@@ -24,20 +24,12 @@
             <div class="ui divided list userinfo" id="userinfo">
                 <a class="item" href="/weixin/user/<%= user._id %>/edit">
                     <i class="right floated arrow icon"></i>
-                    <img class="ui huge avatar image" src="/img/default_avatar.png">
+                    <img class="ui huge avatar image" src="<%= user.headimgurl || '/img/default_avatar.png' %>">
                     <div class="content">
                         <div class="ui header"><%= user.username %></div>
                         <% if(user.province != '0') { %>
                             <%= user.province %> <%= user.city %>
                         <% } %>
-                        
-                    </div>
-                </a>
-                <a class="item devitem" href="javascript:void(0);">
-                    <i class="right floated arrow icon" style="margin-top: 4px;"></i>
-                    <i class="mail icon"></i>
-                    <div class="content">
-                        <div class="header">我的消息</div>
                     </div>
                 </a>
             </div>
@@ -47,7 +39,7 @@
             <div class="ui divided list">
                 <a class="item" href="/weixin/user/<%= user._id %>/projects/sponsor">
                     <i class="right floated arrow icon" style="margin-top: 2px;"></i>
-                    <i class="list layout icon"></i>
+                    <i class="grid layout icon"></i>
                     <div class="content">
                         <div class="header">我发起的项目</div>
                     </div>
@@ -89,7 +81,6 @@
             <div class="ui red fluid button" id="logout">退出登录</div>
         </div>
 
-
     <!-- 查找用户信息失败 -->
     <% } else { %>
         <div class="ui center teal aligned icon header">
@@ -97,7 +88,6 @@
         </div>
     <% } %>
 
-    
 
     <!--
     < include ./inc_footer_nav.html %>

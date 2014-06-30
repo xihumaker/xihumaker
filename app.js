@@ -1,6 +1,7 @@
 /**
  * Module dependencies.
  */
+"use strict";
 var express = require('express'),
     http = require('http'),
     path = require('path'),
@@ -8,6 +9,8 @@ var express = require('express'),
     config = require('./config'),
     routes = require('./routes'),
     logger = require('./common/logger');
+
+var auth = require('./policies/auth');
 
 // 数据库连接
 mongoose.connect('mongodb://' + config.MONGODB_IP + '/' + config.MONGODB_DATABASE_NAME, function(err) {
@@ -31,6 +34,19 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('xihumaker'));
 app.use(express.session());
+
+// 全局返回用户是否登录
+app.use(function(req, res, next) {
+    var xihumaker = auth.getSignedCookies(req, res, 'xihumaker');
+    if ( !! xihumaker) {
+        res.locals.hasLogin = true;
+        res.locals.userId = xihumaker.userId;
+        res.locals.username = xihumaker.username;
+    } else {
+        res.locals.hasLogin = false;
+    }
+    next();
+});
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 

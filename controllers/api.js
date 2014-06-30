@@ -1,3 +1,4 @@
+"use strict";
 var weixin = require('weixin-apis');
 var config = require('../config');
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
@@ -56,7 +57,25 @@ module.exports = {
         };
 
         weixin.sendMsg(resMsg);
+    },
+
+    // 朋友~ - 绑定帐号
+    bindAccount: function(data) {
+        var articles = [];
+        articles[0] = {
+            title: "绑定帐号",
+            description: "点击卡片进行【西湖创客汇】帐号的绑定，绑定帐号后，可获得10金币的奖励哦~",
+            picUrl: WEB_SERVER_IP + '/img/logo_360_200.jpg',
+            url: WEB_SERVER_IP + '/weixin/bindWeixin?openId=' + data.fromUserName
+        };
+        var resMsg = {
+            toUserName: data.fromUserName,
+            fromUserName: data.toUserName,
+            msgType: 'news',
+            articles: articles
+        };
+        weixin.sendMsg(resMsg);
     }
 
 
-}
+};

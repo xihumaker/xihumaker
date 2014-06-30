@@ -1,3 +1,4 @@
+"use strict";
 var config = require('../config');
 var ADMIN_ACCOUNT = config.ADMIN_ACCOUNT;
 var Util = require('../common/util');
@@ -5,41 +6,54 @@ var logger = require('../common/logger');
 var nodeExcel = require('excel-export');
 var User = require('../models/user');
 
+
+function getSignedCookies(req, res, name) {
+    return req.signedCookies && req.signedCookies[name];
+}
+
+// true 用户已登录 false 用户未登录
+function adminAuth(req, res) {
+    var admin = getSignedCookies(req, res, 'admin');
+    return !!admin;
+}
+
+/**
+ * 页面请求认证
+ */
+function adminPageAuth(req, res, next) {
+    if (adminAuth(req, res)) {
+        console.log("[ >>> LOG >>> ]：管理员已登录");
+        next();
+    } else {
+        console.log("[ >>> LOG >>> ]：管理员未登录");
+        res.render('admin/login');
+    }
+}
+
+/**
+ * Ajax请求认证
+ */
+function adminAjaxAuth(req, res, next) {
+    if (adminAuth(req, res)) {
+        console.log("[ >>> LOG >>> ]：管理员已登录");
+        next();
+    } else {
+        console.log("[ >>> LOG >>> ]：管理员未登录");
+        res.json({
+            "r": 1,
+            "errcode": "20001",
+            "msg": "管理员未登录"
+        });
+    }
+}
+
+
 module.exports = {
 
-    /**
-     * @method auth
-     * 验证管理员是否已经登录，主要用于页面请求
-     */
-    auth: function(req, res, next) {
-        var adminId = req.signedCookies.admin && req.signedCookies.admin.adminId;
-        if (adminId) {
-            logger.info("管理员已经登录");
-            next();
-        } else {
-            logger.info("管理员未登录");
-            res.render('admin/login');
-        }
-    },
-
-    /**
-     * @method auth2
-     * 验证管理员是否已经登录，主要用于Ajax请求
-     */
-    auth2: function(req, res, next) {
-        var adminId = req.signedCookies.admin && req.signedCookies.admin.adminId;
-        if (adminId) {
-            logger.info("管理员已经登录");
-            next();
-        } else {
-            logger.info("管理员未登录");
-            res.json({
-                "r": 1,
-                "errcode": "20001",
-                "msg": "管理员未登录"
-            });
-        }
-    },
+    getSignedCookies: getSignedCookies,
+    adminAuth: adminAuth,
+    adminPageAuth: adminPageAuth,
+    adminAjaxAuth: adminAjaxAuth,
 
     /**
      * @method login
@@ -202,7 +216,40 @@ module.exports = {
             res.setHeader("Content-Disposition", "attachment; filename=" + "xihumaker.xlsx");
             res.end(result, 'binary');
         });
+    },
+
+
+    showIndex: function(req, res) {
+        res.render('admin/index');
+    },
+
+    showLogin: function(req, res) {
+        res.render('admin/login');
+    },
+
+    showUserManagement: function(req, res) {
+        res.render('admin/userManagement');
+    },
+
+    showProjectManagement: function(req, res) {
+        res.render('admin/projectManagement');
+    },
+
+    showActivityManagement: function(req, res) {
+        res.render('admin/activityManagement');
+    },
+
+    showVipManagement: function(req, res) {
+        res.render('admin/vipManagement');
+    },
+
+    showCreateVip: function(req, res) {
+        res.render('admin/createVip');
+    },
+
+    showCreateActivity: function(req, res) {
+        res.render('admin/createActivity');
     }
 
 
-}
+};

@@ -1,3 +1,4 @@
+"use strict";
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
@@ -6,14 +7,12 @@ var logger = require('../common/logger');
 var Project = require('../models/project');
 var ProjectTopic = require('../models/project_topic');
 var User = require('../models/user');
-
-// Controller
-var user = require('./user');
+var auth = require('../policies/auth');
 
 module.exports = {
 
     // 添加一条江湖告急
-    addOneTopic: function(req, res) {
+    addOneProjectTopic: function(req, res) {
         var projectId = req.params._id,
             content = req.body.content;
 
@@ -28,7 +27,7 @@ module.exports = {
 
         Project.findOne({
             _id: new ObjectId(projectId)
-        }, function(err, doc) {
+        }, function(err, _project) {
             if (err) {
                 logger.error(err);
                 res.json({
@@ -39,11 +38,9 @@ module.exports = {
                 return;
             }
 
-            var project = doc;
-
             var projectTopic = new ProjectTopic({
                 belongToProjectId: projectId,
-                belongToProjectTitle: project.title,
+                belongToProjectTitle: _project.title,
                 content: content,
                 createTime: Date.now()
             });
@@ -133,10 +130,9 @@ module.exports = {
 
     // 添加一条江湖告急回复
     addOneTopicComment: function(req, res) {
-        var projectId = req.params._id,
-            topicId = req.params.topicId,
+        var topicId = req.params.topicId,
             content = req.body.content,
-            userId = user.getUserId(req);
+            userId = auth.getUserId(req, res);
 
         User.findOne({
             _id: new ObjectId(userId)
@@ -159,7 +155,7 @@ module.exports = {
                 headimgurl: user.headimgurl,
                 content: content,
                 createTime: Date.now()
-            }
+            };
 
             ProjectTopic.findByIdAndUpdate({
                 _id: topicId

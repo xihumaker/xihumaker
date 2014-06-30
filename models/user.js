@@ -21,6 +21,7 @@ var mongoose = require('mongoose'),
  * interest 个人感兴趣的行业方向
  * headimgurl 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空
  * coin 金币数 默认0
+ * openId 微信用户唯一ID
  */
 var UserSchema = new Schema({
     username: {
@@ -95,6 +96,18 @@ var UserSchema = new Schema({
     coin: {
         type: Number,
         default: 0
+    },
+    resetTicket: {
+        type: Number,
+        default: 0
+    },
+    resetToken: {
+        type: String,
+        default: ''
+    },
+    openId: {
+        type: String,
+        default: ''
     }
 });
 
