@@ -224,7 +224,7 @@ define(function(require) {
         $phone.html(user.phone);
         $birthday.html((new Date(user.birthday).toLocaleDateString()));
         $coin.html(user.coin);
-        $interest.html(user.interest.join("、"));
+        $interest.html((user.interest || []).join("、"));
         $inAddress.html(user.inAddress);
         $city.html(user.city);
         $province.html(user.province);

@@ -249,7 +249,17 @@ module.exports = {
 
     showCreateActivity: function(req, res) {
         res.render('admin/createActivity');
+    },
+
+    showProductManagement: function(req, res) {
+        res.render('admin/productManagement');
+    },
+
+    showCreateProduct: function(req, res) {
+        res.render('admin/createProduct');
     }
+
+
 
 
 };

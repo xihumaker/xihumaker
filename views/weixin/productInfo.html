@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>产品：<%= product.name %></title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
+    <link rel="shortcut icon" href="/icon/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/css/weixin/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/weixin/productInfo.css">
+
+    <script type="text/javascript">
+        // 显示微信中网页右上角按钮
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('showOptionMenu');
+        });
+        var global = {
+            hasLogin: <%= hasLogin %>,
+            userId: "<%= userId %>",
+            r: <%= r %>,
+            msg: "<%= msg %>",
+            product: {
+                _id: "<%= product._id %>"
+            }
+        };
+    </script>
+</head>
+<body>
+
+    <h4 class="ui top attached center aligned inverted green header"><%= product.name %></h4>
+    <div class="ui segment center aligned attached">
+        <div class="ui buttons">
+            <% if(whichWorld === 1) { %>
+                <a class="ui button" id="realBtn" href="/weixin/product/<%= product._id %>?world=0" target="_self">现实世界</a>
+                <div class="or"></div>
+                <a class="ui blue button" id="perfectBtn" href="/weixin/product/<%= product._id %>?world=1">完美世界</a>
+            <% } else { %>
+                <a class="ui blue button" id="realBtn" href="/weixin/product/<%= product._id %>?world=0" target="_self">现实世界</a>
+                <div class="or"></div>
+                <a class="ui button" id="perfectBtn" href="/weixin/product/<%= product._id %>?world=1">完美世界</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="ui basic segment topicList" id="topicList">
+        <!-- <div class="ui segment topic">
+            <h4 class="ui header">
+                <img class="rounded ui image" width="40" height="40" src="/img/thumbnail-1.jpg">
+                <div class="content">
+                    戴立
+                    <div class="sub header">
+                        2014年7月8日 下午4:10:32
+                    </div>
+                </div>
+            </h4>
+            <div class="content">你好发射点发阿凡达开发贷款放假啊阿萨德解放拉隧道附近啊扣篮大赛放假啊大煞风景啊塞德里克放假啊第三轮放假啊岁啊上炕都费劲阿斯顿福建你好发射点发阿凡达开发贷款放假啊阿萨德解放拉隧道附近啊扣篮大赛放假啊大煞风景啊塞德里克放假啊第三轮放假啊岁啊上炕都费劲阿斯顿福建</div>
+            <a href="javascript:void(0);">全文</a>
+            <ul class="picList">
+                <li>
+                    <img src="http://xihumakertest.qiniudn.com/o_18sadje1n1kl4mq1mqu1uk897na.jpg" width="100%" alt="">    
+                </li>
+                <li>
+                    <img src="http://xihumakertest.qiniudn.com/o_18sadje1o1s2pe6j1gmn19971imbb.jpg" width="100%" alt="">
+                </li>
+                <li>
+                    <img src="http://xihumakertest.qiniudn.com/o_18lmergbjuo71motulb97349n9.jpg" width="100%" alt="">    
+                </li>
+            </ul>
+            <div class="meta">
+                <i class="thumbs up outline blue icon"></i> 12
+                <i class="chat outline blue icon"></i> 回复
+            </div>
+            <div class="ui divider"></div>
+            <ul class="commentList">
+                <li>
+                    <strong>戴笠：</strong>这是第一个评论。
+                </li>
+                <li>
+                    <strong>戴笠：</strong>这是第一个评论。
+                </li>
+                <li>
+                    <strong>戴笠：</strong>这是第一个评论。
+                </li>
+            </ul>
+            <span><a href="javascript:void(0);">更多</a> 共10条回复</span>
+        </div> -->
+        
+    </div>
+
+    <div class="ui header center black aligned loadMore" id="loadMore">加载更多</div>
+
+    <div class="ui fixed bottom menu">
+        <% if(hasLogin) { %>
+            <% if(whichWorld === 1) { %>
+                <a class="ui button fluid green" href="/weixin/createProductTopic?id=<%= product._id %>&world=1" id="newTopicOfOne"><i class="icon edit"></i>发帖子</a>
+            <% } else { %>
+                <a class="ui button fluid green" href="/weixin/createProductTopic?id=<%= product._id %>&world=0" id="newTopicOfZero"><i class="icon edit"></i>发帖子</a>
+            <% } %>
+        <% } else { %>
+            <% if(whichWorld === 1) { %>
+                <a class="ui button fluid green" href="/weixin/login?returnUrl=/weixin/createProductTopic?id=<%= product._id %>&world=1"><i class="icon edit"></i>发帖子</a>
+            <% } else { %>
+                <a class="ui button fluid green" href="/weixin/login?returnUrl=/weixin/createProductTopic?id=<%= product._id %>&world=0"><i class="icon edit"></i>发帖子</a>
+            <% } %>
+        <% } %>
+    </div>
+    
+    <!-- 回复框 -->
+    <div class="replyBox" id="replyBox">
+        <div class="ui form">
+            <div class="ui field">
+                <textarea placeholder="回两句吧..."></textarea>
+            </div>
+            <div class="ui field" style="text-align:right;">
+                <div class="ui small button cancelBtn">取消</div>                
+                <div class="ui small button green sendBtn">发送</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 大图查看 -->
+    <div class="imageView" id="imageView">
+        <a href="javascript:;" class="close">
+            <span></span>
+        </a>
+        <img src="" alt="" width="100%" id="largeImage" />
+    </div>
+
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>
+
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/weixin/productInfo" ></script>
+
+</body>
+</html>

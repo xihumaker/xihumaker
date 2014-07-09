@@ -6,6 +6,7 @@
     <a href="/admin/projectManagement" class="item linkToProjectManagement">项目管理</a>
     <a href="/admin/activityManagement" class="item linkToActivityManagement">活动管理</a>
     <a href="/admin/vipManagement" class="item linkToVipManagement">会员秀管理</a>
+    <a href="/admin/productManagement" class="item linkToProductManagement">产品乌托邦管理</a>
     <a href="/admin/logout" class="right item"><i class="off icon"></i>退出</a>
 </div>
 
@@ -23,14 +24,15 @@
         if(/admin\/projectManagement/.test(href)) {
             $('.linkToProjectManagement').addClass('active');
         }
-        if(/admin\/vipManagement/.test(href) || /admin\/createVip/.test(href)) {
-            $('.linkToVipManagement').addClass('active');
-        }
-        if(/admin\/settings/.test(href)) {
-            $('.linkToSettings').addClass('active');
-        }
         if(/admin\/activityManagement/.test(href) || /admin\/createActivity/.test(href)) {
             $('.linkToActivityManagement').addClass('active');
         }
+        if(/admin\/vipManagement/.test(href) || /admin\/createVip/.test(href)) {
+            $('.linkToVipManagement').addClass('active');
+        }
+        if(/admin\/productManagement/.test(href) || /admin\/createProduct/.test(href)) {
+            $('.linkToProductManagement').addClass('active');
+        }
+        
     });
 </script>

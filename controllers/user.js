@@ -15,7 +15,8 @@ function newCookie(req, res, user) {
     res.cookie('xihumaker', {
         userId: user._id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        headimgurl: user.headimgurl
     }, {
         path: '/',
         maxAge: 1000 * 60 * 60 * 24 * 30,

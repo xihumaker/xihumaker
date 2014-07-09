@@ -1,0 +1,120 @@
+body {
+    padding-bottom: 60px;
+}
+.hide {
+    display: none !important;
+}
+.topicList {
+    padding: 10px !important;
+    margin-top: 0px !important;
+}
+.topicList .topic {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.topicList .topic .content {
+    word-wrap: break-word; 
+    word-break: break-all;
+}
+.topicList .topic a {
+    text-decoration: none;
+}
+.topicList .topic .meta {
+    text-align: right;
+}
+.topicList .topic img {
+    float: left;
+    margin-right: 10px;
+}
+.topicList .topic .ui.header {
+    overflow: auto;
+    margin-bottom: 5px;
+}
+.topicList .topic .sub.header {
+    font-size: 12px;
+}
+ul {
+    padding-left: 0;
+    list-style: none;
+}
+.picList {
+    overflow: auto;
+    margin: 5px 0;
+}
+.picList li {
+    width: 30%;
+    float: left;
+    margin-right: 3%;
+    margin-bottom: 5px;
+}
+.commentList {
+    font-size: 14px;
+    margin: 5px 0;
+}
+.ui.divider {
+    margin: 5px 0;
+}
+.loadMore {
+    font-size: 16px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+a {
+    color: #5D5DEC;
+    ;
+}
+.replyBox {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    left: 0;
+    display: none;
+}
+.replyBox .ui.form {
+    background: #fff;
+    z-index: 100001;
+    width: 92%;
+    margin-left: 2%;
+    margin-top: 10px;
+    padding: 10px 2% 1px;
+}
+.replyBox textarea {
+    height: 6em !important;
+    min-height: 6em !important;
+    padding-left: 5px !important;
+}
+
+/*大图查看样式*/
+.imageView {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    left: 0;
+    display: none;
+}
+.imageView .close {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 58px;
+    height: 58px;
+    background-color: #393939;
+    -webkit-border-radius: 0px 0px 0px 138px;
+    -moz-border-radius: 0px 0px 0px 138px;
+    border-radius: 0px 0px 0px 138px;
+}
+.imageView .close span {
+    display: block;
+    float: right;
+    width: 34px;
+    height: 34px;
+    margin: 10px 5px 0px 0px;
+    background: url(/img/button021844c2.png) no-repeat -38px -37px;
+}

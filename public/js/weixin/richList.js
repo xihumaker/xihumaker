@@ -1,9 +1,9 @@
 /**
  * 财富榜
  */
-define(function(require, exports, module){
-	
-	var iAlert = require('../../angel/alert');
+define(function(require, exports, module) {
+
+    var iAlert = require('../../angel/alert');
     var $richList = $('#richList');
 
     function getCoinRankByUserId(userId, succCall) {
@@ -39,8 +39,8 @@ define(function(require, exports, module){
                     getCoinRankByUserId(userId, function(data) {
                         if (data.r === 0) {
                             var temp = '<tr>' +
-                            '<td><img class="rounded mini ui image" src="' + user.headimgurl + '"></td>' +
-                                '<td>' + data.  + '</td>' +
+                                '<td><img class="rounded mini ui image" src="' + user.headimgurl + '"></td>' +
+                                '<td>' + data.coinRank + '</td>' +
                                 '<td>我</td>' +
                                 '<td>' + user.coin + '</td>' +
                                 '</tr>';

@@ -19,6 +19,8 @@ var activityLike = require('./controllers/activity_like');
 var activityComment = require('./controllers/activity_comment');
 var activityScore = require('./controllers/activity_score');
 var site = require('./controllers/site');
+var product = require('./controllers/product');
+var productTopic = require('./controllers/product_topic');
 var ccap = require('./services/ccap');
 var auth = require('./policies/auth');
 
@@ -187,7 +189,12 @@ module.exports = function(app) {
         res.render('weixin/jianghu');
     });
 
-
+    // 微信端 - 产品乌托邦 - 列表
+    app.get('/weixin/products', product.showProducts);
+    // 微信端 - 产品乌托邦 - 详情
+    app.get('/weixin/product/:_id', product.showProductInfo);
+    // 微信端 - 产品乌托邦 - 新建帖子
+    app.get('/weixin/createProductTopic', productTopic.showCreateProductTopic)
 
 
     /**
@@ -320,6 +327,22 @@ module.exports = function(app) {
     // 活动 - 签到并评分
     app.post('/api/activity/:_id/score', auth.userAjaxAuth, activityScore.scoreActivity);
 
+    // 产品乌托邦 - 新建
+    app.post('/api/product/create', admin.adminAjaxAuth, product.createProduct);
+    // 产品乌托邦 - 查询
+    app.get('/api/products', product.findProductsByPage);
+    // 产品乌托邦 - 删除
+    app.delete('/api/product/:_id', admin.adminAjaxAuth, product.deleteProductById);
+    // 产品乌托邦 - 更新
+    app.put('/api/product/:_id', admin.adminAjaxAuth, product.updateProductById);
+    // 产品乌托邦 - 新建帖子
+    app.post('/api/product/:_id/topic', auth.userAjaxAuth, productTopic.createProductTopic);
+    // 产品乌托邦 - 分页查询
+    app.get('/api/product/:_id/topics', productTopic.findProductTopicsByPage);
+    // 产品乌托邦 - 赞
+    app.post('/api/product/topic/:_id/like', auth.userAjaxAuth, productTopic.likeProductTopic);
+    // 产品乌托邦 - 评论帖子
+    app.post('/api/product/topic/:_id/comment', auth.userAjaxAuth, productTopic.commentProductTopic);
 
     /**
      * 后台管理相关路由
@@ -357,6 +380,12 @@ module.exports = function(app) {
     app.get('/admin/createActivity', admin.showCreateActivity);
     // 显示更新活动页面
     app.get('/admin/activity/:_id/edit', activity.showEditActivity);
+    // 产品乌托邦 - 管理页面
+    app.get('/admin/productManagement', admin.showProductManagement);
+    // 产品乌托邦 - 新建产品
+    app.get('/admin/createProduct', admin.showCreateProduct);
+    // 产品乌托邦 - 更新页面
+    app.get('/admin/product/:_id/edit', product.showEditProduct);
 
 
     /**

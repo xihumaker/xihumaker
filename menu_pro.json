@@ -8,7 +8,7 @@
         }, {
             "type": "view",
             "name": "改变世界",
-            "url": "http://115.29.18.213in/gaibianshijie"
+            "url": "http://115.29.18.213/weixin/gaibianshijie"
         }, {
             "type": "view",
             "name": "创客分布",
@@ -19,30 +19,26 @@
         "sub_button": [{
             "type": "view",
             "name": "活动",
-            "url": "http://115.29.18.213in/activities"
-        }, {
-            "type": "view",
-            "name": "江湖告急",
-            "url": "http://115.29.18.213in/jianghu"
+            "url": "http://115.29.18.213/weixin/activities"
         }, {
             "type": "view",
             "name": "微课程",
-            "url": "http://115.29.18.213in/weikecheng"
+            "url": "http://115.29.18.213/weixin/weikecheng"
         }, {
             "type": "view",
             "name": "推广创客文化",
-            "url": "http://115.29.18.213in/tuiguang"
+            "url": "http://115.29.18.213/weixin/tuiguang"
         }]
     }, {
         "name": "朋友～",
         "sub_button": [{
             "type": "view",
             "name": "会员秀",
-            "url": "http://115.29.18.213in/vipShow"
+            "url": "http://115.29.18.213/weixin/vipShow"
         }, {
             "type": "view",
             "name": "财富榜",
-            "url": "http://115.29.18.213in/richList"
+            "url": "http://115.29.18.213/weixin/richList"
         }, {
             "type": "view",
             "name": "北斗社区",
@@ -50,7 +46,7 @@
         }, {
             "type": "view",
             "name": "我",
-            "url": "http://115.29.18.213in/userCenter"
+            "url": "http://115.29.18.213/weixin/userCenter"
         }, {
             "type": "click",
             "name": "绑定帐号",

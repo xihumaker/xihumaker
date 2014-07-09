@@ -30,6 +30,10 @@
             "url": "http://xihumaker.jios.org/weixin/weikecheng"
         }, {
             "type": "view",
+            "name": "产品乌托邦",
+        "url": "http://xihumaker.jios.org/weixin/products"
+        }, {
+            "type": "view",
             "name": "推广创客文化",
             "url": "http://xihumaker.jios.org/weixin/tuiguang"
         }]

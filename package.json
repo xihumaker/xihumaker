@@ -16,6 +16,7 @@
     "nodemailer": "^0.7.0",
     "request": "^2.36.0",
     "validator": "*",
-    "weixin-apis": "0.0.5"
+    "weixin-apis": "0.0.5",
+    "xss": "^0.1.9"
   }
 }

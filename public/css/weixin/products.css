@@ -1,0 +1,10 @@
+#searchBox {
+	margin-top:2px;
+	padding-right: 2px;
+}
+#searchKey {
+	width: 140px;padding-left:5px;
+}
+#productList .ui.button {
+	margin-bottom: 5px;
+}

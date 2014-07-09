@@ -1,176 +1,215 @@
-[2014-06-30 18:08:21.293] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:08:21.311] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:08:30.411] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:08:30.435] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:08:36.443] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:08:36.466] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:09:02.801] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:09:02.822] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:12:16.685] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:12:16.719] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:12:30.232] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:12:30.249] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:12:36.762] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:12:36.782] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:12:44.791] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:12:44.808] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:12:52.973] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:12:52.994] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:15:25.037] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:15:25.058] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:16:39.050] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:16:39.071] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:16:45.238] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:16:45.261] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:16:51.222] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:16:51.245] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:17:29.803] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:17:29.821] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:17:34.880] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:17:34.900] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:17:39.981] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:17:39.998] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:18:15.389] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:18:15.411] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:18:24.507] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:18:24.528] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:18:48.845] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:18:48.866] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:19:37.515] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:19:37.533] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:19:44.567] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:19:44.590] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:20:01.003] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:20:01.022] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:20:04.941] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:20:04.964] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:21:12.833] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:21:12.855] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:23:59.168] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:23:59.188] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:24:45.823] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:24:45.844] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:24:51.856] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:24:51.881] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:27:11.862] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:27:11.881] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:27:19.889] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:27:19.907] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:28:51.253] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:28:51.268] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:29:23.649] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:29:23.668] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:29:36.884] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:29:36.905] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:30:04.144] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:30:04.165] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:30:12.251] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:30:12.272] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:30:30.576] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:30:30.597] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:30:43.737] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:30:43.754] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:34:29.822] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:34:29.842] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:35:04.300] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:35:04.320] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:35:55.009] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:35:55.032] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:36:28.437] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:36:28.458] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:36:30.477] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:36:30.498] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:37:25.445] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:37:25.462] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:37:57.734] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:37:57.760] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:38:22.036] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:38:22.056] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:40:31.818] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:40:31.837] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:40:57.190] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:40:57.211] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:42:23.423] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:42:23.447] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:42:30.599] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:42:30.620] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:42:45.681] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:42:45.704] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:43:01.997] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:43:02.016] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:44:39.444] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:44:39.467] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:44:48.798] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:44:48.817] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 18:45:15.749] [INFO] logger - Express server listening on port 80
-[2014-06-30 18:45:15.770] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 19:11:41.723] [INFO] logger - Express server listening on port 80
-[2014-06-30 19:11:41.746] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 19:12:17.165] [INFO] logger - Express server listening on port 80
-[2014-06-30 19:12:17.187] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 19:12:37.540] [INFO] logger - Express server listening on port 80
-[2014-06-30 19:12:37.558] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 19:14:00.614] [INFO] logger - Express server listening on port 80
-[2014-06-30 19:14:00.636] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 19:57:37.781] [INFO] logger - Express server listening on port 80
-[2014-06-30 19:57:37.802] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 19:58:14.270] [INFO] logger - Express server listening on port 80
-[2014-06-30 19:58:14.291] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 19:59:11.190] [INFO] logger - Express server listening on port 80
-[2014-06-30 19:59:11.210] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:00:52.483] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:00:52.504] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:03:53.030] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:03:53.051] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:03:57.014] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:03:57.035] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:04:11.252] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:04:11.277] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:08:38.905] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:08:38.934] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:09:06.303] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:09:06.324] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:10:33.560] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:10:33.575] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:11:02.934] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:11:02.955] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:13:30.962] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:13:30.983] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:14:13.566] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:14:13.584] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:14:31.771] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:14:31.794] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:14:46.008] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:14:46.032] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:16:08.243] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:16:08.263] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:16:21.299] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:16:21.319] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:16:42.645] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:16:42.666] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:20:13.554] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:20:13.578] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:21:07.416] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:21:07.435] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:24:09.814] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:24:09.835] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:24:45.450] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:24:45.486] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:26:04.310] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:26:04.333] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:26:55.092] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:26:55.122] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:27:03.239] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:27:03.256] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:27:43.756] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:27:43.779] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:27:58.993] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:27:59.015] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:28:35.536] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:28:35.557] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:29:39.505] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:29:39.524] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:31:36.003] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:31:36.024] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-06-30 20:32:07.487] [INFO] logger - Express server listening on port 80
-[2014-06-30 20:32:07.505] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 07:33:56.761] [INFO] logger - Express server listening on port 80
+[2014-07-09 07:33:56.777] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 07:43:38.933] [INFO] logger - 登录成功
+[2014-07-09 08:05:16.671] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:05:16.683] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:06:53.631] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:06:53.655] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:13:55.729] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:13:55.748] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:16:05.546] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:16:05.567] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:17:21.504] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:17:21.522] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:17:48.871] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:17:48.894] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:22:10.498] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:22:10.515] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:22:56.100] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:22:56.125] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:23:29.550] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:23:29.578] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:24:11.150] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:24:11.172] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:38:42.351] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:38:42.370] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:39:08.722] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:39:08.739] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:39:36.133] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:39:36.148] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:47:43.726] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:47:43.746] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:49:39.074] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:49:39.094] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:50:18.651] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:50:18.669] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:50:40.170] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:50:40.188] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:51:56.235] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:51:56.250] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:52:32.639] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:52:32.671] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 08:54:43.378] [INFO] logger - Express server listening on port 80
+[2014-07-09 08:54:43.409] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:05:36.648] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:05:36.669] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:21:24.801] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:21:24.818] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:22:09.197] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:22:09.220] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:23:13.402] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:23:13.419] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:24:52.402] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:24:52.446] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:25:30.336] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:25:30.352] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:30:03.452] [INFO] logger - 登录成功
+[2014-07-09 09:37:58.820] [INFO] logger - 登录成功
+[2014-07-09 09:43:16.000] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:43:16.020] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:48:49.441] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:48:49.458] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:50:30.034] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:50:30.056] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:50:40.135] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:50:40.154] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:51:11.590] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:51:11.605] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 09:57:58.197] [INFO] logger - Express server listening on port 80
+[2014-07-09 09:57:58.216] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:00:51.770] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:00:51.785] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:01:22.979] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:01:22.995] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:06:22.180] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:06:22.200] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:07:30.065] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:07:30.084] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:08:34.067] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:08:34.086] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:08:48.129] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:08:48.149] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:10:05.244] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:10:05.260] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:12:32.217] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:12:32.238] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:13:23.062] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:13:23.081] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:14:29.888] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:14:29.904] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:15:00.280] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:15:00.300] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:16:23.402] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:16:23.421] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:39:23.179] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:39:23.201] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:39:39.514] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:39:39.541] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:40:38.327] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:40:38.347] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:42:42.090] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:42:42.109] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:43:19.738] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:43:19.758] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:44:31.518] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:44:31.545] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:44:46.918] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:44:46.935] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:46:50.774] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:46:50.791] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:47:22.250] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:47:22.267] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:47:36.447] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:47:36.464] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 10:47:52.458] [INFO] logger - Express server listening on port 80
+[2014-07-09 10:47:52.476] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 11:26:26.205] [INFO] logger - Express server listening on port 80
+[2014-07-09 11:26:26.224] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 11:29:15.832] [INFO] logger - Express server listening on port 80
+[2014-07-09 11:29:15.845] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 11:51:13.726] [INFO] logger - Express server listening on port 80
+[2014-07-09 11:51:13.746] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 12:11:56.882] [INFO] logger - Express server listening on port 80
+[2014-07-09 12:11:56.903] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 12:13:21.140] [INFO] logger - Express server listening on port 80
+[2014-07-09 12:13:21.159] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 12:15:09.615] [INFO] logger - Express server listening on port 80
+[2014-07-09 12:15:09.634] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 12:51:26.309] [INFO] logger - Express server listening on port 80
+[2014-07-09 12:51:26.326] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 13:00:44.982] [INFO] logger - Express server listening on port 80
+[2014-07-09 13:00:45.000] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 13:07:15.351] [INFO] logger - Express server listening on port 80
+[2014-07-09 13:07:15.369] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 13:11:40.113] [INFO] logger - Express server listening on port 80
+[2014-07-09 13:11:40.131] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 13:12:23.854] [INFO] logger - Express server listening on port 80
+[2014-07-09 13:12:23.874] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 13:14:26.494] [INFO] logger - Express server listening on port 80
+[2014-07-09 13:14:26.515] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 14:02:40.269] [INFO] logger - Express server listening on port 80
+[2014-07-09 14:02:40.281] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 14:03:29.546] [INFO] logger - Express server listening on port 80
+[2014-07-09 14:03:29.564] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 14:05:36.359] [INFO] logger - Express server listening on port 80
+[2014-07-09 14:05:36.380] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 14:36:29.425] [INFO] logger - Express server listening on port 80
+[2014-07-09 14:36:29.446] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2014-07-09 14:37:50.873] [ERROR] logger - { [CastError: Cast to ObjectId failed for value "undefined" at path "belongToUserId"]
+  message: 'Cast to ObjectId failed for value "undefined" at path "belongToUserId"',
+  name: 'CastError',
+  type: 'ObjectId',
+  value: 'undefined',
+  path: 'belongToUserId' }
+CastError: Cast to ObjectId failed for value "undefined" at path "belongToUserId"
+    at ObjectId.cast (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\schema\objectid.js:116:13)
+    at ObjectId.castForQuery (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\schema\objectid.js:165:17)
+    at Query.cast (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\query.js:2291:32)
+    at Query.find (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\query.js:981:10)
+    at Function.find (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\model.js:942:13)
+    at module.exports.findProjectsByUserId (C:\Users\kyle\Documents\GitHub\xihumaker\controllers\project_like.js:151:21)
+    at callbacks (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:164:37)
+    at param (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:138:11)
+    at param (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:135:11)
+    at pass (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:145:5)
+[2014-07-09 14:37:50.882] [ERROR] logger - { [CastError: Cast to ObjectId failed for value "undefined" at path "belongToUserId"]
+  message: 'Cast to ObjectId failed for value "undefined" at path "belongToUserId"',
+  name: 'CastError',
+  type: 'ObjectId',
+  value: 'undefined',
+  path: 'belongToUserId' }
+CastError: Cast to ObjectId failed for value "undefined" at path "belongToUserId"
+    at ObjectId.cast (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\schema\objectid.js:116:13)
+    at ObjectId.castForQuery (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\schema\objectid.js:165:17)
+    at Query.cast (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\query.js:2291:32)
+    at Query.find (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\query.js:981:10)
+    at Function.find (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\model.js:942:13)
+    at module.exports.findProjectsByUserId (C:\Users\kyle\Documents\GitHub\xihumaker\controllers\project_concern.js:151:24)
+    at callbacks (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:164:37)
+    at param (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:138:11)
+    at param (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:135:11)
+    at pass (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:145:5)
+[2014-07-09 14:38:13.318] [ERROR] logger - { [CastError: Cast to ObjectId failed for value "undefined" at path "belongToUserId"]
+  message: 'Cast to ObjectId failed for value "undefined" at path "belongToUserId"',
+  name: 'CastError',
+  type: 'ObjectId',
+  value: 'undefined',
+  path: 'belongToUserId' }
+CastError: Cast to ObjectId failed for value "undefined" at path "belongToUserId"
+    at ObjectId.cast (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\schema\objectid.js:116:13)
+    at ObjectId.castForQuery (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\schema\objectid.js:165:17)
+    at Query.cast (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\query.js:2291:32)
+    at Query.find (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\query.js:981:10)
+    at Function.find (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\model.js:942:13)
+    at module.exports.findProjectsByUserId (C:\Users\kyle\Documents\GitHub\xihumaker\controllers\project_like.js:151:21)
+    at callbacks (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:164:37)
+    at param (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:138:11)
+    at param (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:135:11)
+    at pass (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:145:5)
+[2014-07-09 14:38:13.324] [ERROR] logger - { [CastError: Cast to ObjectId failed for value "undefined" at path "belongToUserId"]
+  message: 'Cast to ObjectId failed for value "undefined" at path "belongToUserId"',
+  name: 'CastError',
+  type: 'ObjectId',
+  value: 'undefined',
+  path: 'belongToUserId' }
+CastError: Cast to ObjectId failed for value "undefined" at path "belongToUserId"
+    at ObjectId.cast (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\schema\objectid.js:116:13)
+    at ObjectId.castForQuery (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\schema\objectid.js:165:17)
+    at Query.cast (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\query.js:2291:32)
+    at Query.find (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\query.js:981:10)
+    at Function.find (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\mongoose\lib\model.js:942:13)
+    at module.exports.findProjectsByUserId (C:\Users\kyle\Documents\GitHub\xihumaker\controllers\project_concern.js:151:24)
+    at callbacks (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:164:37)
+    at param (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:138:11)
+    at param (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:135:11)
+    at pass (C:\Users\kyle\Documents\GitHub\xihumaker\node_modules\express\lib\router\index.js:145:5)
