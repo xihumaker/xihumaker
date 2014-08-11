@@ -24,23 +24,6 @@ var productTopic = require('./controllers/product_topic');
 var ccap = require('./services/ccap');
 var auth = require('./policies/auth');
 
-if (config.ENV === 'DEV') {
-    // dev - 微信接入配置
-    weixin.configurate({
-        token: 'xihumaker',
-        appid: 'wxc2d82aa2e44a2faa',
-        secret: '9ef7661014dd0dbd098b483fee803d58'
-    });
-} else {
-    // pro - 部署
-    weixin.configurate({
-        token: 'xihumaker',
-        appid: 'wx1b77ae9461a7f199',
-        secret: '4f87ca5ca463cff33541909fb88dc5cd'
-    });
-    weixin.reflashAccessToken();
-}
-
 qiniu.conf.ACCESS_KEY = config.QINIU_ACCESS_KEY;
 qiniu.conf.SECRET_KEY = config.QINIU_SECRET_KEY;
 
@@ -48,18 +31,34 @@ var uptoken = new qiniu.rs.PutPolicy(config.QINIU_Bucket_Name);
 
 module.exports = function(app) {
 
-    // 接入验证
-    app.get('/verify', function(req, res) {
-        if (weixin.checkSignature(req)) {
-            res.send(200, req.query.echostr);
-        } else {
-            res.send(200, 'fail');
-        }
-    });
-    // Start
-    app.post('/verify', function(req, res) {
-        weixin.loop(req, res);
-    });
+    if (config.ENV === 'DEV') {
+        // dev - 微信接入配置 iPhone
+        weixin.configurate({
+            app: app,
+            token: 'xihumaker',
+            appid: 'wxc2d82aa2e44a2faa',
+            secret: '9ef7661014dd0dbd098b483fee803d58'
+        });
+        // weixin.reflashAccessToken();
+    } else if (config.ENV === 'TEST') {
+        // test - 测试 魅族
+        weixin.configurate({
+            app: app,
+            token: 'xihumaker',
+            appid: 'wx7c9cf10634b7c066',
+            secret: 'bb93a8587b9f6cd20911ff0c8c61c6c0'
+        });
+        weixin.reflashAccessToken();
+    } else {
+        // pro - 部署 
+        weixin.configurate({
+            app: app,
+            token: 'xihumaker',
+            appid: 'wx1b77ae9461a7f199',
+            secret: '4f87ca5ca463cff33541909fb88dc5cd'
+        });
+        weixin.reflashAccessToken();
+    }
 
     // 七牛token
     app.get('/qiniuUptoken', function(req, res) {
@@ -201,6 +200,8 @@ module.exports = function(app) {
      * API
      * ---------------------------------------------------------
      */
+    // 创客分布
+    app.get('/api/members/all', api.findAllMembers);
     // 帐号绑定
     app.post('/api/user/bind', user.bindWeixin);
     // 用户搜索
@@ -224,6 +225,8 @@ module.exports = function(app) {
     // 重置密码
     app.post('/api/password/reset', user.resetPassword);
     app.post('/api/password/new', user.newPassword);
+    // 更新用户金币数量
+    app.post('/api/coin/update', user.updateCoin);
     // 根据项目ID查找项目信息
     app.get('/api/project/:_id', project.findProjectById);
     // 创建项目
@@ -343,6 +346,8 @@ module.exports = function(app) {
     app.post('/api/product/topic/:_id/like', auth.userAjaxAuth, productTopic.likeProductTopic);
     // 产品乌托邦 - 评论帖子
     app.post('/api/product/topic/:_id/comment', auth.userAjaxAuth, productTopic.commentProductTopic);
+    // 获取产品总个数
+    app.get('/api/products/total', product.getTotalProductNum);
 
     /**
      * 后台管理相关路由
@@ -426,4 +431,12 @@ weixin.on('clickEventMsg', function(data) {
                 break;
         }
     }
+});
+
+// 监听地理位置事件
+weixin.on('locationEventMsg', function(data) {
+    console.log('>>>>>>>>> locationEventMsg emit >>>>>>>>>');
+    console.log(data);
+    api.locationHandler(data);
+    return '';
 });

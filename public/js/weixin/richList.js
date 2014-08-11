@@ -39,7 +39,7 @@ define(function(require, exports, module) {
                     getCoinRankByUserId(userId, function(data) {
                         if (data.r === 0) {
                             var temp = '<tr>' +
-                                '<td><img class="rounded mini ui image" src="' + user.headimgurl + '"></td>' +
+                                '<td><img class="rounded mini ui image" src="' + user.headimgurl + '" height="40"></td>' +
                                 '<td>' + data.coinRank + '</td>' +
                                 '<td>我</td>' +
                                 '<td>' + user.coin + '</td>' +
@@ -72,7 +72,7 @@ define(function(require, exports, module) {
                         user.headimgurl = '/img/default_avatar.png';
                     }
                     temp = '<tr>' +
-                        '<td><img class="rounded mini ui image" src="' + user.headimgurl + '"></td>' +
+                        '<td><img class="rounded mini ui image" src="' + user.headimgurl + '" height="40"></td>' +
                         '<td>' + (i + 1) + '</td>' +
                         '<td>' + user.username + '</td>' +
                         '<td>' + user.coin + '</td>' +

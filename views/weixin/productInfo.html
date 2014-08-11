@@ -22,7 +22,9 @@
             r: <%= r %>,
             msg: "<%= msg %>",
             product: {
-                _id: "<%= product._id %>"
+                _id: "<%= product._id %>",
+                name: "<%= product.name %>",
+                industry: <%= product.industry %>
             }
         };
     </script>
@@ -119,17 +121,10 @@
             </div>
         </div>
     </div>
-    
-    <!-- 大图查看 -->
-    <div class="imageView" id="imageView">
-        <a href="javascript:;" class="close">
-            <span></span>
-        </a>
-        <img src="" alt="" width="100%" id="largeImage" />
-    </div>
 
     <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>
+    <script src="/lib/WeixinApi.js"></script>
 
     <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/weixin/productInfo" ></script>
 

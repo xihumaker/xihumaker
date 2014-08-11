@@ -6,5 +6,12 @@
 	width: 140px;padding-left:5px;
 }
 #productList .ui.button {
+	width: 47%;
 	margin-bottom: 5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0.8em 1em !important;
+	float: left;
+	margin-left: 2%;
 }

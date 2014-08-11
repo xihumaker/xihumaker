@@ -39,6 +39,7 @@ define(function(require) {
             '<td>' + product.name + '</td>' +
             '<td>' + INDUSTRY_LIST[product.industry] + '</td>' +
             '<td>' + product.topicNum + '</td>' +
+            '<td>' + product.commentNum + '</td>' +
             '<td>' + new Date(product.lastActionTime).toLocaleString() + '</td>' +
             '<td>' + new Date(product.createTime).toLocaleString() + '</td>' +
             '<td>' +
@@ -56,7 +57,7 @@ define(function(require) {
     }
 
     var searchConfig = {
-        pageSize: 12,
+        pageSize: 20,
         pageStart: 0
     };
 
@@ -66,6 +67,8 @@ define(function(require) {
         if (data.r === 0) {
             var products = data.products;
             var len = products.length;
+
+            $('#totalNum').html(data.count);
 
             if (len === 0) {
 
@@ -130,6 +133,7 @@ define(function(require) {
             });
         }
     });
+
 
 
 

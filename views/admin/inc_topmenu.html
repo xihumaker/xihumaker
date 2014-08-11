@@ -1,5 +1,5 @@
 <div class="ui black fixed transparent inverted menu">
-    <a href="/admin" class="icon item">
+    <a href="/admin/index" class="icon item linkToIndex">
         <i class="lemon icon"></i>&nbsp;西湖创客汇
     </a>
     <a href="/admin/userManagement" class="item linkToUserManagement">用户管理</a>
@@ -15,22 +15,22 @@
     // -------------------------------------------
     $(function() {
         var href = window.location.href;
-        if(/admin\/index/.test(href)) {
+        if(/index/i.test(href)) {
             $('.linkToIndex').addClass('active');
         };
-        if(/admin\/userManagement/.test(href)) {
+        if(/user/i.test(href)) {
             $('.linkToUserManagement').addClass('active');
         }
-        if(/admin\/projectManagement/.test(href)) {
+        if(/project/i.test(href)) {
             $('.linkToProjectManagement').addClass('active');
         }
-        if(/admin\/activityManagement/.test(href) || /admin\/createActivity/.test(href)) {
+        if(/activity/i.test(href)) {
             $('.linkToActivityManagement').addClass('active');
         }
-        if(/admin\/vipManagement/.test(href) || /admin\/createVip/.test(href)) {
+        if(/vip/i.test(href)) {
             $('.linkToVipManagement').addClass('active');
         }
-        if(/admin\/productManagement/.test(href) || /admin\/createProduct/.test(href)) {
+        if(/product/i.test(href)) {
             $('.linkToProductManagement').addClass('active');
         }
         

@@ -2,10 +2,13 @@ define(function(require) {
     "use strict";
 
     var iAlert = require('../../angel/alert');
+    var CONST = require('../const');
 
     var $topicList = $('#topicList');
     var $loadMore = $('#loadMore');
     var $replyBox = $('#replyBox');
+
+    $('h4.top.header').html(CONST.INDUSTRY_LIST[global.product.industry] + "：" + global.product.name);
 
     function findProductTopicsByPage(config, succCall, failCall) {
         failCall = failCall || function() {
@@ -52,7 +55,8 @@ define(function(require) {
             temp += '</ul>';
         }
 
-        if (topic.likeList.indexOf(global.userId) !== -1) { // 已赞
+        if (topic.likeList.indexOf(global.userId) !== -1) {
+            //已赞
             temp += '<div class="meta">' +
                 '<a href="javascript:void(0);" class="likeBtn" data-id="' + topic._id + '" data-likeNum="' + topic.likeNum + '">' +
                 '<i class="thumbs up blue icon"></i>&nbsp;' + topic.likeNum + '</a>';
@@ -266,22 +270,17 @@ define(function(require) {
         $(this).parents('.topic').find('.commentList li.hide').removeClass('hide');
     });
 
-    var $imageView = $('#imageView');
-    var $largeImage = $('#largeImage');
     // 大图查看
-    $('body').on('click', '.picList img', function() {
-        var picUrl = $(this).attr('src');
-        $largeImage.attr('src', picUrl);
-        $imageView.show();
-        var winH = $(window).height();
-        var imgH = $largeImage.height();
-        var top = (winH - imgH) / 2;
-        $largeImage.css('margin-top', top + 'px');
-    });
-
-    $('#imageView .close').on('click', function() {
-        $imageView.hide();
-        $largeImage.attr('src', '');
+    WeixinApi.ready(function(Api) {
+        $('body').on('click', '.picList img', function() {
+            var srcList = [];
+            var curSrc = this.src;
+            var imgList = $(this).parents('.picList').find('img');
+            for (var i = 0; i < imgList.length; i++) {
+                srcList.push(imgList[i].src);
+            }
+            Api.imagePreview(curSrc, srcList);
+        });
     });
 
 });

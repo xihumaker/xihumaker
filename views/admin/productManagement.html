@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>产品乌托邦管理 - 西湖创客汇</title>
-    <meta name="description" content="">
-    <link rel="stylesheet" type="text/css" href="/semantic/packaged/css/semantic.css">
-    <link rel="stylesheet" type="text/css" href="/css/admin/common.css">
-    <link rel="shortcut icon" href="/icon/favicon.ico">
-    <style type="text/css">
-    	.ui.button {
-			margin-right: 5px;
-		}
-    	.loadMore.ui.button {
-            display: none;
-        }
-    </style>
-
-    <script src="/lib/jquery.js"></script>
-    <script src="/semantic/packaged/javascript/semantic.js"></script>
-</head>
-<body>
-
-    <% include ./inc_topmenu.html %>
-
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>产品乌托邦管理 - 西湖创客汇</title>
+        <meta name="description" content="">
+        <link rel="stylesheet" type="text/css" href="/semantic/packaged/css/semantic.css">
+        <link rel="stylesheet" type="text/css" href="/css/admin/common.css">
+        <link rel="shortcut icon" href="/icon/favicon.ico">
+        <style type="text/css">
+            .ui.button {
+                margin-right: 5px;
+            }
+            .loadMore.ui.button {
+                display: none;
+                margin-bottom: 20px;
+            }
+        </style>
+        <script src="/lib/jquery.js"></script>
+        <script src="/semantic/packaged/javascript/semantic.js"></script>
+    </head>
+    <body>
+        <% include ./inc_topmenu.html %>
         <div class="main">
-
             <div class="ui basic segment" style="margin: 0;padding: 0;height:42px;">
                 <div class="ui large breadcrumb">
                     <a class="section">西湖创客汇</a>
@@ -35,7 +32,18 @@
                 </div>
                 <a class="ui blue right floated button" href="/admin/createProduct">新建产品</a>
             </div>
+            
+            <!-- <div class="ui basic segment searchSegment" style="margin: 0;padding: 0;height:42px;">
+                <div class="ui action left icon input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="产品名" id="searchKey">
+                    <div class="ui teal button" id="searchBtn">搜索</div>
+                </div>
+            </div> -->
 
+            <p>
+                共<span class="ui red header" id="totalNum"></span>个产品
+            </p>
             <table class="ui celled table segment">
                 <thead>
                     <tr>
@@ -44,21 +52,22 @@
                         <th>产品名</th>
                         <th>所属行业</th>
                         <th>帖子个数</th>
-                        <th>最新动作时间<span style="font-size:12px;">（包括新建产品和新建帖子，默认按此倒序排序）</span></th>
+                        <th>评论个数</th>
+                        <th>最新动作时间</th>
                         <th>创建日期</th>
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody id="productList"></tbody>
-                
-            </table>
-            <div class="ui default button fluid loadMore" id="loadMore">加载更多</div>
-        </div>
+            <tbody id="productList"></tbody>
 
-    
+        </table>
+        <div class="ui default button fluid loadMore" id="loadMore">加载更多</div>
+
+
+    </div>
+
     <% include ./inc_gotop.html %>
-    
-    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/productManagement" ></script>
 
+    <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/admin/productManagement" ></script>
 </body>
 </html>

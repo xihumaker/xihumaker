@@ -1,4 +1,5 @@
 "use strict";
+var Member = require('../models/member');
 var weixin = require('weixin-apis');
 var config = require('../config');
 var WEB_SERVER_IP = 'http://' + config.WEB_SERVER_IP;
@@ -75,7 +76,91 @@ module.exports = {
             articles: articles
         };
         weixin.sendMsg(resMsg);
+    },
+
+    // 如果该用户在数据库中没有记录，则添加，否则更新记录
+    locationHandler: function(data) {
+        var fromUserName = data.fromUserName;
+        var createTime = data.createTime;
+        var latitude = data.latitude;
+        var longitude = data.longitude;
+        var precision = data.precision;
+
+        Member.findOne({
+            openid: fromUserName
+        }, function(err, doc) {
+            if (err) {
+                console.log(err);
+            }
+
+            if (!doc) { // 数据库没有该记录，新增一条记录
+                weixin.getUserInfo({
+                    openid: fromUserName
+                }, function(data) {
+                    console.log(data);
+                    var member = new Member({
+                        openid: fromUserName,
+                        createTime: createTime,
+                        latitude: latitude,
+                        longitude: longitude,
+                        precision: precision,
+                        nickname: data.nickname,
+                        sex: data.sex,
+                        city: data.city,
+                        province: data.province,
+                        country: data.country,
+                        language: data.language,
+                        headimgurl: data.headimgurl,
+                        subscribeTime: data.subscribe_time
+                    });
+
+                    member.save(function(err, doc) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log(doc);
+                        console.log('新增一条记录成功');
+                    });
+                });
+            } else {
+                Member.findOneAndUpdate({
+                    openid: fromUserName
+                }, {
+                    $set: {
+                        createTime: createTime,
+                        latitude: latitude,
+                        longitude: longitude,
+                        precision: precision
+                    }
+                }, function(err, doc) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log('更新坐标成功');
+                })
+            }
+        });
+    },
+
+    findAllMembers: function(req, res) {
+        Member.find({}, function(err, docs) {
+            if (err) {
+                res.json({
+                    r: 1,
+                    msg: "服务器错误，查找失败"
+                })
+                return;
+            }
+
+            res.json({
+                r: 0,
+                msg: "查找成功",
+                members: docs
+            });
+        })
     }
+
+
 
 
 };

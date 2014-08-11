@@ -2,44 +2,55 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /**
- * username 用户真实姓名
- * password 密码
- * email 电子邮箱
- * phone 手机号
- * createTime 帐号创建日期，默认为用户注册时的服务器时间
- * sex 性别 1男 2女 0未知
- * birthday 生日
- * province 用户个人资料填写的省份
- * city 普通用户个人资料填写的城市
- * country 国家，如中国为CN
- * inAddress 收件地址
- * workOrStudy 0未知 1工作 2学习
- * company 公司
- * job 岗位
- * school 学校
- * profession 大学专业
- * interest 个人感兴趣的行业方向
- * headimgurl 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空
- * coin 金币数 默认0
- * openId 微信用户唯一ID
+ * username     用户真实姓名
+ * password     密码
+ * email        电子邮箱
+ * phone        手机号
+ * createTime   帐号创建日期，默认为用户注册时的服务器时间
+ * sex          性别 0-未知、1-男、 2-女
+ * birthday     生日
+ * province     用户个人资料填写的省份
+ * city         普通用户个人资料填写的城市
+ * country      国家，如中国为CN
+ * inAddress    收件地址
+ * workOrStudy  0未知 1工作 2学习
+ * company      公司
+ * job          岗位
+ * school       学校
+ * profession   大学专业
+ * interest     个人感兴趣的行业方向
+ * headimgurl   用户头像，用户没有头像时该项为空
+ * coin         金币数 默认0
+ * openId       微信用户唯一ID
  */
 var UserSchema = new Schema({
     username: {
         type: String,
         default: ''
     },
-    password: String,
+    password: {
+        type: String
+    },
     email: {
         type: String,
-        unique: true
+        unique: true,
+        index: true,
+        require: true
     },
     phone: {
         type: String,
-        default: ''
+        unique: true,
+        default: '',
+        index: true
     },
     createTime: {
         type: Number,
-        default: 0
+        default: Date.now,
+        index: true
+    },
+    updateTime: {
+        type: Number,
+        default: Date.now
     },
     sex: {
         type: Number,
@@ -95,7 +106,8 @@ var UserSchema = new Schema({
     },
     coin: {
         type: Number,
-        default: 0
+        default: 0,
+        index: true
     },
     resetTicket: {
         type: Number,

@@ -1,22 +1,22 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "ccap": "^0.4.3",
-    "ejs": "*",
-    "eventproxy": "^0.3.1",
-    "express": "3.4.2",
-    "log4js": "*",
-    "mongoose": "*",
-    "node-uuid": "^1.4.1",
-    "nodemailer": "^0.7.0",
-    "request": "^2.36.0",
-    "validator": "*",
-    "weixin-apis": "0.0.5",
-    "xss": "^0.1.9"
-  }
+    "name": "application-name",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "ccap": "^0.4.3",
+        "ejs": "*",
+        "eventproxy": "^0.3.1",
+        "express": "3.4.2",
+        "log4js": "*",
+        "mongoose": "*",
+        "node-uuid": "^1.4.1",
+        "nodemailer": "^0.7.0",
+        "request": "^2.36.0",
+        "validator": "*",
+        "weixin-apis": "*",
+        "xss": "^0.1.9"
+    }
 }

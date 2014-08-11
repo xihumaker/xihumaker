@@ -3,14 +3,14 @@ var mongoose = require('mongoose'),
 
 /**
  * 会员秀
- * _id 唯一编号
- * name 会员姓名
- * headimgurl 会员头像
- * title 标题
- * content 正文
- * likeNum 赞个数
- * createTime 会员秀创建时间
- * updateTime 会员秀最近修改时间
+ * _id          唯一编号
+ * name         会员姓名
+ * headimgurl   会员头像
+ * title        标题
+ * content      正文
+ * likeNum      赞个数
+ * createTime   会员秀创建时间
+ * updateTime   会员秀最近修改时间
  */
 var VipSchema = new Schema({
     name: String,
@@ -23,11 +23,11 @@ var VipSchema = new Schema({
     },
     createTime: {
         type: Number,
-        default: 0
+        default: Date.now
     },
     updateTime: {
         type: Number,
-        default: 0
+        default: Date.now
     }
 });
 

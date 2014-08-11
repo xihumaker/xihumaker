@@ -63,6 +63,7 @@ define(function(require) {
             '<td>' + user.email + '</td>' +
             '<td>' + user.phone + '</td>' +
             '<td>' + user.localCreateTime + '</td>' +
+            '<td contenteditable="true" class="coin" data-coin="' + user.coin + '" data-userId="' + user._id + '">' + user.coin + '</td>' +
             '<td>' +
             '<div class="ui mini icon buttons">' +
             '<div class="ui red button delete" data-id="' + user._id + '" title="删除" data-content="删除" data-variation="inverted"><i class="trash icon"></i> 删除</div>' +
@@ -82,7 +83,7 @@ define(function(require) {
     }
 
     var searchConfig = {
-        pageSize: 10,
+        pageSize: 15,
         pageStart: 0
     };
 
@@ -254,6 +255,58 @@ define(function(require) {
     });
 
 
+    function updateCoin(config, succCall, failCall) {
+        $.ajax({
+            url: '/api/coin/update',
+            type: 'POST',
+            data: config,
+            dataType: 'json',
+            timeout: 15000,
+            success: function(data) {
+                if (data.r === 0) {
+                    succCall(data);
+                } else {
+                    failCall(data);
+                }
+            }
+        });
+    }
+
+
+    $('body').on('blur', '.coin', function(e) {
+        var that = this;
+        var val = $(this).html().trim();
+        if (!$.isNumeric(val)) { // 输入的不是数字
+            iAlert("输入的金币不正确，请重新修改");
+            $(this).html($(this).attr('data-coin'));
+            $(this).focus();
+            return;
+        } else {
+            if ($(this).html() === $(this).attr('data-coin')) {
+                console.log('什么都没修改');
+                return;
+            }
+
+            if (confirm("你确定要修改这个用户的金币个数吗？")) {
+                console.log('确定修改');
+                var coin = $(this).html().trim();
+                var userId = $(this).attr('data-userId');
+                updateCoin({
+                    coin: coin,
+                    userId: userId
+                }, function(data) {
+                    $(that).attr('data-coin', coin);
+                    iAlert('修改成功');
+                }, function(data) {
+                    iAlert('修改失败');
+                })
+            } else {
+                console.log('取消修改');
+                $(this).html($(this).attr('data-coin'));
+                return;
+            }
+        }
+    });
 
 
 

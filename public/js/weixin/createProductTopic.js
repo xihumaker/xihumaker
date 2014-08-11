@@ -9,6 +9,14 @@ define(function(require) {
     var $content = $('#content');
     var $sendBtn = $('#sendBtn');
 
+    var href = window.location.href;
+    var params = href.split("?")[1].split('&');
+    var belongToProductId = params[0].split('=')[1];
+    var whichWorld = Number(params[1].split('=')[1]) || 0;
+
+    var addedNum = 0; // 记录添加的图片个数
+    var finishedNum = 0; // 记录已经完成上传的图片个数
+
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',
         browse_button: 'pickfiles',
@@ -26,6 +34,7 @@ define(function(require) {
         auto_start: true,
         init: {
             'FilesAdded': function(up, files) {
+                addedNum += files.length;
                 plupload.each(files, function(file) {
                     var temp = '<li>' +
                         '<span>0%</span>' +
@@ -52,7 +61,7 @@ define(function(require) {
                 //    "key": "gogopher.jpg"
                 //  }
                 // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
-
+                finishedNum += 1;
                 var domain = up.getOption('domain');
                 var res = JSON.parse(info);
                 var sourceLink = domain + res.key;
@@ -79,48 +88,35 @@ define(function(require) {
         }
     });
 
-    // 上传图片
-    // $('#pickfiles').on('change', function(e) {
-    //     if (this.files.length !== 0) {
-    //         var file = this.files[0];
-    //         var reader = new FileReader();
-    //         reader.readAsDataURL(file);
-    //         reader.onload = function(e) {
-    //             var picData = e.target.result;
-    //             var temp = '<li>' +
-    //                 '<a href="javascript:void(0);" class="close"></a>' +
-    //                 '<img src="' + picData + '" width="62" height="56">' +
-    //                 '</li>';
-
-    //             $picList.append($(temp));
-    //             if ($('#picList img').length === 4) {
-    //                 $('.large.button').hide();
-    //             }
-    //         };
-    //     }
-    // });
-
     $picList.on('click', '.close', function() {
         $(this).parents('li').remove();
         $('.large.button').show();
     });
 
-    var href = window.location.href;
-    var params = href.split("?")[1].split('&');
-    var belongToProductId = params[0].split('=')[1];
-    var whichWorld = Number(params[1].split('=')[1]) || 0;
+    $('#content').on('keyup', function(e) {
+        var len = $(this).val().length;
+        if (len === 0) {
+            $sendBtn.addClass('disabled');
+        } else {
+            $sendBtn.removeClass('disabled');
+        }
+    });
 
     $sendBtn.on('click', function() {
+        if ($sendBtn.hasClass('disabled')) {
+            return;
+        }
         var content = $content.val().trim();
         var picList = []; // 存放图片地址数组
 
-        if (!content) {
-            iAlert('内容不能为空');
-            return;
-        } else if (content.length < 10) {
+        if (content.length < 10) {
             iAlert('内容过短');
             return;
         } else {
+            if (addedNum !== finishedNum) {
+                iAlert('图片上传中...');
+                return;
+            }
             var imgList = $picList.find('img');
             var src = '';
             for (var i = 0; i < imgList.length; i++) {

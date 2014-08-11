@@ -6,7 +6,7 @@ define(function(require, exports, module) {
         var $alert = $('<div>');
         $alert.html(str);
         $alert.css({
-            'padding': '15px 25px',
+            'padding': '15px 20px',
             'position': 'fixed',
             'left': '50%',
             'top': '50%',
@@ -20,7 +20,7 @@ define(function(require, exports, module) {
         });
         $('body').append($alert);
         $alert.css({
-            'margin-left': -($alert.width() / 2 + 25) + 'px'
+            'margin-left': -($alert.width() / 2 + 20) + 'px'
         });
         setTimeout(function() {
             $alert.remove();

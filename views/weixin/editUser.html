@@ -50,6 +50,12 @@
 </head>
 <body>
 
+    <div class="mask">
+        <p>
+            正在上传...<span>0</span>%
+        </p>
+    </div>
+
     <div class="ui segment">
         <div class="ui small inverted green block header" style="font-size:1em;">1，请详细阅读<a href="/weixin/constitution">《西湖创客汇章程》</a></div>
     </div>
@@ -60,10 +66,11 @@
         <div class="ui divided list">
             <a class="item" href="javascript:void(0);" style="line-height: 80px;" id="headimgItem">
                 <i class="right floated arrow icon" style="margin-top: 32px;"></i>
-                <img id="headimgurl" class="right floated" src="<%= user.headimgurl || '/img/default_avatar.png' %>" style="width: 75px;">
+                <img id="headimgurl" class="right floated" src="<%= user.headimgurl || '/img/default_avatar.png' %>" style="width: 75px;height:75px;">
                 <div class="content">
                     <div class="header">头像</div>
                 </div>
+                <div id="pickfiles"></div>
             </a>
             <div class="item">
                 <div class="content">
@@ -386,6 +393,8 @@
     
     <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/semantic/packaged/javascript/semantic.min.js"></script>
+    <script type="text/javascript" src="/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/js/qiniu.js"></script>
     <script src="/seajs/sea.js" data-config="/js/config" data-main="/js/weixin/editUser" ></script>
 
 </body>

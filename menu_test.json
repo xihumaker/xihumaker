@@ -8,41 +8,45 @@
         }, {
             "type": "view",
             "name": "改变世界",
-            "url": "http://xihumaker.jios.org/weixin/gaibianshijie"
+            "url": "http://115.29.241.71/weixin/gaibianshijie"
         }, {
             "type": "view",
             "name": "创客分布",
-            "url": "http://xihumaker.jios.org/weixin/map"
+            "url": "http://115.29.241.71/weixin/map"
         }]
     }, {
         "name": "一起来！",
         "sub_button": [{
             "type": "view",
             "name": "活动",
-            "url": "http://xihumaker.jios.org/weixin/activities"
+            "url": "http://115.29.241.71/weixin/activities"
         }, {
             "type": "view",
             "name": "江湖告急",
-            "url": "http://xihumaker.jios.org/weixin/jianghu"
+            "url": "http://115.29.241.71/weixin/jianghu"
         }, {
             "type": "view",
             "name": "微课程",
-            "url": "http://xihumaker.jios.org/weixin/weikecheng"
+            "url": "http://115.29.241.71/weixin/weikecheng"
         }, {
             "type": "view",
             "name": "产品乌托邦",
-            "url": "http://xihumaker.jios.org/weixin/products"
+            "url": "http://115.29.241.71/weixin/products"
+        }, {
+            "type": "view",
+            "name": "推广创客文化",
+            "url": "http://115.29.241.71/weixin/tuiguang"
         }]
     }, {
         "name": "朋友～",
         "sub_button": [{
             "type": "view",
             "name": "会员秀",
-            "url": "http://xihumaker.jios.org/weixin/vipShow"
+            "url": "http://115.29.241.71/weixin/vipShow"
         }, {
             "type": "view",
             "name": "财富榜",
-            "url": "http://xihumaker.jios.org/weixin/richList"
+            "url": "http://115.29.241.71/weixin/richList"
         }, {
             "type": "view",
             "name": "北斗社区",
@@ -50,7 +54,11 @@
         }, {
             "type": "view",
             "name": "我",
-            "url": "http://xihumaker.jios.org/weixin/userCenter"
+            "url": "http://115.29.241.71/weixin/userCenter"
+        }, {
+            "type": "click",
+            "name": "绑定帐号",
+            "key": "BANGING_ACCOUNT"
         }]
     }]
 }

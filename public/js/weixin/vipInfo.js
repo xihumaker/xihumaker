@@ -20,10 +20,10 @@ define(function(require) {
             success: function(data) {
                 console.log(data);
                 if (data.r === 0) {
-                    iAlert('赞成功');
+                    iAlert('赞 +1');
                     $('#likeNum').html(++vipInfo.likeNum);
                 } else {
-                    iAlert('不能重复赞');
+                    iAlert('已赞');
                 }
             }
         });

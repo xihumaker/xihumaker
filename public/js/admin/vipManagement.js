@@ -27,15 +27,17 @@ define(function(require, exports, module) {
                     vip = vips[i];
                     temp = '<tr>' +
                         '<td>' + (i + 1) + '</td>' +
+                        '<td>' + vip._id + '</td>' +
                         '<td>' + vip.name + '</td>' +
-                        '<td><img class="rounded ui small image" src="' + vip.headimgurl + '" width="50" height="75" alt=""></td>' +
+                        '<td><img class="rounded ui small image" src="' + vip.headimgurl + '" width="50" height="60" alt=""></td>' +
                         '<td>' + vip.title + '</td>' +
                         '<td>' + vip.likeNum + '</td>' +
                         '<td>' + new Date(vip.createTime).toLocaleString() + '</td>' +
+                        '<td>' + new Date(vip.updateTime).toLocaleString() + '</td>' +
                         '<td>' +
-                        '<div class="ui small red button delete" title="删除" data-id="' + vip._id + '"><i class="trash icon"></i>删除</div>' +
-                        '<a class="ui small blue button" title="编辑" href="/admin/vip/' + vip._id + '/edit" target="_blank"><i class="edit icon"></i>编辑</a>' +
-                        '<a class="ui small default button" title="查看" href="/weixin/vip/' + vip._id + '" target="_blank"><i class="camera icon"></i>查看</a>' +
+                        '<div class="ui mini red button delete" title="删除" data-id="' + vip._id + '"><i class="trash icon"></i>删除</div>' +
+                        '<a class="ui mini blue button" title="编辑" href="/admin/vip/' + vip._id + '/edit" target="_blank"><i class="edit icon"></i>编辑</a>' +
+                        '<a class="ui mini default button" title="查看" href="/weixin/vip/' + vip._id + '" target="_blank"><i class="camera icon"></i>查看</a>' +
                         '</td>' +
                         '</tr>';
 

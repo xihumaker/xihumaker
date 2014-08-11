@@ -4,13 +4,80 @@ var mongoose = require('mongoose'),
 
 var xss = require('xss');
 var Product = require('../models/product');
+var ProductTopic = require('../models/product_topic');
 
 module.exports = {
+
+    // 页面请求
+    // ============================================
 
     // 微信端 - 产品列表页
     showProducts: function(req, res) {
         res.render('weixin/products');
     },
+
+    // 显示产品更新页面
+    showEditProduct: function(req, res) {
+        var _id = req.params._id;
+
+        Product.findOne({
+            _id: new ObjectId(_id)
+        }, function(err, doc) {
+            if (err) {
+                res.render('admin/editProduct', {
+                    "r": 1,
+                    "errcode": 10069,
+                    "msg": "服务器错误，显示产品编辑页失败"
+                });
+                return;
+            }
+
+            if (!!doc) {
+                res.render('admin/editProduct', {
+                    "r": 0,
+                    "msg": "请求成功",
+                    "product": doc
+                });
+                return;
+            } else {
+                res.render('admin/editProduct', {
+                    "r": 1,
+                    "errcode": 10070,
+                    "msg": "产品不存在"
+                });
+                return;
+            }
+        });
+    },
+
+    // 显示产品详情页面
+    showProductInfo: function(req, res) {
+        var _id = req.params._id;
+        var whichWorld = Number(req.query.world) || 0;
+
+        Product.findOne({
+            _id: new ObjectId(_id)
+        }, function(err, doc) {
+            if (err) {
+                res.render('weixin/productInfo', {
+                    "r": 1,
+                    "errcode": 10071,
+                    "msg": "服务器错误，显示产品详情页失败"
+                });
+                return;
+            }
+
+            res.render('weixin/productInfo', {
+                "r": 0,
+                "msg": "查找产品详情成功",
+                "product": doc,
+                "whichWorld": whichWorld
+            });
+        });
+    },
+
+    // Ajax 请求
+    // ============================================
 
     // 新建产品
     createProduct: function(req, res) {
@@ -30,7 +97,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.json({
                     "r": 1,
                     "errcode": 10059,
@@ -72,17 +139,18 @@ module.exports = {
         var industry = query.industry;
         var params = {};
 
-        if ( !! key) {
+        if (!!key) {
             params.name = new RegExp(key);
         }
-        if ( !! industry) {
+        if (!!industry) {
             params.industry = industry;
         }
 
         var q = Product.find(params).limit(pageSize).skip(pageStart).sort({
             lastActionTime: -1
         });
-        q.exec(function(err, docs) {
+
+        Product.count(params, function(err, count) {
             if (err) {
                 res.json({
                     "r": 1,
@@ -92,12 +160,26 @@ module.exports = {
                 return;
             }
 
-            res.json({
-                "r": 0,
-                "msg": "查找产品列表成功",
-                "products": docs
+            q.exec(function(err, docs) {
+                if (err) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10063,
+                        "msg": "服务器错误，查找产品列表失败"
+                    });
+                    return;
+                }
+
+                res.json({
+                    "r": 0,
+                    "msg": "查找产品列表成功",
+                    "products": docs,
+                    "count": count
+                });
             });
         });
+
+
     },
 
     // 根据产品ID删除某个产品
@@ -125,54 +207,25 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            // 删除产品时也删除该产品下的所有帖子
+            ProductTopic.remove({
+                belongToProductId: new ObjectId(_id)
+            }, function(err) {
+                if (err) {
+                    res.json({
+                        "r": 1,
+                        "errcode": 10067,
+                        "msg": "服务器错误，删除产品失败"
+                    });
+                    return;
+                }
+
                 res.json({
                     "r": 0,
                     "msg": "删除成功"
                 });
                 return;
-            } else {
-                res.json({
-                    "r": 1,
-                    "errcode": 10068,
-                    "msg": "要删除的产品记录未找到"
-                });
-                return;
-            }
-        });
-    },
-
-    // 显示产品更新页面
-    showEditProduct: function(req, res) {
-        var _id = req.params._id;
-
-        Product.findOne({
-            _id: new ObjectId(_id)
-        }, function(err, doc) {
-            if (err) {
-                res.render('admin/editProduct', {
-                    "r": 1,
-                    "errcode": 10069,
-                    "msg": "服务器错误，显示产品编辑页失败"
-                });
-                return;
-            }
-
-            if ( !! doc) {
-                res.render('admin/editProduct', {
-                    "r": 0,
-                    "msg": "请求成功",
-                    "product": doc
-                });
-                return;
-            } else {
-                res.render('admin/editProduct', {
-                    "r": 1,
-                    "errcode": 10070,
-                    "msg": "产品不存在"
-                });
-                return;
-            }
+            });
         });
     },
 
@@ -193,7 +246,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc && String(doc._id) !== _id) {
+            if (!!doc && String(doc._id) !== _id) {
                 res.json({
                     "r": 1,
                     "errcode": 10059,
@@ -217,7 +270,7 @@ module.exports = {
                         return;
                     }
 
-                    if ( !! doc) {
+                    if (!!doc) {
                         res.json({
                             "r": 0,
                             "msg": "修改成功",
@@ -237,30 +290,21 @@ module.exports = {
         });
     },
 
-    // 显示产品详情页面
-    showProductInfo: function(req, res) {
-        var _id = req.params._id;
-        var whichWorld = Number(req.query.world) || 0;
-
-        Product.findOne({
-            _id: new ObjectId(_id)
-        }, function(err, doc) {
+    // 获取产品总个数
+    getTotalProductNum: function(req, res, next) {
+        Product.count({}, function(err, count) {
             if (err) {
-                res.render('weixin/productInfo', {
-                    "r": 1,
-                    "errcode": 10071,
-                    "msg": "服务器错误，显示产品详情页失败"
-                });
-                return;
+                return next(err);
             }
-
-            res.render('weixin/productInfo', {
-                "r": 0,
-                "msg": "查找产品详情成功",
-                "product": doc,
-                "whichWorld": whichWorld
+            res.json({
+                r: 0,
+                msg: '获取产品总个数成功',
+                count: count
             });
         });
     }
+
+
+
 
 };

@@ -2,12 +2,12 @@
 var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
 
+var uuid = require('node-uuid');
 var Util = require('../common/util');
 var logger = require('../common/logger');
 var User = require('../models/user');
 var ccap = require('../services/ccap');
 var mail = require('../services/mail');
-var uuid = require('node-uuid');
 var auth = require('../policies/auth');
 
 function newCookie(req, res, user) {
@@ -162,7 +162,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.json({
                     "r": 0,
                     "msg": "获得当前登录用户信息成功",
@@ -207,7 +207,8 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
+                // 登录成功，新建一个Cookie
                 newCookie(req, res, doc);
                 res.json({
                     "r": 0,
@@ -267,7 +268,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.json({
                     "r": 0,
                     "msg": "查找用户信息成功",
@@ -316,7 +317,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 if (doc.email === email) {
                     res.json({
                         "r": 1,
@@ -385,7 +386,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.render('weixin/userCenter', {
                     "r": 0,
                     "msg": "显示用户中心页面成功",
@@ -425,7 +426,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.render('weixin/editUser', {
                     "r": 0,
                     "msg": "显示用户详情编辑页面成功",
@@ -478,7 +479,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.json({
                     "r": 0,
                     "msg": "修改成功",
@@ -705,7 +706,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 mail.sendResetPassMail(email, resetToken, function(response) {
                     console.log('发送了一份重设密码邮件');
                     console.log(response);
@@ -794,7 +795,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.json({
                     "r": 0,
                     "msg": "设置新密码成功"
@@ -820,7 +821,11 @@ module.exports = {
         var openId = body.openId;
 
         User.findOne({
-            email: email
+            '$or': [{
+                'email': email
+            }, {
+                'phone': email
+            }]
         }, function(err, doc) {
             if (err) {
                 res.json({
@@ -831,7 +836,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 if (doc.password !== Util.md5(password)) {
                     res.json({
                         "r": 1,
@@ -841,7 +846,7 @@ module.exports = {
                     return;
                 }
 
-                if ( !! doc.openId) {
+                if (!!doc.openId) {
                     if (doc.openId === openId) {
                         res.json({
                             "r": 1,
@@ -885,6 +890,42 @@ module.exports = {
                 });
                 return;
             }
+        });
+    },
+
+
+    updateCoin: function(req, res) {
+        var body = req.body;
+        var userId = body.userId;
+        var coin = Number(body.coin);
+
+        if (typeof coin !== "number") {
+            res.json({
+                r: 1,
+                msg: "参数错误，修改失败"
+            });
+            return;
+        }
+
+        User.findOneAndUpdate({
+            _id: new ObjectId(userId)
+        }, {
+            $set: {
+                coin: coin
+            }
+        }, function(err, doc) {
+            if (err) {
+                res.json({
+                    r: 1,
+                    msg: "修改失败"
+                });
+                return;
+            }
+
+            res.json({
+                r: 0,
+                msg: "修改成功"
+            });
         });
     }
 

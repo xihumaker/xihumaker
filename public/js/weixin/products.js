@@ -7,8 +7,7 @@ define(function(require) {
     var $searchKey = $('#searchKey');
     var $searchBtn = $('#searchBtn');
     var $industry = $('#industry');
-    var $left = $('#left-column');
-    var $right = $('#right-column');
+    var $productList = $('#productList');
     var $loadMore = $('#loadMore');
 
     function findProductsByPage(config, succCall, failCall) {
@@ -38,12 +37,7 @@ define(function(require) {
         } else {
             temp = '<a href="/weixin/login?returnUrl=/weixin/product/' + product._id + '" class="ui fluid green button product">' + product.name + ' ' + product.topicNum + '</a>';
         }
-
-        if (index % 2 === 0) {
-            $left.append($(temp));
-        } else if (index % 2 === 1) {
-            $right.append($(temp));
-        }
+        $productList.append($(temp));
     }
 
     function render(products) {
@@ -62,7 +56,7 @@ define(function(require) {
     }
 
     var searchConfig = {
-        pageSize: 14,
+        pageSize: 18,
         pageStart: 0
     };
 

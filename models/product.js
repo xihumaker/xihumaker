@@ -10,9 +10,9 @@ var mongoose = require('mongoose'),
  * _id	            默认生成的唯一ID
  * name             产品名
  * industry         产品所属行业
- * topicNum         产品下面帖子的个数
- * lastActionTime   最新动作时间（包括创建产品、产品下新建了一个帖子）
- * commentNum       产品评论个数
+ * lastActionTime   最新动作时间（包括：创建产品、新建帖子）
+ * topicNum         该产品下的帖子个数（包括现实世界帖子和完美世界帖子）
+ * commentNum       该产品下的评论个数
  * createTime       产品创建日期
  * updateTime       产品最后更新日期
  */
