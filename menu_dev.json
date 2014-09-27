@@ -22,10 +22,6 @@
             "url": "http://xihumaker.jios.org/weixin/activities"
         }, {
             "type": "view",
-            "name": "江湖告急",
-            "url": "http://xihumaker.jios.org/weixin/jianghu"
-        }, {
-            "type": "view",
             "name": "微课程",
             "url": "http://xihumaker.jios.org/weixin/weikecheng"
         }, {

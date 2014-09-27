@@ -22,20 +22,12 @@
             "url": "http://115.29.241.71/weixin/activities"
         }, {
             "type": "view",
-            "name": "江湖告急",
-            "url": "http://115.29.241.71/weixin/jianghu"
-        }, {
-            "type": "view",
             "name": "微课程",
             "url": "http://115.29.241.71/weixin/weikecheng"
         }, {
             "type": "view",
             "name": "产品乌托邦",
             "url": "http://115.29.241.71/weixin/products"
-        }, {
-            "type": "view",
-            "name": "推广创客文化",
-            "url": "http://115.29.241.71/weixin/tuiguang"
         }]
     }, {
         "name": "朋友～",
