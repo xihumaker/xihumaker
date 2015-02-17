@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * 项目配置文件
  *
@@ -82,7 +84,7 @@ if (ENV === 'DEV') { // 开发配置，本地电脑
                 pass: 'xihumaker666'
             }
         }
-    }
+    };
 } else if (ENV === 'TEST') { // 测试环境，阿里云服务器
     module.exports = {
         ENV: 'DEV',
@@ -154,7 +156,7 @@ if (ENV === 'DEV') { // 开发配置，本地电脑
                 pass: 'xihumaker666'
             }
         }
-    }
+    };
 } else { // 产品配置
     module.exports = {
         ENV: 'PRO',
@@ -226,5 +228,5 @@ if (ENV === 'DEV') { // 开发配置，本地电脑
                 pass: 'xihumaker666'
             }
         }
-    }
+    };
 }
