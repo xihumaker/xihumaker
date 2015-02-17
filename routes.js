@@ -193,7 +193,7 @@ module.exports = function(app) {
     // 微信端 - 产品乌托邦 - 详情
     app.get('/weixin/product/:_id', product.showProductInfo);
     // 微信端 - 产品乌托邦 - 新建帖子
-    app.get('/weixin/createProductTopic', productTopic.showCreateProductTopic)
+    app.get('/weixin/createProductTopic', productTopic.showCreateProductTopic);
 
 
     /**
