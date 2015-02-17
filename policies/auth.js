@@ -1,3 +1,5 @@
+/*global exports */
+
 "use strict";
 
 function getSignedCookies(req, res, name) {
