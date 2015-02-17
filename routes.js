@@ -24,6 +24,8 @@ var productTopic = require('./controllers/product_topic');
 var ccap = require('./services/ccap');
 var auth = require('./policies/auth');
 
+var Industry = require('./api/controllers/Industry');
+
 qiniu.conf.ACCESS_KEY = config.QINIU_ACCESS_KEY;
 qiniu.conf.SECRET_KEY = config.QINIU_SECRET_KEY;
 
@@ -348,6 +350,11 @@ module.exports = function(app) {
     app.post('/api/product/topic/:_id/comment', auth.userAjaxAuth, productTopic.commentProductTopic);
     // 获取产品总个数
     app.get('/api/products/total', product.getTotalProductNum);
+
+    app.get('/api/industry', Industry.getAllIndustries);
+    app.post('/api/industry', Industry.createIndustry);
+    app.post('/api/industry/all', Industry.createAllIndustries);
+
 
     /**
      * 后台管理相关路由

@@ -4,8 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var IndustrySchema = new Schema({
-    name: String,
     code: Number,
+    name: String,
     createTime: {
         type: Number,
         default: Date.now

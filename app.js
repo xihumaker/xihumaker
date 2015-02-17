@@ -10,6 +10,7 @@ var express = require('express'),
     logger = require('./common/logger');
 
 var auth = require('./policies/auth');
+var _globals = require('./api/controllers/_globals');
 
 // 数据库连接
 mongoose.connect('mongodb://' + config.MONGODB_IP + '/' + config.MONGODB_DATABASE_NAME, function(err) {
@@ -46,6 +47,10 @@ app.use(function(req, res, next) {
     }
     next();
 });
+
+// 返回全局变量
+app.use(_globals);
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
