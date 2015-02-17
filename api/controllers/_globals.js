@@ -24,7 +24,7 @@ module.exports = function(req, res, next) {
             '2005': '浙江大学',
             '2002': '中国计量学院'
         },
-        
+
         PROJECT_STATUS: {
             '1': 'idea',
             '2': '招兵买马',
