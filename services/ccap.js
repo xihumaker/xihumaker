@@ -1,4 +1,5 @@
 "use strict";
+
 var ccap = require('ccap');
 var Util = require('../common/util');
 
@@ -13,14 +14,14 @@ module.exports = {
     newCaptcha: function(req, res) {
         var randomStr = Util.randomString(4);
         var captcha = ccap({
-            width: 100,
-            height: 40,
-            offset: 20,
-            fontsize: 40,
-            generate: function() {
-                return randomStr;
-            }
-        }),
+                width: 100,
+                height: 40,
+                offset: 20,
+                fontsize: 40,
+                generate: function() {
+                    return randomStr;
+                }
+            }),
             ary = captcha.get(),
             txt = ary[0],
             buf = ary[1];
@@ -32,7 +33,7 @@ module.exports = {
     /**
      * 返回当前会话的验证码
      */
-    getCaptcha: function(req, res) {
+    getCaptcha: function(req) {
         return req.session.captcha || '';
     }
 

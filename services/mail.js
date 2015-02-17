@@ -1,4 +1,5 @@
 "use strict";
+
 var nodemailer = require("nodemailer");
 
 var config = require('../config');
