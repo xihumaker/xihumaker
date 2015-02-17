@@ -165,7 +165,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.json({
                     "r": 0,
                     "msg": "修改成功"
@@ -210,7 +210,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.json({
                     "r": 0,
                     "msg": "删除成功"
@@ -343,7 +343,7 @@ module.exports = {
                 errFun(err);
 
                 // doc不为空，说明用户已报名该活动
-                if ( !! doc) {
+                if (!!doc) {
                     hasJoin = true;
                     // 判断用户是否已评分并签到
                     ActivityScore.findOne({
@@ -353,7 +353,7 @@ module.exports = {
                         errFun(err);
 
                         // doc不为空，说明用户已评分并签到
-                        if ( !! doc) {
+                        if (!!doc) {
                             hasCheckIn = true;
                         }
                     });
@@ -385,7 +385,7 @@ module.exports = {
                 return;
             }
 
-            if ( !! doc) {
+            if (!!doc) {
                 res.render('admin/editActivity', {
                     "r": 0,
                     "msg": "显示更新活动页面成功",
