@@ -1,6 +1,5 @@
-/**
- * Module dependencies.
- */
+/*global process,__dirname */
+
 "use strict";
 var express = require('express'),
     http = require('http'),
@@ -38,7 +37,7 @@ app.use(express.session());
 // 全局返回用户是否登录
 app.use(function(req, res, next) {
     var xihumaker = auth.getSignedCookies(req, res, 'xihumaker');
-    if ( !! xihumaker) {
+    if (!!xihumaker) {
         res.locals.hasLogin = true;
         res.locals.userId = xihumaker.userId;
         res.locals.username = xihumaker.username;
