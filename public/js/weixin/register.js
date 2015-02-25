@@ -1,3 +1,6 @@
+/* globals hex_md5,validator */
+"use strict";
+
 /**
  * 微信客户端注册页面
  */
@@ -12,7 +15,6 @@ $(function() {
         $register = $('#register');
 
     $register.click(function() {
-
         var email = $email.val().trim();
         var phone = $phone.val().trim();
         var username = $username.val().trim();
@@ -69,7 +71,7 @@ $(function() {
             },
             dataType: 'json',
             timeout: 15000,
-            success: function(data, textStatus, jqXHR) {
+            success: function(data) {
                 console.log(data);
                 if (data.r === 0) {
                     window.location.href = '/weixin/registerSucc?userId=' + data.user._id;
@@ -79,7 +81,7 @@ $(function() {
                     return;
                 }
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function() {
 
             }
         });
@@ -89,8 +91,5 @@ $(function() {
     $('input').focus(function() {
         $message.hide();
     });
-
-
-
 
 });

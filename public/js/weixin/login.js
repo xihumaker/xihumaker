@@ -1,3 +1,4 @@
+/* globals hex_md5 */
 "use strict";
 
 /**
@@ -34,7 +35,7 @@ $(function() {
             },
             dataType: 'json',
             timeout: 15000,
-            success: function(data, textStatus, jqXHR) {
+            success: function(data) {
                 if (data.r === 0) {
                     var href = window.location.href;
                     if (/returnUrl/.test(href)) { // 说明有指定返回Url
@@ -51,7 +52,7 @@ $(function() {
                     return;
                 }
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function() {
 
             }
         });

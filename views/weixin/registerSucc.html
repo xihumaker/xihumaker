@@ -9,48 +9,21 @@
 		<link rel="shortcut icon" href="/icon/favicon.ico">
 		<link rel="stylesheet" href="/semantic/packaged/css/semantic.min.css">
 		<link rel="stylesheet" href="/css/weixin/main.css">
-
-		<script type="text/javascript">
-			// 隐藏微信中网页右上角按钮
-			document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-				WeixinJSBridge.call('showOptionMenu');
-			});
-		</script>
-		<style type="text/css">
-			.page_container {
-				margin-top: -180px;
-			}
-			.ui.form {
-				padding: 0 10px;
-			}
-			.ui.form .sub.header {
-				margin-top: 5px;
-			}
-			.ui.segment {
-				padding: 0 8px;
-			}
-		</style>
-		
 	</head>
 	<body>
 
-		<div class="main">
-			<div class="page_container">
-				<div class="ui basic form segment">
-					<div class="field">
-						<div class="ui icon header">
-							<i class="circular checkmark icon"></i>注册成功
-							<div class="sub header">
-								<!-- 【注】完善个人资料，可获得50金币奖励 -->
-							</div>
-						</div>
+		<div class="page_container">
+			<div class="ui basic form segment">
+				<div class="field">
+					<div class="ui icon header">
+						<i class="circular checkmark icon"></i>注册成功
 					</div>
-					<div class="field">
-						<a class="ui fluid red button" id="complete" href="/weixin/user/<%= userId %>/edit">填写《会员登记表》，成为正式会员</a>
-					</div>
-					<div class="field">
-						<a class="ui fluid default button" href="/weixin/projects">暂不填写</a>
-					</div>
+				</div>
+				<div class="field">
+					<a class="ui fluid red button" href="/weixin/user/<%= userId %>/edit">填写《会员登记表》，成为正式会员</a>
+				</div>
+				<div class="field">
+					<a class="ui fluid default button" href="/weixin/projects">暂不填写</a>
 				</div>
 			</div>
 		</div>
