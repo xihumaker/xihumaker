@@ -9,6 +9,7 @@ var express = require('express'),
     config = require('./config'),
     routes = require('./routes'),
     logger = require('./common/logger');
+var routers = require('./routers/index');
 
 var auth = require('./policies/auth');
 
@@ -57,6 +58,7 @@ if ('development' == app.get('env')) {
 
 // 路由
 routes(app);
+routers(app);
 
 http.createServer(app).listen(app.get('port'), function() {
     logger.info('Express server listening on port ' + app.get('port'));
