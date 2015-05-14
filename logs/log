@@ -1,33 +1,162 @@
-[2014-09-27 08:30:30.989] [INFO] logger - Express server listening on port 80
-[2014-09-27 08:30:31.006] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2014-09-27 08:36:18.315] [INFO] logger - 登录成功
-[2015-05-10 22:03:02.864] [INFO] logger - Express server listening on port 80
-[2015-05-10 22:03:02.946] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 22:54:57.803] [INFO] logger - Express server listening on port 80
-[2015-05-10 22:54:57.880] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 22:56:58.301] [INFO] logger - Express server listening on port 80
-[2015-05-10 22:56:58.389] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 22:58:01.584] [INFO] logger - Express server listening on port 80
-[2015-05-10 22:58:01.660] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 22:59:00.805] [INFO] logger - Express server listening on port 80
-[2015-05-10 22:59:00.882] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 22:59:42.847] [INFO] logger - Express server listening on port 80
-[2015-05-10 22:59:42.931] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 22:59:43.851] [INFO] logger - Express server listening on port 80
-[2015-05-10 22:59:43.931] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 23:00:05.879] [INFO] logger - Express server listening on port 80
-[2015-05-10 23:00:05.964] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 23:04:25.693] [INFO] logger - Express server listening on port 80
-[2015-05-10 23:04:25.779] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 23:04:31.687] [INFO] logger - Express server listening on port 80
-[2015-05-10 23:04:31.774] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 23:05:40.973] [INFO] logger - Express server listening on port 80
-[2015-05-10 23:05:41.055] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 23:10:49.372] [INFO] logger - Express server listening on port 80
-[2015-05-10 23:10:49.439] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 23:11:33.505] [INFO] logger - Express server listening on port 80
-[2015-05-10 23:11:33.588] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 23:11:42.688] [INFO] logger - Express server listening on port 80
-[2015-05-10 23:11:42.770] [INFO] logger - 【日志】连接到数据库：xihumaker
-[2015-05-10 23:12:27.691] [INFO] logger - Express server listening on port 80
-[2015-05-10 23:12:27.780] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:41:43.269] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:41:43.362] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:43:34.643] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:43:34.733] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:49:28.604] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:49:28.687] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:51:09.968] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:51:10.052] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:51:42.162] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:51:42.246] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:53:21.421] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:53:21.508] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:54:20.629] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:54:20.710] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:54:35.653] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:54:35.735] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:55:48.843] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:55:48.911] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:55:56.866] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:55:56.947] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:58:02.249] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:58:02.330] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:58:06.244] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:58:06.329] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:58:14.253] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:58:14.336] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:58:28.314] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:58:28.394] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:59:15.436] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:59:15.520] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 09:59:46.491] [INFO] logger - Express server listening on port 8080
+[2015-05-14 09:59:46.575] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:01:43.808] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:01:43.892] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:02:49.014] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:02:49.098] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:03:13.062] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:03:13.145] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:03:29.063] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:03:29.146] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:04:18.245] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:04:18.329] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:04:32.202] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:04:32.287] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:04:50.243] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:04:50.326] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:06:09.444] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:06:09.532] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:06:19.514] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:06:19.596] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:07:02.561] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:07:02.645] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:07:19.611] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:07:19.698] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:07:34.640] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:07:34.722] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:07:42.634] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:07:42.716] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:07:53.718] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:07:53.799] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:08:38.803] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:08:38.884] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:09:09.917] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:09:10.000] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:14:31.349] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:14:31.435] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:15:31.626] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:15:31.710] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:15:53.664] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:15:53.749] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:16:10.689] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:16:10.780] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:16:28.738] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:16:28.821] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:16:31.789] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:16:31.856] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 10:28:19.652] [INFO] logger - Express server listening on port 8080
+[2015-05-14 10:28:19.720] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:46:15.795] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:46:15.858] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:48:31.807] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:48:31.893] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:49:21.947] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:49:22.035] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:49:47.974] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:49:48.058] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:50:04.034] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:50:04.119] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:50:20.099] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:50:20.185] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:50:37.137] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:50:37.223] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:51:45.338] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:51:45.426] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:52:10.169] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:52:10.256] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:52:59.773] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:52:59.857] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:53:01.390] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:53:01.476] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:53:57.765] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:53:58.490] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:53:58.577] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:54:22.647] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:54:22.731] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:55:17.726] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:55:17.812] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:55:37.726] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:55:37.812] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:57:28.038] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:57:28.123] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:58:11.667] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:58:11.726] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:58:40.232] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:58:40.316] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:59:08.258] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:59:08.344] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 13:59:31.314] [INFO] logger - Express server listening on port 8080
+[2015-05-14 13:59:31.401] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:00:07.693] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:00:07.759] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:00:30.677] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:00:30.749] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:02:13.716] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:02:13.803] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:02:17.816] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:02:17.873] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:02:18.741] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:02:18.826] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:03:03.573] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:03:03.655] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:03:04.874] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:03:04.951] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:03:13.875] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:03:13.960] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:03:47.974] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:03:48.063] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:03:58.062] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:03:58.144] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:04:04.955] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:04:05.045] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:04:18.980] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:04:19.065] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:05:31.181] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:05:31.266] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:05:34.189] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:05:34.273] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:06:42.312] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:06:42.399] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:07:32.421] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:07:32.505] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:07:33.478] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:07:33.561] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:08:09.844] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:08:10.594] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:08:10.676] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:09:12.736] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:09:12.806] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:09:29.798] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:09:29.861] [INFO] logger - 【日志】连接到数据库：xihumaker
+[2015-05-14 14:09:34.784] [INFO] logger - Express server listening on port 8080
+[2015-05-14 14:09:34.869] [INFO] logger - 【日志】连接到数据库：xihumaker

@@ -8,7 +8,6 @@ var UserController = BaseController.extend({
     init: function() {
         this._super();
         console.log('UserController init');
-
     },
 
     newUser: function(req, res, next) {
@@ -59,3 +58,4 @@ var UserController = BaseController.extend({
 
 module.exports = new UserController();
 var self = module.exports;
+

@@ -17,6 +17,7 @@
     "nodemailer": "^0.7.0",
     "qiniu": "^6.1.5",
     "request": "^2.36.0",
+    "underscore": "^1.8.3",
     "validator": "*",
     "weixin-apis": "*",
     "xss": "^0.1.9"

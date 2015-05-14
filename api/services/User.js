@@ -4,7 +4,6 @@ var BaseService = require('./Base');
 var UserModel = require('../../models/user');
 var Utils = require('../lib/utils');
 
-
 var UserService = BaseService.extend({
 
     init: function() {

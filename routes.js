@@ -105,7 +105,6 @@ module.exports = function(app) {
     app.get('/project/:_id/edit', auth.webPageAuth, project.showEditProject);
 
 
-
     /**
      * 微信端页面
      * ---------------------------------------------------------

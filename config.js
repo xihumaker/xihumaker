@@ -22,7 +22,7 @@ if (ENV === 'DEV') { // 开发配置，本地电脑
         QINIU_ACCESS_KEY: 'nrcu5P6P671pB3ujgNdEe34It3ajrILnEQD5EmKD',
         QINIU_SECRET_KEY: 'y0as1N68ZRiTqLK_QRnwMxVAitj6Rlu1D57F1MO4',
         QINIU_Bucket_Name: 'xihumakertest',
-        WEB_SERVER_PORT: 80,
+        WEB_SERVER_PORT: 8080,
         TOKEN: 'xihumaker',
 
         ADMIN_ACCOUNT: {

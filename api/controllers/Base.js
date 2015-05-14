@@ -10,11 +10,11 @@ var BaseController = CommonBase.extend({
     },
 
     r: function(code, msg, data) {
-        return {
+        this.res.json({
             code: code,
             msg: msg,
             data: data
-        };
+        });
     }
 
 });

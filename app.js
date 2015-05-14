@@ -57,8 +57,8 @@ if ('development' == app.get('env')) {
 }
 
 // 路由
-routes(app);
 routers(app);
+routes(app);
 
 http.createServer(app).listen(app.get('port'), function() {
     logger.info('Express server listening on port ' + app.get('port'));
